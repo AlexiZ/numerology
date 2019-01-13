@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Numérologie
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>Numérologie {{ personne }}</h1>
+
+        <ol class="breadcrumb">
+            <li><a href="/">Nouvelle personne</a></li>
+            <li class="active">{{ personne }}</li>
+        </ol>
+
+        <div class="panel with-nav-tabs">
+            <div class="panel-heading">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#tab1" data-toggle="tab">Identité</a></li>
+                    <li class=""><a href="#tab2" data-toggle="tab">Lettres</a></li>
+                </ul>
+            </div>
+
+            <div class="panel-body">
+                <div class="tab-content">
+                    <div class="tab-pane fade active in" id="tab1">
+                        {% include '@App/Numerologie/_identite.html.twig' with {'personne': personne} %}
+                    </div>
+
+                    <div class="tab-pane fade" id="tab2">
+                        {% include '@App/Numerologie/_lettres.html.twig' with {'personne': personne} %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,39 @@
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col"></th>
+            {% for lettre in mot|split('') %}
+                <th>{{ lettre }}</th>
+            {% endfor %}
+            <th>Total</th>
+            <th>Réduit</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr>
+            <th scope="row">Lettres - Nombre héréditaire</th>
+            {% for lettre in mot|split('') %}
+                <td>{{ lettre|lettre }}</td>
+            {% endfor %}
+            <td>{{ mot|totalLettre }}</td>
+            <td>{{ mot|totalReduitLettre }}</td>
+        </tr>
+        <tr>
+            <th scope="row">Voyelles - Nombre social</th>
+            {% for lettre in mot|split('') %}
+                <td>{{ lettre|voyelle }}</td>
+            {% endfor %}
+            <td>{{ mot|totalVoyelle }}</td>
+            <td>{{ mot|totalReduitVoyelle }}</td>
+        </tr>
+        <tr>
+            <th scope="row">Consonnes - Nombre de structure</th>
+            {% for lettre in mot|split('') %}
+                <td>{{ lettre|consonne }}</td>
+            {% endfor %}
+            <td>{{ mot|totalConsonne }}</td>
+            <td>{{ mot|totalReduitConsonne }}</td>
+        </tr>
+    </tbody>
+</table>

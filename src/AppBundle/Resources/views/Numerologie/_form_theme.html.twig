@@ -1,0 +1,30 @@
+{%- block collection_widget -%}
+    {% if prototype is defined %}
+        <ul id="{{ name }}-fields-list"
+            data-prototype="{{ form_widget(prototype)|e }}"
+            data-widget-tags="{{ '<li></li>'|e }}">
+            {% for field in form %}
+                <li>
+                    {{- form_errors(form) -}}
+                    {{- block('form_widget') -}}
+                </li>
+            {% endfor %}
+        </ul>
+
+        <button type="button"
+                class="add-another-collection-widget btn btn-primary"
+                data-list="#{{ name }}-fields-list">Ajouter</button>
+    {% endif %}
+{%- endblock collection_widget -%}
+
+{%- block form_row -%}
+    <div>
+        {{- form_errors(form) -}}
+        <div class="form-group row">
+            {{ form_label(form, null, {'label_attr': {'class': 'col-md-4'}}) }}
+            <div class="col-sm-8">
+                {{ form_widget(form, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+    </div>
+{%- endblock form_row -%}

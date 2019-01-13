@@ -1,0 +1,7 @@
+numerologie_add:
+    path: /
+    defaults: { _controller: AppBundle:Numerologie:add }
+
+numerologie_show:
+    path: /afficher/
+    defaults: { _controller: AppBundle:Numerologie:show }

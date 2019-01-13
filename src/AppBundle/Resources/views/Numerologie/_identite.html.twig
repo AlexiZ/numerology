@@ -1,0 +1,73 @@
+<h3>Noms de naissance</h3>
+
+{% for nom in personne.noms %}
+    {% include '@App/Numerologie/_table_identite.html.twig' with {'mot': nom} %}
+{% endfor %}
+
+<hr>
+
+<h3>Prénoms d'usage et masqués</h3>
+
+{% for prenom in personne.prenoms %}
+    {% include '@App/Numerologie/_table_identite.html.twig' with {'mot': prenom} %}
+{% endfor %}
+
+<hr>
+
+<h3>Tableau récapitulatif de l'identité</h3>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">{{ personne }} (nombre global : {{ (personne.noms[0]~personne.prenoms[0])|totalReduitLettre + (personne.noms[0]~personne.prenoms[0])|totalReduitVoyelle + (personne.noms[0]~personne.prenoms[0])|totalReduitConsonne }})</th>
+            <td>Nombre héréditaire</td>
+            <td>Nombre de mission</td>
+            <td>Nombre social</td>
+            <td>Nombre de structure</td>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr>
+            <th scope="row">Nom d'usage</th>
+            <td>{{ personne.noms[0]|totalReduitLettre }}</td>
+            <td>-</td>
+            <td>{{ personne.noms[0]|totalReduitVoyelle }}</td>
+            <td>{{ personne.noms[0]|totalReduitConsonne }}</td>
+        </tr>
+        {% if prenoms.noms[1]|default %}
+            <tr>
+                <th scope="row">Nom de naissance</th>
+                <td>{{ personne.noms[1]|totalReduitLettre }}</td>
+                <td>-</td>
+                <td>{{ personne.noms[1]|totalReduitVoyelle }}</td>
+                <td>{{ personne.noms[1]|totalReduitConsonne }}</td>
+            </tr>
+        {% endif %}
+        <tr>
+            <th scope="row">Prénom d'usage</th>
+            <td>-</td>
+            <td>{{ personne.prenoms[0]|totalReduitLettre }}</td>
+            <td>{{ personne.prenoms[0]|totalReduitVoyelle }}</td>
+            <td>{{ personne.prenoms[0]|totalReduitConsonne }}</td>
+        </tr>
+        {% for prenom in personne.prenoms %}
+            {% if loop.index > 1  %}
+                <tr>
+                    <th scope="row">Prénom masqué</th>
+                    <td>-</td>
+                    <td>{{ prenom|totalReduitLettre }}</td>
+                    <td>{{ prenom|totalReduitVoyelle }}</td>
+                    <td>{{ prenom|totalReduitConsonne }}</td>
+                </tr>
+            {% endif %}
+        {% endfor %}
+        <tr>
+            <th scope="row">Total</th>
+            <th>{{ personne.noms|join('')|totalReduitLettre }}</th>
+            <th>{{ personne.prenoms|join('')|totalReduitLettre }}</th>
+            <th>{{ (personne.noms|join('')~personne.prenoms|join(''))|totalReduitVoyelle }}</th>
+            <th>{{ (personne.noms|join('')~personne.prenoms|join(''))|totalReduitConsonne }}</th>
+        </tr>
+    </tbody>
+</table>

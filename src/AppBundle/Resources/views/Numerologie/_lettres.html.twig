@@ -1,0 +1,26 @@
+<h2>Lettres physiques, émotives, cérébrales, intuitives</h2>
+
+<h3>Nom d'usage</h3>
+
+{% include '@App/Numerologie/_table_lettres.html.twig' with {'mot': personne.noms[0], 'moyen': [25, 30, 27, 10]} %}
+
+<hr>
+
+<h3>Prénom d'usage</h3>
+
+{% include '@App/Numerologie/_table_lettres.html.twig' with {'mot': personne.prenoms[0]} %}
+
+{% if personne.prenoms|length > 1 %}
+    <hr>
+
+    <h3>Autres prénoms</h3>
+
+    {% set autres = '' %}
+    {% for prenom in personne.prenoms %}
+        {% if loop.index > 1 %}
+            {% set autres = autres~prenom %}
+        {% endif %}
+    {% endfor %}
+
+    {% include '@App/Numerologie/_table_lettres.html.twig' with {'mot': autres} %}
+{% endif %}

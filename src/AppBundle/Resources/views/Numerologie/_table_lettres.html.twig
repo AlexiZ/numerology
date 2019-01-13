@@ -1,0 +1,52 @@
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Lettres ({{ mot|split('')|length }})</th>
+            {% for lettre in mot|split('') %}
+                <th>{{ lettre }}</th>
+            {% endfor %}
+            <th>Total</th>
+            <th>%</th>
+            {% if moyen|default %}<th>Moyen</th>{% endif %}
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr>
+            <th scope="row">Physiques : D, E, M, W</th>
+            {% for lettre in mot|split('') %}
+                <td>{{ lettre|lettrePhysique ? 'x' : '' }}</td>
+            {% endfor %}
+            <td>{{ mot|totalLettrePhysique }}</td>
+            <td>{{ ((mot|totalLettrePhysique / mot|length)*100)|number_format(0) }} %</td>
+            {% if moyen|default %}<th>{{ moyen[0] }}</th>{% endif %}
+        </tr>
+        <tr>
+            <th scope="row">Émotives : B, I, O, R, S, T, X, Z</th>
+            {% for lettre in mot|split('') %}
+                <td>{{ lettre|lettreEmotive ? 'x' : '' }}</td>
+            {% endfor %}
+            <td>{{ mot|totalLettreEmotive }}</td>
+            <td>{{ ((mot|totalLettreEmotive / mot|length)*100)|number_format(0) }} %</td>
+            {% if moyen|default %}<th>{{ moyen[1] }}</th>{% endif %}
+        </tr>
+        <tr>
+            <th scope="row">Cérébrales : A, G, H, J, L, N, P</th>
+            {% for lettre in mot|split('') %}
+                <td>{{ lettre|lettreCerebrale ? 'x' : '' }}</td>
+            {% endfor %}
+            <td>{{ mot|totalLettreCerebrale }}</td>
+            <td>{{ ((mot|totalLettreCerebrale / mot|length)*100)|number_format(0) }} %</td>
+            {% if moyen|default %}<th>{{ moyen[2] }}</th>{% endif %}
+        </tr>
+        <tr>
+            <th scope="row">Intuitives : C, F, K, Q, U, V, Y</th>
+            {% for lettre in mot|split('') %}
+                <td>{{ lettre|lettreIntuitive ? 'x' : '' }}</td>
+            {% endfor %}
+            <td>{{ mot|totalLettreIntuitive }}</td>
+            <td>{{ ((mot|totalLettreIntuitive / mot|length)*100)|number_format(0) }} %</td>
+            {% if moyen|default %}<th>{{ moyen[3] }}</th>{% endif %}
+        </tr>
+    </tbody>
+</table>
