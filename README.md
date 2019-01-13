@@ -1,11 +1,7 @@
-availability
+Numerology
 ============
 
-A Symfony project created on June 16, 2017, 9:34 am.
+A Symfony project created on January 13, 2019, 7:44 pm.
 
 ### Purpose :
-Check if given websites (constants for now) are still online.
-
-
-### Incoming features :
-TODO
+Automatically calculate a person's numerology theme.
