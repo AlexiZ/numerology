@@ -10,7 +10,13 @@ use Symfony\Component\HttpFoundation\Request;
 
 class NumerologieController extends Controller
 {
-    public function addAction(Request $request, ManagerRegistry $managerRegistry)
+    public function indexAction(Request $request)
+    {
+        $parameters = [];
+        return $this->render('@App/Numerologie/index.html.twig', $parameters);
+    }
+
+    public function addAction(Request $request)
     {
         $parameters = [];
         $numerologie = new Numerologie();
@@ -18,14 +24,14 @@ class NumerologieController extends Controller
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            return $this->redirectToRoute('numerologie_show', ['numerologie' => $numerologie->serialize()]);
+            return $this->redirectToRoute('numerologie_show', ['numerologie' => array_filter($numerologie->serialize())]);
         }
 
         $parameters = array_merge($parameters, [
             'form' => $form->createView()
         ]);
 
-        return $this->render('@App/Numerologie/index.html.twig', $parameters);
+        return $this->render('@App/Numerologie/add.html.twig', $parameters);
     }
 
     public function showAction(Request $request, ManagerRegistry $managerRegistry)
@@ -37,6 +43,6 @@ class NumerologieController extends Controller
         $numerologie = new Numerologie();
         $numerologie->unserialize($request->get('numerologie'));
 
-        return $this->render('@App/Numerologie/show.html.twig', ['personne' => $numerologie]);
+        return $this->render('@App/Numerologie/show.html.twig', ['subject' => $numerologie]);
     }
 }

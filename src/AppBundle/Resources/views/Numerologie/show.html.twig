@@ -1,16 +1,16 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    Numérologie
+    Numérologie - {{ subject }}
 {% endblock %}
 
 {% block body %}
     <div class="container">
-        <h1>Numérologie {{ personne }}</h1>
+        <h1>Numérologie {{ subject }}</h1>
 
         <ol class="breadcrumb">
             <li><a href="/">Nouvelle personne</a></li>
-            <li class="active">{{ personne }}</li>
+            <li class="active">{{ subject }}</li>
         </ol>
 
         <div class="panel with-nav-tabs">
@@ -24,11 +24,11 @@
             <div class="panel-body">
                 <div class="tab-content">
                     <div class="tab-pane fade active in" id="tab1">
-                        {% include '@App/Numerologie/_identite.html.twig' with {'personne': personne} %}
+                        {% include '@App/Numerologie/_identite.html.twig' with {'subject': subject} %}
                     </div>
 
                     <div class="tab-pane fade" id="tab2">
-                        {% include '@App/Numerologie/_lettres.html.twig' with {'personne': personne} %}
+                        {% include '@App/Numerologie/_lettres.html.twig' with {'subject': subject} %}
                     </div>
                 </div>
             </div>

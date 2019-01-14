@@ -2,181 +2,276 @@
 
 namespace AppBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-
 /**
- * Website
- *
- * @ORM\Table(name="numerologie")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\NumerologieRepository")
+ * Numerologie
  */
 class Numerologie
 {
     /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @var string
      */
-    private $id;
-
-    /**
-     * @var array
-     *
-     * @ORM\Column(name="noms", type="array", nullable=false)
-     */
-    private $noms;
-
-    /**
-     * @var array
-     *
-     * @ORM\Column(name="prenoms", type="array", nullable=false)
-     */
-    private $prenoms;
+    private $birthName;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="pseudo", type="string", length=255, nullable=true)
      */
-    private $pseudo = null;
+    private $useName;
+
+    /**
+     * @var string
+     */
+    private $firstname;
+
+    /**
+     * @var array
+     */
+    private $otherFirstnames;
+
+    /**
+     * @var array
+     */
+    private $pseudos = [];
 
     /**
      * @var \Datetime
-     *
-     * @ORM\Column(name="date_naissance", type="datetime", nullable=false)
      */
-    private $dateNaissance;
+    private $birthDate;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="lieu_naissance", type="string", length=255, nullable=false)
      */
-    private $lieuNaissance;
+    private $birthPlace;
 
     public function __toString()
     {
-        return implode(' ', $this->getPrenoms()) . ' ' . implode(' ', $this->getNoms());
+        return $this->getFirstname() . ' ' . ($this->getOtherFirstnames() ? implode(' ', $this->getOtherFirstnames()) . ' ' : null) . ($this->getUseName() ?? $this->getBirthName()) . ' ' . ($this->getPseudos() ? implode(' ', $this->getPseudos()) . ' ' : null);
     }
 
     public function serialize()
     {
         return [
-            'noms' => $this->getNoms(),
-            'prenoms' => $this->getPrenoms(),
-            'pseudo' => $this->getPseudo(),
-            'dateNaissance' => $this->getDateNaissance(),
-            'lieuNaissance' => $this->getLieuNaissance(),
+            'birthName' => $this->cleanString($this->getBirthName()),
+            'useName' => $this->cleanString($this->getUseName()),
+            'firstname' => $this->cleanString($this->getFirstname()),
+            'otherFirstnames' => $this->cleanString(implode(',', $this->getOtherFirstnames())),
+            'pseudo' => $this->cleanString(implode(',', $this->getPseudos())),
+            'birthDate' => $this->getBirthDate(),
+            'birthPlace' => $this->cleanString($this->getBirthPlace()),
         ];
     }
 
     public function unserialize(array $data)
     {
-        foreach ($data as $name => $value) {
-            $function = 'set' . ucfirst($name);
-            $this->$function($value);
+        $this->setBirthName($data['birthName'] ?? null);
+        $this->setUseName($data['useName'] ?? null);
+        $this->setFirstname($data['firstname']);
+        if (isset($data['otherFirstnames'])) {
+            foreach (explode(',', $data['otherFirstnames']) as $other) {
+                $this->addOtherFirstname($other);
+            }
         }
+        if (isset($data['pseudos'])) {
+            foreach (explode(',', $data['pseudos']) as $pseudo) {
+                $this->addPseudo($pseudo);
+            }
+        }
+        $date_array = date_parse($data['birthDate']['date']);
+
+        $date_string = date('Y-m-d H:i:s', mktime($date_array['hour'], $date_array['minute'], $date_array['second'], $date_array['month'], $date_array['day'], $date_array['year']));
+
+        $this->setBirthDate(new \DateTime($date_string));
+        $this->setBirthPlace($data['birthPlace']);
 
         return $this;
     }
 
-    /**
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
+    protected function cleanString($text) {
+        $utf8 = array(
+            '/[áàâãªä]/u'   =>   'a',
+            '/[ÁÀÂÃÄ]/u'    =>   'A',
+            '/[ÍÌÎÏ]/u'     =>   'I',
+            '/[íìîï]/u'     =>   'i',
+            '/[éèêë]/u'     =>   'e',
+            '/[ÉÈÊË]/u'     =>   'E',
+            '/[óòôõºö]/u'   =>   'o',
+            '/[ÓÒÔÕÖ]/u'    =>   'O',
+            '/[úùûü]/u'     =>   'u',
+            '/[ÚÙÛÜ]/u'     =>   'U',
+            '/ç/'           =>   'c',
+            '/Ç/'           =>   'C',
+            '/ñ/'           =>   'n',
+            '/Ñ/'           =>   'N',
+            '/–/'           =>   '',
+            '/-/'           =>   '',
+            '/[’‘‹›‚]/u'    =>   '',
+            '/[“”«»„]/u'    =>   '',
+            '/  /'          =>   '',
+        );
+
+        return strtoupper(preg_replace(array_keys($utf8), array_values($utf8), $text));
     }
 
     /**
-     * @return array
+     * @return string
      */
-    public function getNoms()
+    public function getBirthName()
     {
-        return $this->noms;
+        return $this->birthName;
     }
 
     /**
-     * @param array $noms
+     * @param string $birthName
+     *
      * @return Numerologie
      */
-    public function setNoms($noms)
+    public function setBirthName($birthName)
     {
-        $this->noms = $noms;
-        return $this;
-    }
+        $this->birthName = $birthName;
 
-    /**
-     * @return array
-     */
-    public function getPrenoms()
-    {
-        return $this->prenoms;
-    }
-
-    /**
-     * @param array $prenoms
-     * @return Numerologie
-     */
-    public function setPrenoms($prenoms)
-    {
-        $this->prenoms = $prenoms;
         return $this;
     }
 
     /**
      * @return string
      */
-    public function getPseudo()
+    public function getUseName()
     {
-        return $this->pseudo;
+        return $this->useName;
     }
 
     /**
-     * @param string|null $pseudo
+     * @param string $useName
+     *
      * @return Numerologie
      */
-    public function setPseudo($pseudo = null)
+    public function setUseName($useName)
     {
-        $this->pseudo = $pseudo;
+        $this->useName = $useName;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFirstname()
+    {
+        return $this->firstname;
+    }
+
+    /**
+     * @param string $firstname
+     *
+     * @return Numerologie
+     */
+    public function setFirstname($firstname)
+    {
+        $this->firstname = $firstname;
+
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getOtherFirstnames()
+    {
+        return $this->otherFirstnames;
+    }
+
+    /**
+     * @param array $otherFirstnames
+     *
+     * @return Numerologie
+     */
+    public function setOtherFirstnames($otherFirstnames)
+    {
+        $this->otherFirstnames = $otherFirstnames;
+
+        return $this;
+    }
+
+    /**
+     * @param string $otherFirstname
+     *
+     * @return Numerologie
+     */
+    public function addOtherFirstname($otherFirstname)
+    {
+        $this->otherFirstnames[] = $otherFirstname;
+
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getPseudos()
+    {
+        return $this->pseudos;
+    }
+
+    /**
+     * @param array $pseudos
+     *
+     * @return Numerologie
+     */
+    public function setPseudos($pseudos)
+    {
+        $this->pseudos = $pseudos;
+
+        return $this;
+    }
+
+    /**
+     * @param string $pseudo
+     *
+     * @return Numerologie
+     */
+    public function addPseudo($pseudo)
+    {
+        $this->pseudos[] = $pseudo;
+
         return $this;
     }
 
     /**
      * @return \Datetime
      */
-    public function getDateNaissance()
+    public function getBirthDate()
     {
-        return $this->dateNaissance;
+        return $this->birthDate;
     }
 
     /**
-     * @param \Datetime $dateNaissance
+     * @param \Datetime $birthDate
+     *
      * @return Numerologie
      */
-    public function setDateNaissance($dateNaissance)
+    public function setBirthDate($birthDate)
     {
-        $this->dateNaissance = $dateNaissance;
+        $this->birthDate = $birthDate;
+
         return $this;
     }
 
     /**
      * @return string
      */
-    public function getLieuNaissance()
+    public function getBirthPlace()
     {
-        return $this->lieuNaissance;
+        return $this->birthPlace;
     }
 
     /**
-     * @param string $lieuNaissance
+     * @param string $birthPlace
+     *
      * @return Numerologie
      */
-    public function setLieuNaissance($lieuNaissance)
+    public function setBirthPlace($birthPlace)
     {
-        $this->lieuNaissance = $lieuNaissance;
+        $this->birthPlace = $birthPlace;
+
         return $this;
     }
 }

@@ -2,25 +2,25 @@
 
 <h3>Nom d'usage</h3>
 
-{% include '@App/Numerologie/_table_lettres.html.twig' with {'mot': personne.noms[0], 'moyen': [25, 30, 27, 10]} %}
+{% include '@App/Numerologie/_table_lettres.html.twig' with {'mot': subject.useName|default(subject.birthName), 'moyen': [25, 30, 27, 10]} %}
 
 <hr>
 
 <h3>Prénom d'usage</h3>
 
-{% include '@App/Numerologie/_table_lettres.html.twig' with {'mot': personne.prenoms[0]} %}
+{% include '@App/Numerologie/_table_lettres.html.twig' with {'mot': subject.firstname} %}
 
-{% if personne.prenoms|length > 1 %}
+{% if subject.otherFirstnames|default %}
     <hr>
 
-    <h3>Autres prénoms</h3>
+    <h3>Prénoms masqués</h3>
 
-    {% set autres = '' %}
-    {% for prenom in personne.prenoms %}
+    {% set others = '' %}
+    {% for other in subject.otherFirstnames %}
         {% if loop.index > 1 %}
-            {% set autres = autres~prenom %}
+            {% set others = others~other %}
         {% endif %}
     {% endfor %}
 
-    {% include '@App/Numerologie/_table_lettres.html.twig' with {'mot': autres} %}
+    {% include '@App/Numerologie/_table_lettres.html.twig' with {'mot': others} %}
 {% endif %}

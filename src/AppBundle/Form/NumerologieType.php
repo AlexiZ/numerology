@@ -5,6 +5,7 @@ namespace AppBundle\Form;
 use AppBundle\Entity\Numerologie;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -16,34 +17,37 @@ class NumerologieType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('noms', CollectionType::class, [
-                'label' => 'Noms de famille (naissance, adoption, mariage)',
+            ->add('birthName', TextType::class, [
+                'label' => 'Nom de naissance',
                 'required' => true,
-                'entry_type' => TextType::class,
-                'allow_add' => true,
             ])
-            ->add('prenoms', CollectionType::class, [
-                'label' => 'Prénoms',
-                'required' => true,
-                'entry_type' => TextType::class,
-                'allow_add' => true,
-            ])
-            ->add('pseudo', TextType::class, [
-                'label' => 'Pseudonymes',
+            ->add('useName', TextType::class, [
+                'label' => 'Nom d\'usage (si différent du nom d\'usage)',
                 'required' => false,
             ])
+            ->add('firstname', TextType::class, [
+                'label' => 'Premier prénom',
+                'required' => true,
+            ])
+            ->add('otherFirstnames', CollectionType::class, [
+                'label' => 'Autres prénoms',
+                'required' => true,
+                'entry_type' => TextType::class,
+                'allow_add' => true,
+                'allow_delete' => true,
+            ])
 
-            ->add('dateNaissance', DateType::class, [
+            ->add('birthDate', DateTimeType::class, [
                 'label' => 'Date et heure de naissance (heure universelle)',
                 'widget' => 'single_text',
                 'required' => true,
             ])
-            ->add('lieuNaissance', TextType::class, [
+            ->add('birthPlace', TextType::class, [
                 'label' => 'Lieu de naissance',
                 'required' => true,
             ])
             ->add('submit', SubmitType::class, [
-                'label' => 'Enregistrer',
+                'label' => 'Voir les résultats',
             ])
         ;
     }

@@ -118,7 +118,7 @@ class Numerologie
             }
         }
 
-        return $reduction;
+        return $reduction > 0 ? $reduction : '-';
     }
 
     public function is($type, $letter)

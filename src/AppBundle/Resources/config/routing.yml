@@ -1,5 +1,9 @@
+numerologie_index:
+  path: /
+  defaults: { _controller: AppBundle:Numerologie:index }
+
 numerologie_add:
-    path: /
+    path: /ajouter
     defaults: { _controller: AppBundle:Numerologie:add }
 
 numerologie_show:
