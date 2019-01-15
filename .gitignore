@@ -2,4 +2,8 @@ web/bundles/
 vendor
 app/config/parameters.yml
 .idea
-var/
+var/cache/*
+var/logs/*
+var/sessions/*
+app/logs/*
+parameters.yml

@@ -18,5 +18,4 @@ parameters:
     # A secret key that's used to generate certain security-related tokens
     secret: ThisTokenIsNotSoSecretChangeIt
 
-    app_domain: availability.docker
-    alert_email: me@test.com
+    app_domain: numerology.local
