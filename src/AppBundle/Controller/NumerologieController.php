@@ -3,20 +3,22 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Numerologie;
+use AppBundle\Services\Numerologie as NumerologieService;
 use AppBundle\Form\NumerologieType;
-use Doctrine\Common\Persistence\ManagerRegistry;
+use AppBundle\Services\JsonIO;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
 class NumerologieController extends Controller
 {
-    public function indexAction(Request $request)
+    public function indexAction(JsonIO $jsonIO)
     {
-        $parameters = [];
-        return $this->render('@App/Numerologie/index.html.twig', $parameters);
+        return $this->render('@App/Numerologie/index.html.twig', [
+            'histories' => $jsonIO->readHistoryFolder(),
+        ]);
     }
 
-    public function addAction(Request $request)
+    public function addAction(Request $request, JsonIO $jsonIO)
     {
         $parameters = [];
         $numerologie = new Numerologie();
@@ -24,7 +26,9 @@ class NumerologieController extends Controller
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            return $this->redirectToRoute('numerologie_show', ['numerologie' => array_filter($numerologie->serialize())]);
+            $filename = $jsonIO->writeJson($numerologie);
+
+            return $this->redirectToRoute('numerologie_show', ['filename' => $filename]);
         }
 
         $parameters = array_merge($parameters, [
@@ -34,14 +38,17 @@ class NumerologieController extends Controller
         return $this->render('@App/Numerologie/add.html.twig', $parameters);
     }
 
-    public function showAction(Request $request, ManagerRegistry $managerRegistry)
+    public function showAction(Request $request, NumerologieService $numerologieService)
     {
-        if (!$request->query->has('numerologie')) {
+        if (!$request->query->has('filename')) {
             return $this->redirectToRoute('numerologie_add');
         }
 
-        $numerologie = new Numerologie();
-        $numerologie->unserialize($request->get('numerologie'));
+        $numerologie = $numerologieService->getSubject($request->get('filename'));
+
+        if (!$numerologie) {
+            return $this->redirectToRoute('numerologie_index');
+        }
 
         return $this->render('@App/Numerologie/show.html.twig', ['subject' => $numerologie]);
     }

@@ -44,6 +44,8 @@ class NumerologieExtension extends AbstractExtension
 
             new TwigFilter('lettreIntuitive', array($this, 'intuitiveNumber')),
             new TwigFilter('totalLettreIntuitive', array($this, 'totalIntuitiveNumber')),
+
+            new TwigFilter('getSubject', array($this, 'getSubject')),
         );
     }
 
@@ -149,5 +151,14 @@ class NumerologieExtension extends AbstractExtension
     public function totalIntuitiveNumber($word)
     {
         return $this->numerologie->count('intuitive', $word);
+    }
+
+    /**
+     * SUBJECT
+     */
+
+    public function getSubject($md5)
+    {
+        return $this->numerologie->getSubject($md5);
     }
 }

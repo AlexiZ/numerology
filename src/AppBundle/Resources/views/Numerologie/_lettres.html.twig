@@ -17,10 +17,10 @@
 
     {% set others = '' %}
     {% for other in subject.otherFirstnames %}
-        {% if loop.index > 1 %}
-            {% set others = others~other %}
-        {% endif %}
+        {% set others = others~other %}
     {% endfor %}
 
-    {% include '@App/Numerologie/_table_lettres.html.twig' with {'mot': others} %}
+    {% if others|default %}
+        {% include '@App/Numerologie/_table_lettres.html.twig' with {'mot': others} %}
+    {% endif %}
 {% endif %}

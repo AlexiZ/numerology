@@ -7,3 +7,4 @@ var/logs/*
 var/sessions/*
 app/logs/*
 parameters.yml
+app/Resources/storage/*

@@ -6,10 +6,22 @@
 
 {% block body %}
     <div class="container">
+        <ol class="breadcrumb">
+            <li class="active">Accueil</li>
+        </ol>
+
         <div class="row">
             <div class="panel panel-default">
                 <div class="panel-body text-center">
-                    <a class="btn btn-primary" href="{{ path('numerologie_add') }}">Nouvelle personne</a>
+                    <p>
+                        <a class="btn btn-primary" href="{{ path('numerologie_add') }}">Nouvelle personne</a>
+                    </p>
+
+                    <p>
+                        <em>Cliquez ici pour voir la numérologie d'une nouvelle personne</em>
+                        <br>
+                        <em>ou mettre à jour la numérologie d'une personne existante</em>
+                    </p>
                 </div>
             </div>
         </div>
@@ -20,9 +32,10 @@
                     <h3>Historique</h3>
 
                     <div class="list-group">
-                        <a href="#" class="list-group-item">First item</a>
-                        <a href="#" class="list-group-item">Second item</a>
-                        <a href="#" class="list-group-item">Third item</a>
+                        {% for filename, label in histories %}
+                            {% set subject = filename|getSubject %}
+                            <a href="{{ path('numerologie_show', {'filename': filename}) }}" class="list-group-item">{{ subject }} ({{ label }})</a>
+                        {% endfor %}
                     </div>
                 </div>
             </div>
