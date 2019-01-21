@@ -1211,12 +1211,18 @@ $this->server->remove('UNENCODED_URL');
 $this->server->remove('IIS_WasUrlRewritten');
 } elseif ($this->server->has('REQUEST_URI')) {
 $requestUri = $this->server->get('REQUEST_URI');
+if (''!== $requestUri &&'/'=== $requestUri[0]) {
+if (false !== $pos = strpos($requestUri,'#')) {
+$requestUri = substr($requestUri, 0, $pos);
+}
+} else {
 $uriComponents = parse_url($requestUri);
 if (isset($uriComponents['path'])) {
 $requestUri = $uriComponents['path'];
 }
 if (isset($uriComponents['query'])) {
 $requestUri .='?'.$uriComponents['query'];
+}
 }
 } elseif ($this->server->has('ORIG_PATH_INFO')) {
 $requestUri = $this->server->get('ORIG_PATH_INFO');
