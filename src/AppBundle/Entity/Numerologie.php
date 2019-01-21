@@ -44,7 +44,7 @@ class Numerologie
 
     public function __toString()
     {
-        return $this->getFirstname() . ' ' . ($this->getOtherFirstnames() ? implode(' ', $this->getOtherFirstnames()) . ' ' : null) . ($this->getUseName() ?? $this->getBirthName()) . ' ' . ($this->getPseudos() ? implode(' ', $this->getPseudos()) . ' ' : null);
+        return $this->getFirstname() . ' ' . ($this->getOtherFirstnames() ? implode(' ', $this->getOtherFirstnames()) . ' ' : '') . (!empty($this->getUseName()) ? $this->getUseName() : $this->getBirthName());
     }
 
     public function serialize()
@@ -109,6 +109,17 @@ class Numerologie
         );
 
         return strtoupper(preg_replace(array_keys($utf8), array_values($utf8), $text));
+    }
+
+    public function getFileName($extension = false)
+    {
+        $serialize = $this->serialize();
+        $filename = implode('_', array_merge(
+            [($serialize['useName'] ?? $serialize['birthName'])],
+            [$serialize['firstname']]
+        ));
+
+        return md5($filename) . ($extension ? '.json' : '');
     }
 
     /**

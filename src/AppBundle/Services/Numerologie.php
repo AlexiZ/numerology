@@ -2,6 +2,8 @@
 
 namespace AppBundle\Services;
 
+use AppBundle\Entity\Numerologie as NumerologieEntity;
+
 class Numerologie
 {
     private static $vowels = [
@@ -47,6 +49,15 @@ class Numerologie
     private static $intuitive = [
         'C', 'F', 'K', 'Q', 'U', 'V', 'Y',
     ];
+    /**
+     * @var JsonIO
+     */
+    private $jsonIO;
+
+    public function __construct(JsonIO $jsonIO)
+    {
+        $this->jsonIO = $jsonIO;
+    }
 
     protected function getVowel($letter)
     {
@@ -137,5 +148,33 @@ class Numerologie
         }
 
         return $total;
+    }
+
+    public function getSubject($md5)
+    {
+        $subject = null;
+        $files = $this->jsonIO->readHistoryFolder(true);
+        if (false !== preg_match('/\.*/', $md5)) {
+            $md5 = explode('.', $md5)[0];
+        }
+
+        foreach ($files as $name => $file) {
+            if (false !== preg_match('/\.*/', $name)) {
+                $name = explode('.', $name)[0];
+            }
+            if ($name == $md5) {
+                $data = json_decode($file, true);
+                $subject = new NumerologieEntity();
+                $subject->setBirthName($data['birthName'] ?? null);
+                $subject->setUseName($data['useName'] ?? null);
+                $subject->setFirstName($data['firstname'] ?? null);
+                $subject->setOtherFirstnames(isset($data['otherFirstnames']) ? explode(',', $data['otherFirstnames']) : []);
+                $subject->setPseudos(isset($data['pseudo']) ? explode(',', $data['pseudo']) : []);
+                $subject->setBirthDate($data['birthDate'] ?? null);
+                $subject->setBirthPlace($data['birthPlace'] ?? null);
+            }
+        }
+
+        return $subject;
     }
 }
