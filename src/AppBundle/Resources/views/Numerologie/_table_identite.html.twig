@@ -1,3 +1,8 @@
+{% set labels = ['Lettres - Nombre héréditaire', 'Voyelles - Nombre social', 'Consonnes - Nombre de structure'] %}
+{% if 'firstname' == type %}
+    {% set labels = ['Lettres - Nombre de mission', 'Voyelles - Nombre social', 'Consonnes - Nombre de structure'] %}
+{% endif %}
+
 <table class="table">
     <thead>
         <tr>
@@ -12,7 +17,7 @@
 
     <tbody>
         <tr>
-            <th scope="row">Lettres - Nombre héréditaire</th>
+            <th scope="row">{{ labels[0] }}</th>
             {% for lettre in mot|split('') %}
                 <td>{{ lettre|lettre }}</td>
             {% endfor %}
@@ -20,7 +25,7 @@
             <td>{{ mot|totalReduitLettre }}</td>
         </tr>
         <tr>
-            <th scope="row">Voyelles - Nombre social</th>
+            <th scope="row">{{ labels[1] }}</th>
             {% for lettre in mot|split('') %}
                 <td>{{ lettre|voyelle }}</td>
             {% endfor %}
@@ -28,7 +33,7 @@
             <td>{{ mot|totalReduitVoyelle }}</td>
         </tr>
         <tr>
-            <th scope="row">Consonnes - Nombre de structure</th>
+            <th scope="row">{{ labels[2] }}</th>
             {% for lettre in mot|split('') %}
                 <td>{{ lettre|consonne }}</td>
             {% endfor %}

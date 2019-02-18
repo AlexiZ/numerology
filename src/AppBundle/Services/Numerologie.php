@@ -177,4 +177,19 @@ class Numerologie
 
         return $subject;
     }
+
+    public function addNumberDigits($number)
+    {
+        $digits = (string)$number;
+        $total = 0;
+        for ($i = 0; $i < strlen($digits); $i++) {
+            $total += (int)$digits[$i];
+        }
+
+        if (strlen($total) > 1) {
+            return $this->addNumberDigits($total);
+        }
+
+        return $total;
+    }
 }

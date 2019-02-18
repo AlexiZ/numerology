@@ -1,26 +1,26 @@
 {% if subject.useName|default %}
     <h3>Nom d'usage</h3>
 
-    {% include '@App/Numerologie/_table_identite.html.twig' with {'mot': subject.useName} %}
+    {% include '@App/Numerologie/_table_identite.html.twig' with {'mot': subject.useName, 'type': 'lastname'} %}
 {% endif %}
 
 {% if subject.birthName|default %}
     <h3>Nom de naissance</h3>
 
-    {% include '@App/Numerologie/_table_identite.html.twig' with {'mot': subject.birthName} %}
+    {% include '@App/Numerologie/_table_identite.html.twig' with {'mot': subject.birthName, 'type': 'lastname'} %}
 {% endif %}
 
 <hr>
 
 <h3>Prénom</h3>
 
-{% include '@App/Numerologie/_table_identite.html.twig' with {'mot': subject.firstname} %}
+{% include '@App/Numerologie/_table_identite.html.twig' with {'mot': subject.firstname, 'type': 'firstname'} %}
 
 {% if subject.otherFirstnames %}
     <h3>Prénom</h3>
 
     {% for otherFirstname in subject.otherFirstnames %}
-        {% include '@App/Numerologie/_table_identite.html.twig' with {'mot': otherFirstname} %}
+        {% include '@App/Numerologie/_table_identite.html.twig' with {'mot': otherFirstname, 'type': 'firstname'} %}
     {% endfor %}
 {% endif %}
 
@@ -31,7 +31,7 @@
 <table class="table">
     <thead>
         <tr>
-            <th scope="col">{{ subject }} (nombre global : {{ (subject.useName|default(subject.birthName)~subject.firstname)|totalReduitLettre + (subject.useName|default(subject.birthName)~subject.firstname)|totalReduitVoyelle + (subject.useName|default(subject.birthName)~subject.firstname)|totalReduitConsonne }})</th>
+            <th scope="col">{{ subject }} (nombre global : {{ ((subject.useName|default(subject.birthName)~subject.firstname)|totalReduitLettre + (subject.useName|default(subject.birthName)~subject.firstname)|totalReduitVoyelle + (subject.useName|default(subject.birthName)~subject.firstname)|totalReduitConsonne)|addNumberDigits }})</th>
             <td>Nombre héréditaire</td>
             <td>Nombre de mission</td>
             <td>Nombre social</td>

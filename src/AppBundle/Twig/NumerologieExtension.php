@@ -46,6 +46,8 @@ class NumerologieExtension extends AbstractExtension
             new TwigFilter('totalLettreIntuitive', array($this, 'totalIntuitiveNumber')),
 
             new TwigFilter('getSubject', array($this, 'getSubject')),
+
+            new TwigFilter('addNumberDigits', array($this, 'addNumberDigits')),
         );
     }
 
@@ -66,6 +68,11 @@ class NumerologieExtension extends AbstractExtension
     public function reducedTotalLetterNumber($word)
     {
         return $this->numerologie->reducedTotalNumber('letter', $word);
+    }
+
+    public function addNumberDigits($number)
+    {
+        return $this->numerologie->addNumberDigits($number);
     }
 
 
