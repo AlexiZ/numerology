@@ -49,6 +49,7 @@ class Numerologie
     private static $intuitive = [
         'C', 'F', 'K', 'Q', 'U', 'V', 'Y',
     ];
+
     /**
      * @var JsonIO
      */
@@ -57,6 +58,23 @@ class Numerologie
     public function __construct(JsonIO $jsonIO)
     {
         $this->jsonIO = $jsonIO;
+    }
+
+    public function exportData(NumerologieEntity $subject)
+    {
+        return [
+            'identity' => [
+                'inheritedNumber' => $this->reducedTotalNumber('letter', $subject->getUseName().$subject->getBirthName()),
+                'dutyNumber' => $this->reducedTotalNumber('letter', $subject->getFirstName().implode('', $subject->getOtherFirstnames())),
+                'socialNumber' => $this->reducedTotalNumber('vowel', $subject->getUseName().$subject->getBirthName().$subject->getFirstName().implode('', $subject->getOtherFirstnames())),
+                'structureNumber' => $this->reducedTotalNumber('consonant', $subject->getUseName().$subject->getBirthName().$subject->getFirstName().implode('', $subject->getOtherFirstnames())),
+                'globalNumber' => $this->addNumberDigits(
+                    (int) $this->reducedTotalNumber('letter', $subject->getUseName().$subject->getBirthName().$subject->getFirstName())
+                    + (int) $this->reducedTotalNumber('vowel', $subject->getUseName().$subject->getBirthName().$subject->getFirstName())
+                    + (int) $this->reducedTotalNumber('consonant', $subject->getUseName().$subject->getBirthName().$subject->getFirstName())
+                ),
+            ],
+        ];
     }
 
     protected function getVowel($letter)
@@ -165,13 +183,7 @@ class Numerologie
             if ($name == $md5) {
                 $data = json_decode($file, true);
                 $subject = new NumerologieEntity();
-                $subject->setBirthName($data['birthName'] ?? null);
-                $subject->setUseName($data['useName'] ?? null);
-                $subject->setFirstName($data['firstname'] ?? null);
-                $subject->setOtherFirstnames(isset($data['otherFirstnames']) ? explode(',', $data['otherFirstnames']) : []);
-                $subject->setPseudos(isset($data['pseudo']) ? explode(',', $data['pseudo']) : []);
-                $subject->setBirthDate($data['birthDate'] ?? null);
-                $subject->setBirthPlace($data['birthPlace'] ?? null);
+                $subject->unserialize($data);
             }
         }
 

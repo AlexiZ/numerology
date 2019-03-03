@@ -18,15 +18,15 @@ class NumerologieController extends Controller
         ]);
     }
 
-    public function addAction(Request $request, JsonIO $jsonIO)
+    public function addAction(Request $request, JsonIO $jsonIO, NumerologieService $numerologieService)
     {
         $parameters = [];
-        $numerologie = new Numerologie();
-        $form = $this->createForm(NumerologieType::class, $numerologie);
+        $subject = new Numerologie();
+        $form = $this->createForm(NumerologieType::class, $subject);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $filename = $jsonIO->writeJson($numerologie);
+            $filename = $jsonIO->writeJson($subject, $numerologieService->exportData($subject));
 
             return $this->redirectToRoute('numerologie_show', ['filename' => $filename]);
         }

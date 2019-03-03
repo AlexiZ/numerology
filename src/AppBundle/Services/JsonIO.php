@@ -28,11 +28,11 @@ class JsonIO
         return json_decode(file_get_contents($this->storageFileFolder.$filename),TRUE);
     }
 
-    public function writeJson(Numerologie $subject)
+    public function writeJson(Numerologie $subject, array $data)
     {
         $filename = $this->storageFileFolder.$subject->getFileName(true);
         if (!file_exists($filename)) {
-            file_put_contents($filename, json_encode($subject->serialize()));
+            file_put_contents($filename, json_encode($subject->serialize($data)));
         }
 
         return $subject->getFileName(true);

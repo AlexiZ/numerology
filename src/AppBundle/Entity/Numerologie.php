@@ -42,12 +42,14 @@ class Numerologie
      */
     private $birthPlace;
 
+    private $data = [];
+
     public function __toString()
     {
         return $this->getFirstname() . ' ' . ($this->getOtherFirstnames() ? implode(' ', $this->getOtherFirstnames()) . ' ' : '') . (!empty($this->getUseName()) ? $this->getUseName() : $this->getBirthName());
     }
 
-    public function serialize()
+    public function serialize($data)
     {
         return [
             'birthName' => $this->cleanString($this->getBirthName()),
@@ -55,8 +57,9 @@ class Numerologie
             'firstname' => $this->cleanString($this->getFirstname()),
             'otherFirstnames' => $this->cleanString(implode(',', $this->getOtherFirstnames())),
             'pseudo' => $this->cleanString(implode(',', $this->getPseudos())),
-            'birthDate' => $this->getBirthDate(),
+            'birthDate' => $this->getBirthDate()->format('d-m-Y H:i'),
             'birthPlace' => $this->cleanString($this->getBirthPlace()),
+            'data' => $data,
         ];
     }
 
@@ -75,12 +78,10 @@ class Numerologie
                 $this->addPseudo($pseudo);
             }
         }
-        $date_array = date_parse($data['birthDate']['date']);
 
-        $date_string = date('Y-m-d H:i:s', mktime($date_array['hour'], $date_array['minute'], $date_array['second'], $date_array['month'], $date_array['day'], $date_array['year']));
-
-        $this->setBirthDate(new \DateTime($date_string));
+        $this->setBirthDate(new \DateTime($data['birthDate']));
         $this->setBirthPlace($data['birthPlace']);
+        $this->setData($data['data']);
 
         return $this;
     }
@@ -113,10 +114,9 @@ class Numerologie
 
     public function getFileName($extension = false)
     {
-        $serialize = $this->serialize();
         $filename = implode('_', array_merge(
-            [($serialize['useName'] ?? $serialize['birthName'])],
-            [$serialize['firstname']]
+            [($this->cleanString($this->getUseName()) ?? $this->cleanString($this->getBirthName()))],
+            [$this->cleanString($this->getFirstname())]
         ));
 
         return md5($filename) . ($extension ? '.json' : '');
@@ -282,6 +282,26 @@ class Numerologie
     public function setBirthPlace($birthPlace)
     {
         $this->birthPlace = $birthPlace;
+
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getData()
+    {
+        return $this->data;
+    }
+
+    /**
+     * @param array $data
+     *
+     * @return Numerologie
+     */
+    public function setData($data)
+    {
+        $this->data = $data;
 
         return $this;
     }

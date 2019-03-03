@@ -16,18 +16,23 @@
         <div class="panel with-nav-tabs">
             <div class="panel-heading">
                 <ul class="nav nav-tabs">
-                    <li class="active"><a href="#tab1" data-toggle="tab">Identité</a></li>
-                    <li class=""><a href="#tab2" data-toggle="tab">Lettres</a></li>
+                    <li class="active"><a href="#tab1" data-toggle="tab">Résumé</a></li>
+                    <li class=""><a href="#tab2" data-toggle="tab">Identité</a></li>
+                    <li class=""><a href="#tab3" data-toggle="tab">Lettres</a></li>
                 </ul>
             </div>
 
             <div class="panel-body">
                 <div class="tab-content">
                     <div class="tab-pane fade active in" id="tab1">
-                        {% include '@App/Numerologie/_identite.html.twig' with {'subject': subject} %}
+                        {% include '@App/Numerologie/_resume.html.twig' with {'subject': subject} %}
                     </div>
 
                     <div class="tab-pane fade" id="tab2">
+                        {% include '@App/Numerologie/_identite.html.twig' with {'subject': subject} %}
+                    </div>
+
+                    <div class="tab-pane fade" id="tab3">
                         {% include '@App/Numerologie/_lettres.html.twig' with {'subject': subject} %}
                     </div>
                 </div>

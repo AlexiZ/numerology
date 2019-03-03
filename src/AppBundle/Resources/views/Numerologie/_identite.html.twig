@@ -31,7 +31,7 @@
 <table class="table">
     <thead>
         <tr>
-            <th scope="col">{{ subject }} (nombre global : {{ ((subject.useName|default(subject.birthName)~subject.firstname)|totalReduitLettre + (subject.useName|default(subject.birthName)~subject.firstname)|totalReduitVoyelle + (subject.useName|default(subject.birthName)~subject.firstname)|totalReduitConsonne)|addNumberDigits }})</th>
+            <th scope="col">{{ subject }} (nombre global : {{ subject.data.identity.globalNumber }})</th>
             <td>Nombre héréditaire</td>
             <td>Nombre de mission</td>
             <td>Nombre social</td>
@@ -74,10 +74,10 @@
         {% endfor %}
         <tr>
             <th scope="row">Total</th>
-            <th>{{ (subject.useName~subject.birthName)|totalReduitLettre }}</th>
-            <th>{{ (subject.firstname~(subject.otherFirstnames|join('')))|totalReduitLettre }}</th>
-            <th>{{ ((subject.useName~subject.birthName)~(subject.firstname~(subject.otherFirstnames|join(''))))|totalReduitVoyelle }}</th>
-            <th>{{ ((subject.useName~subject.birthName)~(subject.firstname~(subject.otherFirstnames|join(''))))|totalReduitConsonne }}</th>
+            <th>{{ subject.data.identity.inheritedNumber }}</th>
+            <th>{{ subject.data.identity.dutyNumber }}</th>
+            <th>{{ subject.data.identity.socialNumber }}</th>
+            <th>{{ subject.data.identity.structureNumber }}</th>
         </tr>
     </tbody>
 </table>
