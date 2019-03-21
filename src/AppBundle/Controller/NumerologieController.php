@@ -26,7 +26,7 @@ class NumerologieController extends Controller
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $filename = $jsonIO->writeJson($subject, $numerologieService->exportData($subject));
+            $filename = $jsonIO->writeNumerology($subject, $numerologieService->exportData($subject));
 
             return $this->redirectToRoute('numerologie_show', ['filename' => $filename]);
         }

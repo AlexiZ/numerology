@@ -204,4 +204,9 @@ class Numerologie
 
         return $total;
     }
+
+    public function getAnalysis($number, $context)
+    {
+        return $this->jsonIO->readAnalysis($number, $context);
+    }
 }

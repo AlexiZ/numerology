@@ -48,6 +48,8 @@ class NumerologieExtension extends AbstractExtension
             new TwigFilter('getSubject', array($this, 'getSubject')),
 
             new TwigFilter('addNumberDigits', array($this, 'addNumberDigits')),
+
+            new TwigFilter('getAnalysis', array($this, 'getAnalysis')),
         );
     }
 
@@ -167,5 +169,10 @@ class NumerologieExtension extends AbstractExtension
     public function getSubject($md5)
     {
         return $this->numerologie->getSubject($md5);
+    }
+
+    public function getAnalysis($number, $context)
+    {
+        return $this->numerologie->getAnalysis($number, $context);
     }
 }

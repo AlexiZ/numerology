@@ -13,6 +13,11 @@ class JsonIO
     private $storageFileFolder;
 
     /**
+     * @var string
+     */
+    private $dataFileFolder;
+
+    /**
      * @var KernelInterface
      */
     private $kernel;
@@ -21,19 +26,30 @@ class JsonIO
     {
         $this->kernel = $kernel;
         $this->storageFileFolder = $this->kernel->getRootDir().'/Resources/storage/';
+        $this->dataFileFolder = $this->kernel->getRootDir().'/Resources/data/';
     }
 
-    public function readJson($filename = null)
+    public function readJson($filename = null, $json = true)
     {
-        return json_decode(file_get_contents($this->storageFileFolder.$filename),TRUE);
-    }
-
-    public function writeJson(Numerologie $subject, array $data)
-    {
-        $filename = $this->storageFileFolder.$subject->getFileName(true);
-        if (!file_exists($filename)) {
-            file_put_contents($filename, json_encode($subject->serialize($data)));
+        if (5 <= strlen($filename) || '.json' !== substr($filename, -5, 5)) {
+            $filename .= '.json';
         }
+
+        $content = file_get_contents($filename);
+
+        return $json ? json_decode($content,TRUE) : $content;
+    }
+
+    public function writeJson($filename, $content)
+    {
+        if (!file_exists($filename)) {
+            file_put_contents($filename, $content);
+        }
+    }
+
+    public function writeNumerology(Numerologie $subject, array $data)
+    {
+        $this->writeJson($this->storageFileFolder.$subject->getFileName(true), json_encode($subject->serialize($data)));
 
         return $subject->getFileName(true);
     }
@@ -52,5 +68,10 @@ class JsonIO
         }
 
         return $history;
+    }
+
+    public function readAnalysis($number, $context)
+    {
+        return $this->readJson($this->dataFileFolder.$number)[$context];
     }
 }
