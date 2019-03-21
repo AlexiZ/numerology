@@ -1,14 +1,14 @@
 <h3>Nombre héréditaire : {{ subject.data.identity.inheritedNumber }}</h3>
-<p>{{ subject.data.identity.inheritedNumber|getAnalysis(context)|raw }}</p>
+<p>{{ subject.data.identity.inheritedNumber|getAnalysis('inherited')|raw }}</p>
 
 <h3>Nombre de mission : {{ subject.data.identity.dutyNumber }}</h3>
-<p>{{ subject.data.identity.dutyNumber|getAnalysis(context)|raw }}</p>
+<p>{{ subject.data.identity.dutyNumber|getAnalysis('duty')|raw }}</p>
 
 <h3>Nombre social : {{ subject.data.identity.socialNumber }}</h3>
-<p>{{ subject.data.identity.socialNumber|getAnalysis(context)|raw }}</p>
+<p>{{ subject.data.identity.socialNumber|getAnalysis('social')|raw }}</p>
 
 <h3>Nombre de structure : {{ subject.data.identity.structureNumber }}</h3>
-<p>{{ subject.data.identity.structureNumber|getAnalysis(context)|raw }}</p>
+<p>{{ subject.data.identity.structureNumber|getAnalysis('structure')|raw }}</p>
 
 <h3>Nombre global : {{ subject.data.identity.globalNumber }}</h3>
-<p>{{ subject.data.identity.globalNumber|getAnalysis(context)|raw }}</p>
+<p>{{ subject.data.identity.globalNumber|getAnalysis('global')|raw }}</p>
