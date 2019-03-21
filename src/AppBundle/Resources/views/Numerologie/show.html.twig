@@ -4,9 +4,15 @@
     Numérologie - {{ subject }}
 {% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/app/css/print.css') }}" media="print">
+{% endblock %}
+
 {% block body %}
     <div class="container">
-        <h1>Numérologie {{ subject }}</h1>
+        <h1>Numérologie <span class="subject">{{ subject }}</span></h1>
 
         <ol class="breadcrumb">
             <li><a href="{{ path('numerologie_index') }}">Accueil</a></li>
