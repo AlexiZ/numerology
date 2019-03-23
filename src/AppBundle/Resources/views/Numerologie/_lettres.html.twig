@@ -1,18 +1,24 @@
 <h2>Lettres physiques, émotives, cérébrales, intuitives</h2>
 
-<h3>Nom d'usage</h3>
+{% if subject.useName|default %}
+    <h3>Nom d'usage</h3>
 
-{% include '@App/Numerologie/_table_lettres.html.twig' with {'mot': subject.useName|default(subject.birthName), 'moyen': [25, 30, 27, 10]} %}
+    {% include '@App/Numerologie/_table_lettres.html.twig' with {'mot': subject.useName, 'moyen': [25, 30, 27, 10]} %}
+{% endif %}
 
-<hr>
+{% if subject.birthName|default %}
+    <h3>Nom de naissance</h3>
 
-<h3>Prénom d'usage</h3>
+    {% include '@App/Numerologie/_table_lettres.html.twig' with {'mot': subject.birthName, 'moyen': [25, 30, 27, 10]} %}
+{% endif %}
 
-{% include '@App/Numerologie/_table_lettres.html.twig' with {'mot': subject.firstname} %}
+{% if subject.firstName|default %}
+    <h3>Prénom d'usage</h3>
+
+    {% include '@App/Numerologie/_table_lettres.html.twig' with {'mot': subject.firstname} %}
+{% endif %}
 
 {% if subject.otherFirstnames|default %}
-    <hr>
-
     <h3>Prénoms masqués</h3>
 
     {% set others = '' %}
@@ -24,3 +30,6 @@
         {% include '@App/Numerologie/_table_lettres.html.twig' with {'mot': others} %}
     {% endif %}
 {% endif %}
+
+<h3>Tous les noms et prénoms</h3>
+{% include '@App/Numerologie/_table_lettres.html.twig' with {'mot': subject.fullNames} %}

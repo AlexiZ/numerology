@@ -122,6 +122,16 @@ class Numerologie
         return md5($filename) . ($extension ? '.json' : '');
     }
 
+    public function getPublicName()
+    {
+        return ('' !== $this->getUseName() ? $this->getUseName() : $this->getBirthName()) . $this->getFirstname();
+    }
+
+    public function getFullNames()
+    {
+        return ($this->getUseName() ?? '') . $this->getBirthName() . $this->getFirstname() . ($this->getOtherFirstnames() ? implode('', $this->getOtherFirstnames()) : '');
+    }
+
     /**
      * @return string
      */
