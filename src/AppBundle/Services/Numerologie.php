@@ -50,6 +50,11 @@ class Numerologie
         'C', 'F', 'K', 'Q', 'U', 'V', 'Y',
     ];
 
+    private static $numberExceptions = [
+        11,
+        22,
+    ];
+
     /**
      * @var JsonIO
      */
@@ -140,7 +145,7 @@ class Numerologie
             $reduction += $total[$i];
         }
         $total = (string) $reduction;
-        if (strlen($total) > 1) {
+        if ($this->needReduction($total)) {
             $reduction = 0;
             for ($i = 0; $i < strlen($total); $i++) {
                 $reduction += $total[$i];
@@ -148,6 +153,11 @@ class Numerologie
         }
 
         return $reduction > 0 ? $reduction : '-';
+    }
+
+    protected function needReduction($number)
+    {
+        return strlen($number) > 1 && !in_array($number, self::$numberExceptions);
     }
 
     public function is($type, $letter)
