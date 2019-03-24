@@ -1,0 +1,34 @@
+<h2>Nombres manquants, faibles et forts : vibrations de soutien</h2>
+<p>Les nombres les plus fréquents ont une forte influence sur la personnalité et le comportement de l’individu, tandis que ceux qui sont manquants ne soutiennent pas la vibration des noms et prénoms.</p>
+
+{% set occurrences = subject.fullNames|occurrencesNombresLettres %}
+<table>
+    <tr>
+    {% for i in 1..9 %}
+        <td style="border:solid 1px gray; width: 20px; text-align: center;">{{ occurrences[i] }}</td>
+        {% if i % 3 == 0 and i < 9 %}
+    </tr>
+    <tr>
+        {% endif %}
+    {% endfor %}
+    </tr>
+</table>
+
+<p>
+    <strong>Nombre total de lettres :</strong> {{ subject.fullNames|length }}
+</p>
+<p>
+    <strong>Nombre moyen de présence de chaque lettre :</strong> {{ subject.fullNames|nombreMoyenLettres|number_format(1, '.', ' ') }}
+</p>
+<p>
+    <strong>Nombres manquants :</strong> {{ subject.fullNames|numerosLettresManquantes|join(', ') }}
+</p>
+<p>
+    <strong>Nombres faibles :</strong> {{ subject.fullNames|numerosLettresFaibles|join(', ') }}
+</p>
+<p>
+    <strong>Nombres forts :</strong> {{ subject.fullNames|numerosLettresFortes|join(', ') }}
+</p>
+<p>
+    <strong>Nombres moyens :</strong> {{ subject.fullNames|numerosLettresMoyennes|join(', ') }}
+</p>

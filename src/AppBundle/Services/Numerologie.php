@@ -157,7 +157,7 @@ class Numerologie
 
     protected function needReduction($number)
     {
-        return strlen($number) > 1 && !in_array($number, self::$numberExceptions);
+        return strlen($number) > 1; // && !in_array($number, self::$numberExceptions);
     }
 
     public function is($type, $letter)
@@ -218,5 +218,61 @@ class Numerologie
     public function getAnalysis($number, $context)
     {
         return $this->jsonIO->readAnalysis($number, $context);
+    }
+
+    public function getLettersNumberOccurrences($word)
+    {
+        $letters = array_fill(1, 9, 0);
+
+        for ($i = 0; $i < strlen($word); $i++) {
+            $letters[$this->getLetter($word[$i])]++;
+        }
+
+        return array_map(function($a) {
+            return $a == 0 ? '-' : $a;
+        }, $letters);
+    }
+
+    public function getAverageLetterNumber($word)
+    {
+        return strlen($word) / 9;
+    }
+
+    public function getMissingLettersNumbers($word)
+    {
+        $occurrences = $this->getLettersNumberOccurrences($word);
+
+        return array_filter(array_map(function($a, $b) {
+            return $a == '-' ? $b : null;
+        }, $occurrences, array_keys($occurrences)));
+    }
+
+    public function getWeakLettersNumbers($word)
+    {
+        $occurrences = array_map(function($a) {
+            return $a == '-' ? 10 : $a;
+        }, $this->getLettersNumberOccurrences($word));
+
+        return array_filter(array_map(function($a, $b) use ($word) {
+            return $a < round($this->getAverageLetterNumber($word), 0, PHP_ROUND_HALF_DOWN) ? $b : null;
+        }, $occurrences, array_keys($occurrences)));
+    }
+
+    public function getStrongLettersNumbers($word)
+    {
+        $occurrences = $this->getLettersNumberOccurrences($word);
+
+        return array_filter(array_map(function($a, $b) use ($word) {
+            return $a > round($this->getAverageLetterNumber($word), 0, PHP_ROUND_HALF_UP) ? $b : null;
+        }, $occurrences, array_keys($occurrences)));
+    }
+
+    public function getAverageLettersNumbers($word)
+    {
+        $occurrences = $this->getLettersNumberOccurrences($word);
+
+        return array_filter(array_map(function($a, $b) use ($word) {
+            return $a == round($this->getAverageLetterNumber($word), 0, PHP_ROUND_HALF_DOWN) || $a == round($this->getAverageLetterNumber($word), 0, PHP_ROUND_HALF_UP) ? $b : null;
+        }, $occurrences, array_keys($occurrences)));
     }
 }

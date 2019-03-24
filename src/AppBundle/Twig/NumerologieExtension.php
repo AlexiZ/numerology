@@ -24,6 +24,12 @@ class NumerologieExtension extends AbstractExtension
             new TwigFilter('lettre', array($this, 'letterNumber')),
             new TwigFilter('totalLettre', array($this, 'totalLetterNumber')),
             new TwigFilter('totalReduitLettre', array($this, 'reducedTotalLetterNumber')),
+            new TwigFilter('occurrencesNombresLettres', array($this, 'lettersNumberOccurrences')),
+            new TwigFilter('numerosLettresManquantes', array($this, 'missingLettersNumbers')),
+            new TwigFilter('numerosLettresFaibles', array($this, 'weakLettersNumbers')),
+            new TwigFilter('numerosLettresFortes', array($this, 'strongLettersNumbers')),
+            new TwigFilter('nombreMoyenLettres', array($this, 'averageLetterNumber')),
+            new TwigFilter('numerosLettresMoyennes', array($this, 'averageLettersNumbers')),
 
             new TwigFilter('voyelle', array($this, 'vowelNumber')),
             new TwigFilter('totalVoyelle', array($this, 'totalVowelNumber')),
@@ -75,6 +81,36 @@ class NumerologieExtension extends AbstractExtension
     public function addNumberDigits($number)
     {
         return $this->numerologie->addNumberDigits($number);
+    }
+
+    public function lettersNumberOccurrences($word)
+    {
+        return $this->numerologie->getLettersNumberOccurrences($word);
+    }
+
+    public function missingLettersNumbers($word)
+    {
+        return $this->numerologie->getMissingLettersNumbers($word);
+    }
+
+    public function weakLettersNumbers($word)
+    {
+        return $this->numerologie->getWeakLettersNumbers($word);
+    }
+
+    public function strongLettersNumbers($word)
+    {
+        return $this->numerologie->getStrongLettersNumbers($word);
+    }
+
+    public function averageLetterNumber($word)
+    {
+        return $this->numerologie->getAverageLetterNumber($word);
+    }
+
+    public function averageLettersNumbers($word)
+    {
+        return $this->numerologie->getAverageLettersNumbers($word);
     }
 
 

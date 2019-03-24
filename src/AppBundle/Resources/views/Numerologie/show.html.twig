@@ -26,6 +26,7 @@
                     <li class=""><a href="#tab2" data-toggle="tab">Calcul identité</a></li>
                     <li class=""><a href="#tab3" data-toggle="tab">Résumé lettres</a></li>
                     <li class=""><a href="#tab4" data-toggle="tab">Calcul lettres</a></li>
+                    <li class=""><a href="#tab5" data-toggle="tab">Vibrations de soutien</a></li>
                 </ul>
             </div>
 
@@ -45,6 +46,10 @@
 
                     <div class="tab-pane fade" id="tab4">
                         {% include '@App/Numerologie/_lettres.html.twig' with {'subject': subject} %}
+                    </div>
+
+                    <div class="tab-pane fade" id="tab5">
+                        {% include '@App/Numerologie/_vibrations.html.twig' with {'subject': subject} %}
                     </div>
                 </div>
             </div>
