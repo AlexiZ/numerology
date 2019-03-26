@@ -19,6 +19,10 @@
             "vendor/symfony/symfony/src/Symfony/Component/VarDumper/Resources/functions/dump.php"
         ]
     },
+    "repositories": [
+        {"type": "composer", "url": "https://repo.packagist.com/perso/"},
+        {"packagist.org": false}
+    ],
     "require": {
         "ext-json": "*",
         "php": ">=5.5.9",
