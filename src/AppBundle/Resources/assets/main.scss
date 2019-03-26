@@ -1,0 +1,16 @@
+@import "~@fortawesome/fontawesome-free/css/all.min.css";
+@import "~startbootstrap-sb-admin-2/css/sb-admin-2.min.css";
+
+#wrapper {
+  #content-wrapper {
+    overflow: hidden;
+  }
+
+  #sidebarToggle {
+    color: rgba(255,255,255,.5);
+
+    &:after {
+      content: none;
+    }
+  }
+}

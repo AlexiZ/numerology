@@ -42,3 +42,10 @@ services:
             VIRTUAL_HOST: numerology.$DOCKER_HOST_SUFFIX
             CERT_NAME: generic
             HTTPS_METHOD: noredirect
+
+    node:
+        image: node:alpine
+        volumes:
+            - .:/var/www/symfony
+        user: 1000:1000
+        working_dir: /var/www/symfony

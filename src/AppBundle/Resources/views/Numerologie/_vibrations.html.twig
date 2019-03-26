@@ -1,34 +1,59 @@
-<h2>Nombres manquants, faibles et forts : vibrations de soutien</h2>
-<p>Les nombres les plus fréquents ont une forte influence sur la personnalité et le comportement de l’individu, tandis que ceux qui sont manquants ne soutiennent pas la vibration des noms et prénoms.</p>
+<div class="row">
+    <div class="col-lg-6 mb-4">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">
+                    Nombres manquants, faibles et forts : vibrations de soutien
+                </h6>
+            </div>
 
-{% set occurrences = subject.fullNames|occurrencesNombresLettres %}
-<table>
-    <tr>
-    {% for i in 1..9 %}
-        <td style="border:solid 1px gray; width: 20px; text-align: center;">{{ occurrences[i] }}</td>
-        {% if i % 3 == 0 and i < 9 %}
-    </tr>
-    <tr>
-        {% endif %}
-    {% endfor %}
-    </tr>
-</table>
+            <div class="card-body">
+                <p>Les nombres les plus fréquents ont une forte influence sur la personnalité et le comportement de l’individu, tandis que ceux qui sont manquants ne soutiennent pas la vibration des noms et prénoms.</p>
 
-<p>
-    <strong>Nombre total de lettres :</strong> {{ subject.fullNames|length }}
-</p>
-<p>
-    <strong>Nombre moyen de présence de chaque lettre :</strong> {{ subject.fullNames|nombreMoyenLettres|number_format(1, '.', ' ') }}
-</p>
-<p>
-    <strong>Nombres manquants :</strong> {{ subject.fullNames|numerosLettresManquantes|join(', ') }}
-</p>
-<p>
-    <strong>Nombres faibles :</strong> {{ subject.fullNames|numerosLettresFaibles|join(', ') }}
-</p>
-<p>
-    <strong>Nombres forts :</strong> {{ subject.fullNames|numerosLettresFortes|join(', ') }}
-</p>
-<p>
-    <strong>Nombres moyens :</strong> {{ subject.fullNames|numerosLettresMoyennes|join(', ') }}
-</p>
+                {% set occurrences = subject.fullNames|occurrencesNombresLettres %}
+                <table>
+                    <tr>
+                        {% for i in 1..9 %}
+                        <td style="border:solid 1px gray; width: 20px; text-align: center;">{{ occurrences[i] }}</td>
+                        {% if i % 3 == 0 and i < 9 %}
+                    </tr>
+                    <tr>
+                        {% endif %}
+                        {% endfor %}
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-6 mb-4">
+        <div class="card shadow mb-4">
+            <div class="card-body">
+                <p><a href="#" class="btn btn-info btn-icon-split">
+                    <span class="icon text-white-50">{{ subject.fullNames|length }}</span>
+                    <span class="text">Nombre total de lettres</span>
+                </a></p>
+                <p><a href="#" class="btn btn-info btn-icon-split">
+                    <span class="icon text-white-50">{{ subject.fullNames|nombreMoyenLettres|number_format(1, '.', ' ') }}</span>
+                    <span class="text">Nombre moyen de présence de chaque lettre</span>
+                </a></p>
+                <p><a href="#" class="btn btn-info btn-icon-split">
+                    <span class="icon text-white-50">{{ subject.fullNames|numerosLettresManquantes|join(', ') }}</span>
+                    <span class="text">Nombres manquants</span>
+                </a></p>
+                <p><a href="#" class="btn btn-info btn-icon-split">
+                    <span class="icon text-white-50">{{ subject.fullNames|numerosLettresFaibles|join(', ') }}</span>
+                    <span class="text">Nombres faibles</span>
+                </a></p>
+                <p><a href="#" class="btn btn-info btn-icon-split">
+                    <span class="icon text-white-50">{{ subject.fullNames|numerosLettresFortes|join(', ') }}</span>
+                    <span class="text">Nombres forts</span>
+                </a></p>
+                <p><a href="#" class="btn btn-info btn-icon-split">
+                    <span class="icon text-white-50">{{ subject.fullNames|numerosLettresMoyennes|join(', ') }}</span>
+                    <span class="text">Nombres moyens</span>
+                </a></p>
+            </div>
+        </div>
+    </div>
+</div>

@@ -5,18 +5,30 @@
 {% endblock %}
 
 {% block body %}
-    <div class="container">
-        <h1>Numérologie</h1>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">
+                        Ajouter une nouvelle personne
+                    </h6>
+                </div>
 
-        <ol class="breadcrumb">
-            <li><a href="{{ path('numerologie_index') }}">Accueil</a></li>
-            <li class="active">Nouvelle Personne</li>
-        </ol>
+                <div class="card-body">
+                    {% form_theme form '@App/Numerologie/_form_theme.html.twig' %}
 
-        <div class="row">
-            {% form_theme form '@App/Numerologie/_form_theme.html.twig' %}
+                    {{ form_start(form) }}
+                    {{ form_errors(form) }}
+                    {{ form_rest(form) }}
 
-            {{ form(form) }}
+                    <button type="submit" class="btn btn-success btn-icon-split">
+                        <span class="icon text-white-50"><i class="fas fa-check"></i></span>
+                        <span class="text">Voir les résultats</span>
+                    </button>
+
+                    {{ form_end(form) }}
+                </div>
+            </div>
         </div>
     </div>
 {% endblock %}

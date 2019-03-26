@@ -1,55 +1,97 @@
 <div class="row">
-    <div class="col-md-6">
-        <h3>Nom et prénom d'usage</h3>
-        <p>
-            <strong>{{ ((subject.publicName|totalLettrePhysique / subject.publicName|length)*100)|number_format(0) }} % physique</strong>
-        </p>
-        <p>
-            <strong>{{ ((subject.publicName|totalLettreEmotive / subject.publicName|length)*100)|number_format(0) }} % émotive</strong>
-        </p>
-        <p>
-            <strong>{{ ((subject.publicName|totalLettreCerebrale / subject.publicName|length)*100)|number_format(0) }} % cérébrale</strong>
-        </p>
-        <p>
-            <strong>{{ ((subject.publicName|totalLettreIntuitive / subject.publicName|length)*100)|number_format(0) }} % intuitive</strong>
-        </p>
+    <div class="col-lg-6">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">
+                    Nom et prénom d'usage
+                </h6>
+            </div>
+
+            <div class="card-body">
+                <div class="chart-pie pt-4 pb-2">
+                    <canvas class="automaticBarChart"
+                            data-labels="Physique,Émotive,Cérébrale,Intuitive"
+                            data-values="{{ ((subject.publicName|totalLettrePhysique / subject.publicName|length)*100)|number_format(0) }},{{ ((subject.publicName|totalLettreEmotive / subject.publicName|length)*100)|number_format(0) }},{{ ((subject.publicName|totalLettreCerebrale / subject.publicName|length)*100)|number_format(0) }},{{ ((subject.publicName|totalLettreIntuitive / subject.publicName|length)*100)|number_format(0) }}||25,30,27,13"
+                            data-legends="{{ subject.firstName }},Moyenne">
+                    </canvas>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <div class="col-md-6">
-        <h3>Tous les noms et prénoms</h3>
-        <p>
-            <strong>{{ ((subject.fullNames|totalLettrePhysique / subject.fullNames|length)*100)|number_format(0) }} % physique</strong>
-        </p>
-        <p>
-            <strong>{{ ((subject.fullNames|totalLettreEmotive / subject.fullNames|length)*100)|number_format(0) }} % émotive</strong>
-        </p>
-        <p>
-            <strong>{{ ((subject.fullNames|totalLettreCerebrale / subject.fullNames|length)*100)|number_format(0) }} % cérébrale</strong>
-        </p>
-        <p>
-            <strong>{{ ((subject.fullNames|totalLettreIntuitive / subject.fullNames|length)*100)|number_format(0) }} % intuitive</strong>
-        </p>
+    <div class="col-lg-6">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">
+                    Tous les noms et prénoms
+                </h6>
+            </div>
+
+            <div class="card-body">
+                <div class="chart-pie pt-4 pb-2">
+                    <canvas class="automaticBarChart"
+                            data-labels="Physique,Émotive,Cérébrale,Intuitive"
+                            data-values="{{ ((subject.fullNames|totalLettrePhysique / subject.fullNames|length)*100)|number_format(0) }},{{ ((subject.fullNames|totalLettreEmotive / subject.fullNames|length)*100)|number_format(0) }},{{ ((subject.fullNames|totalLettreCerebrale / subject.fullNames|length)*100)|number_format(0) }},{{ ((subject.fullNames|totalLettreIntuitive / subject.fullNames|length)*100)|number_format(0) }}||25,30,27,13"
+                            data-legends="{{ subject.firstName }},Moyenne">
+                    </canvas>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
-<hr>
-<div class="row">
-    <h4>Lettres physiques</h4>
-    <p>
-        Elles concernent ce qui a trait à la réalité, à l’expérience, aux capacités d’action, au réalisme, à la rationalité, aux facultés permettant d’affronter la société et les responsabilités ainsi qu’au désir d’agir concrètement.
-    </p>
 
-    <h4>Lettres émotives</h4>
-    <p>
-        Elles parlent de ce qui concerne les sentiments, les émotions, l’affectif et les relations.
-    </p>
+    <div class="col-lg-3">
+        <div class="card mb-4">
+            <div class="card-header">
+                Lettres physiques
+            </div>
 
-    <h4>Lettres cérébrales</h4>
-    <p>
-        Elles concernent ce qui touche au raisonnement, à l’imagination, à l’activité mentale, à la réflexion, à l’intelligence et à la vie intellectuelle et psychique.
-    </p>
+            <div class="card-body">
+                <p>
+                    Elles concernent ce qui a trait à la réalité, à l’expérience, aux capacités d’action, au réalisme, à la rationalité, aux facultés permettant d’affronter la société et les responsabilités ainsi qu’au désir d’agir concrètement.
+                </p>
+            </div>
+        </div>
+    </div>
 
-    <h4>Lettres intuitives</h4>
-    <p>
-        Elles révèlent comment l’identité de la personne la pousse à sentir, deviner, percevoir ou anticiper ce qui n’est pas directement visible, ce qui va se passer ou ce qui se trame derrière les apparences.
-    </p>
+    <div class="col-lg-3">
+        <div class="card mb-4">
+            <div class="card-header">
+                Lettres émotives
+            </div>
+
+            <div class="card-body">
+                <p>
+                    Elles parlent de ce qui concerne les sentiments, les émotions, l’affectif et les relations.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-3">
+        <div class="card mb-4">
+            <div class="card-header">
+                Lettres cérébrales
+            </div>
+
+            <div class="card-body">
+                <p>
+                    Elles concernent ce qui touche au raisonnement, à l’imagination, à l’activité mentale, à la réflexion, à l’intelligence et à la vie intellectuelle et psychique.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-3">
+        <div class="card mb-4">
+            <div class="card-header">
+                Lettres intuitives
+            </div>
+
+            <div class="card-body">
+                <p>
+                    Elles révèlent comment l’identité de la personne la pousse à sentir, deviner, percevoir ou anticiper ce qui n’est pas directement visible, ce qui va se passer ou ce qui se trame derrière les apparences.
+                </p>
+            </div>
+        </div>
+    </div>
 </div>

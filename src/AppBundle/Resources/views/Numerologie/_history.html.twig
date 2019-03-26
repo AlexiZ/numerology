@@ -1,0 +1,22 @@
+<table class="table" id="historyTable">
+    <thead>
+        <tr>
+            <th>Nom</th>
+            <th>Date d'ajout</th>
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for filename, label in histories %}
+            {% set subject = filename|getSubject %}
+            <tr>
+                <td>{{ subject }}</td>
+                <td>{{ label }}</td>
+                <td>
+                    <a href="{{ path('numerologie_show', {'filename': filename}) }}"><i class="fa fa-eye"></i></a>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>

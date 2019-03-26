@@ -10,49 +10,67 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('bundles/app/css/print.css') }}" media="print">
 {% endblock %}
 
-{% block body %}
-    <div class="container">
-        <h1>Numérologie <span class="subject">{{ subject }}</span></h1>
+{% block navbar %}
+    <hr class="sidebar-divider my-0">
 
-        <ol class="breadcrumb">
-            <li><a href="{{ path('numerologie_index') }}">Accueil</a></li>
-            <li class="active">{{ subject }}</li>
-        </ol>
+    <li class="nav-item">
+        <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            <i class="fas fa-fw fa-user"></i>
+            <span>Identité</span>
+        </a>
 
-        <div class="panel with-nav-tabs">
-            <div class="panel-heading">
-                <ul class="nav nav-tabs">
-                    <li class="active"><a href="#tab1" data-toggle="tab">Résumé identité</a></li>
-                    <li class=""><a href="#tab2" data-toggle="tab">Calcul identité</a></li>
-                    <li class=""><a href="#tab3" data-toggle="tab">Résumé lettres</a></li>
-                    <li class=""><a href="#tab4" data-toggle="tab">Calcul lettres</a></li>
-                    <li class=""><a href="#tab5" data-toggle="tab">Vibrations de soutien</a></li>
-                </ul>
-            </div>
-
-            <div class="panel-body">
-                <div class="tab-content">
-                    <div class="tab-pane fade active in" id="tab1">
-                        {% include '@App/Numerologie/_resume_identite.html.twig' with {'subject': subject} %}
-                    </div>
-
-                    <div class="tab-pane fade" id="tab2">
-                        {% include '@App/Numerologie/_identite.html.twig' with {'subject': subject} %}
-                    </div>
-
-                    <div class="tab-pane fade" id="tab3">
-                        {% include '@App/Numerologie/_resume_lettres.html.twig' with {'subject': subject} %}
-                    </div>
-
-                    <div class="tab-pane fade" id="tab4">
-                        {% include '@App/Numerologie/_lettres.html.twig' with {'subject': subject} %}
-                    </div>
-
-                    <div class="tab-pane fade" id="tab5">
-                        {% include '@App/Numerologie/_vibrations.html.twig' with {'subject': subject} %}
-                    </div>
-                </div>
+        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item custom-tab-link active" data-target="tab1" href="#">Résumé</a>
+                <a class="collapse-item custom-tab-link" data-target="tab2" href="#">Calculs</a>
             </div>
         </div>
+    </li>
+
+    <hr class="sidebar-divider">
+
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+            <i class="fas fa-fw fa-pencil-alt"></i>
+            <span>Lettres</span>
+        </a>
+
+        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item custom-tab-link" data-target="tab3" href="#">Résumé</a>
+                <a class="collapse-item custom-tab-link" data-target="tab4" href="#">Calculs</a>
+            </div>
+        </div>
+    </li>
+
+    <hr class="sidebar-divider">
+
+    <li class="nav-item">
+        <a class="nav-link custom-tab-link" href="#" data-target="tab5">
+            <i class="fas fa-fw fa-circle-notch"></i>
+            <span>Vibrations</span>
+        </a>
+    </li>
+{% endblock navbar %}
+
+{% block pagetitle %}
+    {{ subject }}
+{% endblock pagetitle %}
+
+{% block body %}
+    <div id="tab1" class="custom-tab">
+        {% include '@App/Numerologie/_resume_identite.html.twig' with {'subject': subject} %}
     </div>
-{% endblock %}
+    <div id="tab2" class="custom-tab d-none">
+        {% include '@App/Numerologie/_identite.html.twig' with {'subject': subject} %}
+    </div>
+    <div id="tab3" class="custom-tab d-none">
+        {% include '@App/Numerologie/_resume_lettres.html.twig' with {'subject': subject} %}
+    </div>
+    <div id="tab4" class="custom-tab d-none">
+        {% include '@App/Numerologie/_lettres.html.twig' with {'subject': subject} %}
+    </div>
+    <div id="tab5" class="custom-tab d-none">
+        {% include '@App/Numerologie/_vibrations.html.twig' with {'subject': subject} %}
+    </div>
+{% endblock body %}

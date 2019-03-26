@@ -1,0 +1,63 @@
+{
+  "name": "numerology",
+  "version": "1.0.0",
+  "description": "Numerology",
+  "main": "web/app.php",
+  "directories": {
+    "test": "tests"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "5.7.2",
+    "bootstrap": "4.3.1",
+    "chart.js": "2.7.3",
+    "datatables.net-bs4": "^1.10.19",
+    "jquery": "3.3.1",
+    "jquery-easing": "0.0.1",
+    "jquery-ui": "^1.12.1",
+    "popper.js": "^1.14.6",
+    "startbootstrap-sb-admin-2": "^4.0.2"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-eslint": "^8.2.6",
+    "babel-loader": "^7.1.5",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "css-loader": "^2.1.1",
+    "eslint": "^5.11.1",
+    "eslint-plugin-compat": "^2.5.1",
+    "eslint-plugin-react": "^7.12.0",
+    "eslint-plugin-vue": "^5.0.0",
+    "expose-loader": "^0.7.5",
+    "extract-text-webpack-plugin": "^3.0.2",
+    "file-loader": "^1.1.11",
+    "image-webpack-loader": "^4.6.0",
+    "node-sass": "^4.11.0",
+    "postcss-loader": "^2.1.6",
+    "sass-loader": "^6.0.7",
+    "style-loader": "^0.19.0",
+    "uglifyjs-webpack-plugin": "^1.2.7",
+    "url-loader": "^0.6.2",
+    "webpack": "^3.12.0"
+  },
+  "scripts": {
+    "lint": "eslint src",
+    "lint:fix": "eslint --fix src",
+    "test": "npm run lint",
+    "install": "test -z $CI && npm run build:dev || echo 'Pas de build:dev sur un CI'",
+    "build:stats": "webpack --profile --json > webpack-stats.json",
+    "build:watch": "webpack --watch",
+    "build:dev": "webpack",
+    "build": "NODE_ENV=production webpack -p"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlexiZ/numerology.git"
+  },
+  "author": "AlexiZ",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AlexiZ/numerology/issues"
+  },
+  "homepage": "https://github.com/AlexiZ/numerology#readme"
+}

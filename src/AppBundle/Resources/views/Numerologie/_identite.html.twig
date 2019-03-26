@@ -1,83 +1,125 @@
-{% if subject.useName|default %}
-    <h3>Nom d'usage</h3>
+<div class="row">
+    <div class="col-lg-12 mb-4">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">
+                    Tableau récapitulatif de l'identité
+                </h6>
+            </div>
 
-    {% include '@App/Numerologie/_table_identite.html.twig' with {'mot': subject.useName, 'type': 'lastname'} %}
-{% endif %}
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>{{ subject }} (nombre global : {{ subject.data.identity.globalNumber }})</th>
+                            <td>Nombre héréditaire</td>
+                            <td>Nombre de mission</td>
+                            <td>Nombre social</td>
+                            <td>Nombre de structure</td>
+                        </tr>
+                    </thead>
 
-{% if subject.birthName|default %}
-    <h3>Nom de naissance</h3>
+                    <tbody>
+                        {% if subject.useName|default %}
+                            <tr>
+                                <th>Nom d'usage - {{ subject.useName }}</th>
+                                <td>{{ subject.useName|totalReduitLettre }}</td>
+                                <td>-</td>
+                                <td>{{ subject.useName|totalReduitVoyelle }}</td>
+                                <td>{{ subject.useName|totalReduitConsonne }}</td>
+                            </tr>
+                        {% endif %}
+                        {% if subject.birthName|default %}
+                            <tr>
+                                <th>Nom de naissance - {{ subject.birthName }}</th>
+                                <td>{{ subject.birthName|totalReduitLettre }}</td>
+                                <td>-</td>
+                                <td>{{ subject.birthName|totalReduitVoyelle }}</td>
+                                <td>{{ subject.birthName|totalReduitConsonne }}</td>
+                            </tr>
+                        {% endif %}
+                        <tr>
+                            <th>Prénom - {{ subject.firstname }}</th>
+                            <td>-</td>
+                            <td>{{ subject.firstname|totalReduitLettre }}</td>
+                            <td>{{ subject.firstname|totalReduitVoyelle }}</td>
+                            <td>{{ subject.firstname|totalReduitConsonne }}</td>
+                        </tr>
+                        {% for otherFirstname in subject.otherFirstnames %}
+                            <tr>
+                                <th>Prénom masqué - {{ otherFirstname }}</th>
+                                <td>-</td>
+                                <td>{{ otherFirstname|totalReduitLettre }}</td>
+                                <td>{{ otherFirstname|totalReduitVoyelle }}</td>
+                                <td>{{ otherFirstname|totalReduitConsonne }}</td>
+                            </tr>
+                        {% endfor %}
+                        <tr>
+                            <th>Total</th>
+                            <th>{{ subject.data.identity.inheritedNumber }}</th>
+                            <th>{{ subject.data.identity.dutyNumber }}</th>
+                            <th>{{ subject.data.identity.socialNumber }}</th>
+                            <th>{{ subject.data.identity.structureNumber }}</th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
 
-    {% include '@App/Numerologie/_table_identite.html.twig' with {'mot': subject.birthName, 'type': 'lastname'} %}
-{% endif %}
+        {% if subject.useName|default %}
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">
+                        Nom d'usage - {{ subject.useName|upper }}
+                    </h6>
+                </div>
 
-<hr>
-
-<h3>Prénom</h3>
-
-{% include '@App/Numerologie/_table_identite.html.twig' with {'mot': subject.firstname, 'type': 'firstname'} %}
-
-{% if subject.otherFirstnames %}
-    <h3>Prénom</h3>
-
-    {% for otherFirstname in subject.otherFirstnames %}
-        {% include '@App/Numerologie/_table_identite.html.twig' with {'mot': otherFirstname, 'type': 'firstname'} %}
-    {% endfor %}
-{% endif %}
-
-<hr>
-
-<h3>Tableau récapitulatif de l'identité</h3>
-
-<table class="table">
-    <thead>
-        <tr>
-            <th scope="col">{{ subject }} (nombre global : {{ subject.data.identity.globalNumber }})</th>
-            <td>Nombre héréditaire</td>
-            <td>Nombre de mission</td>
-            <td>Nombre social</td>
-            <td>Nombre de structure</td>
-        </tr>
-    </thead>
-
-    <tbody>
-        <tr>
-            <th scope="row">Nom d'usage</th>
-            <td>{{ subject.useName|totalReduitLettre }}</td>
-            <td>-</td>
-            <td>{{ subject.useName|totalReduitVoyelle }}</td>
-            <td>{{ subject.useName|totalReduitConsonne }}</td>
-        </tr>
-        {% if subject.birthName|default %}
-            <tr>
-                <th scope="row">Nom de naissance</th>
-                <td>{{ subject.birthName|totalReduitLettre }}</td>
-                <td>-</td>
-                <td>{{ subject.birthName|totalReduitVoyelle }}</td>
-                <td>{{ subject.birthName|totalReduitConsonne }}</td>
-            </tr>
+                <div class="card-body">
+                    {% include '@App/Numerologie/_table_identite.html.twig' with {'mot': subject.useName, 'type': 'lastname'} %}
+                </div>
+            </div>
         {% endif %}
-        <tr>
-            <th scope="row">Prénom</th>
-            <td>-</td>
-            <td>{{ subject.firstname|totalReduitLettre }}</td>
-            <td>{{ subject.firstname|totalReduitVoyelle }}</td>
-            <td>{{ subject.firstname|totalReduitConsonne }}</td>
-        </tr>
-        {% for otherFirstname in subject.otherFirstnames %}
-            <tr>
-                <th scope="row">Prénom masqué {{ loop.index }}</th>
-                <td>-</td>
-                <td>{{ otherFirstname|totalReduitLettre }}</td>
-                <td>{{ otherFirstname|totalReduitVoyelle }}</td>
-                <td>{{ otherFirstname|totalReduitConsonne }}</td>
-            </tr>
-        {% endfor %}
-        <tr>
-            <th scope="row">Total</th>
-            <th>{{ subject.data.identity.inheritedNumber }}</th>
-            <th>{{ subject.data.identity.dutyNumber }}</th>
-            <th>{{ subject.data.identity.socialNumber }}</th>
-            <th>{{ subject.data.identity.structureNumber }}</th>
-        </tr>
-    </tbody>
-</table>
+
+        {% if subject.birthName|default %}
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">
+                        Nom de naissance - {{ subject.birthName|upper }}
+                    </h6>
+                </div>
+
+                <div class="card-body">
+                    {% include '@App/Numerologie/_table_identite.html.twig' with {'mot': subject.birthName, 'type': 'lastname'} %}
+                </div>
+            </div>
+        {% endif %}
+
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">
+                    Prénom - {{ subject.firstname|upper }}
+                </h6>
+            </div>
+
+            <div class="card-body">
+                {% include '@App/Numerologie/_table_identite.html.twig' with {'mot': subject.firstname, 'type': 'firstname'} %}
+            </div>
+        </div>
+
+        {% if subject.otherFirstnames|default %}
+            {% for otherFirstname in subject.otherFirstnames if otherFirstname|default %}
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">
+                            Prénom - {{ otherFirstname|upper }}
+                        </h6>
+                    </div>
+
+                    <div class="card-body">
+                        {% include '@App/Numerologie/_table_identite.html.twig' with {'mot': otherFirstname, 'type': 'firstname'} %}
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+</div>

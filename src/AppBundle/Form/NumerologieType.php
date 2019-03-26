@@ -46,9 +46,6 @@ class NumerologieType extends AbstractType
                 'label' => 'Lieu de naissance',
                 'required' => true,
             ])
-            ->add('submit', SubmitType::class, [
-                'label' => 'Voir les résultats',
-            ])
         ;
     }
 
