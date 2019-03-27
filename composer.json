@@ -33,10 +33,15 @@
         "symfony/polyfill-apcu": "^1.0",
         "symfony/swiftmailer-bundle": "^2.3.10",
         "symfony/symfony": "3.4.*",
-        "twig/twig": "^1.0||^2.0"
+        "twig/twig": "^1.0||^2.0",
+        "guzzlehttp/psr7": "^1.4",
+        "php-http/curl-client": "^1.7",
+        "php-http/httplug-bundle": "^1.7",
+        "hwi/oauth-bundle": ">=0.6"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",
+        "symfony/dotenv": "^3.4",
         "symfony/phpunit-bridge": "^3.0"
     },
     "scripts": {

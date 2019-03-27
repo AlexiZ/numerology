@@ -19,3 +19,7 @@ parameters:
     secret: ThisTokenIsNotSoSecretChangeIt
 
     app_domain: numerology.local
+
+    auth0.base_url: xxx.xx.auth0.com
+    auth0.client_id: xxx
+    auth0.client_secret: xxx
