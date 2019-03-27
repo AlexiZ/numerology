@@ -6,7 +6,19 @@
 
 {% block body %}
     <div class="row">
-        <div class="col-lg-12 mb-4">
+        <div class="col-lg-8 mb-4">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Historique</h6>
+                </div>
+
+                <div class="card-body">
+                    {% include '@App/Numerologie/_history.html.twig' with {'histories': histories} %}
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4 mb-4">
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
                     <h6 class="m-0 font-weight-bold text-primary">Nouvelle personne</h6>
@@ -21,20 +33,6 @@
                         <span class="icon text-white-50"><i class="fas fa-plus"></i></span>
                         <span class="text">Nouvelle personne</span>
                     </a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-lg-12 mb-4">
-            <div class="card shadow mb-4">
-                <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Historique</h6>
-                </div>
-
-                <div class="card-body">
-                    {% include '@App/Numerologie/_history.html.twig' with {'histories': histories} %}
                 </div>
             </div>
         </div>
