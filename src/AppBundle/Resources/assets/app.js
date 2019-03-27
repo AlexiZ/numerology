@@ -7,7 +7,7 @@ import 'datatables.net-bs4';
 
 import './main.scss';
 
-// Handle sidebar navigation for "show"
+// Handle sidebar navigation
 let customTabs = document.querySelectorAll('.custom-tab'),
     customTabLinks = document.querySelectorAll('.custom-tab-link');
 if (customTabs && customTabLinks) {
@@ -178,3 +178,62 @@ if (automaticBarCharts) {
         barChartsIndex++;
     });
 }
+
+// Activate user
+let userValidates = document.querySelectorAll('.userValidate');
+if (userValidates) {
+    userValidates.forEach((userValidate) => {
+        userValidate.addEventListener('click', (e) => {
+            e.preventDefault();
+
+            let xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = () => {
+                if (xmlhttp.readyState === XMLHttpRequest.DONE) {
+                    if (xmlhttp.status === 200) {
+                        let data = JSON.parse(xmlhttp.response);
+                        modalMessage('Mise à jour réussie', 'L\'utilisateur ' + data.nickname + ' a bien été activé');
+                    }
+                    else {
+                        modalMessage('Raté', 'Il semblerait qu\'il y ait eu un souci...');
+                    }
+                }
+            };
+
+            xmlhttp.open("GET", Routing.generate('numerologie_admin_user_validate', {'userId': userValidate.dataset.userid}), true);
+            xmlhttp.send();
+        });
+    });
+}
+
+// Revoke user access
+let userRefuses = document.querySelectorAll('.userRefuse');
+if (userRefuses) {
+    userRefuses.forEach((userRefuse) => {
+        userRefuse.addEventListener('click', (e) => {
+            e.preventDefault();
+
+            let xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = () => {
+                if (xmlhttp.readyState === XMLHttpRequest.DONE) {
+                    if (xmlhttp.status === 200) {
+                        let data = JSON.parse(xmlhttp.response);
+                        modalMessage('Blocage réussi', 'L\'utilisateur ' + data.nickname + ' a bien été bloqué');
+                    } else {
+                        modalMessage('Raté', 'Il semblerait qu\'il y ait eu un souci...');
+                    }
+                }
+            };
+
+            xmlhttp.open("GET", Routing.generate('numerologie_admin_user_refuse', {'userId': userRefuse.dataset.userid}), true);
+            xmlhttp.send();
+        });
+    });
+}
+
+const modalMessage = (title, message) => {
+    let modale = document.querySelector('#standardModal');
+    modale.querySelector('.modal-title').innerHTML = title;
+    modale.querySelector('.modal-body').innerHTML = message;
+
+    $(modale).modal('show');
+};

@@ -234,6 +234,9 @@ class Auth0Manager
         if (null === $user) {
             throw new UnkownUserException(sprintf('Unkown user in auth0: %s', $userId()));
         }
+        if (!array_key_exists('app_metadata', $user)) {
+            $user['app_metadata'] = ['roles' => []];
+        }
 
         $appMetadataRoles = array_unique(array_merge($user['app_metadata']['roles'], $roles));
 

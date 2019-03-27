@@ -22,7 +22,7 @@
                                 <th>Email</th>
                                 <th>Adhésion</th>
                                 <th>Dernière connexion</th>
-                                <th>Rôles</th>
+                                <th>Statut</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -31,20 +31,42 @@
                             {% for user in users %}
                                 <tr>
                                     <td>{{ user.nickname }}</td>
-                                    <td>{% if user.email_verified|default %}<i class="fa fa-check"></i>&nbsp;{% endif %}{{ user.email }}</td>
+                                    <td><i class="fa fa-{% if user.email_verified|default %}check{% else %}times{% endif %}"></i>&nbsp;{{ user.email }}</td>
                                     <td>{{ user.created_at|date('Y-m-d H:i') }}</td>
-                                    <td>{{ user.last_login|date('Y-m-d H:i') }}</td>
-                                    <td>{{ user.app_metadata.roles|join(', ') }}</td>
+                                    <td>{{ user.last_login|default|date('Y-m-d H:i') }}</td>
                                     <td>
-                                        <a href="#" class="btn btn-danger btn-circle btn-sm">
-                                            <i class="fas fa-times"></i>
-                                        </a>
-                                        <a href="#" class="btn btn-success btn-circle btn-sm">
-                                            <i class="fas fa-plus"></i>
-                                        </a>
-                                        <a href="#" class="btn btn-warning btn-circle btn-sm">
-                                            <i class="fas fa-minus"></i>
-                                        </a>
+                                        {% if user.app_metadata is not defined %}
+                                            <a href="#" class="btn btn-sm btn-warning btn-icon-split">
+                                                <span class="icon text-white-50"><i class="fas fa-spinner"></i></span>
+                                                <span class="text">En attente</span>
+                                            </a>
+                                        {% elseif 'ROLE_ADMIN' in user.app_metadata.roles %}
+                                            <a href="#" class="btn btn-sm btn-primary btn-icon-split">
+                                                <span class="icon text-white-50"><i class="fas fa-user"></i></span>
+                                                <span class="text">Administrateur</span>
+                                            </a>
+                                        {% elseif 'ROLE_USER' in user.app_metadata.roles %}
+                                            <a href="#" class="btn btn-sm btn-success btn-icon-split">
+                                                <span class="icon text-white-50"><i class="fas fa-check"></i></span>
+                                                <span class="text">Autorisé</span>
+                                            </a>
+                                        {% else %}
+                                            <a href="#" class="btn btn-sm btn-danger btn-icon-split">
+                                                <span class="icon text-white-50"><i class="fas fa-times"></i></span>
+                                                <span class="text">Refusé</span>
+                                            </a>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        {% if user.app_metadata is not defined or 'ROLE_USER' not in user.app_metadata.roles %}
+                                            <a href="#" data-userid="{{ user.user_id }}" title="Valider l'utilisateur" class="btn btn-success btn-circle btn-sm userValidate">
+                                                <i class="fas fa-check"></i>
+                                            </a>
+                                        {% elseif 'ROLE_USER' in user.app_metadata.roles %}
+                                            <a href="#" data-userid="{{ user.user_id }}" title="Empêcher l'accès" class="btn btn-danger btn-circle btn-sm userRefuse">
+                                                <i class="fas fa-times"></i>
+                                            </a>
+                                        {% endif %}
                                     </td>
                                 </tr>
                             {% endfor %}

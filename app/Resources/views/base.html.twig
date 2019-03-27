@@ -99,6 +99,29 @@
             </div>
         </div>
 
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
+
+        <div class="modal fade" id="standardModal" tabindex="-1" role="dialog" aria-labelledby="standardModalLabel" style="display: none;" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="standardModalLabel"></h5>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+
+                    <div class="modal-body"></div>
+
+                    <div class="modal-footer">
+                        <button class="btn btn-success" type="button" data-dismiss="modal">J'ai compris</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         {% block javascripts %}
             <script type="text/javascript" src="{{ asset("compiled/common.js") }}"></script>
             <script type="text/javascript" src="{{ asset("compiled/app.js") }}"></script>

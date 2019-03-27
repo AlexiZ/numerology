@@ -13,3 +13,15 @@ numerologie_show:
 numerologie_admin:
     path: /administrer/
     defaults: { _controller: AppBundle:Admin:index }
+
+numerologie_admin_user_validate:
+    path: /administrer/utilisateur/valider/{userId}
+    defaults: { _controller: AppBundle:Admin:userValidate }
+    options:
+        expose: true
+
+numerologie_admin_user_refuse:
+    path: /administrer/utilisateur/refuser/{userId}
+    defaults: { _controller: AppBundle:Admin:userRefuse }
+    options:
+        expose: true
