@@ -12,3 +12,4 @@ Automatically calculate a person's numerology theme.
 - gestion des rôles
 - internationalisation
 - messagerie interne
+- éditer les données

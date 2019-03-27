@@ -10,7 +10,6 @@ class AdminController extends Controller
     public function indexAction(Auth0Manager $auth0Manager)
     {
         $users = $auth0Manager->getUsers();
-        dump($users);
 
         return $this->render('@App/Admin/index.html.twig', ['users' => $users]);
     }
