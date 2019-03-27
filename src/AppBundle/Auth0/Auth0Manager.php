@@ -98,8 +98,7 @@ class Auth0Manager
     private function getManagementApi()
     {
         if (null === $this->managementApi) {
-            $token = $this->getAccessToken();
-            $this->managementApi = new Management($token, $this->domain, ['connect_timeout' => 1]);
+            $this->managementApi = new Management($this->getAccessToken(), $this->domain, ['connect_timeout' => 1]);
         }
 
         return $this->managementApi;
@@ -139,8 +138,20 @@ class Auth0Manager
         return $user;
     }
 
-    // TODO: manage when $user is null, e.g auth0 does not respond
-    public function getUserById(string $id)
+    public function getUsers($page = 1, $limit = 10, $fields = '')
+    {
+        $api = $this->getManagementApi();
+        $users = [];
+
+        try {
+            $users = $api->users->getAll(['page' => $page - 1, 'per_page' => $limit], $fields);
+        } catch (\Exception $e) {
+        }
+
+        return $users;
+    }
+
+    public function getUserById($id)
     {
         $api = $this->getManagementApi();
         $user = null;
@@ -181,7 +192,7 @@ class Auth0Manager
         return $userinfo;
     }
 
-    public function isGranted(string $userId, string $role)
+    public function isGranted($userId, $role)
     {
         $api = $this->getManagementApi();
         $user = $api->users->get($userId);
@@ -214,7 +225,7 @@ class Auth0Manager
      *
      * @return array
      */
-    public function addUserRolesByUserId(string $userId, array $roles)
+    public function addUserRolesByUserId($userId, array $roles)
     {
         $api = $this->getManagementApi();
 
@@ -235,7 +246,7 @@ class Auth0Manager
         ]);
     }
 
-    public function removeUserRoleByUserId(string $userId, string $role)
+    public function removeUserRoleByUserId($userId, $role)
     {
         $api = $this->getManagementApi();
 
@@ -311,7 +322,7 @@ class Auth0Manager
         return true;
     }
 
-    public function createPasswordResetTicket($userId, string $locale)
+    public function createPasswordResetTicket($userId, $locale)
     {
         $params = [
             'client_id' => $this->loginClientId,
@@ -387,7 +398,7 @@ class Auth0Manager
      *
      * @throws \Exception
      */
-    public function createUser($email, string $role, array $attributes = null)
+    public function createUser($email, $role, array $attributes = null)
     {
         $api = $this->getManagementApi();
 
@@ -420,7 +431,7 @@ class Auth0Manager
      *
      * @return mixed
      */
-    public function blockUser(string $userId)
+    public function blockUser($userId)
     {
         return $this->getManagementApi()->users->update($userId, [
             'blocked' => true,
@@ -432,26 +443,26 @@ class Auth0Manager
      *
      * @return mixed auth0 response
      */
-    public function unblockUser(string $userId)
+    public function unblockUser($userId)
     {
         return $this->getManagementApi()->users->update($userId, [
             'blocked' => false,
         ]);
     }
 
-    public function grantRole(string $userId, string $role)
+    public function grantRole($userId, $role)
     {
         $inheritedRoles = $this->getInheritedRoles($role);
 
         return $this->addUserRolesByUserId($userId, $inheritedRoles);
     }
 
-    public function removeRole(string $userId, string $role)
+    public function removeRole($userId, $role)
     {
         return $this->removeUserRoleByUserId($userId, $role);
     }
 
-    private function getInheritedRoles(string $role)
+    private function getInheritedRoles($role)
     {
         $inheritedRoles = $this->roleHierarchy->getReachableRoles([new Role($role)]);
 
@@ -460,12 +471,12 @@ class Auth0Manager
         }, $inheritedRoles);
     }
 
-    public function sendVerificationEmail(string $userId)
+    public function sendVerificationEmail($userId)
     {
         return  $this->getManagementApi()->jobs->sendVerificationEmail($userId);
     }
 
-    public function isEmailAlreadyTaken(string $email)
+    public function isEmailAlreadyTaken($email)
     {
         return [] !== $this->getUser($email);
     }

@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Numérologie - Panneau d'administration
+{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">
+                        Liste des utilisateurs
+                    </h6>
+                </div>
+
+                <div class="card-body">
+                    <table class="table automatic-table">
+                        <thead>
+                            <tr>
+                                <th>Pseudo</th>
+                                <th>Email</th>
+                                <th>Adhésion</th>
+                                <th>Dernière connexion</th>
+                                <th>Rôles</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            {% for user in users %}
+                                <tr>
+                                    <td>{{ user.nickname }}</td>
+                                    <td>{% if user.email_verified|default %}<i class="fa fa-check"></i>&nbsp;{% endif %}{{ user.email }}</td>
+                                    <td>{{ user.created_at|date('Y-m-d H:i') }}</td>
+                                    <td>{{ user.last_login|date('Y-m-d H:i') }}</td>
+                                    <td>{{ user.app_metadata.roles|join(', ') }}</td>
+                                    <td>
+                                        <a href="#" class="btn btn-danger btn-circle btn-sm">
+                                            <i class="fas fa-times"></i>
+                                        </a>
+                                        <a href="#" class="btn btn-success btn-circle btn-sm">
+                                            <i class="fas fa-plus"></i>
+                                        </a>
+                                        <a href="#" class="btn btn-warning btn-circle btn-sm">
+                                            <i class="fas fa-minus"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock body %}

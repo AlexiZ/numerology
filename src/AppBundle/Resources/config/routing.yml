@@ -3,9 +3,13 @@ numerologie_index:
   defaults: { _controller: AppBundle:Numerologie:index }
 
 numerologie_add:
-    path: /ajouter
+    path: /ajouter/
     defaults: { _controller: AppBundle:Numerologie:add }
 
 numerologie_show:
     path: /afficher/
     defaults: { _controller: AppBundle:Numerologie:show }
+
+numerologie_admin:
+    path: /administrer/
+    defaults: { _controller: AppBundle:Admin:index }
