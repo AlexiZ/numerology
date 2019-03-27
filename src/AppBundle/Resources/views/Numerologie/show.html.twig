@@ -11,36 +11,42 @@
 {% endblock %}
 
 {% block navbar %}
-    <hr class="sidebar-divider my-0">
+    <hr class="sidebar-divider">
+
+    <div class="sidebar-heading">
+        Identité
+    </div>
 
     <li class="nav-item">
-        <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+        <a class="nav-link custom-tab-link" href="#" data-target="tab1">
             <i class="fas fa-fw fa-user"></i>
-            <span>Identité</span>
+            <span>Résumé identité</span>
         </a>
-
-        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item custom-tab-link active" data-target="tab1" href="#">Résumé</a>
-                <a class="collapse-item custom-tab-link" data-target="tab2" href="#">Calculs</a>
-            </div>
-        </div>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link custom-tab-link" href="#" data-target="tab2">
+            <i class="fas fa-fw fa-user"></i>
+            <span>Calculs identité</span>
+        </a>
     </li>
 
     <hr class="sidebar-divider">
 
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-            <i class="fas fa-fw fa-pencil-alt"></i>
-            <span>Lettres</span>
-        </a>
+    <div class="sidebar-heading">
+        Lettres
+    </div>
 
-        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item custom-tab-link" data-target="tab3" href="#">Résumé</a>
-                <a class="collapse-item custom-tab-link" data-target="tab4" href="#">Calculs</a>
-            </div>
-        </div>
+    <li class="nav-item">
+        <a class="nav-link custom-tab-link" href="#" data-target="tab3">
+            <i class="fas fa-fw fa-pencil-alt"></i>
+            <span>Résumé lettres</span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link custom-tab-link" href="#" data-target="tab4">
+            <i class="fas fa-fw fa-pencil-alt"></i>
+            <span>Calculs lettres</span>
+        </a>
     </li>
 
     <hr class="sidebar-divider">
