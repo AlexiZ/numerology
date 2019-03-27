@@ -13,4 +13,22 @@
       content: none;
     }
   }
+
+  #accordionSidebar .nav-item .nav-link.active {
+    i {
+      color: white;
+    }
+
+    &:after {
+      content: '\f0a5';
+      color: white;
+      width: 1rem;
+      text-align: center;
+      float: right;
+      vertical-align: 0;
+      border: 0;
+      font-weight: 900;
+      font-family: 'Font Awesome 5 Free';
+    }
+  }
 }
