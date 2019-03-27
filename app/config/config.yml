@@ -80,8 +80,8 @@ hwi_oauth:
         auth0:
             type:                oauth2
             class:               'AppBundle\Auth0ResourceOwner'
-            base_url:            'https://%auth0.base_url%'
-            client_id:           '%auth0.client_id%'
-            client_secret:       '%auth0.client_secret%'
+            base_url:            '%auth0.base_url%'
+            client_id:           '%auth0.login.client_id%'
+            client_secret:       '%auth0.login.client_secret%'
             redirect_uri:        'http://%app_domain%/auth0/callback'
-            scope: "openid profile"
+            scope:               "openid profile email"

@@ -21,5 +21,8 @@ parameters:
     app_domain: numerology.local
 
     auth0.base_url: xxx.xx.auth0.com
-    auth0.client_id: xxx
-    auth0.client_secret: xxx
+    auth0.login.client_id: xxx
+    auth0.login.client_secret: xxx
+    auth0.api.client_id: xxx
+    auth0.api.client_secret: xxx
+    auth0.api.ttl_sec: 25920000

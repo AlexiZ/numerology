@@ -2,10 +2,8 @@
 # https://symfony.com/doc/current/security.html
 security:
     providers:
-        in_memory:
-            memory: ~
         hwi:
-            id: hwi_oauth.user.provider
+            id: AppBundle\Security\UserProvider
 
     firewalls:
         dev:
@@ -22,7 +20,7 @@ security:
                 failure_path:      /login
 
                 oauth_user_provider:
-                    service: hwi_oauth.user.provider
+                    service: AppBundle\Security\UserProvider
             logout:
                 path:   /auth0/logout
                 target: /
@@ -30,4 +28,4 @@ security:
     access_control:
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/connect, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/, roles: ROLE_OAUTH_USER }
+        - { path: ^/, roles: ROLE_USER }
