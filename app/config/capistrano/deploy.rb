@@ -6,7 +6,7 @@ ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
 
 set :format_options, log_file: 'app/logs/capistrano.log', command_output: false
 set :symfony_console_path, "bin/console"
-set :linked_files, %w{app/config/parameters.yml}
+set :linked_files, %w{app/config/parameters.yml .env}
 set :linked_dirs, %w{app/Resources/storage}
 set :copy_files, %w{vendor web/compiled}
 set :keep_releases, 3
