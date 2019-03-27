@@ -3,7 +3,11 @@
 namespace AppBundle\Services;
 
 use AppBundle\Entity\Numerologie;
+use AppBundle\Security\User;
 use Symfony\Component\HttpKernel\KernelInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
+use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
+use Symfony\Component\Security\Csrf\TokenStorage\TokenStorageInterface;
 
 class JsonIO
 {
@@ -22,11 +26,30 @@ class JsonIO
      */
     private $kernel;
 
-    public function __construct(KernelInterface $kernel)
+    /**
+     * @var AuthorizationChecker
+     */
+    private $authorizationChecker;
+    /**
+     * @var TokenStorage
+     */
+    private $tokenStorage;
+
+    public function __construct(KernelInterface $kernel, AuthorizationChecker $authorizationChecker, TokenStorage $tokenStorage)
     {
         $this->kernel = $kernel;
-        $this->storageFileFolder = $this->kernel->getRootDir().'/Resources/storage/';
         $this->dataFileFolder = $this->kernel->getRootDir().'/Resources/data/';
+        $this->authorizationChecker = $authorizationChecker;
+        $this->tokenStorage = $tokenStorage;
+        $this->storageFileFolder = $this->kernel->getRootDir().'/Resources/storage/';
+
+        if ($this->tokenStorage->getToken() && $this->tokenStorage->getToken()->getUser() instanceof User) {
+            if (!$this->authorizationChecker->isGranted('ROLE_ADMIN')) {
+                $this->storageFileFolder .= $this->tokenStorage->getToken()->getUser()->getId() . '/';
+            } else {
+                $this->storageFileFolder .= '*/';
+            }
+        }
     }
 
     public function readJson($filename = null, $json = true)
@@ -40,16 +63,19 @@ class JsonIO
         return $json ? json_decode($content,TRUE) : $content;
     }
 
-    public function writeJson($filename, $content)
+    public function writeJson($folder, $filename, $content)
     {
-        if (!file_exists($filename)) {
-            file_put_contents($filename, $content);
+        if (!is_dir($folder)) {
+            mkdir($folder);
+        }
+        if (!file_exists($folder.$filename)) {
+            file_put_contents($folder.$filename, $content);
         }
     }
 
     public function writeNumerology(Numerologie $subject, array $data)
     {
-        $this->writeJson($this->storageFileFolder.$subject->getFileName(true), json_encode($subject->serialize($data)));
+        $this->writeJson($this->storageFileFolder, $subject->getFileName(true), json_encode($subject->serialize($data)));
 
         return $subject->getFileName(true);
     }

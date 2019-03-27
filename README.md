@@ -8,8 +8,9 @@ Automatically calculate a person's numerology theme.
 
 ### Roadmap (fr)
 - reprendre les données du livre
-- gestion des utilisateurs
-- gestion des rôles
 - internationalisation
 - messagerie interne
 - éditer les données
+- exports pdf
+- comparaison
+- notifications internes
