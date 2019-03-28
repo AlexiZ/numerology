@@ -61,18 +61,25 @@
 
 {% block pagetitle %}
     {{ subject }}
-    <a href="{{ path('numerologie_edit', {'md5': filename}) }}" title="Modifier" class="btn btn-primary btn-circle btn-sm">
-        <i class="fas fa-pen"></i>
-    </a>
-    <a href="{{ path('numerologie_export_pdf', {'md5': filename}) }}" title="Exporter en PDF" class="btn btn-info btn-circle btn-sm">
-        <i class="fas fa-download"></i>
-    </a>
-    <a href="{{ path('numerologie_delete', {'md5': filename}) }}" title="Supprimer" class="btn btn-danger btn-circle btn-sm">
-        <i class="fas fa-times"></i>
-    </a>
 {% endblock pagetitle %}
 
+{% block callback_actions %}
+    <a href="{{ path('numerologie_edit', {'md5': filename}) }}" title="Modifier" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+        <i class="fas fa-pen fa-sm text-white-50"></i>&nbsp;
+        Modifier
+    </a>
+    <a href="{{ path('numerologie_export_pdf', {'md5': filename}) }}" title="Télécharger pour imprimer" class="d-none d-sm-inline-block btn btn-sm btn-info shadow-sm">
+        <i class="fas fa-print fa-sm text-white-50"></i>&nbsp;
+        Télécharger
+    </a>
+    <a href="{{ path('numerologie_delete', {'md5': filename}) }}" title="Supprimer" class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm">
+        <i class="fas fa-times fa-sm text-white-50"></i>&nbsp;
+        Supprimer
+    </a>
+{% endblock callback_actions %}
+
 {% block body %}
+
     <div id="tab1" class="custom-tab">
         {% include '@App/Numerologie/_resume_identite.html.twig' with {'subject': subject} %}
     </div>

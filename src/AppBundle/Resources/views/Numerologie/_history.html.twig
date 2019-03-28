@@ -11,7 +11,9 @@
         {% for filename, label in histories %}
             {% set subject = filename|getSubject %}
             <tr>
-                <td>{{ subject }}</td>
+                <td>
+                    <a href="{{ url('numerologie_show', {'filename': filename}) }}" title="Afficher" class="btn">{{ subject }}</a>
+                </td>
                 <td>{{ label }}</td>
                 <td>
                     <a href="{{ url('numerologie_show', {'filename': filename}) }}" title="Afficher" class="btn btn-success btn-circle btn-sm">

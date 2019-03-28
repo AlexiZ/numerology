@@ -10,6 +10,5 @@ Automatically calculate a person's numerology theme.
 - reprendre les données du livre
 - internationalisation
 - messagerie interne
-- exports pdf
 - comparaison
 - notifications internes
