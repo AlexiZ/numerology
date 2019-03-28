@@ -4,6 +4,10 @@
 #wrapper {
   #content-wrapper {
     overflow: hidden;
+
+    form ul {
+      list-style-type: none;
+    }
   }
 
   #sidebarToggle {

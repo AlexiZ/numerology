@@ -9,5 +9,6 @@ var/sessions/*
 app/logs/*
 parameters.yml
 app/Resources/storage/*
+app/Resources/archives/*
 node_modules/
 .env

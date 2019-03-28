@@ -6,6 +6,14 @@ numerologie_add:
     path: /ajouter/
     defaults: { _controller: AppBundle:Numerologie:add }
 
+numerologie_edit:
+    path: /editer/{md5}
+    defaults: { _controller: AppBundle:Numerologie:edit }
+
+numerologie_delete:
+    path: /supprimer/{md5}
+    defaults: { _controller: AppBundle:Numerologie:supprimer }
+
 numerologie_show:
     path: /afficher/
     defaults: { _controller: AppBundle:Numerologie:show }

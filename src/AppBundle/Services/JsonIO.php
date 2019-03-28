@@ -22,6 +22,11 @@ class JsonIO
     private $dataFileFolder;
 
     /**
+     * @var string
+     */
+    private $archivesFolder;
+
+    /**
      * @var KernelInterface
      */
     private $kernel;
@@ -42,13 +47,10 @@ class JsonIO
         $this->authorizationChecker = $authorizationChecker;
         $this->tokenStorage = $tokenStorage;
         $this->storageFileFolder = $this->kernel->getRootDir().'/Resources/storage/';
+        $this->archivesFolder = $this->kernel->getRootDir().'/Resources/archives/';
 
         if ($this->tokenStorage->getToken() && $this->tokenStorage->getToken()->getUser() instanceof User) {
-            if (!$this->authorizationChecker->isGranted('ROLE_ADMIN')) {
-                $this->storageFileFolder .= $this->tokenStorage->getToken()->getUser()->getId() . '/';
-            } else {
-                $this->storageFileFolder .= '*/';
-            }
+            $this->storageFileFolder .= $this->tokenStorage->getToken()->getUser()->getId() . '/';
         }
     }
 
@@ -68,9 +70,28 @@ class JsonIO
         if (!is_dir($folder)) {
             mkdir($folder);
         }
-        if (!file_exists($folder.$filename)) {
-            file_put_contents($folder.$filename, $content);
+        file_put_contents($folder.$filename, $content);
+    }
+
+    public function deleteJson($filename)
+    {
+        foreach (glob($this->storageFileFolder.'*/*.json') as $fullname) {
+            $explodedFilename = explode('/', $fullname);
+            $shortFilename = $explodedFilename[count($explodedFilename) - 1];
+
+            if ($shortFilename === $filename) {
+                $destFolder = $this->archivesFolder . $explodedFilename[count($explodedFilename) - 2] . '/';
+
+                if (!is_dir($destFolder)) {
+                    mkdir($destFolder);
+                }
+                rename($fullname, $destFolder . $filename);
+
+                return true;
+            }
         }
+
+        return false;
     }
 
     public function writeNumerology(Numerologie $subject, array $data)
@@ -83,7 +104,14 @@ class JsonIO
     public function readHistoryFolder($full = false)
     {
         $history = [];
-        foreach (glob($this->storageFileFolder.'*.json') as $filename) {
+        $historyFolder = $this->storageFileFolder;
+        if ($this->authorizationChecker->isGranted('ROLE_ADMIN')) {
+            $explodedFilename = explode('/', $historyFolder);
+            $explodedFilename[count($explodedFilename) - 2] = '*';
+            $historyFolder = implode('/', $explodedFilename);
+        }
+
+        foreach (glob($historyFolder.'*.json') as $filename) {
             $explodedFilename = explode('/', $filename);
             $shortFilename = $explodedFilename[count($explodedFilename) - 1];
             if ($full) {

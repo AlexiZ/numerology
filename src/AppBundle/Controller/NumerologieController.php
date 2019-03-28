@@ -38,6 +38,37 @@ class NumerologieController extends Controller
         return $this->render('@App/Numerologie/add.html.twig', $parameters);
     }
 
+    public function editAction(Request $request, JsonIO $jsonIO, NumerologieService $numerologieService, $md5)
+    {
+        $parameters = [];
+        $subject = $numerologieService->getSubject($md5);
+        if (!$subject) {
+            return $this->redirectToRoute('numerologie_add');
+        }
+
+        $form = $this->createForm(NumerologieType::class, $subject);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $filename = $jsonIO->writeNumerology($subject, $numerologieService->exportData($subject));
+
+            return $this->redirectToRoute('numerologie_show', ['filename' => $filename]);
+        }
+
+        $parameters = array_merge($parameters, [
+            'form' => $form->createView()
+        ]);
+
+        return $this->render('@App/Numerologie/edit.html.twig', $parameters);
+    }
+
+    public function supprimerAction(JsonIO $jsonIO, $md5)
+    {
+        $jsonIO->deleteJson($md5);
+
+        return $this->redirectToRoute('numerologie_index');
+    }
+
     public function showAction(Request $request, NumerologieService $numerologieService)
     {
         if (!$request->query->has('filename')) {
@@ -50,6 +81,9 @@ class NumerologieController extends Controller
             return $this->redirectToRoute('numerologie_index');
         }
 
-        return $this->render('@App/Numerologie/show.html.twig', ['subject' => $numerologie]);
+        return $this->render('@App/Numerologie/show.html.twig', [
+            'subject' => $numerologie,
+            'filename' => $request->get('filename')
+        ]);
     }
 }

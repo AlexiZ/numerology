@@ -6,7 +6,7 @@
             {% for field in form %}
                 <li>
                     {{- form_errors(form) -}}
-                    {{- block('form_widget') -}}
+                    <input type="text" class="form-control" id="{{ field.vars.id }}" name="{{ field.vars.full_name }}" value="{{ field.vars.data }}" required="{{ field.vars.required }}" />
                 </li>
             {% endfor %}
         </ul>
@@ -23,8 +23,10 @@
 {%- block form_row -%}
     <div>
         {{- form_errors(form) -}}
+
         <div class="form-group row">
             {{ form_label(form, null, {'label_attr': {'class': 'col-md-4'}}) }}
+
             <div class="col-sm-8">
                 {{ form_widget(form, {'attr': {'class': 'form-control'}}) }}
             </div>

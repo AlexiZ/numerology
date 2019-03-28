@@ -61,6 +61,12 @@
 
 {% block pagetitle %}
     {{ subject }}
+    <a href="{{ path('numerologie_edit', {'md5': filename}) }}" title="Éditer" class="btn btn-primary btn-circle btn-sm">
+        <i class="fas fa-pen"></i>
+    </a>
+    <a href="{{ path('numerologie_delete', {'md5': filename}) }}" title="Supprimer" class="btn btn-danger btn-circle btn-sm">
+        <i class="fas fa-times"></i>
+    </a>
 {% endblock pagetitle %}
 
 {% block body %}
