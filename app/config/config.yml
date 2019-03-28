@@ -85,3 +85,10 @@ hwi_oauth:
             client_secret:       '%auth0.login.client_secret%'
             redirect_uri:        'http://%app_domain%/auth0/callback'
             scope:               "openid profile email"
+
+knp_snappy:
+    pdf:
+        enabled:    true
+        binary:     '%kernel.root_dir%/../vendor/h4cc/wkhtmltopdf-amd64/bin/wkhtmltopdf-amd64'
+        options:    []
+    temporary_folder: '%kernel.cache_dir%/snappy'

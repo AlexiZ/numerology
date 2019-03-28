@@ -6,8 +6,12 @@ use AppBundle\Entity\Numerologie;
 use AppBundle\Services\Numerologie as NumerologieService;
 use AppBundle\Form\NumerologieType;
 use AppBundle\Services\JsonIO;
+use Knp\Bundle\SnappyBundle\Snappy\Response\PdfResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class NumerologieController extends Controller
 {
@@ -85,5 +89,19 @@ class NumerologieController extends Controller
             'subject' => $numerologie,
             'filename' => $request->get('filename')
         ]);
+    }
+
+    public function exportPdfAction(NumerologieService $numerologieService, $md5)
+    {
+        $numerologie = $numerologieService->getSubject($md5);
+        $html = $this->renderView('@App/Numerologie/export.pdf.twig', [
+            'subject' => $numerologie,
+            'filename' => $md5,
+        ]);
+
+        return new PdfResponse(
+            $this->get('knp_snappy.pdf')->getOutputFromHtml($html),
+            uniqid() . '.pdf'
+        );
     }
 }

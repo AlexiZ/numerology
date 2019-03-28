@@ -14,13 +14,13 @@
                 <td>{{ subject }}</td>
                 <td>{{ label }}</td>
                 <td>
-                    <a href="{{ path('numerologie_show', {'filename': filename}) }}" title="Afficher" class="btn btn-success btn-circle btn-sm">
+                    <a href="{{ url('numerologie_show', {'filename': filename}) }}" title="Afficher" class="btn btn-success btn-circle btn-sm">
                         <i class="fas fa-eye"></i>
                     </a>
-                    <a href="{{ path('numerologie_edit', {'md5': filename}) }}" title="Modifier" class="btn btn-primary btn-circle btn-sm">
+                    <a href="{{ url('numerologie_edit', {'md5': filename}) }}" title="Modifier" class="btn btn-primary btn-circle btn-sm">
                         <i class="fas fa-pen"></i>
                     </a>
-                    <a href="{{ path('numerologie_delete', {'md5': filename}) }}" title="Supprimer" class="btn btn-danger btn-circle btn-sm">
+                    <a href="{{ url('numerologie_delete', {'md5': filename}) }}" title="Supprimer" class="btn btn-danger btn-circle btn-sm">
                         <i class="fas fa-times"></i>
                     </a>
                 </td>
