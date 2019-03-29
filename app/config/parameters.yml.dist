@@ -19,6 +19,7 @@ parameters:
     secret: ThisTokenIsNotSoSecretChangeIt
 
     app_domain: numerology.local
+    router.request_context.scheme: https
 
     auth0.base_url: xxx.xx.auth0.com
     auth0.login.client_id: xxx
@@ -26,3 +27,7 @@ parameters:
     auth0.api.client_id: xxx
     auth0.api.client_secret: xxx
     auth0.api.ttl_sec: 25920000
+
+    sendbird.app_id: xxx
+    sendbird.api_token: xxx
+    sendbird.api_url: xxx

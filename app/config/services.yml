@@ -34,7 +34,7 @@ services:
     #     arguments:
     #         $someArgument: 'some_value'
 
-    AppBundle\Auth0\Auth0Manager:
+    AppBundle\Services\Auth0\Auth0Manager:
         arguments:
             $auth0Data:
                 domain: "%auth0.base_url%"
@@ -42,3 +42,10 @@ services:
                 clientSecret: "%auth0.api.client_secret%"
                 loginClientId: "%auth0.login.client_id%"
                 auth0EmailTtl: "%auth0.api.ttl_sec%"
+
+    AppBundle\Services\SendBird\SendBirdManager:
+        arguments:
+            $sendbirdParams:
+                appId: "%sendbird.app_id%"
+                apiUrl: "%sendbird.api_url%"
+                apiToken: "%sendbird.api_token%"

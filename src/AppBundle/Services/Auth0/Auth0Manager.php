@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Auth0;
+namespace AppBundle\Services\Auth0;
 
 use Auth0\SDK\API\Authentication;
 use Auth0\SDK\API\Header\Authorization\AuthorizationBearer;
