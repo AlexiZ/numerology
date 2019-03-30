@@ -1,0 +1,20 @@
+{% if messages is not empty %}
+    {% for message in messages %}
+        <a class="dropdown-item d-flex align-items-center" href="#">
+            <div class="dropdown-list-image mr-3">
+                <img class="rounded-circle" src="{{ message.user.profile_url }}" alt="{{ message.user.nickname }}">
+            </div>
+
+            <div class="font-weight-bold">
+                <div class="text-truncate">{{ message.message }}</div>
+                <div class="small text-gray-500">{{ message.user.nickname }} · {{ message.created_at|howLongAgo }}</div>
+            </div>
+        </a>
+    {% endfor %}
+{% else %}
+    <a class="dropdown-item d-flex align-items-center" id="messageUnreadSpin" href="javascript:void(0);">
+        <div class="font-weight-bold mx-auto">
+            Vous n'avez pas de messages
+        </div>
+    </a>
+{% endif %}

@@ -22,18 +22,30 @@ numerologie_show:
     path: /afficher/
     defaults: { _controller: AppBundle:Numerologie:show }
 
-numerologie_admin:
+admin_index:
     path: /administrer/
     defaults: { _controller: AppBundle:Admin:index }
 
-numerologie_admin_user_validate:
+admin_user_validate:
     path: /administrer/utilisateur/valider/{userId}
     defaults: { _controller: AppBundle:Admin:userValidate }
     options:
         expose: true
 
-numerologie_admin_user_refuse:
+admin_user_refuse:
     path: /administrer/utilisateur/refuser/{userId}
     defaults: { _controller: AppBundle:Admin:userRefuse }
+    options:
+        expose: true
+
+messages_unread_number:
+    path: /messages/non-lus/
+    defaults: { _controller: AppBundle:Messages:getUnreadNumber }
+    options:
+        expose: true
+
+messages_list:
+    path: /messages/
+    defaults: { _controller: AppBundle:Messages:getMessages }
     options:
         expose: true

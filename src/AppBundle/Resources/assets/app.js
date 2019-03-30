@@ -78,6 +78,8 @@ $(document).ready(() => {
             list.children().last().remove();
         });
     }
+
+    getUnreadMessagesCount();
 });
 
 // Handle automatic pie charts
@@ -229,7 +231,7 @@ if (userValidates) {
                 }
             };
 
-            xmlhttp.open("GET", Routing.generate('numerologie_admin_user_validate', {'userId': userValidate.dataset.userid}), true);
+            xmlhttp.open("GET", Routing.generate('admin_user_validate', {'userId': userValidate.dataset.userid}), true);
             xmlhttp.send();
         });
     });
@@ -254,11 +256,66 @@ if (userRefuses) {
                 }
             };
 
-            xmlhttp.open("GET", Routing.generate('numerologie_admin_user_refuse', {'userId': userRefuse.dataset.userid}), true);
+            xmlhttp.open("GET", Routing.generate('admin_user_refuse', {'userId': userRefuse.dataset.userid}), true);
             xmlhttp.send();
         });
     });
 }
+
+let messagesDropdown = document.querySelector('#messagesDropdown');
+if (messagesDropdown) {
+    messagesDropdown.addEventListener('click', (e) => {
+        e.preventDefault();
+
+        getMessages();
+    });
+}
+
+// Get unread messages count
+const getUnreadMessagesCount = () => {
+    let xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = () => {
+        if (xmlhttp.readyState === XMLHttpRequest.DONE) {
+            if (xmlhttp.status === 200) {
+                let data = JSON.parse(xmlhttp.response),
+                    badge = document.querySelector('#unreadMessagesBadge');
+                if (data > 0) {
+                    badge.classList.remove('d-none');
+                    badge.innerHTML = data;
+                } else {
+                    badge.classList.add('d-none');
+                    badge.innerHTML = '';
+                }
+            }
+        }
+    };
+
+    xmlhttp.open("GET", Routing.generate('messages_unread_number'), true);
+    xmlhttp.send();
+};
+
+const getMessages = () => {
+    let xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = () => {
+        if (xmlhttp.readyState === XMLHttpRequest.DONE) {
+            if (xmlhttp.status === 200) {
+                let data = JSON.parse(xmlhttp.response),
+                    messagesList = document.querySelector('#messagesList'),
+                    messageUnreadSpin = document.querySelector('#messageUnreadSpin');
+                if (data) {
+                    messagesList.innerHTML = data;
+                    messageUnreadSpin.classList.add('d-none');
+                } else {
+                    messagesList.innerHTML = '';
+                    messageUnreadSpin.classList.remove('d-none');
+                }
+            }
+        }
+    };
+
+    xmlhttp.open("GET", Routing.generate('messages_list'), true);
+    xmlhttp.send();
+};
 
 const modalMessage = (title, message) => {
     let modale = document.querySelector('#standardModal');

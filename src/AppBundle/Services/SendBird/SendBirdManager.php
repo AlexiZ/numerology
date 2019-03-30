@@ -8,6 +8,7 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 class SendBirdManager
 {
     const GROUP_CHANNELS = 'group_channels';
+    const USERS = 'users';
     const CUSTOM_TYPE = 'custom_type';
     const CUSTOM_TYPE_SUPPORT = 'support';
 
@@ -15,6 +16,10 @@ class SendBirdManager
      * @var array
      */
     private $apiUrl;
+    /**
+     * @var string
+     */
+    private $apiToken;
     /**
      * @var string
      */
@@ -27,6 +32,7 @@ class SendBirdManager
     public function __construct(TokenStorage $tokenStorage, array $sendbirdParams)
     {
         $this->apiUrl = $sendbirdParams['apiUrl'];
+        $this->apiToken = $sendbirdParams['apiToken'];
         $this->userId = $tokenStorage->getToken()->getUser()->getId();
         $this->privateChannelUrl = Urlizer::urlize($this->userId);
     }
@@ -57,7 +63,7 @@ class SendBirdManager
     public function getMessages($limit = 5)
     {
         if (!$this->privateChannelExist()) {
-            return 0;
+            return [];
         }
 
         $url = $this->apiUrl
@@ -66,11 +72,17 @@ class SendBirdManager
             .'/messages'
         ;
 
-        return $this->callGetApi($url, [
+        $response = $this->callGetApi($url, [
             'message_ts' => time(),
             'prev_limit' => $limit,
             self::CUSTOM_TYPE => self::CUSTOM_TYPE_SUPPORT,
         ]);
+
+        if (is_array($response) && array_key_exists('error', $response) && true === $response['error']) {
+            return [];
+        }
+
+        return $response;
     }
 
     public function sendMessage($message)
@@ -109,15 +121,19 @@ class SendBirdManager
 
         $response = $this->callGetApi($url);
 
-        if (is_array($response) && array_key_exists('name', $response)) {
-            return true;
+        if (is_array($response) && array_key_exists('error', $response) && true === $response['error']) {
+            return false;
         }
 
-        return false;
+        return true;
     }
 
     private function createPrivateChannel()
     {
+        if (!$this->createUser()) {
+            return false;
+        }
+
         $url = $this->apiUrl
             .self::GROUP_CHANNELS.'/'
         ;
@@ -126,11 +142,30 @@ class SendBirdManager
             'name' => $this->userId,
             'channel_url' => $this->privateChannelUrl,
             self::CUSTOM_TYPE => self::CUSTOM_TYPE_SUPPORT,
-            'is_distinct' => true,
             'is_public' => true,
+            'user_ids' => [$this->userId],
         ]);
 
         if (is_array($response) && array_key_exists('name', $response)) {
+            return true;
+        }
+
+        return false;
+    }
+
+    private function createUser()
+    {
+        $url = $this->apiUrl
+            .self::USERS.'/'
+        ;
+
+        $response = $this->callPostApi($url, [
+            'user_id' => $this->userId,
+            'nickname' => $this->userId,
+            'profile_url' => $this->privateChannelUrl,
+        ]);
+
+        if (is_array($response) && array_key_exists('user_id', $response)) {
             return true;
         }
 
@@ -142,12 +177,15 @@ class SendBirdManager
         $ch = curl_init();
 
         curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            'Content-Type: application/json, charset=utf8',
+            'Api-Token: ' . $this->apiToken
+        ));
         curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
 
         //return the transfer as a string
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-
 
         // $output contains the output string
         $output = curl_exec($ch);
@@ -155,7 +193,7 @@ class SendBirdManager
         // close curl resource to free up system resources
         curl_close($ch);
 
-        return $output;
+        return json_decode($output, true);
     }
 
     private function callGetApi($url, array $parameters = [])
@@ -163,10 +201,13 @@ class SendBirdManager
         $ch = curl_init();
 
         curl_setopt($ch, CURLOPT_URL, $url . (!empty($parameters) ? '?' . http_build_query($parameters) : ''));
+        curl_setopt($ch, CURLOPT_HTTPHEADER, [
+            'Content-Type: application/json, charset=utf8',
+            'Api-Token: ' . $this->apiToken
+        ]);
 
         //return the transfer as a string
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-
 
         // $output contains the output string
         $output = curl_exec($ch);
@@ -174,6 +215,6 @@ class SendBirdManager
         // close curl resource to free up system resources
         curl_close($ch);
 
-        return $output;
+        return json_decode($output, true);
     }
 }
