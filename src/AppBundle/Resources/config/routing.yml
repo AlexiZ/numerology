@@ -38,9 +38,9 @@ admin_user_refuse:
     options:
         expose: true
 
-messages_unread_number:
-    path: /messages/non-lus/
-    defaults: { _controller: AppBundle:Messages:getUnreadNumber }
+messages_number:
+    path: /messages/non-lus/total
+    defaults: { _controller: AppBundle:Messages:getMessagesNumber }
     options:
         expose: true
 

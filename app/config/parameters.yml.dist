@@ -31,3 +31,9 @@ parameters:
     sendbird.app_id: xxx
     sendbird.api_token: xxx
     sendbird.api_url: xxx
+
+    slack.api_url: xxx
+    slack.api_token: xxx
+    slack.webhook: xxx
+    slack.inviter_gmail_id: xxx
+    slack.default_channel: xxx

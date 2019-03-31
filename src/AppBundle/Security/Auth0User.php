@@ -16,7 +16,7 @@ class Auth0User implements UserInterface, \Serializable
      */
     protected $accessToken;
 
-    public function __construct(array $data, string $accessToken)
+    public function __construct(array $data, $accessToken)
     {
         $this->data = $data;
         $this->accessToken = $accessToken;

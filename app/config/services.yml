@@ -49,3 +49,11 @@ services:
                 appId: "%sendbird.app_id%"
                 apiUrl: "%sendbird.api_url%"
                 apiToken: "%sendbird.api_token%"
+
+    AppBundle\Services\Slack\SlackManager:
+        arguments:
+            $slackParams:
+                apiUrl: "%slack.api_url%"
+                apiToken: "%slack.api_token%"
+                defaultChannel: "%slack.default_channel%"
+                inviterGmailId: "%slack.inviter_gmail_id%"

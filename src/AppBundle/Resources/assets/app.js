@@ -290,7 +290,7 @@ const getUnreadMessagesCount = () => {
         }
     };
 
-    xmlhttp.open("GET", Routing.generate('messages_unread_number'), true);
+    xmlhttp.open("GET", Routing.generate('messages_number'), true);
     xmlhttp.send();
 };
 

@@ -2,22 +2,34 @@
 
 namespace AppBundle\Twig;
 
+use AppBundle\Services\Slack\SlackManager;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 
 class MessagesExtension extends AbstractExtension
 {
+    /**
+     * @var SlackManager
+     */
+    private $slackManager;
+
+    public function __construct(SlackManager $slackManager)
+    {
+        $this->slackManager = $slackManager;
+    }
+
     public function getFilters()
     {
         return array(
             new TwigFilter('howLongAgo', array($this, 'howLongAgo')),
+            new TwigFilter('getSlackUser', array($this, 'getSlackUser')),
         );
     }
 
     public function howLongAgo($date)
     {
         $message = new \DateTime(date('Y-m-d H:i:s.u', $date));
-        $now = new \DateTime('Y-m-d H:i:s.u', time());
+        $now = new \DateTime(date('Y-m-d H:i:s.u', time()));
 
         $interval = $now->diff($message);
 
@@ -56,5 +68,10 @@ class MessagesExtension extends AbstractExtension
 
         // Prepend 'since ' or whatever you like
         return $interval->format('Il y a ' . $format);
+    }
+
+    public function getSlackUser($userId)
+    {
+        return $this->slackManager->getUserInfo($userId);
     }
 }
