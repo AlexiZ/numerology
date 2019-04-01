@@ -39,13 +39,17 @@ admin_user_refuse:
         expose: true
 
 messages_number:
-    path: /messages/non-lus/total
+    path: /messages/tous/total/
     defaults: { _controller: AppBundle:Messages:getMessagesNumber }
     options:
         expose: true
 
 messages_list:
-    path: /messages/
+    path: /messages/tous/
     defaults: { _controller: AppBundle:Messages:getMessages }
     options:
         expose: true
+
+messages_show:
+    path: /messages/tous/
+    defaults: { _controller: AppBundle:Messages:getMessages }

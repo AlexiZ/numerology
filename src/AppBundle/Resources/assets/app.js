@@ -286,7 +286,7 @@ const getUnreadMessagesCount = () => {
                     badge = document.querySelector('#unreadMessagesBadge');
                 if (data > 0) {
                     badge.classList.remove('d-none');
-                    badge.innerHTML = data;
+                    badge.innerHTML = '<i class="fa fa-exclamation"></i>';
                 } else {
                     badge.classList.add('d-none');
                     badge.innerHTML = '';
@@ -348,12 +348,6 @@ const konami = () => {
             nyanCat();
         }
     });
-};
-
-const barrell = () => {
-    var s = document.createElement('style');
-    s.innerHTML='@-moz-keyframes roll { 100% { -moz-transform: rotate(360deg); } } @-o-keyframes roll { 100% { -o-transform: rotate(360deg); } } @-webkit-keyframes roll { 100% { -webkit-transform: rotate(360deg); } } img{ -moz-animation-name: roll; -moz-animation-duration: 4s; -moz-animation-iteration-count: 1; -o-animation-name: roll; -o-animation-duration: 4s; -o-animation-iteration-count: 1; -webkit-animation-name: roll; -webkit-animation-duration: 4s; -webkit-animation-iteration-count: 1; }';
-    document.getElementsByTagName('head')[0].appendChild(s);
 };
 
 const nyanCat = () => {
