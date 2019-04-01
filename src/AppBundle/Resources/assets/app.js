@@ -79,6 +79,7 @@ $(document).ready(() => {
         });
     }
 
+    konami();
     getUnreadMessagesCount();
 });
 
@@ -332,4 +333,35 @@ const modalMessage = (title, message) => {
     modale.querySelector('.modal-body').innerHTML = message;
 
     $(modale).modal('show');
+};
+
+const konami = () => {
+    let secret = '38384040373937396665',
+        input = '',
+        timer;
+
+    document.addEventListener('keyup', (e) => {
+        input += e.which;
+        clearTimeout(timer);
+        timer = setTimeout(() => { input = ''; }, 500);
+        if (input === secret) {
+            nyanCat();
+        }
+    });
+};
+
+const barrell = () => {
+    var s = document.createElement('style');
+    s.innerHTML='@-moz-keyframes roll { 100% { -moz-transform: rotate(360deg); } } @-o-keyframes roll { 100% { -o-transform: rotate(360deg); } } @-webkit-keyframes roll { 100% { -webkit-transform: rotate(360deg); } } img{ -moz-animation-name: roll; -moz-animation-duration: 4s; -moz-animation-iteration-count: 1; -o-animation-name: roll; -o-animation-duration: 4s; -o-animation-iteration-count: 1; -webkit-animation-name: roll; -webkit-animation-duration: 4s; -webkit-animation-iteration-count: 1; }';
+    document.getElementsByTagName('head')[0].appendChild(s);
+};
+
+const nyanCat = () => {
+    document.querySelector('body').insertAdjacentHTML('beforeend', '<div id="nyan"><img src="http://www.nyan.cat/cats/original.gif"></div>');
+    $('#nyan').animate({
+        'marginLeft' : '100%'
+    }, 3000);
+    setTimeout(() => {
+        document.querySelector('#nyan').remove();
+    }, 4000);
 };
