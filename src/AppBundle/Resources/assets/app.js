@@ -273,9 +273,13 @@ if (messagesDropdown) {
 
 // Get unread messages count
 const getUnreadMessagesCount = () => {
-    let xmlhttp = new XMLHttpRequest();
+    let xmlhttp = new XMLHttpRequest(),
+        messageUnreadSpin = document.querySelector('#messageUnreadSpin');
     xmlhttp.onreadystatechange = () => {
-        if (xmlhttp.readyState === XMLHttpRequest.DONE) {
+        if (xmlhttp.readyState === XMLHttpRequest.OPENED) {
+            messageUnreadSpin.classList.remove('d-none');
+        }
+        else if (xmlhttp.readyState === XMLHttpRequest.DONE) {
             if (xmlhttp.status === 200) {
                 let data = JSON.parse(xmlhttp.response),
                     badge = document.querySelector('#unreadMessagesBadge');
@@ -286,6 +290,8 @@ const getUnreadMessagesCount = () => {
                     badge.classList.add('d-none');
                     badge.innerHTML = '';
                 }
+
+                messageUnreadSpin.classList.add('d-none');
             }
         }
     };
@@ -295,20 +301,23 @@ const getUnreadMessagesCount = () => {
 };
 
 const getMessages = () => {
-    let xmlhttp = new XMLHttpRequest();
+    let xmlhttp = new XMLHttpRequest(),
+        messageUnreadSpin = document.querySelector('#messageUnreadSpin');
     xmlhttp.onreadystatechange = () => {
-        if (xmlhttp.readyState === XMLHttpRequest.DONE) {
+        if (xmlhttp.readyState === XMLHttpRequest.OPENED) {
+            messageUnreadSpin.classList.remove('d-none');
+        }
+        else if (xmlhttp.readyState === XMLHttpRequest.DONE) {
             if (xmlhttp.status === 200) {
                 let data = JSON.parse(xmlhttp.response),
-                    messagesList = document.querySelector('#messagesList'),
-                    messageUnreadSpin = document.querySelector('#messageUnreadSpin');
+                    messagesList = document.querySelector('#messagesList');
                 if (data) {
                     messagesList.innerHTML = data;
-                    messageUnreadSpin.classList.add('d-none');
                 } else {
                     messagesList.innerHTML = '';
-                    messageUnreadSpin.classList.remove('d-none');
                 }
+
+                messageUnreadSpin.classList.add('d-none');
             }
         }
     };
