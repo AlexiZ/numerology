@@ -6,8 +6,8 @@
                 <img class="rounded-circle" src="{{ slackUser.image_32 }}" alt="{{ slackUser.display_name }}">
             </div>
 
-            <div class="font-weight-bold">
-                <div class="text-truncate">{{ message.text }}</div>
+            <div>
+                <div class="text-truncate">{{ message.text|truncate(33) }}</div>
                 <div class="small text-gray-500">{{ slackUser.display_name }} · {{ message.ts|howLongAgo }}</div>
             </div>
         </a>

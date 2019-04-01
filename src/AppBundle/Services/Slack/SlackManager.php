@@ -62,7 +62,7 @@ class SlackManager
         return $count;
     }
 
-    public function getMessages($cursor = null)
+    public function getLastMessages($cursor = null)
     {
         if (!$this->validatePrerequisites()) {
             return [];
@@ -82,7 +82,35 @@ class SlackManager
             $mpimDetails = $this->callGetApi($url, $params, self::CONTENT_TYPE_FORM);
 
             if (is_array($mpimDetails) && 'true' == $mpimDetails['ok'] && isset($mpimDetails['messages'])) {
-                $channels[] = end($mpimDetails['messages']);
+                $channels[] = $mpimDetails['messages'][0];
+            }
+        }
+
+        return $channels;
+    }
+
+    public function getAllMessages($cursor = null)
+    {
+        if (!$this->validatePrerequisites()) {
+            return [];
+        }
+
+        $response = $this->getUserMessages($cursor);
+
+        $channels = [];
+        foreach ($response['channels'] as $channel) {
+            $url = $this->apiUrl
+                . 'mpim.history'
+            ;
+            $params = [
+                'token' => $this->apiToken,
+                'channel' => $channel['id'],
+                'unreads' => true,
+            ];
+            $mpimDetails = $this->callGetApi($url, $params, self::CONTENT_TYPE_FORM);
+
+            if (is_array($mpimDetails) && 'true' == $mpimDetails['ok'] && isset($mpimDetails['messages'])) {
+                $channels[$channel['id']] = $mpimDetails;
             }
         }
 

@@ -354,8 +354,8 @@ const nyanCat = () => {
     document.querySelector('body').insertAdjacentHTML('beforeend', '<div id="nyan"><img src="http://www.nyan.cat/cats/original.gif"></div>');
     $('#nyan').animate({
         'marginLeft' : '100%'
-    }, 3000);
+    }, 6000);
     setTimeout(() => {
         document.querySelector('#nyan').remove();
-    }, 4000);
+    }, 8000);
 };

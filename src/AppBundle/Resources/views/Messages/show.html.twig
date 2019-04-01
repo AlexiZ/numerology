@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Numérologie - Votre messagerie
+{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-lg-12">
+            {% if conversations|default %}
+                {% for id, conversation in conversations %}
+                    <div class="card shadow mb-4">
+                        <a href="#collapseConversation{{ loop.index }}" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseConversation{{ loop.index }}">
+                            <h6 class="m-0 font-weight-bold text-primary">Conversation {{ id }}</h6>
+                        </a>
+
+                        <div class="collapse show" id="collapseConversation{{ loop.index }}">
+                            <div class="card-body">
+                                {{ render(controller('AppBundle:Messages:renderConversation', {'conversation': conversation})) }}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <div class="card shadow mb-4">
+                    <div class="card-body">
+                        Vous n'avez aucun message.
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock body %}

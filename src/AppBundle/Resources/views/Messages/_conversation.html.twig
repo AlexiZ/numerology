@@ -1,0 +1,21 @@
+{% for message in messages %}
+    {% if app.user.id != message.user %}
+        {% set slackUser = message.user|getSlackUser %}
+    {% endif %}
+
+    <div class="card border-{% if app.user.id != message.user %}left{% else %}right{% endif %}-primary shadow h-100 py-2">
+        <div class="card-body">
+            <div class="row no-gutters align-items-center">
+                <div class="col mr-2">
+                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">{% if app.user.id != message.user %}{{ slackUser.display_name }}{% else %}{{ app.user.nickname }}{% endif %}</div>
+                    {% for ts, text in message.texts %}
+                        <div class="mb-0 text-gray-800">
+                            {{ text }}
+                            <div class="text-xs">({{ ts|howLongAgo }})</div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endfor %}

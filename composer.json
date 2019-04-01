@@ -21,8 +21,8 @@
     },
     "require": {
         "php": ">=5.5.9",
-        "ext-json": "*",
         "ext-curl": "*",
+        "ext-json": "*",
         "auth0/auth0-php": "^5.4",
         "doctrine/doctrine-bundle": "^1.6",
         "doctrine/doctrine-migrations-bundle": "^1.3",
@@ -42,6 +42,7 @@
         "symfony/polyfill-apcu": "^1.0",
         "symfony/swiftmailer-bundle": "^2.3.10",
         "symfony/symfony": "3.4.*",
+        "twig/extensions": "^1.5",
         "twig/twig": "^1.0||^2.0"
     },
     "require-dev": {

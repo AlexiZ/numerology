@@ -29,6 +29,11 @@ services:
         public: true
         tags: ['controller.service_arguments']
 
+    twig.extension.text:
+        class: Twig\Extensions\TextExtension
+        tags:
+            - { name: twig.extension }
+
     # add more services, or override services that need manual wiring
     # AppBundle\Service\ExampleService:
     #     arguments:

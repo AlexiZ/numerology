@@ -51,5 +51,5 @@ messages_list:
         expose: true
 
 messages_show:
-    path: /messages/tous/
-    defaults: { _controller: AppBundle:Messages:getMessages }
+    path: /messages/afficher/
+    defaults: { _controller: AppBundle:Messages:showMessages }
