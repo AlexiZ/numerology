@@ -29,7 +29,7 @@
                                             <span>{{ error }}</span>
                                         {% endif %}
                                         {% for owner in hwi_oauth_resource_owners() %}
-                                            <a href="{{ hwi_oauth_login_url(owner) }}" class="btn btn-success btn-user btn-block">
+                                            <a href="{{ hwi_oauth_login_url(owner)|replace({'http:': 'https:'}) }}" class="btn btn-success btn-user btn-block">
                                                 <i class="fa fa-sign-in-alt"></i> Se connecter
                                             </a>
                                         {% endfor %}
@@ -52,6 +52,6 @@
         <script type="text/javascript" src="{{ asset("compiled/common.js") }}"></script>
         <script type="text/javascript" src="{{ asset("compiled/app.js") }}"></script>
         <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
-        <script src="{{ url('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
+        <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
     </body>
 </html>

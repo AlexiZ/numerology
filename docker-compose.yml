@@ -43,8 +43,7 @@ services:
             - .:/var/www/symfony
             - ./var/logs/apache:/var/log/apache2
         environment:
-            VIRTUAL_HOST: numerology.$DOCKER_HOST_SUFFIX
-            CERT_NAME: generic
+            VIRTUAL_HOST: 'numerology.$DOCKER_HOST_SUFFIX'
 
     node:
         image: node:alpine

@@ -80,7 +80,11 @@ $(document).ready(() => {
     }
 
     konami();
-    getUnreadMessagesCount();
+
+    let wrapper = document.getElementById('wrapper');
+    if (wrapper) {
+        getUnreadMessagesCount();
+    }
 });
 
 // Handle automatic pie charts
