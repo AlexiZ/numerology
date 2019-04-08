@@ -39,6 +39,19 @@
       font-family: 'Font Awesome 5 Free';
     }
   }
+
+  .conversation {
+    .message .card-body {
+      padding-top: 0.5rem;
+      padding-bottom: 0.5rem;
+    }
+
+    .card {
+      border: 1px solid #e3e6f0;
+      -webkit-box-shadow: none !important;
+      box-shadow: none !important;
+    }
+  }
 }
 
 #nyan {

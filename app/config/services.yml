@@ -60,5 +60,4 @@ services:
             $slackParams:
                 apiUrl: "%slack.api_url%"
                 apiToken: "%slack.api_token%"
-                defaultChannel: "%slack.default_channel%"
-                inviterGmailId: "%slack.inviter_gmail_id%"
+                admins: "%slack.admins%"

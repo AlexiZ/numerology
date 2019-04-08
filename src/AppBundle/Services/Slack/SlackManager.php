@@ -20,7 +20,7 @@ class SlackManager
     /**
      * @var string
      */
-    private $defaultChannel;
+    private $admins;
     /**
      * @var User
      */
@@ -30,9 +30,9 @@ class SlackManager
     {
         $this->apiUrl = $slackParams['apiUrl'];
         $this->apiToken = $slackParams['apiToken'];
-        $this->defaultChannel = $slackParams['defaultChannel'];
+        $this->admins = $slackParams['admins'];
         $this->user = $tokenStorage->getToken() ? $tokenStorage->getToken()->getUser() : null;
-        $this->inviteEmail = $slackParams['inviterGmailId'] . '+' . (method_exists($this->user, 'getId') ? $this->user->getId() : uniqid()) . '@gmail.com';
+        $this->slackUser = isset($this->user) && method_exists($this->user, 'getSlackId') ? $this->getUserInfo($this->user->getSlackId()) : null;
     }
 
     public function getMessagesNumber($cursor = null)
@@ -54,7 +54,7 @@ class SlackManager
             ];
             $mpimDetails = $this->callGetApi($url, $params, self::CONTENT_TYPE_FORM);
 
-            if (is_array($mpimDetails) && 'true' == $mpimDetails['ok'] && isset($mpimDetails['messages'])) {
+            if (is_array($mpimDetails) && 'true' == $mpimDetails['ok'] && isset($mpimDetails['messages']) && isset($mpimDetails['messages'][0]['user'])) {
                 $count++;
             }
         }
@@ -149,24 +149,51 @@ class SlackManager
             return false;
         }
 
+        $mpim = $this->openMpim();
+
+        if (!isset($mpim['id'])) {
+            return false;
+        }
+
         $url = $this->apiUrl
             . 'chat.postMessage'
         ;
 
         $params = [
             'token' => $this->apiToken,
-            'channel' => $this->defaultChannel,
+            'channel' => $mpim['id'],
             'text' => $message,
-            'username' => $this->user->getNickname(),
+            'as_user' => false,
+            'username' => $this->slackUser['display_name'],
         ];
 
-        $response = $this->callPostApi($url, $params);
+        $response = $this->callPostApi($url, $params, self::CONTENT_TYPE_FORM);
 
         if (is_array($response) && 'true' == $response['ok']) {
             return true;
         }
 
         return false;
+    }
+
+    private function openMpim()
+    {
+        $url = $this->apiUrl
+            . 'mpim.open'
+        ;
+
+        $params = [
+            'token' => $this->apiToken,
+            'users' => implode(',', [$this->user->getSlackId(), $this->admins]),
+        ];
+
+        $response = $this->callPostApi($url, $params, self::CONTENT_TYPE_FORM);
+
+        if (is_array($response) && 'true' == $response['ok']) {
+            return $response['group'];
+        }
+
+        return [];
     }
 
     public function getUserInfo($userId)
@@ -227,7 +254,7 @@ class SlackManager
             'Content-Type: application/' . $contentType . ', charset=utf8'
         ));
         curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
 
         //return the transfer as a string
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -235,7 +262,6 @@ class SlackManager
         // $output contains the output string
         $output = curl_exec($ch);
 
-        dump($ch);
         // close curl resource to free up system resources
         curl_close($ch);
 

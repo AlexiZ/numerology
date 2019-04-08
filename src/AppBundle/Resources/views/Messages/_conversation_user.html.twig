@@ -1,0 +1,23 @@
+{% for message in messages %}
+    {% if message.user is not empty and app.user.slackId != message.sender %}
+        {% set slackUser = message.sender|getSlackUser %}
+    {% else %}
+        {% set slackUser = {'display_name': 'Vous'} %}
+    {% endif %}
+
+    <div class="card border-{% if message.user is not empty %}left-warning{% else %}right-primary text-right{% endif %} shadow h-100 message">
+        <div class="card-body">
+            <div class="row no-gutters align-items-center">
+                <div class="col mr-2">
+                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                        <em>{{ slackUser.display_name }}&nbsp;<small>({{ message.text.ts|howLongAgo }})</small></em>
+                    </div>
+
+                    <div class="mb-0 text-gray-800">
+                        {{ message.text.value }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endfor %}

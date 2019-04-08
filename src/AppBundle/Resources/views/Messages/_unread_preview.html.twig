@@ -1,7 +1,7 @@
 {% if messages is not empty %}
     {% for message in messages %}
         {% set slackUser = message.user|getSlackUser %}
-        <a class="dropdown-item d-flex align-items-center" href="#">
+        <a class="dropdown-item d-flex align-items-center" href="{{ path('messages_show') }}">
             <div class="dropdown-list-image mr-3">
                 <img class="rounded-circle" src="{{ slackUser.image_32 }}" alt="{{ slackUser.display_name }}">
             </div>
@@ -13,7 +13,7 @@
         </a>
     {% endfor %}
 {% else %}
-    <a class="dropdown-item d-flex align-items-center" id="messageUnreadSpin" href="javascript:void(0);">
+    <a class="dropdown-item d-flex align-items-center" id="messageUnreadSpin" href="{{ path('messages_show') }}">
         <div class="font-weight-bold mx-auto">
             Vous n'avez pas de messages
         </div>

@@ -85,6 +85,18 @@ $(document).ready(() => {
     if (wrapper) {
         getUnreadMessagesCount();
     }
+
+    let answerSubmits = document.querySelectorAll('.answerSubmit');
+    if (answerSubmits) {
+        answerSubmits.forEach((answerSubmit) => {
+            answerSubmit.addEventListener('click', (e) => {
+                e.preventDefault();
+
+                let answerText = document.querySelector('form[name="' + answerSubmit.dataset['form'] + '"] .answerText');
+                sendMessage(answerText.value);
+            });
+        });
+    }
 });
 
 // Handle automatic pie charts
@@ -337,6 +349,27 @@ const modalMessage = (title, message) => {
     modale.querySelector('.modal-body').innerHTML = message;
 
     $(modale).modal('show');
+};
+
+const sendMessage = (message) => {
+    let xmlhttp = new XMLHttpRequest(),
+        url = Routing.generate('messages_send'),
+        params = new FormData();
+    params.append('message', message);
+    xmlhttp.onreadystatechange = () => {
+        if (xmlhttp.readyState === XMLHttpRequest.DONE) {
+            let data = JSON.parse(xmlhttp.response);
+
+            if (xmlhttp.status === 200) {
+                 window.location.reload();
+            } else {
+                modalMessage('Une erreur est survenue', data);
+            }
+        }
+    };
+
+    xmlhttp.open("POST", url, true);
+    xmlhttp.send(params);
 };
 
 const konami = () => {

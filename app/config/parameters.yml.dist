@@ -35,5 +35,4 @@ parameters:
     slack.api_url: xxx
     slack.api_token: xxx
     slack.webhook: xxx
-    slack.inviter_gmail_id: xxx
-    slack.default_channel: xxx
+    slack.admins: xxx

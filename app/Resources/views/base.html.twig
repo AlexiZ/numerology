@@ -30,17 +30,6 @@
                 </li>
 
                 {% block navbar %}{% endblock navbar %}
-
-                {% if is_granted('ROLE_ADMIN') %}
-                    <hr class="sidebar-divider">
-
-                    <li class="nav-item">
-                        <a class="nav-link{% if 'numerologie_admin' == app.request.get('_route') %} active{% endif %}" href="{{ path('admin_index') }}">
-                            <i class="fas fa-fw fa-cog"></i>
-                            <span>Administration</span>
-                        </a>
-                    </li>
-                {% endif %}
             </ul>
 
             <div id="content-wrapper" class="d-flex flex-column">
@@ -48,7 +37,7 @@
                     <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
                         <div class="d-none d-sm-inline-block mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                             <a class="nav-link" href="javascript:void(0);">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><em>Date de dernière mise à jour : 28 mars 2019</em></span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><em>Date de dernière mise à jour : 8 avril 2019</em></span>
                             </a>
                         </div>
 
@@ -64,6 +53,10 @@
                                         Messages
                                     </h6>
 
+                                    <a class="dropdown-item text-center small text-gray-500" href="{{ path('messages_show') }}">Aller dans ma messagerie</a>
+
+                                    <div id="messagesList"></div>
+
                                     <div id="messageUnreadSpin">
                                         <a class="dropdown-item d-flex align-items-center" href="javascript:void(0);">
                                             <div class="font-weight-bold mx-auto">
@@ -71,11 +64,6 @@
                                             </div>
                                         </a>
                                     </div>
-
-                                    <div id="messagesList">
-                                    </div>
-
-                                    <a class="dropdown-item text-center small text-gray-500" href="{{ path('messages_show') }}">Voir tous mes messages</a>
                                 </div>
                             </li>
 
@@ -88,6 +76,15 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+
+                                    {% if is_granted('ROLE_ADMIN') %}
+                                        <a class="dropdown-item" href="{{ path('admin_index') }}">
+                                            <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                                            Administration
+                                        </a>
+                                        <div class="dropdown-divider"></div>
+                                    {% endif %}
+
                                     <a class="dropdown-item" href="{{ path('auth0_logout') }}">
                                         <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                         Se déconnecter
