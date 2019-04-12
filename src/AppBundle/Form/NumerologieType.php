@@ -31,7 +31,7 @@ class NumerologieType extends AbstractType
             ])
             ->add('otherFirstnames', CollectionType::class, [
                 'label' => 'Autres prénoms',
-                'required' => true,
+                'required' => false,
                 'entry_type' => TextType::class,
                 'entry_options' => [
                     'attr' => [
@@ -45,11 +45,11 @@ class NumerologieType extends AbstractType
             ->add('birthDate', DateTimeType::class, [
                 'label' => 'Date et heure de naissance (heure universelle)',
                 'widget' => 'single_text',
-                'required' => true,
+                'required' => false,
             ])
             ->add('birthPlace', TextType::class, [
                 'label' => 'Lieu de naissance',
-                'required' => true,
+                'required' => false,
             ])
         ;
     }

@@ -97,6 +97,13 @@ $(document).ready(() => {
             });
         });
     }
+
+    let conversationDetails = document.querySelectorAll('.conversationDetails');
+    if (conversationDetails) {
+        conversationDetails.forEach((details) => {
+            details.scrollTop = details.scrollHeight;
+        });
+    }
 });
 
 // Handle automatic pie charts

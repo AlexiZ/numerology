@@ -5,10 +5,27 @@
   #content-wrapper {
     overflow: hidden;
 
-    form ul {
-      list-style-type: none;
+    form {
+      &[name="app_bundle_numerologie"] {
+        label.required {
+          font-weight: bolder;
+
+          &:after {
+            content: '\f069';
+            font-size: .15rem;
+            vertical-align: super;
+            font-family: 'Font Awesome 5 Free';
+          }
+        }
+      }
+      ul {
+        list-style-type: none;
+      }
     }
 
+    .border-left-warning {
+      border-left: .25rem solid #f6c23e!important;
+    }
     .border-right-primary {
       border-right: .25rem solid #4e73df!important;
     }
@@ -41,15 +58,26 @@
   }
 
   .conversation {
-    .message .card-body {
-      padding-top: 0.5rem;
-      padding-bottom: 0.5rem;
+    .message {
+      border-left: none !important;
+      border-right: none !important ;
+      margin-top: -1px;
+
+      .card-body {
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+      }
     }
 
     .card {
       border: 1px solid #e3e6f0;
       -webkit-box-shadow: none !important;
       box-shadow: none !important;
+
+      .conversationDetails {
+        max-height: 400px;
+        overflow-y: auto;
+      }
     }
   }
 }

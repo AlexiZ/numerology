@@ -33,3 +33,11 @@
         </div>
     </div>
 {%- endblock form_row -%}
+
+{% use 'form_div_layout.html.twig' with form_end as base_form_end %}
+
+{%- block form_end -%}
+    <em>Les champs marqués d'un "<i class="fas fa-asterisk"></i>" sont obligatoires.</em>
+
+    {{ block('base_form_end') }}
+{%- endblock -%}
