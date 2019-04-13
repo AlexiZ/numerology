@@ -14,8 +14,9 @@
     "jquery": "3.3.1",
     "jquery-easing": "0.0.1",
     "jquery-ui": "^1.12.1",
-    "popper.js": "^1.14.6",
-    "startbootstrap-sb-admin-2": "^4.0.2"
+    "popper.js": "^1.15.0",
+    "shepherd.js": "^2.5.0",
+    "startbootstrap-sb-admin-2": "^4.0.3"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",
@@ -24,7 +25,7 @@
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
     "css-loader": "^2.1.1",
-    "eslint": "^5.11.1",
+    "eslint": "^5.16.0",
     "eslint-plugin-compat": "^2.5.1",
     "eslint-plugin-react": "^7.12.0",
     "eslint-plugin-vue": "^5.0.0",

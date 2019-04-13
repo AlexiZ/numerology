@@ -1,5 +1,6 @@
 @import "~@fortawesome/fontawesome-free/css/all.min.css";
 @import "~startbootstrap-sb-admin-2/css/sb-admin-2.min.css";
+@import "~shepherd.js/dist/css/shepherd-theme-square.css";
 
 #wrapper {
   #content-wrapper {
@@ -86,4 +87,19 @@
   position: fixed;
   bottom: 0px;
   z-index: 999;
+}
+
+.btn-real-danger {
+  background-color: #e74a3b !important;
+  border-color: #e74a3b !important;
+}
+
+.btn-real-success {
+  color: #fff !important;
+  background-color: #1cc88a !important;
+  border-color: #1cc88a !important;
+}
+
+.tippy-tooltip {
+  text-align: left;
 }

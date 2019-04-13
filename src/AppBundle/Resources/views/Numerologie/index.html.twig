@@ -4,9 +4,11 @@
     Numérologie - Accueil
 {% endblock %}
 
+{% block bodyAttr %}class="homepage" data-tutorial="homepage"{% endblock bodyAttr %}
+
 {% block body %}
     <div class="row">
-        <div class="col-lg-8 mb-4">
+        <div class="col-lg-8 mb-4" id="historyTable">
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
                     <h6 class="m-0 font-weight-bold text-primary">Votre historique</h6>
@@ -29,7 +31,7 @@
                         <em>Cliquez ici pour voir la numérologie d'une nouvelle personne</em>
                     </p>
                     <hr class="sidebar-divider d-none d-md-block">
-                    <a href="{{ url('numerologie_add') }}" class="btn btn-info btn-icon-split">
+                    <a href="{{ url('numerologie_add') }}" id="newAnalysis" class="btn btn-info btn-icon-split">
                         <span class="icon text-white-50"><i class="fas fa-plus"></i></span>
                         <span class="text">Nouvelle personne</span>
                     </a>

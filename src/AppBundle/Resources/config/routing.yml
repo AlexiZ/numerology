@@ -5,6 +5,8 @@ numerologie_index:
 numerologie_add:
     path: /ajouter/
     defaults: { _controller: AppBundle:Numerologie:add }
+    options:
+        expose: true
 
 numerologie_edit:
     path: /editer/{md5}
@@ -53,6 +55,8 @@ messages_list:
 messages_show:
     path: /messages/afficher/
     defaults: { _controller: AppBundle:Messages:showMessages }
+    options:
+        expose: true
 
 messages_send:
     path: /messages/envoyer/

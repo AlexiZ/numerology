@@ -4,6 +4,7 @@ import 'jquery-easing';
 import 'startbootstrap-sb-admin-2/js/sb-admin-2.min';
 import 'chart.js';
 import 'datatables.net-bs4';
+import Shepherd from "shepherd.js";
 
 import './main.scss';
 
@@ -103,6 +104,20 @@ $(document).ready(() => {
         conversationDetails.forEach((details) => {
             details.scrollTop = details.scrollHeight;
         });
+    }
+
+    let startTutorial = document.querySelector('#startTutorial');
+    if (startTutorial) {
+        // remove tutorial button if page does not have sufficiant body attr
+        if (!document.querySelector('body').dataset.hasOwnProperty('tutorial')) {
+            startTutorial.remove();
+        } else {
+            startTutorial.addEventListener('click', (e) => {
+                e.preventDefault();
+
+                tutorial();
+            });
+        }
     }
 });
 
@@ -377,6 +392,123 @@ const sendMessage = (message) => {
 
     xmlhttp.open("POST", url, true);
     xmlhttp.send(params);
+};
+
+const tutorial = () => {
+    let tour = new Shepherd.Tour(),
+        section = document.querySelector('body').dataset.tutorial;
+
+    if (!section) {
+        return;
+    }
+
+    let tourSteps = {},
+        buttonClose = {
+            text: 'Fermer <i class="fa fa-times"></i>',
+            action: tour.cancel,
+            classes: 'btn-real-danger'
+        },
+        buttonNext = {
+            text: 'Étape suivante <i class="fa fa-arrow-right"></i>',
+            action: tour.next,
+            classes: 'btn-real-success'
+        },
+        buttonEnd = {
+            text: 'Terminer <i class="fa fa-check"></i>',
+            action: tour.next,
+            classes: 'btn-real-success'
+        }
+    ;
+
+    switch (section) {
+        case 'homepage':
+            tourSteps = {
+                'stepOne': {
+                    title: 'Bienvenue !',
+                    text: 'Pour démarrer cette nouvelle aventure du bon pied, rien de tel qu\'une petite explication.<br>On y va ?',
+                    buttons: [
+                        {
+                            text: 'Une autre fois <i class="fa fa-times"></i>',
+                            action: tour.cancel,
+                            classes: 'btn-real-danger'
+                        },
+                        {
+                            text: 'C\'est parti ! <i class="fa fa-arrow-right"></i>',
+                            action: tour.next,
+                            classes: 'btn-real-success'
+                        }
+                    ]
+                },
+                'stepTwo': {
+                    title: 'Nouvelle personne',
+                    text: 'Ajoutez une nouvelle personne pour en consulter l\'analyse numérologique',
+                    buttons: [{
+                        text: 'Essayer !',
+                        action: () => {
+                            window.location.href = Routing.generate('numerologie_add');
+                        },
+                    }, buttonNext],
+                    attachTo: {element: '#newAnalysis', on: 'left'}
+                },
+                'stepThree': {
+                    title: 'Votre historique',
+                    text: 'Consulter vos précédentes analyses numérologiques.<br><em>Rien ne perd, rien ne se crée, tout se transforme !</em>',
+                    buttons: [buttonClose, buttonNext],
+                    attachTo: {element: '#historyTable', on: 'right'}
+                },
+                'stepFour': {
+                    title: 'Vos messages',
+                    text: 'Vous nous écrivez, on vous répond !<br>Retrouvez ici vos derniers messages',
+                    buttons: [{
+                        text: 'Essayer !',
+                        action: () => {
+                            window.location.href = Routing.generate('messages_show');
+                        },
+                    }, buttonNext],
+                    attachTo: {element: '#messagesDropdown', on: 'bottom'}
+                },
+                'stepFive': {
+                    title: 'Vous êtes ici',
+                    text: 'Sécurisez votre travail : cliquez ici pour vous déconnecter.',
+                    buttons: [buttonClose, buttonNext],
+                    attachTo: {element: '#userDropdown', on: 'bottom'}
+                },
+                'lastStep': {
+                    title: 'Prochaine étape',
+                    text: 'Vous en savez suffisamment sur votre page d\'accueil pour démarrer, mais n\'hésitez pas à <a href="' + Routing.generate('messages_show') + '">nous écrire</a>.<br><br><a href="' + Routing.generate('numerologie_add') + '">Générez votre première analyse numérologique dès à présent.</a>',
+                    buttons: [{
+                        text: '<i class="fa fa-arrow-right"></i> Commencer <i class="fa fa-arrow-left"></i>',
+                        action: () => {
+                            window.location.href = Routing.generate('numerologie_add');
+                        },
+                    }, buttonEnd],
+                    attachTo: ''
+                }
+            };
+            break;
+        default:
+            break;
+    }
+
+    Object.keys(tourSteps).map((tourStepName) => {
+        tour.addStep(tourStepName, tourSteps[tourStepName]);
+
+        return tourStepName;
+    });
+
+    $('#tour-modal-fade').modal({ backdrop: 'static', show: true });
+
+    tour.on('complete', () => {
+        $('#tour-modal-fade').hide();
+        $('.modal-backdrop').hide();
+        document.querySelector('#startTutorial').remove();
+    });
+    tour.on('cancel', () => {
+        $('#tour-modal-fade').hide();
+        $('.modal-backdrop').hide();
+        document.querySelector('#startTutorial').remove();
+    });
+    tour.start();
 };
 
 const konami = () => {
