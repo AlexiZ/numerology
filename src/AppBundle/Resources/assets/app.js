@@ -403,25 +403,25 @@ const tutorial = () => {
     }
 
     let tourSteps = {},
-        buttonClose = {
-            text: 'Fermer <i class="fa fa-times"></i>',
-            action: tour.cancel,
-            classes: 'btn-real-danger'
-        },
         buttonNext = {
-            text: 'Étape suivante <i class="fa fa-arrow-right"></i>',
+            text: 'Suivant <i class="fa fa-arrow-right"></i>',
             action: tour.next,
-            classes: 'btn-real-success'
+            classes: 'btn-real-primary'
+        },
+        buttonBack = {
+            text: '<i class="fa fa-arrow-left"></i> Précédent',
+            action: tour.back,
+            classes: 'btn-real-warning'
         },
         buttonEnd = {
             text: 'Terminer <i class="fa fa-check"></i>',
             action: tour.next,
-            classes: 'btn-real-success'
+            classes: 'btn-real-secondary'
         }
     ;
 
     switch (section) {
-        case 'homepage':
+        case 'numerologie_index':
             tourSteps = {
                 'stepOne': {
                     title: 'Bienvenue !',
@@ -437,52 +437,148 @@ const tutorial = () => {
                             action: tour.next,
                             classes: 'btn-real-success'
                         }
-                    ]
+                        ],
+                        tippyOptions: { maxWidth: '500px' }
                 },
                 'stepTwo': {
                     title: 'Nouvelle personne',
-                    text: 'Ajoutez une nouvelle personne pour en consulter l\'analyse numérologique',
-                    buttons: [{
+                    text: 'Ajoutez une nouvelle personne pour en consulter l\'analyse numérologique.',
+                    buttons: [buttonBack, {
                         text: 'Essayer !',
+                        classes: 'btn-real-success',
                         action: () => {
                             window.location.href = Routing.generate('numerologie_add');
                         },
                     }, buttonNext],
-                    attachTo: {element: '#newAnalysis', on: 'left'}
+                    attachTo: {element: '#newAnalysis', on: 'left'},
+                    highlightClass: 'reallyWhite',
+                    showCancelLink: true,
+                    tippyOptions: { maxWidth: '500px' }
                 },
                 'stepThree': {
                     title: 'Votre historique',
                     text: 'Consulter vos précédentes analyses numérologiques.<br><em>Rien ne perd, rien ne se crée, tout se transforme !</em>',
-                    buttons: [buttonClose, buttonNext],
-                    attachTo: {element: '#historyTable', on: 'right'}
+                    buttons: [buttonBack, buttonNext],
+                    attachTo: {element: '#historyTable', on: 'right'},
+                    highlightClass: 'reallyWhite',
+                    showCancelLink: true,
+                    tippyOptions: { maxWidth: '500px' }
                 },
                 'stepFour': {
                     title: 'Vos messages',
-                    text: 'Vous nous écrivez, on vous répond !<br>Retrouvez ici vos derniers messages',
-                    buttons: [{
+                    text: 'Vous nous écrivez, on vous répond !<br>Retrouvez ici vos derniers messages.',
+                    buttons: [buttonBack, {
                         text: 'Essayer !',
+                        classes: 'btn-real-success',
                         action: () => {
                             window.location.href = Routing.generate('messages_show');
                         },
                     }, buttonNext],
-                    attachTo: {element: '#messagesDropdown', on: 'bottom'}
+                    attachTo: {element: '#messagesDropdown', on: 'bottom'},
+                    highlightClass: 'reallyWhite',
+                    showCancelLink: true,
+                    tippyOptions: { maxWidth: '500px' }
                 },
                 'stepFive': {
                     title: 'Vous êtes ici',
                     text: 'Sécurisez votre travail : cliquez ici pour vous déconnecter.',
-                    buttons: [buttonClose, buttonNext],
-                    attachTo: {element: '#userDropdown', on: 'bottom'}
+                    buttons: [buttonBack, buttonNext],
+                    attachTo: {element: '#userDropdown', on: 'bottom'},
+                    highlightClass: 'reallyWhite',
+                    showCancelLink: true,
+                    tippyOptions: { maxWidth: '500px' }
                 },
                 'lastStep': {
                     title: 'Prochaine étape',
-                    text: 'Vous en savez suffisamment sur votre page d\'accueil pour démarrer, mais n\'hésitez pas à <a href="' + Routing.generate('messages_show') + '">nous écrire</a>.<br><br><a href="' + Routing.generate('numerologie_add') + '">Générez votre première analyse numérologique dès à présent.</a>',
-                    buttons: [{
+                    text: 'Vous en savez suffisamment sur votre page d\'accueil pour démarrer, mais n\'hésitez pas à <a href="' + Routing.generate('messages_show') + '">nous écrire</a> si besoin.<br><br>Générez votre première <a href="' + Routing.generate('numerologie_add') + '">analyse numérologique</a> dès à présent.',
+                    buttons: [buttonBack, {
                         text: '<i class="fa fa-arrow-right"></i> Commencer <i class="fa fa-arrow-left"></i>',
+                        classes: 'btn-real-success',
                         action: () => {
                             window.location.href = Routing.generate('numerologie_add');
                         },
                     }, buttonEnd],
-                    attachTo: ''
+                    tippyOptions: { maxWidth: '500px' }
+                }
+            };
+            break;
+        case 'numerologie_add':
+            tourSteps = {
+                'stepOne': {
+                    title: 'Ajouter une nouvelle personne',
+                    text: 'C\'est sur cette page que tout commence :<br>Renseignez les informations de base de votre sujet pour en découvrir l\'analyse numérologique.',
+                    buttons: [buttonNext],
+                    showCancelLink: true,
+                    tippyOptions: { maxWidth: '500px' }
+                },
+                'stepTwo': {
+                    title: 'Nom de famille de naissance',
+                    text: 'Renseignez la 1<sup>ère</sup> information : le nom de famille de naissance.<br>Celui-ci fait partie des deux seuls champs obligatoires et nécessaires pour construire l\'analyse.',
+                    buttons: [buttonBack, buttonNext],
+                    attachTo: {element: '#app_bundle_numerologie_birthName', on: 'bottom'},
+                    highlightClass: 'reallyWhite',
+                    showCancelLink: true,
+                    tippyOptions: { maxWidth: '500px' }
+                },
+                'stepThree': {
+                    title: 'Nom d\'usage',
+                    text: '2<sup>ème</sup> information : le nom d\'usage.<br>Vous renseignerez ici le nom de famille officiel. Cela peut être le nom de marige, d\'adoption ou encore un surnom ou un nom de scène.',
+                    buttons: [buttonBack, buttonNext],
+                    attachTo: {element: '#app_bundle_numerologie_useName', on: 'bottom'},
+                    highlightClass: 'reallyWhite',
+                    showCancelLink: true,
+                    tippyOptions: { maxWidth: '500px' }
+                },
+                'stepFour': {
+                    title: '1<sup>er</sup> prénom',
+                    text: 'Données obligatoire également, le premier prénom doit être rempli.<br><em>Ne mettez ici qu\'un seul prénom, composé ou non.</em>',
+                    buttons: [buttonBack, buttonNext],
+                    attachTo: {element: '#app_bundle_numerologie_firstname', on: 'bottom'},
+                    highlightClass: 'reallyWhite',
+                    showCancelLink: true,
+                    tippyOptions: { maxWidth: '500px' }
+                },
+                'stepFive': {
+                    title: 'Prénoms secondaires',
+                    text: 'Vous pouvez cliquer sur ce bouton pour ajouter un nouveau prénom.<br>Un nouveau champ apparaîtra pour vous en permettre la saisie.',
+                    buttons: [buttonBack, buttonNext],
+                    attachTo: {element: '.add-another-collection-widget', on: 'top'},
+                    highlightClass: 'reallyWhite',
+                    showCancelLink: true,
+                    tippyOptions: { maxWidth: '500px' }
+                },
+                'stepSix': {
+                    title: 'Date et heure de naissance',
+                    text: 'La date et l\'heure de naissance vont vous permettre d\'accéder à une analyse numérologique bien plus complète.',
+                    buttons: [buttonBack, buttonNext],
+                    attachTo: {element: '#app_bundle_numerologie_birthDate', on: 'top'},
+                    highlightClass: 'reallyWhite',
+                    showCancelLink: true,
+                    tippyOptions: { maxWidth: '500px' }
+                },
+                'stepSeven': {
+                    title: 'Lieu de naissance',
+                    text: 'De la même manière, le lieu de naissance permet de comprendre pleinement un individu.',
+                    buttons: [buttonBack, buttonNext],
+                    attachTo: {element: '#app_bundle_numerologie_birthPlace', on: 'top'},
+                    highlightClass: 'reallyWhite',
+                    showCancelLink: true,
+                    tippyOptions: { maxWidth: '500px' }
+                },
+                'stepEight': {
+                    title: 'Voir les résultats',
+                    text: 'Terminez votre saisie en cliquant sur ce bouton.',
+                    buttons: [buttonBack, buttonNext],
+                    attachTo: {element: '#submitAdd', on: 'top'},
+                    highlightClass: 'reallyWhite',
+                    showCancelLink: true,
+                    tippyOptions: { maxWidth: '500px' }
+                },
+                'lastStep': {
+                    title: 'Prochaine étape',
+                    text: 'Vous savez maintenant comment générer votre 1<sup>ère</sup> analyse numérologique complète, alors à vous de jouer !',
+                    buttons: [buttonBack, buttonEnd],
+                    tippyOptions: { maxWidth: '500px' }
                 }
             };
             break;
@@ -502,11 +598,13 @@ const tutorial = () => {
         $('#tour-modal-fade').hide();
         $('.modal-backdrop').hide();
         document.querySelector('#startTutorial').remove();
+        document.querySelector('body').classList.remove('modal-open');
     });
     tour.on('cancel', () => {
         $('#tour-modal-fade').hide();
         $('.modal-backdrop').hide();
         document.querySelector('#startTutorial').remove();
+        document.querySelector('body').classList.remove('modal-open');
     });
     tour.start();
 };

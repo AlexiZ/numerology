@@ -94,12 +94,59 @@
   border-color: #e74a3b !important;
 }
 
+.btn-real-warning {
+  background-color: #f6c23e !important;
+  border-color: #f6c23e !important;
+}
+
+.btn-real-default {
+  background-color: #d4daed !important;
+  border-color: #cbd3e9 !important;
+}
+
+.btn-real-secondary {
+  background-color: #858796 !important;
+  border-color: #858796 !important;
+}
+
+.btn-real-info {
+  background-color: #36b9cc !important;
+  border-color: #36b9cc !important;
+}
+
+.btn-real-primary {
+  background-color: #4e73df !important;
+  border-color: #4e73df !important;
+}
+
 .btn-real-success {
   color: #fff !important;
   background-color: #1cc88a !important;
   border-color: #1cc88a !important;
 }
 
-.tippy-tooltip {
+.reallyWhite {
+  z-index: 12345;
+  position: relative;
+}
+
+.tippy-popper .tippy-tooltip {
   text-align: left;
+  width: auto;
+
+  .shepherd-footer .shepherd-buttons {
+    -webkit-box-orient: horizontal!important;
+    -webkit-box-direction: normal!important;
+    -ms-flex-direction: row!important;
+    flex-direction: row!important;
+    display: -webkit-box!important;
+    display: -ms-flexbox!important;
+    display: flex!important;
+    -webkit-box-align: center!important;
+    -ms-flex-align: center!important;
+    align-items: center!important;
+    -webkit-box-pack: justify!important;
+    -ms-flex-pack: justify!important;
+    justify-content: space-between!important;
+  }
 }

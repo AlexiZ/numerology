@@ -18,16 +18,25 @@ class NumerologieType extends AbstractType
     {
         $builder
             ->add('birthName', TextType::class, [
-                'label' => 'Nom de naissance',
+                'label' => 'Nom de famille de naissance',
                 'required' => true,
+                'attr' => [
+                    'placeholder' => 'Nom de famille de naissance',
+                ],
             ])
             ->add('useName', TextType::class, [
-                'label' => 'Nom d\'usage (si différent du nom d\'usage)',
+                'label' => 'Nom de famille d\'usage (si différent de naissance)',
                 'required' => false,
+                'attr' => [
+                    'placeholder' => 'Nom de famille d\'usage',
+                ],
             ])
             ->add('firstname', TextType::class, [
                 'label' => 'Premier prénom',
                 'required' => true,
+                'attr' => [
+                    'placeholder' => 'Premier prénom',
+                ],
             ])
             ->add('otherFirstnames', CollectionType::class, [
                 'label' => 'Autres prénoms',
@@ -50,6 +59,9 @@ class NumerologieType extends AbstractType
             ->add('birthPlace', TextType::class, [
                 'label' => 'Lieu de naissance',
                 'required' => false,
+                'attr' => [
+                    'placeholder' => 'Lieu de naissance',
+                ],
             ])
         ;
     }
