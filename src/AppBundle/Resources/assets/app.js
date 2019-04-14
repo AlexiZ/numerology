@@ -442,14 +442,8 @@ const tutorial = () => {
                 },
                 'stepTwo': {
                     title: 'Nouvelle personne',
-                    text: 'Ajoutez une nouvelle personne pour en consulter l\'analyse numérologique.',
-                    buttons: [buttonBack, {
-                        text: 'Essayer !',
-                        classes: 'btn-real-success',
-                        action: () => {
-                            window.location.href = Routing.generate('numerologie_add');
-                        },
-                    }, buttonNext],
+                    text: 'Vous pouvez ajouter une nouvelle personne pour en consulter l\'analyse numérologique.',
+                    buttons: [buttonBack, buttonNext],
                     attachTo: {element: '#newAnalysis', on: 'left'},
                     highlightClass: 'reallyWhite',
                     showCancelLink: true,
