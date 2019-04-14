@@ -56,8 +56,8 @@ class Numerologie
             'useName' => $this->cleanString($this->getUseName()),
             'firstname' => $this->cleanString($this->getFirstname()),
             'otherFirstnames' => $this->cleanString(implode(',', $this->getOtherFirstnames())),
-            'pseudo' => $this->cleanString(implode(',', $this->getPseudos())),
-            'birthDate' => $this->getBirthDate()->format('d-m-Y H:i'),
+            'pseudos' => $this->cleanString(implode(',', $this->getPseudos())),
+            'birthDate' => $this->getBirthDate() ? $this->getBirthDate()->format('d-m-Y H:i') : '',
             'birthPlace' => $this->cleanString($this->getBirthPlace()),
             'data' => $data,
         ];
@@ -79,7 +79,7 @@ class Numerologie
             }
         }
 
-        $this->setBirthDate(new \DateTime($data['birthDate']));
+        $this->setBirthDate(new \DateTime($data['birthDate'] ?? time()));
         $this->setBirthPlace($data['birthPlace']);
         $this->setData($data['data']);
 
@@ -124,12 +124,12 @@ class Numerologie
 
     public function getPublicName()
     {
-        return ('' !== $this->getUseName() ? $this->getUseName() : $this->getBirthName()) . $this->getFirstname();
+        return $this->getPseudos() ? implode(',', $this->getPseudos()) : (($this->getUseName() ?? $this->getBirthName()) . $this->getFirstname());
     }
 
     public function getFullNames()
     {
-        return ($this->getUseName() ?? '') . $this->getBirthName() . $this->getFirstname() . ($this->getOtherFirstnames() ? implode('', $this->getOtherFirstnames()) : '');
+        return ($this->getUseName() ?? '') . $this->getBirthName() . $this->getFirstname() . ($this->getOtherFirstnames() ? implode('', $this->getOtherFirstnames()) : '') . ($this->getPseudos() ? str_replace(' ', '', implode('', $this->getPseudos())) : '');
     }
 
     /**

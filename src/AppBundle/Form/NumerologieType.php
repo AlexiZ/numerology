@@ -31,6 +31,19 @@ class NumerologieType extends AbstractType
                     'placeholder' => 'Nom de famille d\'usage',
                 ],
             ])
+            ->add('pseudos', CollectionType::class, [
+                'label' => 'Pseudonymes',
+                'required' => false,
+                'entry_type' => TextType::class,
+                'entry_options' => [
+                    'attr' => [
+                        'class' => 'form-control',
+                    ],
+                ],
+                'allow_add' => true,
+                'allow_delete' => true,
+            ])
+
             ->add('firstname', TextType::class, [
                 'label' => 'Premier prénom',
                 'required' => true,
