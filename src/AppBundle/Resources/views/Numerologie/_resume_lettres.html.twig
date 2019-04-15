@@ -11,7 +11,7 @@
                 <div class="chart-pie pt-4 pb-2">
                     <canvas class="automaticBarChart"
                             data-labels="Physique,Émotive,Cérébrale,Intuitive"
-                            data-values="{{ ((subject.publicName|totalLettrePhysique / subject.publicName|length)*100)|number_format(0) }},{{ ((subject.publicName|totalLettreEmotive / subject.publicName|length)*100)|number_format(0) }},{{ ((subject.publicName|totalLettreCerebrale / subject.publicName|length)*100)|number_format(0) }},{{ ((subject.publicName|totalLettreIntuitive / subject.publicName|length)*100)|number_format(0) }}||25,30,27,13"
+                            data-values="{{ ((subject.publicName|totalLettrePhysique|default(1) / subject.publicName|length)*100)|number_format(0) }},{{ ((subject.publicName|totalLettreEmotive|default(1) / subject.publicName|length)*100)|number_format(0) }},{{ ((subject.publicName|totalLettreCerebrale|default(1) / subject.publicName|length)*100)|number_format(0) }},{{ ((subject.publicName|totalLettreIntuitive|default(1) / subject.publicName|length)*100)|number_format(0) }}||25,30,27,13"
                             data-legends="{{ subject.firstName }},Moyenne">
                     </canvas>
                 </div>

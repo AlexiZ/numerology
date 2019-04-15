@@ -38,15 +38,17 @@
                                 <td>{{ subject.birthName|totalReduitConsonne }}</td>
                             </tr>
                         {% endif %}
-                        {% for pseudo in subject.pseudos %}
-                            <tr>
-                                <th>Surnom - {{ pseudo }}</th>
-                                <td>-</td>
-                                <td>{{ pseudo|totalReduitLettre }}</td>
-                                <td>{{ pseudo|totalReduitVoyelle }}</td>
-                                <td>{{ pseudo|totalReduitConsonne }}</td>
-                            </tr>
-                        {% endfor %}
+                        {% if subject.pseudos is not empty and subject.pseudos.0 is not empty %}
+                            {% for pseudo in subject.pseudos %}
+                                <tr>
+                                    <th>Surnom - {{ pseudo }}</th>
+                                    <td>-</td>
+                                    <td>{{ pseudo|totalReduitLettre }}</td>
+                                    <td>{{ pseudo|totalReduitVoyelle }}</td>
+                                    <td>{{ pseudo|totalReduitConsonne }}</td>
+                                </tr>
+                            {% endfor %}
+                        {% endif %}
                         <tr>
                             <th>Prénom - {{ subject.firstname }}</th>
                             <td>-</td>
@@ -54,15 +56,17 @@
                             <td>{{ subject.firstname|totalReduitVoyelle }}</td>
                             <td>{{ subject.firstname|totalReduitConsonne }}</td>
                         </tr>
-                        {% for otherFirstname in subject.otherFirstnames %}
-                            <tr>
-                                <th>Prénom masqué - {{ otherFirstname }}</th>
-                                <td>-</td>
-                                <td>{{ otherFirstname|totalReduitLettre }}</td>
-                                <td>{{ otherFirstname|totalReduitVoyelle }}</td>
-                                <td>{{ otherFirstname|totalReduitConsonne }}</td>
-                            </tr>
-                        {% endfor %}
+                        {% if subject.otherFirstnames is not empty and subject.otherFirstnames.0 is not empty %}
+                            {% for otherFirstname in subject.otherFirstnames %}
+                                <tr>
+                                    <th>Prénom masqué - {{ otherFirstname }}</th>
+                                    <td>-</td>
+                                    <td>{{ otherFirstname|totalReduitLettre }}</td>
+                                    <td>{{ otherFirstname|totalReduitVoyelle }}</td>
+                                    <td>{{ otherFirstname|totalReduitConsonne }}</td>
+                                </tr>
+                            {% endfor %}
+                        {% endif %}
                         <tr>
                             <th>Total</th>
                             <th>{{ subject.data.identity.inheritedNumber }}</th>

@@ -124,12 +124,12 @@ class Numerologie
 
     public function getPublicName()
     {
-        return $this->getPseudos() ? implode(',', $this->getPseudos()) : (($this->getUseName() ?? $this->getBirthName()) . $this->getFirstname());
+        return !empty($this->getPseudos()) && !empty($this->getPseudos()[0]) ? implode(',', $this->getPseudos()) : ((!empty($this->getUseName()) ? $this->getUseName() : $this->getBirthName()) . $this->getFirstname());
     }
 
     public function getFullNames()
     {
-        return ($this->getUseName() ?? '') . $this->getBirthName() . $this->getFirstname() . ($this->getOtherFirstnames() ? implode('', $this->getOtherFirstnames()) : '') . ($this->getPseudos() ? str_replace(' ', '', implode('', $this->getPseudos())) : '');
+        return (!empty($this->getUseName()) ? $this->getUseName() : '') . $this->getBirthName() . $this->getFirstname() . ($this->getOtherFirstnames() ? implode('', $this->getOtherFirstnames()) : '') . ($this->getPseudos() ? str_replace(' ', '', implode('', $this->getPseudos())) : '');
     }
 
     /**

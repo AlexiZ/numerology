@@ -138,9 +138,8 @@ class Numerologie
     public function reducedTotalNumber($type, $word)
     {
         $total = $this->totalNumber($type, $word);
-        $reduction = $this->reduceNumber((string) $total);
 
-        return $reduction > 0 ? $reduction : '-';
+        return $total > 0 ? $this->reduceNumber((string) $total) : '-';
     }
 
     protected function reduceNumber($stringN)
