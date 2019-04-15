@@ -63,6 +63,12 @@
     {{ subject }}
 {% endblock pagetitle %}
 
+{% block pagesubtitle %}
+    {% if subject.pseudos is not empty %}
+        {{ subject.pseudos|join(', ')|capitalize }}
+    {% endif %}
+{% endblock pagesubtitle %}
+
 {% block callback_actions %}
     <a href="{{ path('numerologie_edit', {'md5': filename}) }}" title="Modifier" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
         <i class="fas fa-pen fa-sm text-white-50"></i>&nbsp;

@@ -30,6 +30,10 @@
     .border-right-primary {
       border-right: .25rem solid #4e73df!important;
     }
+
+    .card-body {
+      overflow-x: auto;
+    }
   }
 
   #sidebarToggle {
@@ -67,7 +71,6 @@
       .card-body {
         padding-top: 0.5rem;
         padding-bottom: 0.5rem;
-        overflow-x: auto;
       }
     }
 

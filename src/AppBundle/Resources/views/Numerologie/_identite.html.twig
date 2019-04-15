@@ -38,6 +38,15 @@
                                 <td>{{ subject.birthName|totalReduitConsonne }}</td>
                             </tr>
                         {% endif %}
+                        {% for pseudo in subject.pseudos %}
+                            <tr>
+                                <th>Surnom - {{ pseudo }}</th>
+                                <td>-</td>
+                                <td>{{ pseudo|totalReduitLettre }}</td>
+                                <td>{{ pseudo|totalReduitVoyelle }}</td>
+                                <td>{{ pseudo|totalReduitConsonne }}</td>
+                            </tr>
+                        {% endfor %}
                         <tr>
                             <th>Prénom - {{ subject.firstname }}</th>
                             <td>-</td>
@@ -92,6 +101,22 @@
                     {% include '@App/Numerologie/_table_identite.html.twig' with {'mot': subject.birthName, 'type': 'lastname'} %}
                 </div>
             </div>
+        {% endif %}
+
+        {% if subject.pseudos|default %}
+            {% for pseudo in subject.pseudos if pseudo|default %}
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">
+                            Surnom - {{ pseudo|upper }}
+                        </h6>
+                    </div>
+
+                    <div class="card-body">
+                        {% include '@App/Numerologie/_table_identite.html.twig' with {'mot': pseudo, 'type': 'lastname'} %}
+                    </div>
+                </div>
+            {% endfor %}
         {% endif %}
 
         <div class="card shadow mb-4">

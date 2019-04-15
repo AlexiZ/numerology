@@ -51,8 +51,7 @@ class Numerologie
     ];
 
     private static $numberExceptions = [
-        11,
-        22,
+        1,2,3,4,5,6,7,8,9,11,22
     ];
 
     /**
@@ -69,14 +68,13 @@ class Numerologie
     {
         return [
             'identity' => [
-                'inheritedNumber' => $this->reducedTotalNumber('letter', $subject->getUseName().$subject->getBirthName()),
+                'inheritedNumber' => $this->reducedTotalNumber('letter', $subject->getUseName().$subject->getBirthName().implode('', $subject->getPseudos())),
                 'dutyNumber' => $this->reducedTotalNumber('letter', $subject->getFirstName().implode('', $subject->getOtherFirstnames())),
-                'socialNumber' => $this->reducedTotalNumber('vowel', $subject->getUseName().$subject->getBirthName().$subject->getFirstName().implode('', $subject->getOtherFirstnames())),
-                'structureNumber' => $this->reducedTotalNumber('consonant', $subject->getUseName().$subject->getBirthName().$subject->getFirstName().implode('', $subject->getOtherFirstnames())),
+                'socialNumber' => $this->reducedTotalNumber('vowel', $subject->getUseName().$subject->getBirthName().implode('', $subject->getPseudos()).$subject->getFirstName().implode('', $subject->getOtherFirstnames())),
+                'structureNumber' => $this->reducedTotalNumber('consonant', $subject->getUseName().$subject->getBirthName().implode('', $subject->getPseudos()).$subject->getFirstName().implode('', $subject->getOtherFirstnames())),
                 'globalNumber' => $this->addNumberDigits(
-                    (int) $this->reducedTotalNumber('letter', $subject->getUseName().$subject->getBirthName().$subject->getFirstName())
-                    + (int) $this->reducedTotalNumber('vowel', $subject->getUseName().$subject->getBirthName().$subject->getFirstName())
-                    + (int) $this->reducedTotalNumber('consonant', $subject->getUseName().$subject->getBirthName().$subject->getFirstName())
+                    (int) $this->reducedTotalNumber('letter', $subject->getUseName().$subject->getBirthName().implode('', $subject->getPseudos()))
+                    + $this->reducedTotalNumber('letter', $subject->getFirstName().implode('', $subject->getOtherFirstnames()))
                 ),
             ],
         ];
@@ -139,25 +137,28 @@ class Numerologie
 
     public function reducedTotalNumber($type, $word)
     {
-        $total = (string) $this->totalNumber($type, $word);
-        $reduction = 0;
-        for ($i = 0; $i < strlen($total); $i++) {
-            $reduction += $total[$i];
-        }
-        $total = (string) $reduction;
-        if ($this->needReduction($total)) {
-            $reduction = 0;
-            for ($i = 0; $i < strlen($total); $i++) {
-                $reduction += $total[$i];
-            }
-        }
+        $total = $this->totalNumber($type, $word);
+        $reduction = $this->reduceNumber((string) $total);
 
         return $reduction > 0 ? $reduction : '-';
     }
 
-    protected function needReduction($number)
+    protected function reduceNumber($stringN)
     {
-        return strlen($number) > 1; // && !in_array($number, self::$numberExceptions);
+        if (in_array($stringN, self::$numberExceptions)) {
+            return (int) $stringN;
+        }
+
+        $reduction = 0;
+        for ($i = 0; $i < strlen($stringN); $i++) {
+            $reduction += (int) $stringN[$i];
+        }
+
+        if (in_array($reduction, self::$numberExceptions)) {
+            return (int) $reduction;
+        }
+
+        return $this->reduceNumber((string) $reduction);
     }
 
     public function is($type, $letter)

@@ -99,7 +99,10 @@
 
                     <div class="container-fluid">
                         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                            <h1 class="h3 mb-0 text-gray-800">{% block pagetitle %}{% endblock pagetitle %}</h1>
+                            <div>
+                                <h1 class="h3 mb-0 text-gray-800">{% block pagetitle %}{% endblock pagetitle %}</h1>
+                                <h2 class="h4 mb-0 font-italic font-weight-light">{% block pagesubtitle %}{% endblock pagesubtitle %}</h2>
+                            </div>
                             <div>{% block callback_actions %}{% endblock callback_actions %}</div>
                         </div>
 
