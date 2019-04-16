@@ -117,10 +117,13 @@ class JsonIO
             if ($full) {
                 $history[$shortFilename] = file_get_contents($filename);
             } else {
-                $history[$shortFilename] = strftime("Le %d/%m/%Y à %H:%m", filemtime($filename));
+                $history[$shortFilename] = filemtime($filename);
             }
         }
 
+        uasort($history, function ($a, $b) {
+            return $b <=> $a;
+        });
         return $history;
     }
 

@@ -8,13 +8,13 @@
     </thead>
 
     <tbody>
-        {% for filename, label in histories %}
+        {% for filename, timestamp in histories %}
             {% set subject = filename|getSubject %}
             <tr>
                 <td>
                     <a href="{{ url('numerologie_show', {'filename': filename}) }}" title="Afficher" class="btn">{{ subject }}</a>
                 </td>
-                <td>{{ label }}</td>
+                <td>Le {{ timestamp|date('d/m/Y \à H:m') }}</td>
                 <td>
                     <a href="{{ url('numerologie_show', {'filename': filename}) }}" title="Afficher" class="btn btn-success btn-circle btn-sm">
                         <i class="fas fa-eye"></i>
