@@ -41,3 +41,11 @@ Automatically calculate a person's numerology theme.
 }
 ```
 - Done
+
+## Dev
+Add a pre-commit hook with this script to automatically update :
+```bash
+#!/bin/bash
+
+echo "$(date +%d\ %b\ %Y)" > /home/alexis/sandbox/numerology/app/Resources/views/latest.html.twig
+```
