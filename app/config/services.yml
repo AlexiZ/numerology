@@ -61,3 +61,7 @@ services:
                 apiUrl: "%slack.api_url%"
                 apiToken: "%slack.api_token%"
                 admins: "%slack.admins%"
+
+    AppBundle\Services\Geocoding:
+        arguments:
+            $apiKey: "%osm.geocoding_api%"

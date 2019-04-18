@@ -59,9 +59,15 @@ class Numerologie
      */
     private $jsonIO;
 
-    public function __construct(JsonIO $jsonIO)
+    /**
+     * @var Geocoding
+     */
+    private $geocoding;
+
+    public function __construct(JsonIO $jsonIO, Geocoding $geocoding)
     {
         $this->jsonIO = $jsonIO;
+        $this->geocoding = $geocoding;
     }
 
     public function exportData(NumerologieEntity $subject)
@@ -142,9 +148,11 @@ class Numerologie
         return $total > 0 ? $this->reduceNumber((string) $total) : '-';
     }
 
-    protected function reduceNumber($stringN)
+    protected function reduceNumber($stringN, $moreExceptions = [])
     {
-        if (in_array($stringN, self::$numberExceptions)) {
+        $exceptions = array_merge(self::$numberExceptions, $moreExceptions);
+
+        if (in_array($stringN, $exceptions)) {
             return (int) $stringN;
         }
 
@@ -153,7 +161,7 @@ class Numerologie
             $reduction += (int) $stringN[$i];
         }
 
-        if (in_array($reduction, self::$numberExceptions)) {
+        if (in_array($reduction, $exceptions)) {
             return (int) $reduction;
         }
 
@@ -274,5 +282,57 @@ class Numerologie
         return array_filter(array_map(function($a, $b) use ($word) {
             return $a == round($this->getAverageLetterNumber($word), 0, PHP_ROUND_HALF_DOWN) || $a == round($this->getAverageLetterNumber($word), 0, PHP_ROUND_HALF_UP) ? $b : null;
         }, $occurrences, array_keys($occurrences)));
+    }
+
+    public function getLifePathNumber(NumerologieEntity $subject)
+    {
+        return $this->reduceNumber($subject->getBirthDate()->format('dmY'));
+    }
+
+    public function getIdealNumber(NumerologieEntity $subject)
+    {
+        return $this->reduceNumber($subject->getBirthDate()->format('dmYhi'));
+    }
+
+    public function getMajorTurnNumber(NumerologieEntity $subject)
+    {
+        return (int) $subject->getBirthDate()->format('d') + (int) $subject->getBirthDate()->format('m');
+    }
+
+    public function getPersonnalYearNowNumber(NumerologieEntity $subject)
+    {
+        return $this->reduceNumber($subject->getBirthDate()->format('dm').date('Y'));
+    }
+
+    public function getAstrologicalNumber(NumerologieEntity $subject)
+    {
+        $cityCoordinates = str_replace([',', '.'], '', $this->geocoding->getGeolocation($subject->getBirthPlace()));
+
+        return $this->reduceNumber($subject->getBirthDate()->format('dmYhi').$cityCoordinates, [10]);
+    }
+
+    public function getVeryShortTermNumber(NumerologieEntity $subject)
+    {
+        return $this->reduceNumber($subject->getBirthDate()->format('hi'));
+    }
+
+    public function getShortTermNumber(NumerologieEntity $subject)
+    {
+        return $this->reduceNumber($subject->getBirthDate()->format('d'));
+    }
+
+    public function getMeanTermNumber(NumerologieEntity $subject)
+    {
+        return $this->reduceNumber($subject->getBirthDate()->format('m'));
+    }
+
+    public function getLongTermNumber(NumerologieEntity $subject)
+    {
+        return $this->reduceNumber($subject->getBirthDate()->format('Y'));
+    }
+
+    public function getSecretNumber(NumerologieEntity $subject)
+    {
+        return $this->reduceNumber((string) ($subject->getData()['identity']['globalNumber'] + $this->getIdealNumber($subject)));
     }
 }

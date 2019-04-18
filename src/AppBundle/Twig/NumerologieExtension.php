@@ -56,6 +56,17 @@ class NumerologieExtension extends AbstractExtension
             new TwigFilter('addNumberDigits', array($this, 'addNumberDigits')),
 
             new TwigFilter('getAnalysis', array($this, 'getAnalysis')),
+
+            new TwigFilter('lifePath', array($this, 'lifePath')),
+            new TwigFilter('ideal', array($this, 'ideal')),
+            new TwigFilter('majorTurn', array($this, 'majorTurn')),
+            new TwigFilter('personnalYearNow', array($this, 'personnalYearNow')),
+            new TwigFilter('astrological', array($this, 'astrological')),
+            new TwigFilter('veryShortTerm', array($this, 'veryShortTerm')),
+            new TwigFilter('shortTerm', array($this, 'shortTerm')),
+            new TwigFilter('meanTerm', array($this, 'meanTerm')),
+            new TwigFilter('longTerm', array($this, 'longTerm')),
+            new TwigFilter('secret', array($this, 'secret')),
         );
     }
 
@@ -210,5 +221,59 @@ class NumerologieExtension extends AbstractExtension
     public function getAnalysis($number, $context)
     {
         return $this->numerologie->getAnalysis($number, $context);
+    }
+
+    /**
+     * LIFE PATH
+     */
+
+    public function lifePath($subject)
+    {
+        return $this->numerologie->getLifePathNumber($subject);
+    }
+
+    public function ideal($subject)
+    {
+        return $this->numerologie->getIdealNumber($subject);
+    }
+
+    public function majorTurn($subject)
+    {
+        return $this->numerologie->getMajorTurnNumber($subject);
+    }
+
+    public function personnalYearNow($subject)
+    {
+        return $this->numerologie->getPersonnalYearNowNumber($subject);
+    }
+
+    public function astrological($subject)
+    {
+        return $this->numerologie->getAstrologicalNumber($subject);
+    }
+
+    public function veryShortTerm($subject)
+    {
+        return $this->numerologie->getVeryShortTermNumber($subject);
+    }
+
+    public function shortTerm($subject)
+    {
+        return $this->numerologie->getShortTermNumber($subject);
+    }
+
+    public function meanTerm($subject)
+    {
+        return $this->numerologie->getMeanTermNumber($subject);
+    }
+
+    public function longTerm($subject)
+    {
+        return $this->numerologie->getLongTermNumber($subject);
+    }
+
+    public function secret($subject)
+    {
+        return $this->numerologie->getSecretNumber($subject);
     }
 }

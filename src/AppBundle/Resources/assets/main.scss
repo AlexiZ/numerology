@@ -33,6 +33,10 @@
 
     .card-body {
       overflow-x: auto;
+
+      .disabled-btn {
+        cursor: default;
+      }
     }
   }
 

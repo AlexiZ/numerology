@@ -36,3 +36,5 @@ parameters:
     slack.api_token: xxx
     slack.webhook: xxx
     slack.admins: xxx
+
+    osm.geocoding_api: xxx

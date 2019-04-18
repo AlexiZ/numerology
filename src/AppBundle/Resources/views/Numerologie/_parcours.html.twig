@@ -1,0 +1,74 @@
+<div class="row">
+    <div class="col-lg-6 mb-4">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">
+                    Paramètres du parcours de vie
+                </h6>
+            </div>
+
+            <div class="card-body">
+                <p>
+                    <a href="#" class="btn btn-info btn-icon-split disabled-btn">
+                        <span class="icon text-white-50">{{ subject|lifePath }}</span>
+                        <span class="text">Chemin de vie</span>
+                    </a>
+                </p>
+                <p>
+                    <a href="#" class="btn btn-info btn-icon-split disabled-btn">
+                        <span class="icon text-white-50">{{ subject|ideal }}</span>
+                        <span class="text">Nombre d'idéal</span>
+                    </a>
+                </p>
+                <p>
+                    <a href="#" class="btn btn-info btn-icon-split disabled-btn">
+                        <span class="icon text-white-50">{{ subject|majorTurn }}</span>
+                        <span class="text">Tournant majeur</span>
+                    </a>
+                </p>
+                <p>
+                    <a href="#" class="btn btn-info btn-icon-split disabled-btn">
+                        <span class="icon text-white-50">{{ subject|personnalYearNow }}</span>
+                        <span class="text">Année personnelle {{ "now"|date('Y') }}</span>
+                    </a>
+                </p>
+                <p>
+                    <a href="#" class="btn btn-info btn-icon-split disabled-btn">
+                        <span class="icon text-white-50">{{ subject|astrological }}</span>
+                        <span class="text">Nombre astrologique</span>
+                    </a>
+                </p>
+                <p>
+                    <a href="#" class="btn btn-info btn-icon-split disabled-btn">
+                        <span class="icon text-white-50">{{ subject|veryShortTerm }}</span>
+                        <span class="text">Nombre du très court terme</span>
+                    </a>
+                </p>
+                <p>
+                    <a href="#" class="btn btn-info btn-icon-split disabled-btn">
+                        <span class="icon text-white-50">{{ subject|shortTerm }}</span>
+                        <span class="text">Nombre du court terme</span>
+                    </a>
+                </p>
+                <p>
+                    <a href="#" class="btn btn-info btn-icon-split disabled-btn">
+                        <span class="icon text-white-50">{{ subject|meanTerm }}</span>
+                        <span class="text">Nombre du moyen terme</span>
+                    </a>
+                </p>
+                <p>
+                    <a href="#" class="btn btn-info btn-icon-split disabled-btn">
+                        <span class="icon text-white-50">{{ subject|longTerm }}</span>
+                        <span class="text">Nombre du long terme</span>
+                    </a>
+                </p>
+                <p>
+                    <a href="#" class="btn btn-info btn-icon-split disabled-btn">
+                        <span class="icon text-white-50">{{ subject|secret }}</span>
+                        <span class="text">Nombre secret</span>
+                    </a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
