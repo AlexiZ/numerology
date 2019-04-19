@@ -10,61 +10,61 @@
             <div class="card-body">
                 <p>
                     <a href="#" class="btn btn-info btn-icon-split disabled-btn">
-                        <span class="icon text-white-50">{{ subject|lifePath }}</span>
+                        <span class="icon text-white-50">{{ subject.data['lifePath']['lifePathNumber'] }}</span>
                         <span class="text">Chemin de vie</span>
                     </a>
                 </p>
                 <p>
                     <a href="#" class="btn btn-info btn-icon-split disabled-btn">
-                        <span class="icon text-white-50">{{ subject|ideal }}</span>
+                        <span class="icon text-white-50">{{ subject.data['lifePath']['idealNumber'] }}</span>
                         <span class="text">Nombre d'idéal</span>
                     </a>
                 </p>
                 <p>
                     <a href="#" class="btn btn-info btn-icon-split disabled-btn">
-                        <span class="icon text-white-50">{{ subject|majorTurn }}</span>
+                        <span class="icon text-white-50">{{ subject.data['lifePath']['majorTurnNumber'] }}</span>
                         <span class="text">Tournant majeur</span>
                     </a>
                 </p>
                 <p>
                     <a href="#" class="btn btn-info btn-icon-split disabled-btn">
-                        <span class="icon text-white-50">{{ subject|personnalYearNow }}</span>
+                        <span class="icon text-white-50">{{ subject.data['lifePath']['personalYearNowNumber'] }}</span>
                         <span class="text">Année personnelle {{ "now"|date('Y') }}</span>
                     </a>
                 </p>
                 <p>
                     <a href="#" class="btn btn-info btn-icon-split disabled-btn">
-                        <span class="icon text-white-50">{{ subject|astrological }}</span>
+                        <span class="icon text-white-50">{{ subject.data['lifePath']['astrologicalNumber'] }}</span>
                         <span class="text">Nombre astrologique</span>
                     </a>
                 </p>
                 <p>
                     <a href="#" class="btn btn-info btn-icon-split disabled-btn">
-                        <span class="icon text-white-50">{{ subject|veryShortTerm }}</span>
+                        <span class="icon text-white-50">{{ subject.data['lifePath']['veryShortTermNumber'] }}</span>
                         <span class="text">Nombre du très court terme</span>
                     </a>
                 </p>
                 <p>
                     <a href="#" class="btn btn-info btn-icon-split disabled-btn">
-                        <span class="icon text-white-50">{{ subject|shortTerm }}</span>
+                        <span class="icon text-white-50">{{ subject.data['lifePath']['shortTermNumber'] }}</span>
                         <span class="text">Nombre du court terme</span>
                     </a>
                 </p>
                 <p>
                     <a href="#" class="btn btn-info btn-icon-split disabled-btn">
-                        <span class="icon text-white-50">{{ subject|meanTerm }}</span>
+                        <span class="icon text-white-50">{{ subject.data['lifePath']['meanTermNumber'] }}</span>
                         <span class="text">Nombre du moyen terme</span>
                     </a>
                 </p>
                 <p>
                     <a href="#" class="btn btn-info btn-icon-split disabled-btn">
-                        <span class="icon text-white-50">{{ subject|longTerm }}</span>
+                        <span class="icon text-white-50">{{ subject.data['lifePath']['longTermNumber'] }}</span>
                         <span class="text">Nombre du long terme</span>
                     </a>
                 </p>
                 <p>
                     <a href="#" class="btn btn-info btn-icon-split disabled-btn">
-                        <span class="icon text-white-50">{{ subject|secret }}</span>
+                        <span class="icon text-white-50">{{ subject.data['lifePath']['secretNumber'] }}</span>
                         <span class="text">Nombre secret</span>
                     </a>
                 </p>

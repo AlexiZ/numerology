@@ -83,6 +83,18 @@ class Numerologie
                     + $this->reducedTotalNumber('letter', $subject->getFirstName().implode('', $subject->getOtherFirstnames()))
                 ),
             ],
+            'lifePath' => [
+                'lifePathNumber' => $this->getLifePathNumber($subject),
+                'idealNumber' => $this->getIdealNumber($subject),
+                'majorTurnNumber' => $this->getMajorTurnNumber($subject),
+                'personalYearNowNumber' => $this->getPersonnalYearNowNumber($subject),
+                'astrologicalNumber' => $this->getAstrologicalNumber($subject),
+                'veryShortTermNumber' => $this->getVeryShortTermNumber($subject),
+                'shortTermNumber' => $this->getShortTermNumber($subject),
+                'meanTermNumber' => $this->getMeanTermNumber($subject),
+                'longTermNumber' => $this->getLongTermNumber($subject),
+                'secretNumber' => $this->getSecretNumber($subject),
+            ],
         ];
     }
 
