@@ -75,7 +75,8 @@ class JsonIO
 
     public function deleteJson($filename)
     {
-        foreach (glob($this->storageFileFolder.'*/*.json') as $fullname) {
+        $folder = $this->storageFileFolder.($this->authorizationChecker->isGranted('ROLE_ADMIN') ? '../*/' : '').'*.json';
+        foreach (glob($folder) as $fullname) {
             $explodedFilename = explode('/', $fullname);
             $shortFilename = $explodedFilename[count($explodedFilename) - 1];
 
