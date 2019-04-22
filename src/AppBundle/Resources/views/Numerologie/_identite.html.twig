@@ -1,15 +1,16 @@
 <div class="row">
     <div class="col-lg-12 mb-4">
         <div class="card shadow mb-4">
-            <div class="card-header py-3">
+            <a href="#collapseIdentity" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseIdentity">
                 <h6 class="m-0 font-weight-bold text-primary">
                     Tableau récapitulatif de l'identité
                 </h6>
-            </div>
+            </a>
 
-            <div class="card-body">
-                <table class="table">
-                    <thead>
+            <div class="collapse show" id="collapseIdentity">
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
                         <tr>
                             <th>{{ subject }} (nombre global : {{ subject.data.identity.globalNumber }})</th>
                             <td>Nombre héréditaire</td>
@@ -17,9 +18,9 @@
                             <td>Nombre social</td>
                             <td>Nombre de structure</td>
                         </tr>
-                    </thead>
+                        </thead>
 
-                    <tbody>
+                        <tbody>
                         {% if subject.useName|default %}
                             <tr>
                                 <th>Nom d'usage - {{ subject.useName }}</th>
@@ -74,35 +75,40 @@
                             <th>{{ subject.data.identity.socialNumber }}</th>
                             <th>{{ subject.data.identity.structureNumber }}</th>
                         </tr>
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
 
         {% if subject.useName|default %}
             <div class="card shadow mb-4">
-                <div class="card-header py-3">
+                <a href="#collapseUseName" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseUseName">
                     <h6 class="m-0 font-weight-bold text-primary">
                         Nom d'usage - {{ subject.useName|upper }}
                     </h6>
-                </div>
+                </a>
 
-                <div class="card-body">
-                    {% include '@App/Numerologie/_table_identite.html.twig' with {'mot': subject.useName, 'type': 'lastname'} %}
+                <div class="collapse show" id="collapseUseName">
+                    <div class="card-body">
+                        {% include '@App/Numerologie/_table_identite.html.twig' with {'mot': subject.useName, 'type': 'lastname'} %}
+                    </div>
                 </div>
             </div>
         {% endif %}
 
         {% if subject.birthName|default %}
             <div class="card shadow mb-4">
-                <div class="card-header py-3">
+                <a href="#collapseBirthName" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseBirthName">
                     <h6 class="m-0 font-weight-bold text-primary">
                         Nom de naissance - {{ subject.birthName|upper }}
                     </h6>
-                </div>
+                </a>
 
-                <div class="card-body">
-                    {% include '@App/Numerologie/_table_identite.html.twig' with {'mot': subject.birthName, 'type': 'lastname'} %}
+                <div class="collapse show" id="collapseBirthName">
+                    <div class="card-body">
+                        {% include '@App/Numerologie/_table_identite.html.twig' with {'mot': subject.birthName, 'type': 'lastname'} %}
+                    </div>
                 </div>
             </div>
         {% endif %}
@@ -110,42 +116,48 @@
         {% if subject.pseudos|default %}
             {% for pseudo in subject.pseudos if pseudo|default %}
                 <div class="card shadow mb-4">
-                    <div class="card-header py-3">
+                    <a href="#collapsePseudo" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapsePseudo">
                         <h6 class="m-0 font-weight-bold text-primary">
                             Surnom - {{ pseudo|upper }}
                         </h6>
-                    </div>
+                    </a>
 
-                    <div class="card-body">
-                        {% include '@App/Numerologie/_table_identite.html.twig' with {'mot': pseudo, 'type': 'lastname'} %}
+                    <div class="collapse show" id="collapsePseudo">
+                        <div class="card-body">
+                            {% include '@App/Numerologie/_table_identite.html.twig' with {'mot': pseudo, 'type': 'lastname'} %}
+                        </div>
                     </div>
                 </div>
             {% endfor %}
         {% endif %}
 
         <div class="card shadow mb-4">
-            <div class="card-header py-3">
+            <a href="#collapseFirstname" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseFirstname">
                 <h6 class="m-0 font-weight-bold text-primary">
                     Prénom - {{ subject.firstname|upper }}
                 </h6>
-            </div>
+            </a>
 
-            <div class="card-body">
-                {% include '@App/Numerologie/_table_identite.html.twig' with {'mot': subject.firstname, 'type': 'firstname'} %}
+            <div class="collapse show" id="collapseFirstname">
+                <div class="card-body">
+                    {% include '@App/Numerologie/_table_identite.html.twig' with {'mot': subject.firstname, 'type': 'firstname'} %}
+                </div>
             </div>
         </div>
 
         {% if subject.otherFirstnames|default %}
             {% for otherFirstname in subject.otherFirstnames if otherFirstname|default %}
                 <div class="card shadow mb-4">
-                    <div class="card-header py-3">
+                    <a href="#collapseOtherFirstnames" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseOtherFirstnames">
                         <h6 class="m-0 font-weight-bold text-primary">
                             Prénom - {{ otherFirstname|upper }}
                         </h6>
-                    </div>
+                    </a>
 
-                    <div class="card-body">
-                        {% include '@App/Numerologie/_table_identite.html.twig' with {'mot': otherFirstname, 'type': 'firstname'} %}
+                    <div class="collapse show" id="collapseOtherFirstnames">
+                        <div class="card-body">
+                            {% include '@App/Numerologie/_table_identite.html.twig' with {'mot': otherFirstname, 'type': 'firstname'} %}
+                        </div>
                     </div>
                 </div>
             {% endfor %}

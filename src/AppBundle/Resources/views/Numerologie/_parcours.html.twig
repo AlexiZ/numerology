@@ -1,7 +1,7 @@
 <div class="row">
-    <div class="col-lg-4 mb-4">
+    <div class="col-lg-4">
         <div class="card shadow mb-4">
-            <div class="card-header py-3">
+            <div class="card-header py-3"à>
                 <h6 class="m-0 font-weight-bold text-primary">
                     Paramètres du parcours de vie
                 </h6>
@@ -9,80 +9,71 @@
 
             <div class="card-body">
                 <p>
-                    <a href="#" class="btn btn-info btn-icon-split disabled-btn">
-                        <span class="icon text-white-50">{{ subject.data['lifePath']['lifePathNumber'] }}</span>
+                    <a href="#" class="btn btn-info btn-icon-split disabled-btn mb-2">
+                        <span class="icon text-white-50">{{ subject.data.lifePath.lifePathNumber }}</span>
                         <span class="text">Chemin de vie</span>
                     </a>
-                </p>
-                <p>
-                    <a href="#" class="btn btn-info btn-icon-split disabled-btn">
-                        <span class="icon text-white-50">{{ subject.data['lifePath']['idealNumber'] }}</span>
+                    <a href="#" class="btn btn-info btn-icon-split disabled-btn mb-2">
+                        <span class="icon text-white-50">{{ subject.data.lifePath.idealNumber }}</span>
                         <span class="text">Nombre d'idéal</span>
                     </a>
+                    <a href="#" class="btn btn-info btn-icon-split disabled-btn mb-2">
+                        <span class="icon text-white-50">{{ subject.data.lifePath.secretNumber }}</span>
+                        <span class="text">Nombre secret</span>
+                    </a>
                 </p>
+
                 <p>
-                    <a href="#" class="btn btn-info btn-icon-split disabled-btn">
-                        <span class="icon text-white-50">{{ subject.data['lifePath']['majorTurnNumber'] }}</span>
+                    <a href="#" class="btn btn-info btn-icon-split disabled-btn mb-2">
+                        <span class="icon text-white-50">{{ subject.data.lifePath.majorTurnNumber }} ans</span>
                         <span class="text">Tournant majeur</span>
                     </a>
-                </p>
-                <p>
-                    <a href="#" class="btn btn-info btn-icon-split disabled-btn">
-                        <span class="icon text-white-50">{{ subject.data['lifePath']['personalYearNowNumber'] }}</span>
+                    <a href="#" class="btn btn-info btn-icon-split disabled-btn mb-2">
+                        <span class="icon text-white-50">{{ subject.data.lifePath.personalYearNowNumber }}</span>
                         <span class="text">Année personnelle {{ "now"|date('Y') }}</span>
                     </a>
-                </p>
-                <p>
-                    <a href="#" class="btn btn-info btn-icon-split disabled-btn">
-                        <span class="icon text-white-50">{{ subject.data['lifePath']['astrologicalNumber'] }}</span>
+                    <a href="#" class="btn btn-info btn-icon-split disabled-btn mb-2">
+                        <span class="icon text-white-50">{{ subject.data.lifePath.astrologicalNumber }}</span>
                         <span class="text">Nombre astrologique</span>
                     </a>
                 </p>
+
                 <p>
-                    <a href="#" class="btn btn-info btn-icon-split disabled-btn">
-                        <span class="icon text-white-50">{{ subject.data['lifePath']['veryShortTermNumber'] }}</span>
+                    <a href="#" class="btn btn-info btn-icon-split disabled-btn mb-2">
+                        <span class="icon text-white-50">{{ subject.data.lifePath.veryShortTermNumber }}</span>
                         <span class="text">Nombre du très court terme</span>
                     </a>
-                </p>
-                <p>
-                    <a href="#" class="btn btn-info btn-icon-split disabled-btn">
-                        <span class="icon text-white-50">{{ subject.data['lifePath']['shortTermNumber'] }}</span>
+                    <a href="#" class="btn btn-info btn-icon-split disabled-btn mb-2">
+                        <span class="icon text-white-50">{{ subject.data.lifePath.shortTermNumber }}</span>
                         <span class="text">Nombre du court terme</span>
                     </a>
-                </p>
-                <p>
-                    <a href="#" class="btn btn-info btn-icon-split disabled-btn">
-                        <span class="icon text-white-50">{{ subject.data['lifePath']['meanTermNumber'] }}</span>
+                    <a href="#" class="btn btn-info btn-icon-split disabled-btn mb-2">
+                        <span class="icon text-white-50">{{ subject.data.lifePath.meanTermNumber }}</span>
                         <span class="text">Nombre du moyen terme</span>
                     </a>
-                </p>
-                <p>
-                    <a href="#" class="btn btn-info btn-icon-split disabled-btn">
-                        <span class="icon text-white-50">{{ subject.data['lifePath']['longTermNumber'] }}</span>
+                    <a href="#" class="btn btn-info btn-icon-split disabled-btn mb-2">
+                        <span class="icon text-white-50">{{ subject.data.lifePath.longTermNumber }}</span>
                         <span class="text">Nombre du long terme</span>
-                    </a>
-                </p>
-                <p>
-                    <a href="#" class="btn btn-info btn-icon-split disabled-btn">
-                        <span class="icon text-white-50">{{ subject.data['lifePath']['secretNumber'] }}</span>
-                        <span class="text">Nombre secret</span>
                     </a>
                 </p>
             </div>
         </div>
     </div>
 
-    <div class="col-lg-8 mb-4">
+    <div class="col-lg-4">
         <div class="card shadow mb-4">
             <a href="#collapseCardExample0" class="d-block card-header py-3 collapsed" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseCardExample0">
                 <h6 class="m-0 font-weight-bold text-primary">
+                    <span href="javascript:void(0);" class="btn btn-primary btn-sm btn-circle">
+                        {{ subject.data.lifePath.lifePathNumber }}
+                    </span>
                     Chemin de vie
                 </h6>
             </a>
 
             <div class="collapse" id="collapseCardExample0" style="">
                 <div class="card-body">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Condimentum id venenatis a condimentum vitae. Nunc aliquet bibendum enim facilisis gravida. Fringilla est ullamcorper eget nulla facilisi etiam dignissim.
+                    <p class="mb-3"><small><em>Ce nombre indique comment est vécu le parcours de l'existence.</em></small></p>
                 </div>
             </div>
         </div>
@@ -90,12 +81,15 @@
         <div class="card shadow mb-4">
             <a href="#collapseCardExample1" class="d-block card-header py-3 collapsed" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseCardExample1">
                 <h6 class="m-0 font-weight-bold text-primary">
+                    <span href="javascript:void(0);" class="btn btn-primary btn-sm btn-circle">
+                        {{ subject.data.lifePath.idealNumber }}
+                    </span>
                     Nombre d'idéal
                 </h6>
             </a>
             <div class="collapse" id="collapseCardExample1" style="">
                 <div class="card-body">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Condimentum id venenatis a condimentum vitae. Nunc aliquet bibendum enim facilisis gravida. Fringilla est ullamcorper eget nulla facilisi etiam dignissim.
+                    <p class="mb-3"><small><em>Ce nombre indique quel est le but à atteindre en parcourant le chemin de vie.</em></small></p>
                 </div>
             </div>
         </div>
@@ -103,12 +97,15 @@
         <div class="card shadow mb-4">
             <a href="#collapseCardExample2" class="d-block card-header py-3 collapsed" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseCardExample2">
                 <h6 class="m-0 font-weight-bold text-primary">
+                    <span href="javascript:void(0);" class="btn btn-primary btn-sm btn-circle">
+                        {{ subject.data.lifePath.majorTurnNumber }}
+                    </span>
                     Tournant majeur
                 </h6>
             </a>
             <div class="collapse" id="collapseCardExample2" style="">
                 <div class="card-body">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Condimentum id venenatis a condimentum vitae. Nunc aliquet bibendum enim facilisis gravida. Fringilla est ullamcorper eget nulla facilisi etiam dignissim.
+                    <p class="mb-3"><small><em>Ce nombre indique à que âge et quelle année se produit quelque chose - événement, prise de conscience, décision - dont l'influence est déterminante sur le reste de sa vie.</em></small></p>
                 </div>
             </div>
         </div>
@@ -116,12 +113,15 @@
         <div class="card shadow mb-4">
             <a href="#collapseCardExample3" class="d-block card-header py-3 collapsed" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseCardExample3">
                 <h6 class="m-0 font-weight-bold text-primary">
+                    <span href="javascript:void(0);" class="btn btn-primary btn-sm btn-circle">
+                        {{ subject.data.lifePath.personalYearNowNumber }}
+                    </span>
                     Année personnelle {{ "now"|date('Y') }}
                 </h6>
             </a>
             <div class="collapse" id="collapseCardExample3" style="">
                 <div class="card-body">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Condimentum id venenatis a condimentum vitae. Nunc aliquet bibendum enim facilisis gravida. Fringilla est ullamcorper eget nulla facilisi etiam dignissim.
+                    <p class="mb-3"><small><em>Cette notion permet de découvrir un cycle qui rythme de manière importante le chemin de vie.</em></small></p>
                 </div>
             </div>
         </div>
@@ -129,25 +129,33 @@
         <div class="card shadow mb-4">
             <a href="#collapseCardExample4" class="d-block card-header py-3 collapsed" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseCardExample4">
                 <h6 class="m-0 font-weight-bold text-primary">
+                    <span href="javascript:void(0);" class="btn btn-primary btn-sm btn-circle">
+                        {{ subject.data.lifePath.astrologicalNumber }}
+                    </span>
                     Nombre astrologique
                 </h6>
             </a>
             <div class="collapse" id="collapseCardExample4" style="">
                 <div class="card-body">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Condimentum id venenatis a condimentum vitae. Nunc aliquet bibendum enim facilisis gravida. Fringilla est ullamcorper eget nulla facilisi etiam dignissim.
+                    <p class="mb-3"><small><em>C'est un nombre qui regroupe l'ensemble des informations de la naissance, comme pour un thème astrologique. De ce fait, ce nombre est le signe astrologique caché de la personne, un signe secondaire dont la force agit en soutien de la personnalité apparente.</em></small></p>
                 </div>
             </div>
         </div>
+    </div>
 
+    <div class="col-lg-4">
         <div class="card shadow mb-4">
             <a href="#collapseCardExample5" class="d-block card-header py-3 collapsed" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseCardExample5">
                 <h6 class="m-0 font-weight-bold text-primary">
+                    <span href="javascript:void(0);" class="btn btn-primary btn-sm btn-circle">
+                        {{ subject.data.lifePath.veryShortTermNumber }}
+                    </span>
                     Nombre du très court terme
                 </h6>
             </a>
             <div class="collapse" id="collapseCardExample5" style="">
                 <div class="card-body">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Condimentum id venenatis a condimentum vitae. Nunc aliquet bibendum enim facilisis gravida. Fringilla est ullamcorper eget nulla facilisi etiam dignissim.
+                    <p class="mb-3"><small><em>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Condimentum id venenatis a condimentum vitae. Nunc aliquet bibendum enim facilisis gravida. Fringilla est ullamcorper eget nulla facilisi etiam dignissim.</em></small></p>
                 </div>
             </div>
         </div>
@@ -155,12 +163,15 @@
         <div class="card shadow mb-4">
             <a href="#collapseCardExample6" class="d-block card-header py-3 collapsed" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseCardExample6">
                 <h6 class="m-0 font-weight-bold text-primary">
+                    <span href="javascript:void(0);" class="btn btn-primary btn-sm btn-circle">
+                        {{ subject.data.lifePath.shortTermNumber }}
+                    </span>
                     Nombre du court terme
                 </h6>
             </a>
             <div class="collapse" id="collapseCardExample6" style="">
                 <div class="card-body">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Condimentum id venenatis a condimentum vitae. Nunc aliquet bibendum enim facilisis gravida. Fringilla est ullamcorper eget nulla facilisi etiam dignissim.
+                    <p class="mb-3"><small><em>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Condimentum id venenatis a condimentum vitae. Nunc aliquet bibendum enim facilisis gravida. Fringilla est ullamcorper eget nulla facilisi etiam dignissim.</em></small></p>
                 </div>
             </div>
         </div>
@@ -168,12 +179,15 @@
         <div class="card shadow mb-4">
             <a href="#collapseCardExample7" class="d-block card-header py-3 collapsed" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseCardExample7">
                 <h6 class="m-0 font-weight-bold text-primary">
+                    <span href="javascript:void(0);" class="btn btn-primary btn-sm btn-circle">
+                        {{ subject.data.lifePath.meanTermNumber }}
+                    </span>
                     Nombre du moyen terme
                 </h6>
             </a>
             <div class="collapse" id="collapseCardExample7" style="">
                 <div class="card-body">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Condimentum id venenatis a condimentum vitae. Nunc aliquet bibendum enim facilisis gravida. Fringilla est ullamcorper eget nulla facilisi etiam dignissim.
+                    <p class="mb-3"><small><em>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Condimentum id venenatis a condimentum vitae. Nunc aliquet bibendum enim facilisis gravida. Fringilla est ullamcorper eget nulla facilisi etiam dignissim.</em></small></p>
                 </div>
             </div>
         </div>
@@ -181,12 +195,15 @@
         <div class="card shadow mb-4">
             <a href="#collapseCardExample8" class="d-block card-header py-3 collapsed" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseCardExample8">
                 <h6 class="m-0 font-weight-bold text-primary">
+                    <span href="javascript:void(0);" class="btn btn-primary btn-sm btn-circle">
+                        {{ subject.data.lifePath.longTermNumber }}
+                    </span>
                     Nombre du long terme
                 </h6>
             </a>
             <div class="collapse" id="collapseCardExample8" style="">
                 <div class="card-body">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Condimentum id venenatis a condimentum vitae. Nunc aliquet bibendum enim facilisis gravida. Fringilla est ullamcorper eget nulla facilisi etiam dignissim.
+                    <p class="mb-3"><small><em>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Condimentum id venenatis a condimentum vitae. Nunc aliquet bibendum enim facilisis gravida. Fringilla est ullamcorper eget nulla facilisi etiam dignissim.</em></small></p>
                 </div>
             </div>
         </div>
@@ -194,12 +211,16 @@
         <div class="card shadow mb-4">
             <a href="#collapseCardExample9" class="d-block card-header py-3 collapsed" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseCardExample9">
                 <h6 class="m-0 font-weight-bold text-primary">
+                    <span href="javascript:void(0);" class="btn btn-primary btn-sm btn-circle">
+                        {{ subject.data.lifePath.secretNumber }}
+                    </span>
                     Nombre secret
                 </h6>
             </a>
             <div class="collapse" id="collapseCardExample9" style="">
                 <div class="card-body">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Condimentum id venenatis a condimentum vitae. Nunc aliquet bibendum enim facilisis gravida. Fringilla est ullamcorper eget nulla facilisi etiam dignissim.
+                    <p class="mb-3"><small><em>Chaque personne naît d'une conjonction entre, d'une part, la volonté d'un couple issu de deux lignées familiales et, d'autre part, sa matérialisation sur la courbe du temps, qui fait de chacun de nous un être unique.</em></small></p>
+                    <p class="mb-3"><small><em>Du point de vue numérologique, on visualise cette composition grâce à la combinaison du nombre de la vibration globale, représentatif de l'énergie généalogique, avec le nombre d'idéal, rvélateur de l'impulsion dispensée par le moment précis de la naissance.</em></small></p>
                 </div>
             </div>
         </div>

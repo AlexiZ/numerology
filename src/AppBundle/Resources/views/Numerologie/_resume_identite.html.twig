@@ -1,86 +1,96 @@
 <div class="row">
-    <div class="col-lg-12 mb-4">
+    <div class="col-lg-12">
         <div class="card shadow mb-4">
-            <div class="card-header py-3">
+            <a href="#collapseGlobalNumber" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseGlobalNumber">
                 <h6 class="m-0 font-weight-bold text-primary">
                     Nombre global
-                    <a href="javascript:void(0);" class="btn btn-primary btn-sm btn-circle">
+                    <span href="javascript:void(0);" class="btn btn-primary btn-sm btn-circle">
                         {{ subject.data.identity.globalNumber }}
-                    </a>
+                    </span>
                 </h6>
-            </div>
+            </a>
 
-            <div class="card-body">
-                <p>{{ subject.data.identity.globalNumber|getAnalysis('global')|raw }}</p>
-                <p class="mb-0"><small><em>Le nombre global, obtenu en effectuant la somme des nombres héréditaires et des nombres de mission, exprime quelle vibration émane de l’identité complète. Il indique quelle influence subit la personne du fait de cette identité dans sa manière de fonctionner et d’exister.</em></small></p>
+            <div class="collapse show" id="collapseGlobalNumber">
+                <div class="card-body">
+                    <p class="mb-3"><small><em>Le nombre global, obtenu en effectuant la somme des nombres héréditaires et des nombres de mission, exprime quelle vibration émane de l’identité complète. Il indique quelle influence subit la personne du fait de cette identité dans sa manière de fonctionner et d’exister.</em></small></p>
+                    <p>{{ subject.data.identity.globalNumber|getAnalysis('global')|raw }}</p>
+                </div>
             </div>
         </div>
     </div>
 
-    <div class="col-lg-6 mb-4">
+    <div class="col-lg-6">
         <div class="card shadow mb-4">
-            <div class="card-header py-3">
+            <a href="#collapseInheritedNumber" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseInheritedNumber">
                 <h6 class="m-0 font-weight-bold text-primary">
                     Nombre héréditaire
-                    <a href="javascript:void(0);" class="btn btn-primary btn-sm btn-circle">
+                    <span href="javascript:void(0);" class="btn btn-primary btn-sm btn-circle">
                         {{ subject.data.identity.inheritedNumber }}
-                    </a>
+                    </span>
                 </h6>
-            </div>
+            </a>
 
-            <div class="card-body">
-                <p>{{ subject.data.identity.inheritedNumber|getAnalysis('inherited')|raw }}</p>
-                <p class="mb-0"><small><em>En s’inscrivant dans une lignée familiale, un individu reçoit par le nom de cette famille une vibration qui, dans sa personnalité et son comportement, soutient et stimule les caractéristiques que dévoile le nombre héréditaire. Celui-ci est calculé en additionnant les nombres correspondant à toutes les lettres du nom.</em></small></p>
+            <div class="collapse show" id="collapseInheritedNumber">
+                <div class="card-body">
+                    <p class="mb-3"><small><em>En s’inscrivant dans une lignée familiale, un individu reçoit par le nom de cette famille une vibration qui, dans sa personnalité et son comportement, soutient et stimule les caractéristiques que dévoile le nombre héréditaire. Celui-ci est calculé en additionnant les nombres correspondant à toutes les lettres du nom.</em></small></p>
+                    <p>{{ subject.data.identity.inheritedNumber|getAnalysis('inherited')|raw }}</p>
+                </div>
             </div>
         </div>
 
         <div class="card shadow mb-4">
-            <div class="card-header py-3">
+            <a href="#collapseDutyNumber" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseDutyNumber">
                 <h6 class="m-0 font-weight-bold text-primary">
                     Nombre de mission
-                    <a href="javascript:void(0);" class="btn btn-primary btn-sm btn-circle">
+                    <span href="javascript:void(0);" class="btn btn-primary btn-sm btn-circle">
                         {{ subject.data.identity.dutyNumber }}
-                    </a>
+                    </span>
                 </h6>
-            </div>
+            </a>
 
-            <div class="card-body">
-                <p>{{ subject.data.identity.dutyNumber|getAnalysis('duty')|raw }}</p>
-                <p class="mb-0"><small><em>Le nombre de mission exprime quelle mission les parents confient à leur enfant par le biais des prénoms qu’ils choisissent pour lui. Celle-ci peut être en adéquation ou non avec les aspirations profondes et les autres caractéristiques de la personnalité de l’individu.</em></small></p>
+            <div class="collapse show" id="collapseDutyNumber">
+                <div class="card-body">
+                    <p class="mb-3"><small><em>Le nombre de mission exprime quelle mission les parents confient à leur enfant par le biais des prénoms qu’ils choisissent pour lui. Celle-ci peut être en adéquation ou non avec les aspirations profondes et les autres caractéristiques de la personnalité de l’individu.</em></small></p>
+                    <p>{{ subject.data.identity.dutyNumber|getAnalysis('duty')|raw }}</p>
+                </div>
             </div>
         </div>
     </div>
 
     <div class="col-lg-6 mb-4">
         <div class="card shadow mb-4">
-            <div class="card-header py-3">
+            <a href="#collapseSocialNumber" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseSocialNumber">
                 <h6 class="m-0 font-weight-bold text-primary">
                     Nombre social
-                    <a href="javascript:void(0);" class="btn btn-primary btn-sm btn-circle">
+                    <span href="javascript:void(0);" class="btn btn-primary btn-sm btn-circle">
                         {{ subject.data.identity.socialNumber }}
-                    </a>
+                    </span>
                 </h6>
-            </div>
+            </a>
 
-            <div class="card-body">
-                <p>{{ subject.data.identity.socialNumber|getAnalysis('social')|raw }}</p>
-                <p class="mb-0"><small><em>Le nombre social donne des indications sur la façon dont le nom et les prénoms influent sur la manière de se réaliser dans la société et comment socialement la personne peut être perçue. On calcule le nombre social d’un nom ou d’un prénom en effectuant la somme de ses voyelles.</em></small></p>
+            <div class="collapse show" id="collapseSocialNumber">
+                <div class="card-body">
+                    <p class="mb-3"><small><em>Le nombre social donne des indications sur la façon dont le nom et les prénoms influent sur la manière de se réaliser dans la société et comment socialement la personne peut être perçue. On calcule le nombre social d’un nom ou d’un prénom en effectuant la somme de ses voyelles.</em></small></p>
+                    <p>{{ subject.data.identity.socialNumber|getAnalysis('social')|raw }}</p>
+                </div>
             </div>
         </div>
 
         <div class="card shadow mb-4">
-            <div class="card-header py-3">
+            <a href="#collapseStructureNumber" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseStructureNumber">
                 <h6 class="m-0 font-weight-bold text-primary">
                     Nombre de structure
-                    <a href="javascript:void(0);" class="btn btn-primary btn-sm btn-circle">
+                    <span href="javascript:void(0);" class="btn btn-primary btn-sm btn-circle">
                         {{ subject.data.identity.structureNumber }}
-                    </a>
+                    </span>
                 </h6>
-            </div>
+            </a>
 
-            <div class="card-body">
-                <p>{{ subject.data.identity.structureNumber|getAnalysis('structure')|raw }}</p>
-                <p class="mb-0"><small><em>Le nombre de structure expose quelle vibration agit sur la manière de se structurer, de se construire et de s’ancrer dans l’existence. On calcule le nombre de structure d’un nom ou d’un prénom en effectuant la somme de ses consonnes.</em></small></p>
+            <div class="collapse show" id="collapseStructureNumber">
+                <div class="card-body">
+                    <p class="mb-3"><small><em>Le nombre de structure expose quelle vibration agit sur la manière de se structurer, de se construire et de s’ancrer dans l’existence. On calcule le nombre de structure d’un nom ou d’un prénom en effectuant la somme de ses consonnes.</em></small></p>
+                    <p>{{ subject.data.identity.structureNumber|getAnalysis('structure')|raw }}</p>
+                </div>
             </div>
         </div>
     </div>

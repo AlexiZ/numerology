@@ -1,19 +1,21 @@
 <div class="row">
     <div class="col-lg-6">
         <div class="card shadow mb-4">
-            <div class="card-header py-3">
+            <a href="#collapseName" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseName">
                 <h6 class="m-0 font-weight-bold text-primary">
                     Nom et prénom d'usage
                 </h6>
-            </div>
+            </a>
 
-            <div class="card-body">
-                <div class="chart-pie pt-4 pb-2">
-                    <canvas class="automaticBarChart"
-                            data-labels="Physique,Émotive,Cérébrale,Intuitive"
-                            data-values="{{ ((subject.publicName|totalLettrePhysique|default(1) / subject.publicName|length)*100)|number_format(0) }},{{ ((subject.publicName|totalLettreEmotive|default(1) / subject.publicName|length)*100)|number_format(0) }},{{ ((subject.publicName|totalLettreCerebrale|default(1) / subject.publicName|length)*100)|number_format(0) }},{{ ((subject.publicName|totalLettreIntuitive|default(1) / subject.publicName|length)*100)|number_format(0) }}||25,30,27,13"
-                            data-legends="{{ subject.firstName }},Moyenne">
-                    </canvas>
+            <div class="collapse show" id="collapseName">
+                <div class="card-body">
+                    <div class="chart-pie pt-4 pb-2">
+                        <canvas class="automaticBarChart"
+                                data-labels="Physique,Émotive,Cérébrale,Intuitive"
+                                data-values="{{ ((subject.publicName|totalLettrePhysique|default(1) / subject.publicName|length)*100)|number_format(0) }},{{ ((subject.publicName|totalLettreEmotive|default(1) / subject.publicName|length)*100)|number_format(0) }},{{ ((subject.publicName|totalLettreCerebrale|default(1) / subject.publicName|length)*100)|number_format(0) }},{{ ((subject.publicName|totalLettreIntuitive|default(1) / subject.publicName|length)*100)|number_format(0) }}||25,30,27,13"
+                                data-legends="{{ subject.firstName }},Moyenne">
+                        </canvas>
+                    </div>
                 </div>
             </div>
         </div>
@@ -21,76 +23,94 @@
 
     <div class="col-lg-6">
         <div class="card shadow mb-4">
-            <div class="card-header py-3">
+            <a href="#collapseAllNames" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseAllNames">
                 <h6 class="m-0 font-weight-bold text-primary">
                     Tous les noms et prénoms
                 </h6>
-            </div>
+            </a>
 
-            <div class="card-body">
-                <div class="chart-pie pt-4 pb-2">
-                    <canvas class="automaticBarChart"
-                            data-labels="Physique,Émotive,Cérébrale,Intuitive"
-                            data-values="{{ ((subject.fullNames|totalLettrePhysique / subject.fullNames|length)*100)|number_format(0) }},{{ ((subject.fullNames|totalLettreEmotive / subject.fullNames|length)*100)|number_format(0) }},{{ ((subject.fullNames|totalLettreCerebrale / subject.fullNames|length)*100)|number_format(0) }},{{ ((subject.fullNames|totalLettreIntuitive / subject.fullNames|length)*100)|number_format(0) }}||25,30,27,13"
-                            data-legends="{{ subject.firstName }},Moyenne">
-                    </canvas>
+            <div class="collapse show" id="collapseAllNames">
+                <div class="card-body">
+                    <div class="chart-pie pt-4 pb-2">
+                        <canvas class="automaticBarChart"
+                                data-labels="Physique,Émotive,Cérébrale,Intuitive"
+                                data-values="{{ ((subject.fullNames|totalLettrePhysique / subject.fullNames|length)*100)|number_format(0) }},{{ ((subject.fullNames|totalLettreEmotive / subject.fullNames|length)*100)|number_format(0) }},{{ ((subject.fullNames|totalLettreCerebrale / subject.fullNames|length)*100)|number_format(0) }},{{ ((subject.fullNames|totalLettreIntuitive / subject.fullNames|length)*100)|number_format(0) }}||25,30,27,13"
+                                data-legends="{{ subject.firstName }},Moyenne">
+                        </canvas>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
     <div class="col-lg-3">
-        <div class="card mb-4">
-            <div class="card-header">
-                Lettres physiques
-            </div>
+        <div class="card shadow mb-4">
+            <a href="#collapsePhysical" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapsePhysical">
+                <h6 class="m-0 font-weight-bold text-primary">
+                    Lettres physiques
+                </h6>
+            </a>
 
-            <div class="card-body">
-                <p>
-                    Elles concernent ce qui a trait à la réalité, à l’expérience, aux capacités d’action, au réalisme, à la rationalité, aux facultés permettant d’affronter la société et les responsabilités ainsi qu’au désir d’agir concrètement.
-                </p>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-lg-3">
-        <div class="card mb-4">
-            <div class="card-header">
-                Lettres émotives
-            </div>
-
-            <div class="card-body">
-                <p>
-                    Elles parlent de ce qui concerne les sentiments, les émotions, l’affectif et les relations.
-                </p>
+            <div class="collapse show" id="collapsePhysical">
+                <div class="card-body">
+                    <p>
+                        Elles concernent ce qui a trait à la réalité, à l’expérience, aux capacités d’action, au réalisme, à la rationalité, aux facultés permettant d’affronter la société et les responsabilités ainsi qu’au désir d’agir concrètement.
+                    </p>
+                </div>
             </div>
         </div>
     </div>
 
     <div class="col-lg-3">
-        <div class="card mb-4">
-            <div class="card-header">
-                Lettres cérébrales
-            </div>
+        <div class="card shadow mb-4">
+            <a href="#collapseEmotional" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseEmotional">
+                <h6 class="m-0 font-weight-bold text-primary">
+                    Lettres émotives
+                </h6>
+            </a>
 
-            <div class="card-body">
-                <p>
-                    Elles concernent ce qui touche au raisonnement, à l’imagination, à l’activité mentale, à la réflexion, à l’intelligence et à la vie intellectuelle et psychique.
-                </p>
+            <div class="collapse show" id="collapseEmotional">
+                <div class="card-body">
+                    <p>
+                        Elles parlent de ce qui concerne les sentiments, les émotions, l’affectif et les relations.
+                    </p>
+                </div>
             </div>
         </div>
     </div>
 
     <div class="col-lg-3">
-        <div class="card mb-4">
-            <div class="card-header">
-                Lettres intuitives
-            </div>
+        <div class="card shadow mb-4">
+            <a href="#collapseBrain" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseBrain">
+                <h6 class="m-0 font-weight-bold text-primary">
+                    Lettres cérébrales
+                </h6>
+            </a>
 
-            <div class="card-body">
-                <p>
-                    Elles révèlent comment l’identité de la personne la pousse à sentir, deviner, percevoir ou anticiper ce qui n’est pas directement visible, ce qui va se passer ou ce qui se trame derrière les apparences.
-                </p>
+            <div class="collapse show" id="collapseBrain">
+                <div class="card-body">
+                    <p>
+                        Elles concernent ce qui touche au raisonnement, à l’imagination, à l’activité mentale, à la réflexion, à l’intelligence et à la vie intellectuelle et psychique.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-3">
+        <div class="card shadow mb-4">
+            <a href="#collapseFeel" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseFeel">
+                <h6 class="m-0 font-weight-bold text-primary">
+                    Lettres intuitives
+                </h6>
+            </a>
+
+            <div class="collapse show" id="collapseFeel">
+                <div class="card-body">
+                    <p>
+                        Elles révèlent comment l’identité de la personne la pousse à sentir, deviner, percevoir ou anticiper ce qui n’est pas directement visible, ce qui va se passer ou ce qui se trame derrière les apparences.
+                    </p>
+                </div>
             </div>
         </div>
     </div>
