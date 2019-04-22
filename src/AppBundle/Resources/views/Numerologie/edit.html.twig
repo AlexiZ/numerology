@@ -4,6 +4,15 @@
     Numérologie - Édition
 {% endblock %}
 
+{% block pagesubtitle %}
+    <a href="{{ path('numerologie_show', {'filename': app.request.get('md5')}) }}" class="btn btn-light btn-icon-split">
+        <span class="icon text-gray-600">
+            <i class="fa fa-arrow-left"></i>
+        </span>
+        <span class="text">Voir la numérologie de cette personne</span>
+    </a>
+{% endblock pagesubtitle %}
+
 {% block body %}
     <div class="row">
         <div class="col-lg-12">

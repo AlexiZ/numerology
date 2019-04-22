@@ -11,7 +11,7 @@ class Geocoding
         $this->apiKey = $apiKey;
     }
 
-    public function getGeolocation($address)
+    public function getGeolocation($address, $asArray = false)
     {
         $coordinates = null;
         try {
@@ -21,26 +21,34 @@ class Geocoding
             ]);
 
             if (0 === $result['info']['statuscode']) {
-                $lat = $this->DECtoDMS($result['results'][0]['locations'][0]['latLng']['lat']);
-                $lng = $this->DECtoDMS($result['results'][0]['locations'][0]['latLng']['lng']);
-                $coordinates = $lat . ',' . $lng;
+                $lat = $this->DECtoDMS($result['results'][0]['locations'][0]['latLng']['lat'], $asArray);
+                $lng = $this->DECtoDMS($result['results'][0]['locations'][0]['latLng']['lng'], $asArray);
+
+                if ($asArray) {
+                    $coordinates = [
+                        'lat' => $lat,
+                        'lng' => $lng,
+                    ];
+                } else {
+                    $coordinates = $lat . ',' . $lng;
+                }
             }
         } catch (\Exception $e) {}
 
         return $coordinates;
     }
 
-    protected function DECtoDMS($dec)
+    protected function DECtoDMS($dec, $asArray = false)
     {
-        $vars = explode(".",$dec);
-        $deg = $vars[0];
-        $tempma = "0.".$vars[1];
+        $vars = explode(".", $dec);
+        $deg = (int) $vars[0];
+        $tempma = "0." . $vars[1];
 
         $tempma = $tempma * 3600;
         $min = floor($tempma / 60);
-        $sec = round($tempma - ($min*60), 2);
+        $sec = round($tempma - ($min * 60), 0);
 
-        return $deg.$min.$sec;
+        return $asArray ? [$deg, $min, $sec] : $deg . $min . $sec;
     }
 
     private function callGetApi($url, array $parameters = [])

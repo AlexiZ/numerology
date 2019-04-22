@@ -73,9 +73,10 @@
 {% endblock pagetitle %}
 
 {% block pagesubtitle %}
-    {% if subject.pseudos is not empty %}
-        {{ subject.pseudos|join(', ')|capitalize }}
+    {% if subject.pseudos is not empty and subject.pseudos.0|default %}
+        {{ subject.pseudos|join(', ')|capitalize }}<br>
     {% endif %}
+    <small>{{ subject.birthDate|localizeddate('long', 'short', 'fr') }}, {{ subject.birthPlace }} ({{ subject.data.geolocation|coordsToText }})</small>
 {% endblock pagesubtitle %}
 
 {% block callback_actions %}

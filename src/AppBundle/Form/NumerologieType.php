@@ -42,6 +42,7 @@ class NumerologieType extends AbstractType
                 ],
                 'allow_add' => true,
                 'allow_delete' => true,
+                'delete_empty' => true,
             ])
 
             ->add('firstname', TextType::class, [

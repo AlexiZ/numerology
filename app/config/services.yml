@@ -34,10 +34,10 @@ services:
         tags:
             - { name: twig.extension }
 
-    # add more services, or override services that need manual wiring
-    # AppBundle\Service\ExampleService:
-    #     arguments:
-    #         $someArgument: 'some_value'
+    twig.extension.intl:
+        class: Twig\Extensions\IntlExtension
+        tags:
+            - { name: twig.extension }
 
     AppBundle\Services\Auth0\Auth0Manager:
         arguments:

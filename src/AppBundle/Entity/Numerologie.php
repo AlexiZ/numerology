@@ -69,12 +69,12 @@ class Numerologie
         $this->setUseName($data['useName'] ?? null);
         $this->setFirstname($data['firstname']);
         if (isset($data['otherFirstnames'])) {
-            foreach (explode(',', $data['otherFirstnames']) as $other) {
+            foreach (explode(',', $data['otherFirstnames']) as $other) if ($other) {
                 $this->addOtherFirstname($other);
             }
         }
         if (isset($data['pseudos'])) {
-            foreach (explode(',', $data['pseudos']) as $pseudo) {
+            foreach (explode(',', $data['pseudos']) as $pseudo) if ($pseudo) {
                 $this->addPseudo($pseudo);
             }
         }

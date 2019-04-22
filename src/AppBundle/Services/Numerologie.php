@@ -95,6 +95,7 @@ class Numerologie
                 'longTermNumber' => $this->getLongTermNumber($subject),
                 'secretNumber' => $this->getSecretNumber($subject),
             ],
+            'geolocation' => $this->geocoding->getGeolocation($subject->getBirthPlace(), true),
         ];
     }
 
