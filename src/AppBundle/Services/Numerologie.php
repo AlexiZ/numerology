@@ -74,14 +74,11 @@ class Numerologie
     {
         return [
             'identity' => [
-                'inheritedNumber' => $this->reducedTotalNumber('letter', $subject->getUseName().$subject->getBirthName().implode('', $subject->getPseudos())),
-                'dutyNumber' => $this->reducedTotalNumber('letter', $subject->getFirstName().implode('', $subject->getOtherFirstnames())),
-                'socialNumber' => $this->reducedTotalNumber('vowel', $subject->getUseName().$subject->getBirthName().implode('', $subject->getPseudos()).$subject->getFirstName().implode('', $subject->getOtherFirstnames())),
-                'structureNumber' => $this->reducedTotalNumber('consonant', $subject->getUseName().$subject->getBirthName().implode('', $subject->getPseudos()).$subject->getFirstName().implode('', $subject->getOtherFirstnames())),
-                'globalNumber' => $this->addNumberDigits(
-                    (int) $this->reducedTotalNumber('letter', $subject->getUseName().$subject->getBirthName().implode('', $subject->getPseudos()))
-                    + $this->reducedTotalNumber('letter', $subject->getFirstName().implode('', $subject->getOtherFirstnames()))
-                ),
+                'inheritedNumber' => $this->getInheritedNumber($subject),
+                'dutyNumber' => $this->getDutyNumber($subject),
+                'socialNumber' => $this->getSocialNumber($subject),
+                'structureNumber' => $this->getStructureNumber($subject),
+                'globalNumber' => $this->getGlobalNumber($subject),
             ],
             'lifePath' => [
                 'lifePathNumber' => $this->getLifePathNumber($subject),
@@ -236,6 +233,34 @@ class Numerologie
         return $total;
     }
 
+    public function getInheritedNumber(NumerologieEntity $subject)
+    {
+        return $this->reducedTotalNumber('letter', $subject->getUseName().$subject->getBirthName().implode('', $subject->getPseudos()));
+    }
+
+    public function getDutyNumber(NumerologieEntity $subject)
+    {
+        return $this->reducedTotalNumber('letter', $subject->getFirstName().implode('', $subject->getOtherFirstnames()));
+    }
+
+    public function getSocialNumber(NumerologieEntity $subject)
+    {
+        return $this->reducedTotalNumber('vowel', $subject->getUseName().$subject->getBirthName().implode('', $subject->getPseudos()).$subject->getFirstName().implode('', $subject->getOtherFirstnames()));
+    }
+
+    public function getStructureNumber(NumerologieEntity $subject)
+    {
+        return $this->reducedTotalNumber('consonant', $subject->getUseName().$subject->getBirthName().implode('', $subject->getPseudos()).$subject->getFirstName().implode('', $subject->getOtherFirstnames()));
+    }
+
+    public function getGlobalNumber(NumerologieEntity $subject)
+    {
+        return $this->addNumberDigits(
+            (int) $this->reducedTotalNumber('letter', $subject->getUseName().$subject->getBirthName().implode('', $subject->getPseudos()))
+            + $this->reducedTotalNumber('letter', $subject->getFirstName().implode('', $subject->getOtherFirstnames()))
+        );
+    }
+
     public function getAnalysis($number, $context)
     {
         return $this->jsonIO->readAnalysis($number, $context);
@@ -346,6 +371,6 @@ class Numerologie
 
     public function getSecretNumber(NumerologieEntity $subject)
     {
-        return $this->reduceNumber((string) ($subject->getData()['identity']['globalNumber'] + $this->getIdealNumber($subject)));
+        return $this->reduceNumber((string) ($this->getGlobalNumber($subject) + $this->getIdealNumber($subject)));
     }
 }

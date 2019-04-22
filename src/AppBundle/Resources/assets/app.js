@@ -194,7 +194,7 @@ if (automaticBarCharts) {
             let data = rawData.split('||');
 
             for (let i = 0; i < data.length; i++) {
-                let colors = [64, 128, 255],
+                let colors = [32, 64, 96, 128, 160, 192],
                     color = 'rgba(' + colors[Math.floor(Math.random() * colors.length)] + ', ' + colors[Math.floor(Math.random() * colors.length)] + ', ' + colors[Math.floor(Math.random() * colors.length)] + ', 0.5)';
                 datasets[i] = Object.assign(
                     {
@@ -242,6 +242,13 @@ if (automaticBarCharts) {
                 },
                 legend: {
                     display: true,
+                },
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
                 },
             },
         });
