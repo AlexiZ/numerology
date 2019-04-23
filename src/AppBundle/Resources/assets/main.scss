@@ -2,6 +2,11 @@
 @import "~startbootstrap-sb-admin-2/css/sb-admin-2.min.css";
 @import "~shepherd.js/dist/css/shepherd-theme-square.css";
 
+.bg-login-image {
+  background: url(http://www.editions-bussiere.com/1297-thickbox_default/numerologie-essentielle-heritages-et-parcours-de-vie.jpg);
+  background-position: center;
+}
+
 #wrapper {
   #content-wrapper {
     overflow: hidden;

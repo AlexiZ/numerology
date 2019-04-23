@@ -63,3 +63,17 @@ messages_send:
     defaults: { _controller: AppBundle:Messages:sendMessage }
     options:
         expose: true
+
+hwi_oauth_redirect:
+    resource: "@HWIOAuthBundle/Resources/config/routing/redirect.xml"
+    prefix:   /connect
+
+hwi_oauth_login:
+    resource: "@HWIOAuthBundle/Resources/config/routing/login.xml"
+    prefix:   /login
+
+auth0_login:
+    path:    /auth0/callback
+
+auth0_logout:
+    path: /auth0/logout

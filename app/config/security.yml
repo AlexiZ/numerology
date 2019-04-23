@@ -12,18 +12,18 @@ security:
             anonymous: ~
             oauth:
                 resource_owners:
-                    auth0: "/auth0/callback"
-                login_path:        /login
+                    auth0: "/extranet/auth0/callback"
+                login_path:        /extranet/login
                 use_forward:       false
-                failure_path:      /login
+                failure_path:      /extranet/login
 
                 oauth_user_provider:
                     service: AppBundle\Security\UserProvider
             logout:
-                path:   /auth0/logout
-                target: /
+                path:   /extranet/auth0/logout
+                target: /extranet/
 
     access_control:
-        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/connect, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/extranet/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/extranet/connect, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/, roles: ROLE_USER }
