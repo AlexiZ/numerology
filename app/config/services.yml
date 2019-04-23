@@ -18,14 +18,21 @@ services:
     # this creates a service per class whose id is the fully-qualified class name
     ExtranetBundle\:
         resource: '../../src/ExtranetBundle/*'
-        # you can exclude directories or files
-        # but if a service is unused, it's removed anyway
         exclude: '../../src/ExtranetBundle/{Entity,Repository,Tests}'
+
+    SiteBundle\:
+        resource: '../../src/SiteBundle/*'
+        exclude: '../../src/SiteBundle/{Entity,Repository,Tests}'
 
     # controllers are imported separately to make sure they're public
     # and have a tag that allows actions to type-hint services
     ExtranetBundle\Controller\:
         resource: '../../src/ExtranetBundle/Controller'
+        public: true
+        tags: ['controller.service_arguments']
+
+    SiteBundle\Controller\:
+        resource: '../../src/SiteBundle/Controller'
         public: true
         tags: ['controller.service_arguments']
 

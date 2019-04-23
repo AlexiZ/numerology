@@ -8,6 +8,9 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
+        main:
+            anonymous: ~
+
         secured_area:
             anonymous: ~
             oauth:
@@ -26,4 +29,5 @@ security:
     access_control:
         - { path: ^/extranet/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/extranet/connect, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/, roles: ROLE_USER }
+        - { path: ^/extranet/, roles: ROLE_USER }
+        - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
