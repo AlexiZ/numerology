@@ -1,7 +1,7 @@
 security:
     providers:
         hwi:
-            id: AppBundle\Security\UserProvider
+            id: ExtranetBundle\Security\UserProvider
 
     firewalls:
         dev:
@@ -18,7 +18,7 @@ security:
                 failure_path:      /extranet/login
 
                 oauth_user_provider:
-                    service: AppBundle\Security\UserProvider
+                    service: ExtranetBundle\Security\UserProvider
             logout:
                 path:   /extranet/auth0/logout
                 target: /extranet/

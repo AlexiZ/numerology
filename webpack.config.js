@@ -2,14 +2,14 @@ const path = require('path');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const nodeModules = path.resolve(__dirname, 'node_modules');
-const resources = path.resolve(__dirname, 'src/AppBundle/Resources');
+const resources = path.resolve(__dirname, 'src/ExtranetBundle/Resources');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 const config = {
     cache: true,
     entry: {
-        app: [
-            './src/AppBundle/Resources/assets/app.js',
+        extranet: [
+            './src/ExtranetBundle/Resources/assets/app.js',
         ],
     },
     output: {
@@ -140,7 +140,7 @@ const config = {
         new webpack.optimize.CommonsChunkPlugin({
             name: 'common',
             filename: 'common.js',
-            chunks: ['app'],
+            chunks: ['extranet'],
         }),
         new webpack.DefinePlugin({
             'process.env': {

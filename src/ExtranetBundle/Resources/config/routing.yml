@@ -1,0 +1,79 @@
+numerologie_index:
+  path: /
+  defaults: { _controller: ExtranetBundle:Numerologie:index }
+
+numerologie_add:
+    path: /ajouter/
+    defaults: { _controller: ExtranetBundle:Numerologie:add }
+    options:
+        expose: true
+
+numerologie_edit:
+    path: /editer/{md5}
+    defaults: { _controller: ExtranetBundle:Numerologie:edit }
+
+numerologie_delete:
+    path: /supprimer/{md5}
+    defaults: { _controller: ExtranetBundle:Numerologie:supprimer }
+
+numerologie_export_pdf:
+    path: /exporter/pdf/{md5}
+    defaults: { _controller: ExtranetBundle:Numerologie:exportPdf }
+
+numerologie_show:
+    path: /afficher/
+    defaults: { _controller: ExtranetBundle:Numerologie:show }
+
+admin_index:
+    path: /administrer/
+    defaults: { _controller: ExtranetBundle:Admin:index }
+
+admin_user_validate:
+    path: /administrer/utilisateur/valider/{userId}
+    defaults: { _controller: ExtranetBundle:Admin:userValidate }
+    options:
+        expose: true
+
+admin_user_refuse:
+    path: /administrer/utilisateur/refuser/{userId}
+    defaults: { _controller: ExtranetBundle:Admin:userRefuse }
+    options:
+        expose: true
+
+messages_number:
+    path: /messages/tous/total/
+    defaults: { _controller: ExtranetBundle:Messages:getMessagesNumber }
+    options:
+        expose: true
+
+messages_list:
+    path: /messages/tous/
+    defaults: { _controller: ExtranetBundle:Messages:getMessages }
+    options:
+        expose: true
+
+messages_show:
+    path: /messages/afficher/
+    defaults: { _controller: ExtranetBundle:Messages:showMessages }
+    options:
+        expose: true
+
+messages_send:
+    path: /messages/envoyer/
+    defaults: { _controller: ExtranetBundle:Messages:sendMessage }
+    options:
+        expose: true
+
+hwi_oauth_redirect:
+    resource: "@HWIOAuthBundle/Resources/config/routing/redirect.xml"
+    prefix:   /connect
+
+hwi_oauth_login:
+    resource: "@HWIOAuthBundle/Resources/config/routing/login.xml"
+    prefix:   /login
+
+auth0_login:
+    path:    /auth0/callback
+
+auth0_logout:
+    path: /auth0/logout

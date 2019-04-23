@@ -79,7 +79,7 @@ hwi_oauth:
     resource_owners:
         auth0:
             type:                oauth2
-            class:               'AppBundle\Auth0ResourceOwner'
+            class:               'ExtranetBundle\Auth0ResourceOwner'
             base_url:            '%auth0.base_url%'
             client_id:           '%auth0.login.client_id%'
             client_secret:       '%auth0.login.client_secret%'

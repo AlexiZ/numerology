@@ -1,0 +1,116 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Numérologie - {{ subject }}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/app/css/print.css') }}" media="print">
+{% endblock %}
+
+{% block navbar %}
+    <hr class="sidebar-divider">
+
+    <div class="sidebar-heading">
+        Identité
+    </div>
+
+    <li class="nav-item">
+        <a class="nav-link custom-tab-link active" href="#" data-target="tab1">
+            <i class="fas fa-fw fa-user"></i>
+            <span>Résumé identité</span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link custom-tab-link" href="#" data-target="tab2">
+            <i class="fas fa-fw fa-user"></i>
+            <span>Calculs identité</span>
+        </a>
+    </li>
+
+    <hr class="sidebar-divider">
+
+    <div class="sidebar-heading">
+        Lettres
+    </div>
+
+    <li class="nav-item">
+        <a class="nav-link custom-tab-link" href="#" data-target="tab3">
+            <i class="fas fa-fw fa-pencil-alt"></i>
+            <span>Résumé lettres</span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link custom-tab-link" href="#" data-target="tab4">
+            <i class="fas fa-fw fa-pencil-alt"></i>
+            <span>Calculs lettres</span>
+        </a>
+    </li>
+
+    <hr class="sidebar-divider">
+
+    <li class="nav-item">
+        <a class="nav-link custom-tab-link" href="#" data-target="tab5">
+            <i class="fas fa-fw fa-circle-notch"></i>
+            <span>Vibrations de soutien</span>
+        </a>
+    </li>
+
+    <hr class="sidebar-divider">
+
+    <li class="nav-item">
+        <a class="nav-link custom-tab-link" href="#" data-target="tab6">
+            <i class="fas fa-fw fa-map-signs"></i>
+            <span>Parcours de vie</span>
+        </a>
+    </li>
+{% endblock navbar %}
+
+{% block pagetitle %}
+    {{ subject }}
+{% endblock pagetitle %}
+
+{% block pagesubtitle %}
+    {% if subject.pseudos is not empty and subject.pseudos.0|default %}
+        {{ subject.pseudos|join(', ') }}<br>
+    {% endif %}
+    <small>{{ subject.birthDate|localizeddate('long', 'short', 'fr') }}, {{ subject.birthPlace }} ({{ subject.data.geolocation|coordsToText }})</small>
+{% endblock pagesubtitle %}
+
+{% block callback_actions %}
+    <a href="{{ path('numerologie_edit', {'md5': filename}) }}" title="Modifier" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+        <i class="fas fa-pen fa-sm text-white-50"></i>&nbsp;
+        Modifier
+    </a>
+    <a href="{{ path('numerologie_export_pdf', {'md5': filename}) }}" title="Télécharger pour imprimer" class="d-none d-sm-inline-block btn btn-sm btn-info shadow-sm">
+        <i class="fas fa-print fa-sm text-white-50"></i>&nbsp;
+        Télécharger pour imprimer
+    </a>
+    <a href="{{ path('numerologie_delete', {'md5': filename}) }}" title="Supprimer" class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm">
+        <i class="fas fa-times fa-sm text-white-50"></i>&nbsp;
+        Supprimer
+    </a>
+{% endblock callback_actions %}
+
+{% block body %}
+    <div id="tab1" class="custom-tab">
+        {% include '@Extranet/Numerologie/_resume_identite.html.twig' with {'subject': subject} %}
+    </div>
+    <div id="tab2" class="custom-tab d-none">
+        {% include '@Extranet/Numerologie/_identite.html.twig' with {'subject': subject} %}
+    </div>
+    <div id="tab3" class="custom-tab d-none">
+        {% include '@Extranet/Numerologie/_resume_lettres.html.twig' with {'subject': subject} %}
+    </div>
+    <div id="tab4" class="custom-tab d-none">
+        {% include '@Extranet/Numerologie/_lettres.html.twig' with {'subject': subject} %}
+    </div>
+    <div id="tab5" class="custom-tab d-none">
+        {% include '@Extranet/Numerologie/_vibrations.html.twig' with {'subject': subject} %}
+    </div>
+    <div id="tab6" class="custom-tab d-none">
+        {% include '@Extranet/Numerologie/_parcours.html.twig' with {'subject': subject} %}
+    </div>
+{% endblock body %}

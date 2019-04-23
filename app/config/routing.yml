@@ -1,5 +1,5 @@
 extranet:
-    resource: '@AppBundle/Resources/config/routing.yml'
+    resource: '@ExtranetBundle/Resources/config/routing.yml'
     prefix: /extranet
 
 fos_js_routing:

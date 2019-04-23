@@ -14,18 +14,18 @@ services:
         # if you need to do this, you can override this setting on individual services
         public: false
 
-    # makes classes in src/AppBundle available to be used as services
+    # makes classes in src/ExtranetBundle available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
-    AppBundle\:
-        resource: '../../src/AppBundle/*'
+    ExtranetBundle\:
+        resource: '../../src/ExtranetBundle/*'
         # you can exclude directories or files
         # but if a service is unused, it's removed anyway
-        exclude: '../../src/AppBundle/{Entity,Repository,Tests}'
+        exclude: '../../src/ExtranetBundle/{Entity,Repository,Tests}'
 
     # controllers are imported separately to make sure they're public
     # and have a tag that allows actions to type-hint services
-    AppBundle\Controller\:
-        resource: '../../src/AppBundle/Controller'
+    ExtranetBundle\Controller\:
+        resource: '../../src/ExtranetBundle/Controller'
         public: true
         tags: ['controller.service_arguments']
 
@@ -39,7 +39,7 @@ services:
         tags:
             - { name: twig.extension }
 
-    AppBundle\Services\Auth0\Auth0Manager:
+    ExtranetBundle\Services\Auth0\Auth0Manager:
         arguments:
             $auth0Data:
                 domain: "%auth0.base_url%"
@@ -48,20 +48,20 @@ services:
                 loginClientId: "%auth0.login.client_id%"
                 auth0EmailTtl: "%auth0.api.ttl_sec%"
 
-    AppBundle\Services\SendBird\SendBirdManager:
+    ExtranetBundle\Services\SendBird\SendBirdManager:
         arguments:
             $sendbirdParams:
                 appId: "%sendbird.app_id%"
                 apiUrl: "%sendbird.api_url%"
                 apiToken: "%sendbird.api_token%"
 
-    AppBundle\Services\Slack\SlackManager:
+    ExtranetBundle\Services\Slack\SlackManager:
         arguments:
             $slackParams:
                 apiUrl: "%slack.api_url%"
                 apiToken: "%slack.api_token%"
                 admins: "%slack.admins%"
 
-    AppBundle\Services\Geocoding:
+    ExtranetBundle\Services\Geocoding:
         arguments:
             $apiKey: "%osm.geocoding_api%"

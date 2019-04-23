@@ -1,0 +1,79 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Numérologie - Votre messagerie
+{% endblock %}
+
+{% block body %}
+    <div class="row conversation">
+        {% if conversations|default %}
+            {% for id, conversation in conversations %}
+                <div class="col-lg-12">
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                            <h6 class="m-0 font-weight-bold text-primary">Conversation {{ id }}</h6>
+
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <a title="Répondre dans un nouvel onglet" target="_blank" href="https://mazaudier.slack.com/messages/{{ id }}/"><i class="fas fa-reply"></i>&nbsp;Répondre</a>
+                            {% endif %}
+                        </div>
+
+                        <div class="card-body conversationDetails">
+                            {% if is_granted('ROLE_ADMIN') %}
+                                {{ render(controller('ExtranetBundle:Messages:renderConversationAdmin', {'conversation': conversation})) }}
+                            {% else %}
+                                {{ render(controller('ExtranetBundle:Messages:renderConversationUser', {'conversation': conversation})) }}
+
+                                <hr class="my-20">
+
+                                <form class="answer" name="form{{ id }}">
+                                    <div class="form-row">
+                                        <div class="col-md-12">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control answerText" placeholder="Écrivez votre réponse ici">
+
+                                                <div class="input-group-append">
+                                                    <button class="btn btn-primary answerSubmit" type="submit" data-form="form{{ id }}">Répondre</button>
+                                                </div>
+                                            </div>
+
+                                            <small class="form-text text-muted answerSentMessage d-none" data-form="form{{ id }}"></small>
+                                        </div>
+                                    </div>
+                                </form>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <div class="col-lg-12">
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Écrivez-nous</h6>
+                    </div>
+
+                    <div class="card-body">
+                        <form class="answer" name="form0">
+                            <div class="form-row">
+                                <div class="col-md-12">
+                                    <label>Votre messagerie est vide.<br><small><em>Vous avez une remarque ou une question ? Alors écrivez-nous vite !</em></small></label>
+
+                                    <div class="input-group">
+                                        <input type="text" class="form-control answerText" placeholder="Écrivez votre message ici">
+
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary answerSubmit" type="submit" data-form="form0">Envoyer</button>
+                                        </div>
+                                    </div>
+
+                                    <small class="form-text text-muted answerSentMessage d-none" data-form="form0"></small>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+{% endblock body %}
