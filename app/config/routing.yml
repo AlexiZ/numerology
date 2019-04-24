@@ -1,10 +1,10 @@
-site:
-    resource: "@SiteBundle/Resources/config/routing.yml"
-    prefix:   /
-
 extranet:
     resource: '@ExtranetBundle/Resources/config/routing.yml'
     prefix: /extranet
+
+site:
+    resource: "@SiteBundle/Resources/config/routing.yml"
+    prefix:   /
 
 fos_js_routing:
    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"

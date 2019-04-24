@@ -2,7 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const nodeModules = path.resolve(__dirname, 'node_modules');
-const resources = path.resolve(__dirname, 'src/ExtranetBundle/Resources');
+const resources = path.resolve(__dirname, 'src/ExtranetBundle/Resources,src/SiteBundle/Resources');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 const config = {
@@ -10,6 +10,9 @@ const config = {
     entry: {
         extranet: [
             './src/ExtranetBundle/Resources/assets/app.js',
+        ],
+        site: [
+            './src/SiteBundle/Resources/assets/app.js',
         ],
     },
     output: {
