@@ -30,6 +30,15 @@
                 </li>
 
                 {% block navbar %}{% endblock navbar %}
+
+                <hr class="sidebar-divider my-0">
+
+                <li class="nav-item">
+                    <a class="nav-link{% if 'site_homepage' == app.request.get('_route') %} active{% endif %}" href="{{ path('site_homepage') }}">
+                        <i class="fas fa-fw fa-sign-out-alt"></i>
+                        <span>Site public</span>
+                    </a>
+                </li>
             </ul>
 
             <div id="content-wrapper" class="d-flex flex-column">
