@@ -1,0 +1,104 @@
+{% extends '@Site/base.html.twig' %}
+
+{% block title %}{{ parent() }} - Essayez gratuitement{% endblock %}
+
+{% block navbar %}
+    <li class="nav-item">
+        <a class="nav-link js-scroll-trigger" href="{{ path('site_homepage') }}#about">À propos</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link js-scroll-trigger active" href="{{ path('site_homepage') }}#try">Essayez gratuitement</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link js-scroll-trigger" href="{{ path('site_homepage') }}#extranet">Espace client</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link js-scroll-trigger" href="{{ path('site_homepage') }}#contact">Contact</a>
+    </li>
+{% endblock navbar %}
+
+{% block bodyAttr %}class="tryPage"{% endblock bodyAttr %}
+
+{% block body %}
+    <header class="masthead">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 col-xl-9 mx-auto">
+                    <div class="card card-signin flex-row my-5">
+                        <div class="card-body">
+                            <h5 class="card-title text-center">Renseignez les paramètres de vie</h5>
+
+                            {% form_theme form '@Site/Commons/_form_theme.html.twig' %}
+
+                            {{ form_start(form, {'attr': {'class': 'form-signin'}}) }}
+                                {{ form_errors(form) }}
+
+                                <div class="row">
+                                    <div class="form-label-group col-md-6">
+                                        {{ form_widget(form.birthName, {'attr': {'class': 'form-control'}}) }}
+                                        {{ form_label(form.birthName) }}
+                                    </div>
+
+                                    <div class="form-label-group col-md-6">
+                                        {{ form_widget(form.useName, {'attr': {'class': 'form-control'}}) }}
+                                        {{ form_label(form.useName) }}
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-label-group col-md-6">
+                                        {{ form_widget(form.firstname, {'attr': {'class': 'form-control'}}) }}
+                                        {{ form_label(form.firstname) }}
+                                    </div>
+
+                                    <div class="form-label-group col-md-6">
+                                        {{ form_widget(form.otherFirstnames) }}
+                                        <button type="button"
+                                                class="add-another-collection-widget btn btn-primary"
+                                                data-list="#otherFirstnames-fields-list"
+                                                data-label="Autre prénom">
+                                            Ajouter un autre prénom
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-label-group col-md-6">
+                                        {{ form_widget(form.birthDate, {'attr': {'class': 'form-control'}}) }}
+                                        {{ form_label(form.birthDate) }}
+                                    </div>
+
+                                    <div class="form-label-group col-md-6">
+                                        {{ form_widget(form.birthPlace, {'attr': {'class': 'form-control'}}) }}
+                                        {{ form_label(form.birthPlace) }}
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        {{ form_widget(form.pseudos) }}
+                                        <button type="button"
+                                                class="add-another-collection-widget btn btn-primary"
+                                                data-list="#pseudos-fields-list"
+                                                data-label="Pseudonyme">
+                                            Ajouter un pseudonyme
+                                        </button>
+                                    </div>
+                                </div>
+
+                                {{ form_rest(form) }}
+
+                                <hr class="my-4">
+
+                                <button class="btn btn-lg btn-info btn-block text-uppercase" type="submit">
+                                    <i class="fa fa-check mr-2"></i> Générer ce profil numérologique
+                                    <br><small><em>(Pour que l'analyse soit correcte, n'oubliez aucun nom ou prénom.)</em></small>
+                                </button>
+                            {{ form_end(form) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+{% endblock body %}

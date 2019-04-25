@@ -51,6 +51,8 @@ class JsonIO
 
         if ($this->tokenStorage->getToken() && $this->tokenStorage->getToken()->getUser() instanceof User) {
             $this->storageFileFolder .= $this->tokenStorage->getToken()->getUser()->getId() . '/';
+        } else {
+            $this->storageFileFolder .= 'other/';
         }
     }
 

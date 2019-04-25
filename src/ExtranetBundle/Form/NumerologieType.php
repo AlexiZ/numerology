@@ -25,7 +25,7 @@ class NumerologieType extends AbstractType
                 ],
             ])
             ->add('useName', TextType::class, [
-                'label' => 'Nom de famille d\'usage (si différent de naissance)',
+                'label' => 'Nom de famille d\'usage (si différent)',
                 'required' => false,
                 'attr' => [
                     'placeholder' => 'Nom de famille d\'usage',
@@ -66,7 +66,7 @@ class NumerologieType extends AbstractType
             ])
 
             ->add('birthDate', DateTimeType::class, [
-                'label' => 'Date et heure de naissance (heure universelle)',
+                'label' => 'Date et heure de naissance (UTC)',
                 'widget' => 'single_text',
                 'required' => false,
             ])
