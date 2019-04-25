@@ -10,7 +10,7 @@
             <div class="card-body">
                 <p>Les nombres les plus fréquents ont une forte influence sur la personnalité et le comportement de l’individu, tandis que ceux qui sont manquants ne soutiennent pas la vibration des noms et prénoms.</p>
 
-                {% set occurrences = subject.fullNames|occurrencesNombresLettres %}
+                {% set occurrences = subject.fullNames|replace({' ': ''})|occurrencesNombresLettres %}
                 <table>
                     <tr>
                         {% for i in 1..9 %}
@@ -29,28 +29,29 @@
     <div class="col-lg-6 mb-4">
         <div class="card shadow mb-4">
             <div class="card-body">
+                {% set fullNames = subject.fullNames|replace({' ': ''}) %}
                 <p><a href="#" class="btn btn-info btn-icon-split disabled-btn">
-                    <span class="icon text-white-50">{{ subject.fullNames|length }}</span>
+                    <span class="icon text-white-50">{{ fullNames|length }}</span>
                     <span class="text">Nombre total de lettres</span>
                 </a></p>
                 <p><a href="#" class="btn btn-info btn-icon-split disabled-btn">
-                    <span class="icon text-white-50">{{ subject.fullNames|nombreMoyenLettres|number_format(1, '.', ' ') }}</span>
+                    <span class="icon text-white-50">{{ fullNames|nombreMoyenLettres|number_format(1, '.', ' ') }}</span>
                     <span class="text">Nombre moyen de présence de chaque lettre</span>
                 </a></p>
                 <p><a href="#" class="btn btn-info btn-icon-split disabled-btn">
-                    <span class="icon text-white-50">{{ subject.fullNames|numerosLettresManquantes|join(', ') }}</span>
+                    <span class="icon text-white-50">{{ fullNames|numerosLettresManquantes|join(', ') }}</span>
                     <span class="text">Nombres manquants</span>
                 </a></p>
                 <p><a href="#" class="btn btn-info btn-icon-split disabled-btn">
-                    <span class="icon text-white-50">{{ subject.fullNames|numerosLettresFaibles|join(', ') }}</span>
+                    <span class="icon text-white-50">{{ fullNames|numerosLettresFaibles|join(', ') }}</span>
                     <span class="text">Nombres faibles</span>
                 </a></p>
                 <p><a href="#" class="btn btn-info btn-icon-split disabled-btn">
-                    <span class="icon text-white-50">{{ subject.fullNames|numerosLettresFortes|join(', ') }}</span>
+                    <span class="icon text-white-50">{{ fullNames|numerosLettresFortes|join(', ') }}</span>
                     <span class="text">Nombres forts</span>
                 </a></p>
                 <p><a href="#" class="btn btn-info btn-icon-split disabled-btn">
-                    <span class="icon text-white-50">{{ subject.fullNames|numerosLettresMoyennes|join(', ') }}</span>
+                    <span class="icon text-white-50">{{ fullNames|numerosLettresMoyennes|join(', ') }}</span>
                     <span class="text">Nombres moyens</span>
                 </a></p>
             </div>
