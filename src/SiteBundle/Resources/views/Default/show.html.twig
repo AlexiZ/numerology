@@ -36,7 +36,7 @@
 
                             <div class="row">
                                 <div class="col-md-12 mb-5">
-                                    <h5>Identité</h5>
+                                    <h5>Identité et lettres</h5>
                                     <hr class="divider my-4 underline-divider">
 
                                     <ul class="list-group mb-3">
@@ -87,12 +87,12 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-md-12">
+                                <div class="col-md-12 mb-5">
                                     <h5>Parcours de vie</h5>
                                     <hr class="divider my-4 underline-divider">
 
                                     <div class="row">
-                                        <ul class="list-group col-md-6">
+                                        <ul class="list-group col-md-12">
                                             <li class="list-group-item d-flex justify-content-between align-items-center automatic-tippy"
                                                 data-ltippy="lifepath"
                                                 data-rtippy="{{ subject.data.lifePath.lifePathNumber }}">
@@ -109,7 +109,7 @@
                                                 data-ltippy="majorturn"
                                                 data-rtippy="{{ subject.data.lifePath.majorTurnNumber }}">
                                                 Tournant majeur
-                                                <span class="badge badge-primary badge-pill">{{ subject.data.lifePath.majorTurnNumber }}</span>
+                                                <span class="badge badge-primary badge-pill">{{ subject.data.lifePath.majorTurnNumber }} ans</span>
                                             </li>
                                             <li class="list-group-item d-flex justify-content-between align-items-center automatic-tippy"
                                                 data-ltippy="personalyearnow"
@@ -118,45 +118,27 @@
                                                 <span class="badge badge-primary badge-pill">{{ subject.data.lifePath.personalYearNowNumber }}</span>
                                             </li>
                                             <li class="list-group-item d-flex justify-content-between align-items-center automatic-tippy"
-                                                data-ltippy="astrological"
-                                                data-rtippy="{{ subject.data.lifePath.astrologicalNumber }}">
-                                                Nombre astrologique
-                                                <span class="badge badge-primary badge-pill">{{ subject.data.lifePath.astrologicalNumber }}</span>
-                                            </li>
-                                        </ul>
-
-                                        <ul class="list-group col-md-6">
-                                            <li class="list-group-item d-flex justify-content-between align-items-center automatic-tippy"
-                                                data-ltippy="veryshortterm"
-                                                data-rtippy="{{ subject.data.lifePath.veryShortTermNumber }}">
-                                                Nombre du très court terme
-                                                <span class="badge badge-primary badge-pill">{{ subject.data.lifePath.veryShortTermNumber }}</span>
-                                            </li>
-                                            <li class="list-group-item d-flex justify-content-between align-items-center automatic-tippy"
-                                                data-ltippy="shortterm"
-                                                data-rtippy="{{ subject.data.lifePath.shortTermNumber }}">
-                                                Nombre du court terme
-                                                <span class="badge badge-primary badge-pill">{{ subject.data.lifePath.shortTermNumber }}</span>
-                                            </li>
-                                            <li class="list-group-item d-flex justify-content-between align-items-center automatic-tippy"
-                                                data-ltippy="meanterm"
-                                                data-rtippy="{{ subject.data.lifePath.meanTermNumber }}">
-                                                Nombre du moyen terme
-                                                <span class="badge badge-primary badge-pill">{{ subject.data.lifePath.meanTermNumber }}</span>
-                                            </li>
-                                            <li class="list-group-item d-flex justify-content-between align-items-center automatic-tippy"
-                                                data-ltippy="longterm"
-                                                data-rtippy="{{ subject.data.lifePath.longTermNumber }}">
-                                                Nombre du long terme
-                                                <span class="badge badge-primary badge-pill">{{ subject.data.lifePath.longTermNumber }}</span>
-                                            </li>
-                                            <li class="list-group-item d-flex justify-content-between align-items-center automatic-tippy"
                                                 data-ltippy="secret"
                                                 data-rtippy="{{ subject.data.lifePath.secretNumber }}">
                                                 Nombre secret
                                                 <span class="badge badge-primary badge-pill">{{ subject.data.lifePath.secretNumber }}</span>
                                             </li>
                                         </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="alert alert-warning" role="alert">
+                                        <h5>Ce profil est incomplet</h5>
+                                        Commandez votre <strong>étude numérologique complète</strong> pour accéder aux nombres héréditaire, social, de mission et de structure. Découvrez également les vibrations qui soutiennent votre patronyme et comment influe votre date de naissance sur votre capacité à réagir en toute situation.
+                                        <br>
+                                        Recevez une <strong>analyse complète et détaillée</strong> de vos paramètres de vie en quelques clics.
+                                        <br>
+                                        Vous recevrez également un <strong>lien permanent vers votre profil</strong> à jour de nos dernières évolutions, que vous pourrez consulter à volonté.
+                                        <br><br>
+                                        <button type="button" class="btn btn-info" onclick="javascript:alert('Direction la page de paiement');">Commander pour 8.80€<br><em>(-15% offre de lancement)</em></button>
                                     </div>
                                 </div>
                             </div>

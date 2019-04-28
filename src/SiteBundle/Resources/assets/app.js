@@ -54,7 +54,7 @@ $(document).ready(() => {
                     arrowType: 'round',
                     multiple: 'true',
                     flipOnUpdate: true,
-                    content: 'Chargement en cours...',
+                    content: '<div class="spinner-border" role="status"><span class="sr-only">Chargement...</span></div>',
                 }
             ;
 
