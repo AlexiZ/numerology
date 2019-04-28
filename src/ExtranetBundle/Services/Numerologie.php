@@ -261,6 +261,11 @@ class Numerologie
         );
     }
 
+    public function getDefinition($context)
+    {
+        return $this->jsonIO->readDefinition($context);
+    }
+
     public function getAnalysis($number, $context)
     {
         return $this->jsonIO->readAnalysis($number, $context);

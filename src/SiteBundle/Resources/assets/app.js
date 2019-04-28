@@ -2,6 +2,7 @@ import 'bootstrap';
 import 'jquery';
 import 'jquery-easing';
 import 'magnific-popup';
+import tippy from 'tippy.js';
 import './creative.js';
 
 import './main.scss';
@@ -32,6 +33,86 @@ $(document).ready(() => {
                 var newElem = $(list.attr('data-widget-tags')).html(newWidget);
                 newElem.appendTo(list);
             });
+        });
+    }
+
+    let automaticTippies = document.querySelectorAll('.automatic-tippy');
+    if (automaticTippies) {
+        automaticTippies.forEach((automaticTippy) => {
+            let leftTippy = "ltippy" in automaticTippy.dataset ? automaticTippy.dataset.ltippy : '',
+                rightTippy = "rtippy" in automaticTippy.dataset ? automaticTippy.dataset.rtippy : '',
+                urlParams = {
+                    'filename': /filename=([^&]+)/.exec(window.location.href)[1],
+                },
+                commonOptions = {
+                    interactive: true,
+                    trigger: 'click',
+                    theme: 'light-border',
+                    animateFill: false,
+                    animation: 'scale',
+                    arrow: 'true',
+                    arrowType: 'round',
+                    multiple: 'true',
+                    flipOnUpdate: true,
+                    content: 'Chargement en cours...',
+                }
+            ;
+
+            if ("ltippy" in automaticTippy.dataset) {
+                urlParams = Object.assign({
+                    'definition': leftTippy,
+                }, urlParams);
+                let fetchUrl = Routing.generate('site_show_details', urlParams);
+                const options = Object.assign({
+                    placement: 'left',
+                    onShow(instance) {
+                        let xmlhttp = new XMLHttpRequest(),
+                            data = '';
+                        xmlhttp.onreadystatechange = () => {
+                            if (xmlhttp.readyState === XMLHttpRequest.DONE) {
+                                if (xmlhttp.status === 200) {
+                                    data = JSON.parse(xmlhttp.response);
+
+                                    instance.setContent(data.definition);
+                                }
+                            }
+                        };
+                        xmlhttp.open("GET", fetchUrl, true);
+                        xmlhttp.send();
+                    },
+                }, commonOptions);
+                tippy(automaticTippy, options);
+            }
+
+            if ("rtippy" in automaticTippy.dataset) {
+                urlParams = Object.assign({
+                    'value': rightTippy,
+                }, urlParams);
+                let fetchUrl = Routing.generate('site_show_details', urlParams);
+                const options = Object.assign({
+                    placement: 'right',
+                    onShow(instance) {
+                        let xmlhttp = new XMLHttpRequest(),
+                            data = '';
+                        xmlhttp.onreadystatechange = () => {
+                            if (xmlhttp.readyState === XMLHttpRequest.DONE) {
+                                if (xmlhttp.status === 200) {
+                                    data = JSON.parse(xmlhttp.response);
+
+                                    if ("value" in data) {
+                                        instance.setContent(data.value);
+                                    } else {
+                                        instance.setContent('<em>Information manquante</em>');
+                                    }
+                                }
+                            }
+                        };
+                        xmlhttp.open("GET", fetchUrl, true);
+                        xmlhttp.send();
+                    },
+                }, commonOptions);
+                tippy(automaticTippy, options);
+            }
         });
     }
 });

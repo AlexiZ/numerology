@@ -1,6 +1,7 @@
 @import "~@fortawesome/fontawesome-free/css/all.min.css";
 @import "~magnific-popup/dist/magnific-popup.css";
 @import "creative.css";
+@import "~tippy.js/themes/light-border.css";
 
 .tryPage {
   --input-padding-x: 1.5rem;
@@ -11,7 +12,25 @@
 .showPage, .tryPage {
   header.masthead {
     height: auto !important;
+    min-height: 100vh;
   }
+}
+
+.tippy-tooltip {
+  padding: 15px;
+  line-height: 1.5rem;
+  border-radius: 1rem;
+  background-color: #f4623a !important;
+  color: white !important;
+
+  .tippy-roundarrow {
+    transform: scale(1.5) !important;
+    fill: #f4623a !important;
+  }
+}
+
+.automatic-tippy {
+  cursor: pointer;
 }
 
 hr.underline-divider {

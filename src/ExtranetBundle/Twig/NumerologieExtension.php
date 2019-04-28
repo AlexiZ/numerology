@@ -5,6 +5,7 @@ namespace ExtranetBundle\Twig;
 use ExtranetBundle\Services\Numerologie;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
+use Twig\TwigFunction;
 
 class NumerologieExtension extends AbstractExtension
 {
@@ -57,6 +58,13 @@ class NumerologieExtension extends AbstractExtension
 
             new TwigFilter('getAnalysis', array($this, 'getAnalysis')),
         );
+    }
+
+    public function getFunctions()
+    {
+        return [
+            new TwigFunction('getDefinition', array($this, 'getDefinition')),
+        ];
     }
 
     /**
@@ -205,6 +213,11 @@ class NumerologieExtension extends AbstractExtension
     public function getSubject($md5)
     {
         return $this->numerologie->getSubject($md5);
+    }
+
+    public function getDefinition($context)
+    {
+        return $this->numerologie->getDefinition($context);
     }
 
     public function getAnalysis($number, $context)

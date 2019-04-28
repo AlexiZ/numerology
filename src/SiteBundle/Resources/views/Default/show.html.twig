@@ -35,149 +35,129 @@
                             </h5>
 
                             <div class="row">
-                                <div class="col-md-6 mb-3">
+                                <div class="col-md-12 mb-5">
                                     <h5>Identité</h5>
                                     <hr class="divider my-4 underline-divider">
 
-                                    <ul class="list-group">
-                                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <ul class="list-group mb-3">
+                                        <li class="list-group-item d-flex justify-content-between align-items-center automatic-tippy"
+                                            data-ltippy="global"
+                                            data-rtippy="{{ subject.data.identity.globalNumber }}">
                                             Nombre global
                                             <span class="badge badge-primary badge-pill">{{ subject.data.identity.globalNumber }}</span>
                                         </li>
-                                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                                            Nombre héréditaire
-                                            <span class="badge badge-primary badge-pill">{{ subject.data.identity.inheritedNumber }}</span>
-                                        </li>
-                                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                                            Nombre de mission
-                                            <span class="badge badge-primary badge-pill">{{ subject.data.identity.dutyNumber }}</span>
-                                        </li>
-                                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                                            Nombre social
-                                            <span class="badge badge-primary badge-pill">{{ subject.data.identity.socialNumber }}</span>
-                                        </li>
-                                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                                            Nombre de structure
-                                            <span class="badge badge-primary badge-pill">{{ subject.data.identity.structureNumber }}</span>
-                                        </li>
                                     </ul>
-                                </div>
 
-                                <div class="col-md-6 mb-3">
-                                    <h5>Lettres</h5>
-                                    <hr class="divider my-4 underline-divider">
+                                    {% set progressBars = {
+                                        physical: {
+                                            value: ((subject.publicName|totalLettrePhysique|default(1) / subject.publicName|length)*100)|number_format(0),
+                                            label: "Lettres physiques",
+                                            bg: "success",
+                                        },
+                                        emotional: {
+                                            value: ((subject.publicName|totalLettreEmotive|default(1) / subject.publicName|length)*100)|number_format(0),
+                                            label: "Lettres émotives",
+                                            bg: "info",
+                                        },
+                                        brain: {
+                                            value: ((subject.publicName|totalLettreCerebrale|default(1) / subject.publicName|length)*100)|number_format(0),
+                                            label: "Lettres cérébrales",
+                                            bg: "warning",
+                                        },
+                                        intuitive: {
+                                            value: ((subject.publicName|totalLettreIntuitive|default(1) / subject.publicName|length)*100)|number_format(0),
+                                            label: "Lettres intuitives",
+                                            bg: "danger",
+                                        }
+                                    } %}
 
-                                    {% set value1 = ((subject.publicName|totalLettrePhysique|default(1) / subject.publicName|length)*100)|number_format(0) %}
-                                    {% set value2 = ((subject.publicName|totalLettreEmotive|default(1) / subject.publicName|length)*100)|number_format(0) %}
-                                    {% set value3 = ((subject.publicName|totalLettreCerebrale|default(1) / subject.publicName|length)*100)|number_format(0) %}
-                                    {% set value4 = ((subject.publicName|totalLettreIntuitive|default(1) / subject.publicName|length)*100)|number_format(0) %}
-                                    <div class="progress">
-                                        <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: {{ value1 }}%" aria-valuenow="{{ value1 }}" aria-valuemin="0" aria-valuemax="100">
-                                            {% if value1|default %}{{ value1 }} %{% endif %}
+                                    {% for key, data in progressBars %}
+                                        <div class="progress">
+                                            <div class="progress-bar progress-bar-striped bg-{{ data.bg }} automatic-tippy"
+                                                 data-ltippy="{{ key }}"
+                                                 role="progressbar"
+                                                 style="width: {{ data.value }}%"
+                                                 aria-valuenow="{{ data.value }}" aria-valuemin="0" aria-valuemax="100">
+                                                {% if data.value|default %}{{ data.value }} %{% endif %}
+                                            </div>
+                                            <span>{{ data.label }}</span>
                                         </div>
-                                        <span>Physique</span>
-                                    </div>
-                                    <div class="progress">
-                                        <div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: {{ value2 }}%" aria-valuenow="{{ value2 }}" aria-valuemin="0" aria-valuemax="100">
-                                            {% if value2|default %}{{ value2 }} %{% endif %}
-                                        </div>
-                                        <span>Émotive</span>
-                                    </div>
-                                    <div class="progress">
-                                        <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: {{ value3 }}%" aria-valuenow="{{ value3 }}" aria-valuemin="0" aria-valuemax="100">
-                                            {% if value3|default %}{{ value3 }} %{% endif %}
-                                        </div>
-                                        <span>Cérébrale</span>
-                                    </div>
-                                    <div class="progress">
-                                        <div class="progress-bar progress-bar-striped bg-danger" role="progressbar" style="width: {{ value4 }}%" aria-valuenow="{{ value4 }}" aria-valuemin="0" aria-valuemax="100">
-                                            {% if value4|default %}{{ value4 }} %{% endif %}
-                                        </div>
-                                        <span>Intuitive</span>
-                                    </div>
+                                    {% endfor %}
                                 </div>
                             </div>
 
                             <div class="row">
-                                <div class="col-md-6">
-                                    <h5>Vibrations</h5>
-                                    <hr class="divider my-4 underline-divider">
-
-                                    {% set fullNames = subject.fullNames|replace({' ': ''}) %}
-                                    <ul class="list-group">
-                                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                                            Nombre total de lettres
-                                            <span class="badge badge-primary badge-pill">{{ fullNames|length }}</span>
-                                        </li>
-                                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                                            Nombre moyen de présence de chaque lettre
-                                            <span class="badge badge-primary badge-pill">{{ fullNames|nombreMoyenLettres|number_format(1, '.', ' ') }}</span>
-                                        </li>
-                                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                                            Nombres manquants
-                                            <span class="badge badge-primary badge-pill">{{ fullNames|numerosLettresManquantes|join(', ')|default('-') }}</span>
-                                        </li>
-                                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                                            Nombres faibles
-                                            <span class="badge badge-primary badge-pill">{{ fullNames|numerosLettresFaibles|join(', ') }}</span>
-                                        </li>
-                                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                                            Nombres forts
-                                            <span class="badge badge-primary badge-pill">{{ fullNames|numerosLettresFortes|join(', ') }}</span>
-                                        </li>
-                                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                                            Nombres moyens
-                                            <span class="badge badge-primary badge-pill">{{ fullNames|numerosLettresMoyennes|join(', ')|default('-') }}</span>
-                                        </li>
-                                    </ul>
-                                </div>
-
-                                <div class="col-md-6">
+                                <div class="col-md-12">
                                     <h5>Parcours de vie</h5>
                                     <hr class="divider my-4 underline-divider">
 
-                                    <ul class="list-group">
-                                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                                            Chemin de vie
-                                            <span class="badge badge-primary badge-pill">{{ subject.data.lifePath.lifePathNumber }}</span>
-                                        </li>
-                                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                                            Chemin d'idéal
-                                            <span class="badge badge-primary badge-pill">{{ subject.data.lifePath.idealNumber }}</span>
-                                        </li>
-                                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                                            Tournant majeur
-                                            <span class="badge badge-primary badge-pill">{{ subject.data.lifePath.majorTurnNumber }}</span>
-                                        </li>
-                                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                                            Année personnelle {{ "now"|date('Y') }}
-                                            <span class="badge badge-primary badge-pill">{{ subject.data.lifePath.personalYearNowNumber }}</span>
-                                        </li>
-                                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                                            Nombre astrologique
-                                            <span class="badge badge-primary badge-pill">{{ subject.data.lifePath.astrologicalNumber }}</span>
-                                        </li>
-                                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                                            Nombre du très court terme
-                                            <span class="badge badge-primary badge-pill">{{ subject.data.lifePath.veryShortTermNumber }}</span>
-                                        </li>
-                                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                                            Nombre du court terme
-                                            <span class="badge badge-primary badge-pill">{{ subject.data.lifePath.shortTermNumber }}</span>
-                                        </li>
-                                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                                            Nombre du moyen terme
-                                            <span class="badge badge-primary badge-pill">{{ subject.data.lifePath.meanTermNumber }}</span>
-                                        </li>
-                                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                                            Nombre du long terme
-                                            <span class="badge badge-primary badge-pill">{{ subject.data.lifePath.longTermNumber }}</span>
-                                        </li>
-                                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                                            Nombre secret
-                                            <span class="badge badge-primary badge-pill">{{ subject.data.lifePath.secretNumber }}</span>
-                                        </li>
-                                    </ul>
+                                    <div class="row">
+                                        <ul class="list-group col-md-6">
+                                            <li class="list-group-item d-flex justify-content-between align-items-center automatic-tippy"
+                                                data-ltippy="lifepath"
+                                                data-rtippy="{{ subject.data.lifePath.lifePathNumber }}">
+                                                Chemin de vie
+                                                <span class="badge badge-primary badge-pill">{{ subject.data.lifePath.lifePathNumber }}</span>
+                                            </li>
+                                            <li class="list-group-item d-flex justify-content-between align-items-center automatic-tippy"
+                                                data-ltippy="ideal"
+                                                data-rtippy="{{ subject.data.lifePath.idealNumber }}">
+                                                Chemin d'idéal
+                                                <span class="badge badge-primary badge-pill">{{ subject.data.lifePath.idealNumber }}</span>
+                                            </li>
+                                            <li class="list-group-item d-flex justify-content-between align-items-center automatic-tippy"
+                                                data-ltippy="majorturn"
+                                                data-rtippy="{{ subject.data.lifePath.majorTurnNumber }}">
+                                                Tournant majeur
+                                                <span class="badge badge-primary badge-pill">{{ subject.data.lifePath.majorTurnNumber }}</span>
+                                            </li>
+                                            <li class="list-group-item d-flex justify-content-between align-items-center automatic-tippy"
+                                                data-ltippy="personalyearnow"
+                                                data-rtippy="{{ subject.data.lifePath.personalYearNowNumber }}">
+                                                Année personnelle {{ "now"|date('Y') }}
+                                                <span class="badge badge-primary badge-pill">{{ subject.data.lifePath.personalYearNowNumber }}</span>
+                                            </li>
+                                            <li class="list-group-item d-flex justify-content-between align-items-center automatic-tippy"
+                                                data-ltippy="astrological"
+                                                data-rtippy="{{ subject.data.lifePath.astrologicalNumber }}">
+                                                Nombre astrologique
+                                                <span class="badge badge-primary badge-pill">{{ subject.data.lifePath.astrologicalNumber }}</span>
+                                            </li>
+                                        </ul>
+
+                                        <ul class="list-group col-md-6">
+                                            <li class="list-group-item d-flex justify-content-between align-items-center automatic-tippy"
+                                                data-ltippy="veryshortterm"
+                                                data-rtippy="{{ subject.data.lifePath.veryShortTermNumber }}">
+                                                Nombre du très court terme
+                                                <span class="badge badge-primary badge-pill">{{ subject.data.lifePath.veryShortTermNumber }}</span>
+                                            </li>
+                                            <li class="list-group-item d-flex justify-content-between align-items-center automatic-tippy"
+                                                data-ltippy="shortterm"
+                                                data-rtippy="{{ subject.data.lifePath.shortTermNumber }}">
+                                                Nombre du court terme
+                                                <span class="badge badge-primary badge-pill">{{ subject.data.lifePath.shortTermNumber }}</span>
+                                            </li>
+                                            <li class="list-group-item d-flex justify-content-between align-items-center automatic-tippy"
+                                                data-ltippy="meanterm"
+                                                data-rtippy="{{ subject.data.lifePath.meanTermNumber }}">
+                                                Nombre du moyen terme
+                                                <span class="badge badge-primary badge-pill">{{ subject.data.lifePath.meanTermNumber }}</span>
+                                            </li>
+                                            <li class="list-group-item d-flex justify-content-between align-items-center automatic-tippy"
+                                                data-ltippy="longterm"
+                                                data-rtippy="{{ subject.data.lifePath.longTermNumber }}">
+                                                Nombre du long terme
+                                                <span class="badge badge-primary badge-pill">{{ subject.data.lifePath.longTermNumber }}</span>
+                                            </li>
+                                            <li class="list-group-item d-flex justify-content-between align-items-center automatic-tippy"
+                                                data-ltippy="secret"
+                                                data-rtippy="{{ subject.data.lifePath.secretNumber }}">
+                                                Nombre secret
+                                                <span class="badge badge-primary badge-pill">{{ subject.data.lifePath.secretNumber }}</span>
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
                         </div>

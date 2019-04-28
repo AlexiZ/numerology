@@ -73,7 +73,7 @@
 
             <div class="collapse" id="collapseCardExample0" style="">
                 <div class="card-body">
-                    <p class="mb-3"><small><em>Ce nombre indique comment est vécu le parcours de l'existence.</em></small></p>
+                    <p class="mb-3"><small><em>{{ getDefinition('lifepath')|raw }}</em></small></p>
                 </div>
             </div>
         </div>
@@ -89,7 +89,7 @@
             </a>
             <div class="collapse" id="collapseCardExample1" style="">
                 <div class="card-body">
-                    <p class="mb-3"><small><em>Ce nombre indique quel est le but à atteindre en parcourant le chemin de vie.</em></small></p>
+                    <p class="mb-3"><small><em>{{ getDefinition('ideal')|raw }}</em></small></p>
                 </div>
             </div>
         </div>
@@ -105,7 +105,7 @@
             </a>
             <div class="collapse" id="collapseCardExample2" style="">
                 <div class="card-body">
-                    <p class="mb-3"><small><em>Ce nombre indique à que âge et quelle année se produit quelque chose - événement, prise de conscience, décision - dont l'influence est déterminante sur le reste de sa vie.</em></small></p>
+                    <p class="mb-3"><small><em>{{ getDefinition('majorturn')|raw }}</em></small></p>
                 </div>
             </div>
         </div>
@@ -121,7 +121,7 @@
             </a>
             <div class="collapse" id="collapseCardExample3" style="">
                 <div class="card-body">
-                    <p class="mb-3"><small><em>Cette notion permet de découvrir un cycle qui rythme de manière importante le chemin de vie.</em></small></p>
+                    <p class="mb-3"><small><em>{{ getDefinition('personalyearnow')|raw }}</em></small></p>
                 </div>
             </div>
         </div>
@@ -137,7 +137,7 @@
             </a>
             <div class="collapse" id="collapseCardExample4" style="">
                 <div class="card-body">
-                    <p class="mb-3"><small><em>C'est un nombre qui regroupe l'ensemble des informations de la naissance, comme pour un thème astrologique. De ce fait, ce nombre est le signe astrologique caché de la personne, un signe secondaire dont la force agit en soutien de la personnalité apparente.</em></small></p>
+                    <p class="mb-3"><small><em>{{ getDefinition('astrological')|raw }}</em></small></p>
                 </div>
             </div>
         </div>
@@ -155,7 +155,7 @@
             </a>
             <div class="collapse" id="collapseCardExample5" style="">
                 <div class="card-body">
-                    <p class="mb-3"><small><em>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Condimentum id venenatis a condimentum vitae. Nunc aliquet bibendum enim facilisis gravida. Fringilla est ullamcorper eget nulla facilisi etiam dignissim.</em></small></p>
+                    <p class="mb-3"><small><em>{{ getDefinition('veryshortterm'|raw) }}</em></small></p>
                 </div>
             </div>
         </div>
@@ -171,7 +171,7 @@
             </a>
             <div class="collapse" id="collapseCardExample6" style="">
                 <div class="card-body">
-                    <p class="mb-3"><small><em>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Condimentum id venenatis a condimentum vitae. Nunc aliquet bibendum enim facilisis gravida. Fringilla est ullamcorper eget nulla facilisi etiam dignissim.</em></small></p>
+                    <p class="mb-3"><small><em>{{ getDefinition('shortterm')|raw }}</em></small></p>
                 </div>
             </div>
         </div>
@@ -187,7 +187,7 @@
             </a>
             <div class="collapse" id="collapseCardExample7" style="">
                 <div class="card-body">
-                    <p class="mb-3"><small><em>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Condimentum id venenatis a condimentum vitae. Nunc aliquet bibendum enim facilisis gravida. Fringilla est ullamcorper eget nulla facilisi etiam dignissim.</em></small></p>
+                    <p class="mb-3"><small><em>{{ getDefinition('meanterm')|raw }}</em></small></p>
                 </div>
             </div>
         </div>
@@ -203,7 +203,7 @@
             </a>
             <div class="collapse" id="collapseCardExample8" style="">
                 <div class="card-body">
-                    <p class="mb-3"><small><em>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Condimentum id venenatis a condimentum vitae. Nunc aliquet bibendum enim facilisis gravida. Fringilla est ullamcorper eget nulla facilisi etiam dignissim.</em></small></p>
+                    <p class="mb-3"><small><em>{{ getDefinition('longterm')|raw }}</em></small></p>
                 </div>
             </div>
         </div>
@@ -219,8 +219,7 @@
             </a>
             <div class="collapse" id="collapseCardExample9" style="">
                 <div class="card-body">
-                    <p class="mb-3"><small><em>Chaque personne naît d'une conjonction entre, d'une part, la volonté d'un couple issu de deux lignées familiales et, d'autre part, sa matérialisation sur la courbe du temps, qui fait de chacun de nous un être unique.</em></small></p>
-                    <p class="mb-3"><small><em>Du point de vue numérologique, on visualise cette composition grâce à la combinaison du nombre de la vibration globale, représentatif de l'énergie généalogique, avec le nombre d'idéal, rvélateur de l'impulsion dispensée par le moment précis de la naissance.</em></small></p>
+                    <p class="mb-3"><small><em>{{ getDefinition('secret')|raw }}</em></small></p>
                 </div>
             </div>
         </div>

@@ -132,6 +132,11 @@ class JsonIO
 
     public function readAnalysis($number, $context)
     {
-        return $this->readJson($this->dataFileFolder.$number)[$context];
+        return $this->readJson($this->dataFileFolder.'numbers/'.$number)[$context];
+    }
+
+    public function readDefinition($context)
+    {
+        return $this->readJson($this->dataFileFolder.'definitions/'.$context)['definition'];
     }
 }

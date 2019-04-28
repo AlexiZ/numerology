@@ -12,7 +12,7 @@
 
             <div class="collapse show" id="collapseGlobalNumber">
                 <div class="card-body">
-                    <p class="mb-3"><small><em>Le nombre global, obtenu en effectuant la somme des nombres héréditaires et des nombres de mission, exprime quelle vibration émane de l’identité complète. Il indique quelle influence subit la personne du fait de cette identité dans sa manière de fonctionner et d’exister.</em></small></p>
+                    <p class="mb-3"><small><em>{{ getDefinition('global')|raw }}</em></small></p>
                     <p>{{ subject.data.identity.globalNumber|getAnalysis('global')|raw }}</p>
                 </div>
             </div>
@@ -32,7 +32,7 @@
 
             <div class="collapse show" id="collapseInheritedNumber">
                 <div class="card-body">
-                    <p class="mb-3"><small><em>En s’inscrivant dans une lignée familiale, un individu reçoit par le nom de cette famille une vibration qui, dans sa personnalité et son comportement, soutient et stimule les caractéristiques que dévoile le nombre héréditaire. Celui-ci est calculé en additionnant les nombres correspondant à toutes les lettres du nom.</em></small></p>
+                    <p class="mb-3"><small><em>{{ getDefinition('inherited')|raw }}</em></small></p>
                     <p>{{ subject.data.identity.inheritedNumber|getAnalysis('inherited')|raw }}</p>
                 </div>
             </div>
@@ -50,7 +50,7 @@
 
             <div class="collapse show" id="collapseDutyNumber">
                 <div class="card-body">
-                    <p class="mb-3"><small><em>Le nombre de mission exprime quelle mission les parents confient à leur enfant par le biais des prénoms qu’ils choisissent pour lui. Celle-ci peut être en adéquation ou non avec les aspirations profondes et les autres caractéristiques de la personnalité de l’individu.</em></small></p>
+                    <p class="mb-3"><small><em>{{ getDefinition('duty')|raw }}</em></small></p>
                     <p>{{ subject.data.identity.dutyNumber|getAnalysis('duty')|raw }}</p>
                 </div>
             </div>
@@ -70,7 +70,7 @@
 
             <div class="collapse show" id="collapseSocialNumber">
                 <div class="card-body">
-                    <p class="mb-3"><small><em>Le nombre social donne des indications sur la façon dont le nom et les prénoms influent sur la manière de se réaliser dans la société et comment socialement la personne peut être perçue. On calcule le nombre social d’un nom ou d’un prénom en effectuant la somme de ses voyelles.</em></small></p>
+                    <p class="mb-3"><small><em>{{ getDefinition('social')|raw }}</em></small></p>
                     <p>{{ subject.data.identity.socialNumber|getAnalysis('social')|raw }}</p>
                 </div>
             </div>
@@ -88,7 +88,7 @@
 
             <div class="collapse show" id="collapseStructureNumber">
                 <div class="card-body">
-                    <p class="mb-3"><small><em>Le nombre de structure expose quelle vibration agit sur la manière de se structurer, de se construire et de s’ancrer dans l’existence. On calcule le nombre de structure d’un nom ou d’un prénom en effectuant la somme de ses consonnes.</em></small></p>
+                    <p class="mb-3"><small><em>{{ getDefinition('structure')|raw }}</em></small></p>
                     <p>{{ subject.data.identity.structureNumber|getAnalysis('structure')|raw }}</p>
                 </div>
             </div>

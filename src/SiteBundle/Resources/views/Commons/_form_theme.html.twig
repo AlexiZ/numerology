@@ -1,7 +1,8 @@
 {%- block collection_widget -%}
+    {% dump(form.vars.prototype.vars) %}
     {% if prototype is defined %}
         <ul id="{{ name }}-fields-list"
-            data-prototype="{{ '<div class="form-label-group added-collection-input"><input type="text" id="app_bundle_numerologie_otherFirstnames___name__" name="app_bundle_numerologie[otherFirstnames][__name__]" class="form-control" /><label for="app_bundle_numerologie_otherFirstnames___name__">__label__</label></div>'|e }}"
+            data-prototype="{{ ('<div class="form-label-group added-collection-input"><input type="text" id="'~form.vars.prototype.vars.id~'" name="'~form.vars.prototype.vars.full_name~'" class="form-control" /><label for="'~form.vars.prototype.vars.id~'">__label__</label></div>')|e }}"
             data-widget-tags="{{ '<li></li>'|e }}">
 
             {% for field in form %}

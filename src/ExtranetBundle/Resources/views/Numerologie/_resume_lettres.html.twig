@@ -54,7 +54,7 @@
             <div class="collapse show" id="collapsePhysical">
                 <div class="card-body">
                     <p>
-                        Elles concernent ce qui a trait à la réalité, à l’expérience, aux capacités d’action, au réalisme, à la rationalité, aux facultés permettant d’affronter la société et les responsabilités ainsi qu’au désir d’agir concrètement.
+                        {{ getDefinition('physical')|raw }}
                     </p>
                 </div>
             </div>
@@ -72,7 +72,7 @@
             <div class="collapse show" id="collapseEmotional">
                 <div class="card-body">
                     <p>
-                        Elles parlent de ce qui concerne les sentiments, les émotions, l’affectif et les relations.
+                        {{ getDefinition('emotional')|raw }}
                     </p>
                 </div>
             </div>
@@ -90,7 +90,7 @@
             <div class="collapse show" id="collapseBrain">
                 <div class="card-body">
                     <p>
-                        Elles concernent ce qui touche au raisonnement, à l’imagination, à l’activité mentale, à la réflexion, à l’intelligence et à la vie intellectuelle et psychique.
+                        {{ getDefinition('brain')|raw }}
                     </p>
                 </div>
             </div>
@@ -108,7 +108,7 @@
             <div class="collapse show" id="collapseFeel">
                 <div class="card-body">
                     <p>
-                        Elles révèlent comment l’identité de la personne la pousse à sentir, deviner, percevoir ou anticiper ce qui n’est pas directement visible, ce qui va se passer ou ce qui se trame derrière les apparences.
+                        {{ getDefinition('intuitive')|raw }}
                     </p>
                 </div>
             </div>

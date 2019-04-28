@@ -18,7 +18,8 @@
     "popper.js": "^1.15.0",
     "shepherd.js": "^2.5.0",
     "startbootstrap-creative": "^5.1.4",
-    "startbootstrap-sb-admin-2": "^4.0.3"
+    "startbootstrap-sb-admin-2": "^4.0.3",
+    "tippy.js": "^4.3.0"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",

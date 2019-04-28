@@ -47,5 +47,5 @@ Add a pre-commit hook with this script to automatically update :
 ```bash
 #!/bin/bash
 
-echo "$(date +%d\ %b\ %Y)" > /home/alexis/sandbox/numerology/app/Resources/views/latest.html.twig
+echo "$(date +%d\ %b\ %Y)" > ./app/Resources/views/latest.html.twig
 ```
