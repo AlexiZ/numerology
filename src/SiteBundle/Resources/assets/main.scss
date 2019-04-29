@@ -20,17 +20,35 @@
   padding: 15px;
   line-height: 1.5rem;
   border-radius: 1rem;
-  background-color: #f4623a !important;
-  color: white !important;
 
-  .tippy-roundarrow {
-    transform: scale(1.5) !important;
-    fill: #f4623a !important;
+  &.light-border-theme {
+    background-color: #f4623a !important;
+    color: white !important;
+
+    .tippy-roundarrow {
+      transform: scale(1.5) !important;
+      fill: #f4623a !important;
+    }
+  }
+
+  &.light-theme {
+    background-color: #17a2b8 !important;
+    color: white !important;
+
+    .tippy-roundarrow {
+      transform: scale(1.5) !important;
+      fill: #17a2b8 !important;
+    }
   }
 }
 
 .automatic-tippy {
   cursor: pointer;
+}
+
+.premium-only {
+  background-color: #e6e6e6;
+  cursor: not-allowed;
 }
 
 hr.underline-divider {

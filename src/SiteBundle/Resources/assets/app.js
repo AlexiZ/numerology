@@ -113,6 +113,16 @@ $(document).ready(() => {
                 }, commonOptions);
                 tippy(automaticTippy, options);
             }
+
+            if ("premium" in automaticTippy.dataset) {
+                let commonOptionsClone = commonOptions;
+                const options = Object.assign(commonOptionsClone, {
+                    placement: 'right',
+                    theme: 'light',
+                    content: 'Cette information est disponible dans <a href="#premium" class="btn btn-primary">notre offre premium</a>',
+                });
+                tippy(automaticTippy, options);
+            }
         });
     }
 });
