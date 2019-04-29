@@ -18,6 +18,17 @@
     </head>
 
     <body id="page-top" {% block bodyAttr %}{% endblock bodyAttr %}>
+        <a class="float" data-toggle="collapse" href="#book-cover" role="button" aria-expanded="false" aria-controls="book-cover">
+            <i class="fa fa-2x fa-search my-float"></i>
+        </a>
+        <div class="collapse" id="book-cover">
+            <div class="card card-body">
+                <a href="#">
+                    <img src="https://www.editions-bussiere.com/1297-thickbox_default/numerologie-essentielle-heritages-et-parcours-de-vie.jpg" alt="book-cover">
+                </a>
+            </div>
+        </div>
+
         <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
             <div class="container">
                 <a class="navbar-brand js-scroll-trigger" href="{{ path('site_homepage') }}#page-top">Numérologie</a>
