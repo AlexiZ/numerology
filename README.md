@@ -18,7 +18,7 @@ Automatically calculate a person's numerology theme.
 - Internationalization
 - ~~Chat~~
 - ~~Data editing~~
-- ~~PDF export~~
+- PDF export
 - Comparison
 - ~~Notifications~~
 
