@@ -38,3 +38,5 @@ parameters:
     slack.admins: xxx
 
     osm.geocoding_api: xxx
+
+    contact.email: xxx

@@ -1,0 +1,52 @@
+{% extends '@Site/base.html.twig' %}
+
+{% block title %}{{ parent() }} - Écrivez-nous{% endblock %}
+
+{% block bodyAttr %}class="tryPage"{% endblock bodyAttr %}
+
+{% block body %}
+    <header class="masthead">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 col-xl-9 mx-auto">
+                    <div class="card card-signin flex-row my-5">
+                        <div class="card-body">
+                            <h5 class="card-title text-center">Écrivez-nous</h5>
+
+                            {% for key, message in app.session.flashbag.all %}
+                                <div class="alert alert-{{ key }}">{{ message|join('') }}</div>
+                            {% endfor %}
+
+                            {% form_theme form '@Site/Commons/_form_theme.html.twig' %}
+
+                            {{ form_start(form, {'attr': {'class': 'form-signin'}}) }}
+                                {{ form_errors(form) }}
+
+                                <div class="row">
+                                    <div class="form-label-group col-md-12">
+                                        {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
+                                        {{ form_label(form.email) }}
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-label-group col-md-12">
+                                        {{ form_widget(form.body, {'attr': {'class': 'form-control'}}) }}
+                                    </div>
+                                </div>
+
+                                {{ form_rest(form) }}
+
+                                <hr class="my-4">
+
+                                <button class="btn btn-lg btn-info btn-block text-uppercase" type="submit">
+                                    <i class="fa fa-check mr-2"></i> Envoyer ce message
+                                </button>
+                            {{ form_end(form) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+{% endblock body %}
