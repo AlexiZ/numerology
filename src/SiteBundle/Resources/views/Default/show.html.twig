@@ -2,21 +2,6 @@
 
 {% block title %}{{ parent() }} - {{ subject }}{% endblock %}
 
-{% block navbar %}
-    <li class="nav-item">
-        <a class="nav-link js-scroll-trigger" href="{{ path('site_homepage') }}#about">À propos</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link js-scroll-trigger active" href="{{ path('site_homepage') }}#try">Essayez gratuitement</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link js-scroll-trigger" href="{{ path('site_homepage') }}#extranet">Espace client</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link js-scroll-trigger" href="{{ path('site_homepage') }}#contact">Contact</a>
-    </li>
-{% endblock navbar %}
-
 {% block bodyAttr %}class="showPage"{% endblock bodyAttr %}
 
 {% block body %}
