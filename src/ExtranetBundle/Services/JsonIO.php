@@ -2,7 +2,7 @@
 
 namespace ExtranetBundle\Services;
 
-use ExtranetBundle\Entity\Numerologie;
+use ExtranetBundle\Entity\Analysis;
 use ExtranetBundle\Security\User;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
@@ -97,7 +97,7 @@ class JsonIO
         return false;
     }
 
-    public function writeNumerology(Numerologie $subject, array $data)
+    public function writeNumerology(Analysis $subject, array $data)
     {
         $this->writeJson($this->storageFileFolder, $subject->getFileName(true), json_encode($subject->serialize($data)));
 

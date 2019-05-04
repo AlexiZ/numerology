@@ -428,7 +428,7 @@ const tutorial = () => {
     ;
 
     switch (section) {
-        case 'numerologie_index':
+        case 'extranet_index':
             tourSteps = {
                 'stepOne': {
                     title: 'Bienvenue !',
@@ -491,19 +491,19 @@ const tutorial = () => {
                 },
                 'lastStep': {
                     title: 'Prochaine étape',
-                    text: 'Vous en savez suffisamment sur votre page d\'accueil pour démarrer, mais n\'hésitez pas à <a href="' + Routing.generate('messages_show') + '">nous écrire</a> si besoin.<br><br>Générez votre première <a href="' + Routing.generate('numerologie_add') + '">analyse numérologique</a> dès à présent.',
+                    text: 'Vous en savez suffisamment sur votre page d\'accueil pour démarrer, mais n\'hésitez pas à <a href="' + Routing.generate('messages_show') + '">nous écrire</a> si besoin.<br><br>Générez votre première <a href="' + Routing.generate('extranet_add') + '">analyse numérologique</a> dès à présent.',
                     buttons: [buttonBack, {
                         text: '<i class="fa fa-arrow-right"></i> Commencer <i class="fa fa-arrow-left"></i>',
                         classes: 'btn-real-success',
                         action: () => {
-                            window.location.href = Routing.generate('numerologie_add');
+                            window.location.href = Routing.generate('extranet_add');
                         },
                     }, buttonEnd],
                     tippyOptions: { maxWidth: '500px' }
                 }
             };
             break;
-        case 'numerologie_add':
+        case 'extranet_add':
             tourSteps = {
                 'stepOne': {
                     title: 'Ajouter une nouvelle personne',
@@ -516,7 +516,7 @@ const tutorial = () => {
                     title: 'Nom de famille de naissance',
                     text: 'Renseignez la 1<sup>ère</sup> information : le nom de famille de naissance.<br>Celui-ci fait partie des deux seuls champs obligatoires et nécessaires pour construire l\'analyse.',
                     buttons: [buttonBack, buttonNext],
-                    attachTo: {element: '#app_bundle_numerologie_birthName', on: 'bottom'},
+                    attachTo: {element: '#app_bundle_extranet_birthName', on: 'bottom'},
                     highlightClass: 'reallyWhite',
                     showCancelLink: true,
                     tippyOptions: { maxWidth: '500px' }
@@ -525,7 +525,7 @@ const tutorial = () => {
                     title: 'Nom d\'usage',
                     text: '2<sup>ème</sup> information : le nom d\'usage.<br>Vous renseignerez ici le nom de famille officiel. Cela peut être le nom de marige, d\'adoption ou encore un surnom ou un nom de scène.',
                     buttons: [buttonBack, buttonNext],
-                    attachTo: {element: '#app_bundle_numerologie_useName', on: 'bottom'},
+                    attachTo: {element: '#app_bundle_extranet_useName', on: 'bottom'},
                     highlightClass: 'reallyWhite',
                     showCancelLink: true,
                     tippyOptions: { maxWidth: '500px' }
@@ -534,7 +534,7 @@ const tutorial = () => {
                     title: '1<sup>er</sup> prénom',
                     text: 'Données obligatoire également, le premier prénom doit être rempli.<br><em>Ne mettez ici qu\'un seul prénom, composé ou non.</em>',
                     buttons: [buttonBack, buttonNext],
-                    attachTo: {element: '#app_bundle_numerologie_firstname', on: 'bottom'},
+                    attachTo: {element: '#app_bundle_extranet_firstname', on: 'bottom'},
                     highlightClass: 'reallyWhite',
                     showCancelLink: true,
                     tippyOptions: { maxWidth: '500px' }
@@ -552,7 +552,7 @@ const tutorial = () => {
                     title: 'Date et heure de naissance',
                     text: 'La date et l\'heure de naissance vont vous permettre d\'accéder à une analyse numérologique bien plus complète.',
                     buttons: [buttonBack, buttonNext],
-                    attachTo: {element: '#app_bundle_numerologie_birthDate', on: 'top'},
+                    attachTo: {element: '#app_bundle_extranet_birthDate', on: 'top'},
                     highlightClass: 'reallyWhite',
                     showCancelLink: true,
                     tippyOptions: { maxWidth: '500px' }
@@ -561,7 +561,7 @@ const tutorial = () => {
                     title: 'Lieu de naissance',
                     text: 'De la même manière, le lieu de naissance permet de comprendre pleinement un individu.',
                     buttons: [buttonBack, buttonNext],
-                    attachTo: {element: '#app_bundle_numerologie_birthPlace', on: 'top'},
+                    attachTo: {element: '#app_bundle_extranet_birthPlace', on: 'top'},
                     highlightClass: 'reallyWhite',
                     showCancelLink: true,
                     tippyOptions: { maxWidth: '500px' }

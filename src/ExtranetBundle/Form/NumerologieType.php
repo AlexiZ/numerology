@@ -2,7 +2,7 @@
 
 namespace ExtranetBundle\Form;
 
-use ExtranetBundle\Entity\Numerologie;
+use ExtranetBundle\Entity\Analysis;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
@@ -81,7 +81,7 @@ class NumerologieType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Numerologie::class,
+            'data_class' => Analysis::class,
         ]);
     }
 

@@ -5,11 +5,11 @@
 {% endblock %}
 
 {% block pagesubtitle %}
-    <a href="{{ path('numerologie_show', {'filename': app.request.get('md5')}) }}" class="btn btn-light btn-icon-split">
+    <a href="{{ path('extranet_show', {'hash': subject.hash}) }}" class="btn btn-light btn-icon-split">
         <span class="icon text-gray-600">
             <i class="fa fa-arrow-left"></i>
         </span>
-        <span class="text">Voir la numérologie de cette personne</span>
+        <span class="text">Voir la numérologie de {{ subject }}</span>
     </a>
 {% endblock pagesubtitle %}
 
@@ -19,12 +19,12 @@
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
                     <h6 class="m-0 font-weight-bold text-primary">
-                        Édition des données
+                        Modification des données
                     </h6>
                 </div>
 
                 <div class="card-body">
-                    {% form_theme form '@Extranet/Numerologie/_form_theme.html.twig' %}
+                    {% form_theme form '@Extranet/Analysis/_form_theme.html.twig' %}
 
                     {{ form_start(form) }}
                     {{ form_errors(form) }}

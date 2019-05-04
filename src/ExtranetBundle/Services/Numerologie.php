@@ -2,7 +2,7 @@
 
 namespace ExtranetBundle\Services;
 
-use ExtranetBundle\Entity\Numerologie as NumerologieEntity;
+use ExtranetBundle\Entity\Analysis as Analysis;
 
 class Numerologie
 {
@@ -70,7 +70,7 @@ class Numerologie
         $this->geocoding = $geocoding;
     }
 
-    public function exportData(NumerologieEntity $subject)
+    public function exportData(Analysis $subject)
     {
         return [
             'identity' => [
@@ -210,7 +210,7 @@ class Numerologie
             }
             if ($name == $md5) {
                 $data = json_decode($file, true);
-                $subject = new NumerologieEntity();
+                $subject = new Analysis();
                 $subject->unserialize($data);
             }
         }
@@ -233,27 +233,27 @@ class Numerologie
         return $total;
     }
 
-    public function getInheritedNumber(NumerologieEntity $subject)
+    public function getInheritedNumber(Analysis $subject)
     {
         return $this->reducedTotalNumber('letter', $subject->getUseName().$subject->getBirthName().implode('', $subject->getPseudos()));
     }
 
-    public function getDutyNumber(NumerologieEntity $subject)
+    public function getDutyNumber(Analysis $subject)
     {
         return $this->reducedTotalNumber('letter', $subject->getFirstName().implode('', $subject->getOtherFirstnames()));
     }
 
-    public function getSocialNumber(NumerologieEntity $subject)
+    public function getSocialNumber(Analysis $subject)
     {
         return $this->reducedTotalNumber('vowel', $subject->getUseName().$subject->getBirthName().implode('', $subject->getPseudos()).$subject->getFirstName().implode('', $subject->getOtherFirstnames()));
     }
 
-    public function getStructureNumber(NumerologieEntity $subject)
+    public function getStructureNumber(Analysis $subject)
     {
         return $this->reducedTotalNumber('consonant', $subject->getUseName().$subject->getBirthName().implode('', $subject->getPseudos()).$subject->getFirstName().implode('', $subject->getOtherFirstnames()));
     }
 
-    public function getGlobalNumber(NumerologieEntity $subject)
+    public function getGlobalNumber(Analysis $subject)
     {
         return $this->addNumberDigits(
             (int) $this->reducedTotalNumber('letter', $subject->getUseName().$subject->getBirthName().implode('', $subject->getPseudos()))
@@ -327,54 +327,54 @@ class Numerologie
         }, $occurrences, array_keys($occurrences)));
     }
 
-    public function getLifePathNumber(NumerologieEntity $subject)
+    public function getLifePathNumber(Analysis $subject)
     {
         return $this->reduceNumber($subject->getBirthDate()->format('dmY'));
     }
 
-    public function getIdealNumber(NumerologieEntity $subject)
+    public function getIdealNumber(Analysis $subject)
     {
         return $this->reduceNumber($subject->getBirthDate()->format('dmYhi'));
     }
 
-    public function getMajorTurnNumber(NumerologieEntity $subject)
+    public function getMajorTurnNumber(Analysis $subject)
     {
         return (int) $subject->getBirthDate()->format('d') + (int) $subject->getBirthDate()->format('m');
     }
 
-    public function getPersonnalYearNowNumber(NumerologieEntity $subject)
+    public function getPersonnalYearNowNumber(Analysis $subject)
     {
         return $this->reduceNumber($subject->getBirthDate()->format('dm').date('Y'));
     }
 
-    public function getAstrologicalNumber(NumerologieEntity $subject)
+    public function getAstrologicalNumber(Analysis $subject)
     {
         $cityCoordinates = str_replace([',', '.'], '', $this->geocoding->getGeolocation($subject->getBirthPlace()));
 
         return $this->reduceNumber($subject->getBirthDate()->format('dmYhi').$cityCoordinates, [10]);
     }
 
-    public function getVeryShortTermNumber(NumerologieEntity $subject)
+    public function getVeryShortTermNumber(Analysis $subject)
     {
         return $this->reduceNumber($subject->getBirthDate()->format('hi'));
     }
 
-    public function getShortTermNumber(NumerologieEntity $subject)
+    public function getShortTermNumber(Analysis $subject)
     {
         return $this->reduceNumber($subject->getBirthDate()->format('d'));
     }
 
-    public function getMeanTermNumber(NumerologieEntity $subject)
+    public function getMeanTermNumber(Analysis $subject)
     {
         return $this->reduceNumber($subject->getBirthDate()->format('m'));
     }
 
-    public function getLongTermNumber(NumerologieEntity $subject)
+    public function getLongTermNumber(Analysis $subject)
     {
         return $this->reduceNumber($subject->getBirthDate()->format('Y'));
     }
 
-    public function getSecretNumber(NumerologieEntity $subject)
+    public function getSecretNumber(Analysis $subject)
     {
         return $this->reduceNumber((string) ($this->getGlobalNumber($subject) + $this->getIdealNumber($subject)));
     }

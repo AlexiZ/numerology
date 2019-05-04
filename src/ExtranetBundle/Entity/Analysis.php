@@ -2,47 +2,115 @@
 
 namespace ExtranetBundle\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+
 /**
- * Numerologie
+ * @ORM\Entity(repositoryClass="ExtranetBundle\Repository\AnalysisRepository")
+ * @ORM\Table(name="numerologie")
  */
-class Numerologie
+class Analysis
 {
+    const STATUS_ACTIVE = 'active';
+    const STATUS_DELETED = 'deleted';
+
+    /**
+     * @var integer
+     * @ORM\Column(type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
     /**
      * @var string
+     * @ORM\Column(type="string", length=255)
      */
     private $birthName;
 
     /**
      * @var string
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $useName;
 
     /**
      * @var string
+     * @ORM\Column(type="string", length=255)
      */
     private $firstname;
 
     /**
      * @var array
+     * @ORM\Column(type="array", nullable=true)
      */
     private $otherFirstnames;
 
     /**
      * @var array
+     * @ORM\Column(type="array", nullable=true)
      */
     private $pseudos = [];
 
     /**
      * @var \Datetime
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $birthDate;
 
     /**
      * @var string
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $birthPlace;
 
+    /**
+     * @var array
+     * @ORM\Column(type="array", nullable=true)
+     */
     private $data = [];
+
+    /**
+     * @var string
+     * @ORM\Column(type="string", length=255)
+     */
+    private $status;
+
+    /**
+     * @var string
+     * @ORM\Column(type="string", length=255)
+     */
+    private $hash;
+
+    /**
+     * @var string
+     * @ORM\Column(type="string", length=255)
+     */
+    private $userId;
+
+    /**
+     * @var \Datetime
+     * @ORM\Column(type="datetime")
+     */
+    private $createdAt;
+
+    /**
+     * @var \Datetime
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $updatedAt;
+
+    public static $statusValues = [
+        self::STATUS_ACTIVE,
+        self::STATUS_DELETED,
+    ];
+
+
+    public function __construct()
+    {
+        $this->status = self::STATUS_ACTIVE;
+        $this->hash = uniqid();
+        $this->setCreatedAt(new \DateTime());
+    }
 
     public function __toString()
     {
@@ -133,6 +201,14 @@ class Numerologie
     }
 
     /**
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
      * @return string
      */
     public function getBirthName()
@@ -143,11 +219,11 @@ class Numerologie
     /**
      * @param string $birthName
      *
-     * @return Numerologie
+     * @return Analysis
      */
     public function setBirthName($birthName)
     {
-        $this->birthName = $birthName;
+        $this->birthName = $this->cleanString($birthName);
 
         return $this;
     }
@@ -163,11 +239,11 @@ class Numerologie
     /**
      * @param string $useName
      *
-     * @return Numerologie
+     * @return Analysis
      */
     public function setUseName($useName)
     {
-        $this->useName = $useName;
+        $this->useName = $this->cleanString($useName);
 
         return $this;
     }
@@ -183,11 +259,11 @@ class Numerologie
     /**
      * @param string $firstname
      *
-     * @return Numerologie
+     * @return Analysis
      */
     public function setFirstname($firstname)
     {
-        $this->firstname = $firstname;
+        $this->firstname = $this->cleanString($firstname);
 
         return $this;
     }
@@ -203,11 +279,13 @@ class Numerologie
     /**
      * @param array $otherFirstnames
      *
-     * @return Numerologie
+     * @return Analysis
      */
     public function setOtherFirstnames($otherFirstnames)
     {
-        $this->otherFirstnames = $otherFirstnames;
+        foreach ($otherFirstnames as $otherFirstname) {
+            $this->addOtherFirstname($otherFirstname);
+        }
 
         return $this;
     }
@@ -215,11 +293,11 @@ class Numerologie
     /**
      * @param string $otherFirstname
      *
-     * @return Numerologie
+     * @return Analysis
      */
     public function addOtherFirstname($otherFirstname)
     {
-        $this->otherFirstnames[] = $otherFirstname;
+        $this->otherFirstnames[] = $this->cleanString($otherFirstname);
 
         return $this;
     }
@@ -235,11 +313,13 @@ class Numerologie
     /**
      * @param array $pseudos
      *
-     * @return Numerologie
+     * @return Analysis
      */
     public function setPseudos($pseudos)
     {
-        $this->pseudos = $pseudos;
+        foreach ($pseudos as $pseudo) {
+            $this->addPseudo($pseudo);
+        }
 
         return $this;
     }
@@ -247,11 +327,11 @@ class Numerologie
     /**
      * @param string $pseudo
      *
-     * @return Numerologie
+     * @return Analysis
      */
     public function addPseudo($pseudo)
     {
-        $this->pseudos[] = $pseudo;
+        $this->pseudos[] = $this->cleanString($pseudo);
 
         return $this;
     }
@@ -267,7 +347,7 @@ class Numerologie
     /**
      * @param \Datetime $birthDate
      *
-     * @return Numerologie
+     * @return Analysis
      */
     public function setBirthDate($birthDate)
     {
@@ -287,11 +367,11 @@ class Numerologie
     /**
      * @param string $birthPlace
      *
-     * @return Numerologie
+     * @return Analysis
      */
     public function setBirthPlace($birthPlace)
     {
-        $this->birthPlace = $birthPlace;
+        $this->birthPlace = $this->cleanString($birthPlace);
 
         return $this;
     }
@@ -307,11 +387,101 @@ class Numerologie
     /**
      * @param array $data
      *
-     * @return Numerologie
+     * @return Analysis
      */
     public function setData($data)
     {
         $this->data = $data;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * @param string $status
+     *
+     * @return Analysis
+     */
+    public function setStatus($status)
+    {
+        if (in_array($status, self::$statusValues)) {
+            $this->status = $status;
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getHash()
+    {
+        return $this->hash;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUserId()
+    {
+        return $this->userId;
+    }
+
+    /**
+     * @param string $userId
+     *
+     * @return Analysis
+     */
+    public function setUserId($userId)
+    {
+        $this->userId = $userId;
+
+        return $this;
+    }
+
+    /**
+     * @return \Datetime
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * @param \Datetime $createdAt
+     *
+     * @return Analysis
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * @return \Datetime
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * @param \Datetime $updatedAt
+     *
+     * @return Analysis
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }

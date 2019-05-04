@@ -1,28 +1,28 @@
-numerologie_index:
+extranet_index:
   path: /
-  defaults: { _controller: ExtranetBundle:Numerologie:index }
+  defaults: { _controller: ExtranetBundle:Analysis:index }
 
-numerologie_add:
+extranet_add:
     path: /ajouter/
-    defaults: { _controller: ExtranetBundle:Numerologie:add }
+    defaults: { _controller: ExtranetBundle:Analysis:add }
     options:
         expose: true
 
-numerologie_edit:
-    path: /editer/{md5}
-    defaults: { _controller: ExtranetBundle:Numerologie:edit }
+extranet_edit:
+    path: /editer/{hash}
+    defaults: { _controller: ExtranetBundle:Analysis:edit }
 
-numerologie_delete:
-    path: /supprimer/{md5}
-    defaults: { _controller: ExtranetBundle:Numerologie:supprimer }
+extranet_delete:
+    path: /supprimer/{hash}
+    defaults: { _controller: ExtranetBundle:Analysis:supprimer }
 
-numerologie_export_pdf:
-    path: /exporter/pdf/{md5}
-    defaults: { _controller: ExtranetBundle:Numerologie:exportPdf }
+extranet_export_pdf:
+    path: /exporter/pdf/{hash}
+    defaults: { _controller: ExtranetBundle:Analysis:exportPdf }
 
-numerologie_show:
-    path: /afficher/
-    defaults: { _controller: ExtranetBundle:Numerologie:show }
+extranet_show:
+    path: /afficher/{hash}
+    defaults: { _controller: ExtranetBundle:Analysis:show }
 
 admin_index:
     path: /administrer/

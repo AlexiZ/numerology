@@ -2,7 +2,7 @@
 
 namespace SiteBundle\Controller;
 
-use ExtranetBundle\Entity\Numerologie;
+use ExtranetBundle\Entity\Analysis;
 use ExtranetBundle\Services\Numerologie as NumerologieService;
 use ExtranetBundle\Form\NumerologieType;
 use ExtranetBundle\Services\JsonIO;
@@ -30,7 +30,7 @@ class DefaultController extends Controller
 
     public function tryAction(Request $request, JsonIO $jsonIO)
     {
-        $subject = new Numerologie();
+        $subject = new Analysis();
         $form = $this->createForm(NumerologieType::class, $subject);
 
         $form->handleRequest($request);

@@ -7,7 +7,7 @@
 {% block stylesheets %}
     {{ parent() }}
 
-    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/app/css/print.css') }}" media="print">
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/extranet/css/print.css') }}" media="print">
 {% endblock %}
 
 {% block navbar %}
@@ -80,15 +80,15 @@
 {% endblock pagesubtitle %}
 
 {% block callback_actions %}
-    <a href="{{ path('numerologie_edit', {'md5': filename}) }}" title="Modifier" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+    <a href="{{ path('extranet_edit', {'hash': subject.hash}) }}" title="Modifier" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
         <i class="fas fa-pen fa-sm text-white-50"></i>&nbsp;
         Modifier
     </a>
-    <a href="{{ path('numerologie_export_pdf', {'md5': filename}) }}" title="Télécharger pour imprimer" class="d-none d-sm-inline-block btn btn-sm btn-info shadow-sm">
+    <a href="{{ path('extranet_export_pdf', {'hash': subject.hash}) }}" title="Télécharger pour imprimer" class="d-none d-sm-inline-block btn btn-sm btn-info shadow-sm">
         <i class="fas fa-print fa-sm text-white-50"></i>&nbsp;
         Télécharger pour imprimer
     </a>
-    <a href="{{ path('numerologie_delete', {'md5': filename}) }}" title="Supprimer" class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm">
+    <a href="{{ path('extranet_delete', {'hash': subject.hash}) }}" title="Supprimer" class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm">
         <i class="fas fa-times fa-sm text-white-50"></i>&nbsp;
         Supprimer
     </a>
@@ -96,21 +96,21 @@
 
 {% block body %}
     <div id="tab1" class="custom-tab">
-        {% include '@Extranet/Numerologie/_resume_identite.html.twig' with {'subject': subject} %}
+        {% include '@Extranet/Analysis/_resume_identite.html.twig' with {'subject': subject} %}
     </div>
     <div id="tab2" class="custom-tab d-none">
-        {% include '@Extranet/Numerologie/_identite.html.twig' with {'subject': subject} %}
+        {% include '@Extranet/Analysis/_identite.html.twig' with {'subject': subject} %}
     </div>
     <div id="tab3" class="custom-tab d-none">
-        {% include '@Extranet/Numerologie/_resume_lettres.html.twig' with {'subject': subject} %}
+        {% include '@Extranet/Analysis/_resume_lettres.html.twig' with {'subject': subject} %}
     </div>
     <div id="tab4" class="custom-tab d-none">
-        {% include '@Extranet/Numerologie/_lettres.html.twig' with {'subject': subject} %}
+        {% include '@Extranet/Analysis/_lettres.html.twig' with {'subject': subject} %}
     </div>
     <div id="tab5" class="custom-tab d-none">
-        {% include '@Extranet/Numerologie/_vibrations.html.twig' with {'subject': subject} %}
+        {% include '@Extranet/Analysis/_vibrations.html.twig' with {'subject': subject} %}
     </div>
     <div id="tab6" class="custom-tab d-none">
-        {% include '@Extranet/Numerologie/_parcours.html.twig' with {'subject': subject} %}
+        {% include '@Extranet/Analysis/_parcours.html.twig' with {'subject': subject} %}
     </div>
 {% endblock body %}

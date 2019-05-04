@@ -4,7 +4,7 @@
     Numérologie - Ajouter
 {% endblock %}
 
-{% block bodyAttr %}data-tutorial="numerologie_add"{% endblock bodyAttr %}
+{% block bodyAttr %}data-tutorial="extranet_add"{% endblock bodyAttr %}
 
 {% block body %}
     <div class="row">
@@ -17,7 +17,7 @@
                 </div>
 
                 <div class="card-body">
-                    {% form_theme form '@Extranet/Numerologie/_form_theme.html.twig' %}
+                    {% form_theme form '@Extranet/Analysis/_form_theme.html.twig' %}
 
                     {{ form_start(form) }}
                     {{ form_errors(form) }}
