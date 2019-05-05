@@ -2,7 +2,10 @@
 
 namespace ExtranetBundle\Services;
 
+use Doctrine\Common\Persistence\ManagerRegistry;
 use ExtranetBundle\Entity\Analysis as Analysis;
+use ExtranetBundle\Entity\Definition;
+use ExtranetBundle\Entity\Number;
 
 class Numerologie
 {
@@ -55,19 +58,19 @@ class Numerologie
     ];
 
     /**
-     * @var JsonIO
-     */
-    private $jsonIO;
-
-    /**
      * @var Geocoding
      */
     private $geocoding;
 
-    public function __construct(JsonIO $jsonIO, Geocoding $geocoding)
+    /**
+     * @var ManagerRegistry
+     */
+    private $registry;
+
+    public function __construct(Geocoding $geocoding, ManagerRegistry $registry)
     {
-        $this->jsonIO = $jsonIO;
         $this->geocoding = $geocoding;
+        $this->registry = $registry;
     }
 
     public function exportData(Analysis $subject)
@@ -196,28 +199,6 @@ class Numerologie
         return $total;
     }
 
-    public function getSubject($md5)
-    {
-        $subject = null;
-        $files = $this->jsonIO->readHistoryFolder(true);
-        if (false !== preg_match('/\.*/', $md5)) {
-            $md5 = explode('.', $md5)[0];
-        }
-
-        foreach ($files as $name => $file) {
-            if (false !== preg_match('/\.*/', $name)) {
-                $name = explode('.', $name)[0];
-            }
-            if ($name == $md5) {
-                $data = json_decode($file, true);
-                $subject = new Analysis();
-                $subject->unserialize($data);
-            }
-        }
-
-        return $subject;
-    }
-
     public function addNumberDigits($number)
     {
         $digits = (string)$number;
@@ -263,12 +244,24 @@ class Numerologie
 
     public function getDefinition($context)
     {
-        return $this->jsonIO->readDefinition($context);
+        /** @var Definition $definition */
+        $definition = $this->registry->getRepository(Definition::class)->findOneByName($context);
+        if ($definition) {
+            return $definition->getContent();
+        }
+
+        return null;
     }
 
-    public function getAnalysis($number, $context)
+    public function getAnalysis($value, $context)
     {
-        return $this->jsonIO->readAnalysis($number, $context);
+        /** @var Number $number */
+        $number = $this->registry->getRepository(Number::class)->findOneByValue($value);
+        if ($number) {
+            return $number->get($context);
+        }
+
+        return null;
     }
 
     public function getLettersNumberOccurrences($word)
