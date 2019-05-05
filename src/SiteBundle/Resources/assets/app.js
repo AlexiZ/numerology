@@ -120,7 +120,7 @@ $(document).ready(() => {
                 const options = Object.assign(commonOptionsClone, {
                     placement: 'right',
                     theme: 'light',
-                    content: 'Cette information est disponible dans <a href="#premium" class="btn btn-primary">le profil complet</a>',
+                    content: 'Cette information est disponible dans <a href="#premium" class="btn btn-primary">l\'étude complète</a> ou dans <a href="#" class="btn btn-primary">la Numérologie essentielle - Héritages et parcours de vie</a>',
                 });
                 tippy(automaticTippy, options);
             }

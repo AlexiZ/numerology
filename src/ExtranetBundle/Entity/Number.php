@@ -189,6 +189,16 @@ class Number
         return $this->value;
     }
 
+    public function get($name)
+    {
+        $function = 'get' . ucfirst($name);
+        if (method_exists($this, $function)) {
+            return $this->$function();
+        }
+
+        return null;
+    }
+
     /**
      * Set inherited.
      *

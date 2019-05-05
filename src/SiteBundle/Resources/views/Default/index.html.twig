@@ -10,12 +10,9 @@
                     <hr class="divider light my-4">
                 </div>
 
-                <div class="col-lg-8 align-self-baseline">
-                    <p class="text-white font-weight-light mb-0">
-                        Découvrez l'influence de vos paramètres de naissance sur votre identité.
-                    </p>
+                <div class="col-lg-7 align-self-baseline">
                     <p class="text-white font-weight-light mb-5">
-                        Décelez ce qui vous a été légué par votre famille et quelle pression s'exerce sur votre personnalité.
+                        Découvrez comment vos <strong class="font-weight-bold">paramètres de naissance</strong> et votre <strong class="font-weight-bold">identité</strong> influencent votre <strong class="font-weight-bold">personnalité</strong>.
                     </p>
 
                     <a class="btn btn-primary btn-xl js-scroll-trigger" href="#about">En savoir plus</a>
@@ -26,21 +23,21 @@
 
     <section class="page-section" id="about">
         <div class="container">
-            <h2 class="text-center mt-0">À propos de votre profil numérologique</h2>
+            <h2 class="text-center mt-0">À propos de votre étude numérologique</h2>
             <hr class="divider my-4">
             <div class="row">
                 <div class="col-lg-3 col-md-6 text-center">
                     <div class="mt-5">
                         <i class="fas fa-4x fa-user text-primary mb-4"></i>
                         <h3 class="h4 mb-2">Identité</h3>
-                        <p class="text-muted mb-0">Quelles vibrations émanent de votre identité ? Quelles influence recevez-vous de votre lignée ? Commment êtes-vous perçu ?</p>
+                        <p class="text-muted mb-0">Quelles influences subissez-vous de votre lignée ?<br>Commment êtes-vous perçu ?</p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 text-center">
                     <div class="mt-5">
                         <i class="fas fa-4x fa-pencil-alt text-primary mb-4"></i>
                         <h3 class="h4 mb-2">Lettres</h3>
-                        <p class="text-muted mb-0">Physiques, émotives, cérébrales ou intuitives : vos paramètres de vie en disent long sur votre personnalité.</p>
+                        <p class="text-muted mb-0">Physiques, émotives, cérébrales ou intuitives : elles en disent long sur votre personnalité.</p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 text-center">
@@ -65,11 +62,20 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-8 text-center">
-                    <h2 class="text-white mt-0">Essayez gratuitement</h2>
+                    <h2 class="text-white mt-0">Obtenez votre étude</h2>
                     <hr class="divider light my-4">
-                    <p class="text-white-75 mb-0">Renseignez vos paramètres de vie et découvrez qui vous êtes.</p>
-                    <p class="text-white-75 mb-4">Obtenez votre profil numérologique simplifié gratuitement.</p>
-                    <a class="btn btn-light btn-xl js-scroll-trigger" href="{{ path('site_try') }}">C'est parti !</a>
+                    <p class="text-white-75 mb-0">Renseignez vos paramètres de vie.</p>
+                    <p class="text-white-75 mb-4">Obtenez votre étude numérologique simplifiée gratuitement<br>ou votre étude complète pour 8€88.</p>
+                </div>
+            </div>
+
+            <div class="row justify-content-center">
+                <div class="col-lg-4 text-center">
+                    <a class="btn btn-light btn-xl js-scroll-trigger" href="{{ path('site_try', {'version': 'free'}) }}">Essayez gratuitement</a>
+                </div>
+
+                <div class="col-lg-4 text-center offset-lg-1">
+                    <a class="btn btn-light btn-xl js-scroll-trigger" href="{{ path('site_try', {'version': 'premium'}) }}">Étude complète</a>
                 </div>
             </div>
         </div>
@@ -97,19 +103,31 @@
                                     <span class="fa-li">
                                         <i class="fas fa-check"></i>
                                     </span>
-                                    Profil <strong>partiel</strong>
+                                    Étude <strong>partielle</strong>
                                 </li>
                                 <li class="text-muted">
                                     <span class="fa-li">
                                         <i class="fas fa-times"></i>
                                     </span>
-                                    Lien permanent vers votre profil
+                                    Lien permanent vers votre étude
                                 </li>
                                 <li class="text-muted">
                                     <span class="fa-li">
                                         <i class="fas fa-times"></i>
                                     </span>
-                                    Profils <strong>illimités</strong>
+                                    Téléchargement pour impression
+                                </li>
+                                <li class="text-muted">
+                                    <span class="fa-li">
+                                        <i class="fas fa-times"></i>
+                                    </span>
+                                    Modification de l'étude
+                                </li>
+                                <li class="text-muted">
+                                    <span class="fa-li">
+                                        <i class="fas fa-times"></i>
+                                    </span>
+                                    Études <strong>illimitées</strong>
                                 </li>
                                 <li class="text-muted">
                                     <span class="fa-li">
@@ -121,13 +139,7 @@
                                     <span class="fa-li">
                                         <i class="fas fa-times"></i>
                                     </span>
-                                    Modification de profil
-                                </li>
-                                <li class="text-muted">
-                                    <span class="fa-li">
-                                        <i class="fas fa-times"></i>
-                                    </span>
-                                    Historique de profils
+                                    Historique d'études
                                 </li>
                                 <li class="text-muted">
                                     <span class="fa-li">
@@ -135,15 +147,9 @@
                                     </span>
                                     Contact support privilégié
                                 </li>
-                                <li class="text-muted">
-                                    <span class="fa-li">
-                                        <i class="fas fa-times"></i>
-                                    </span>
-                                    Téléchargement pour impression
-                                </li>
                             </ul>
 
-                            <a href="{{ path('site_try') }}" class="btn btn-block btn-primary text-uppercase">Essayez gratuitement</a>
+                            <a href="{{ path('site_try', {'version': 'free'}) }}" class="btn btn-block btn-primary text-uppercase">Essayez gratuitement</a>
                         </div>
                     </div>
                 </div>
@@ -160,19 +166,31 @@
                                     <span class="fa-li">
                                         <i class="fas fa-check"></i>
                                     </span>
-                                    Profil <strong>complet</strong>
+                                    Étude <strong>complète</strong>
                                 </li>
                                 <li>
                                     <span class="fa-li">
                                         <i class="fas fa-check"></i>
                                     </span>
-                                    Lien permanent vers votre profil
+                                    Lien permanent vers votre étude
+                                </li>
+                                <li>
+                                    <span class="fa-li">
+                                        <i class="fas fa-check"></i>
+                                    </span>
+                                    Téléchargement pour impression
                                 </li>
                                 <li class="text-muted">
                                     <span class="fa-li">
                                         <i class="fas fa-times"></i>
                                     </span>
-                                    Profils <strong>illimités</strong>
+                                    Modification de l'étude
+                                </li>
+                                <li class="text-muted">
+                                    <span class="fa-li">
+                                        <i class="fas fa-times"></i>
+                                    </span>
+                                    Études <strong>illimitées</strong>
                                 </li>
                                 <li class="text-muted">
                                     <span class="fa-li">
@@ -184,13 +202,7 @@
                                     <span class="fa-li">
                                         <i class="fas fa-times"></i>
                                     </span>
-                                    Modification des profils
-                                </li>
-                                <li class="text-muted">
-                                    <span class="fa-li">
-                                        <i class="fas fa-times"></i>
-                                    </span>
-                                    Historique des profils
+                                    Historique des études
                                 </li>
                                 <li class="text-muted">
                                     <span class="fa-li">
@@ -198,15 +210,9 @@
                                     </span>
                                     Contact support privilégié
                                 </li>
-                                <li class="text-muted">
-                                    <span class="fa-li">
-                                        <i class="fas fa-times"></i>
-                                    </span>
-                                    Téléchargement pour impression
-                                </li>
                             </ul>
 
-                            <a href="#" class="btn btn-block btn-primary text-uppercase">Commandez</a>
+                            <a href="{{ path('site_try', {'version': 'premium'}) }}" class="btn btn-block btn-primary text-uppercase">Commandez</a>
                         </div>
                     </div>
                 </div>
@@ -223,19 +229,31 @@
                                     <span class="fa-li">
                                         <i class="fas fa-check"></i>
                                     </span>
-                                    Profil <strong>complet</strong>
+                                    Étude <strong>complète</strong>
                                 </li>
                                 <li>
                                     <span class="fa-li">
                                         <i class="fas fa-check"></i>
                                     </span>
-                                    Lien permanent vers votre profil
+                                    Lien permanent vers votre étude
                                 </li>
                                 <li>
                                     <span class="fa-li">
                                         <i class="fas fa-check"></i>
                                     </span>
-                                    Profils <strong>illimités</strong>
+                                    Téléchargement pour impression
+                                </li>
+                                <li>
+                                    <span class="fa-li">
+                                        <i class="fas fa-check"></i>
+                                    </span>
+                                    Modification d'étude
+                                </li>
+                                <li>
+                                    <span class="fa-li">
+                                        <i class="fas fa-check"></i>
+                                    </span>
+                                    Études <strong>illimitées</strong>
                                 </li>
                                 <li>
                                     <span class="fa-li">
@@ -247,25 +265,13 @@
                                     <span class="fa-li">
                                         <i class="fas fa-check"></i>
                                     </span>
-                                    Modification des profils
-                                </li>
-                                <li>
-                                    <span class="fa-li">
-                                        <i class="fas fa-check"></i>
-                                    </span>
-                                    Historique des profils
+                                    Historique des études
                                 </li>
                                 <li>
                                     <span class="fa-li">
                                         <i class="fas fa-check"></i>
                                     </span>
                                     Contact support privilégié
-                                </li>
-                                <li>
-                                    <span class="fa-li">
-                                        <i class="fas fa-check"></i>
-                                    </span>
-                                    Téléchargement pour impression
                                 </li>
                             </ul>
 
@@ -283,7 +289,7 @@
                 <div class="col-lg-8 text-center">
                     <h2 class="mt-0">Découvrez notre solution pour les professionnels</h2>
                     <hr class="divider light my-4">
-                    <p class="mb-5">Un espace sécurisé, des profils numérologiques complets imprimables en illimité et un espace de communication privilégié.</p>
+                    <p class="mb-5">Un espace sécurisé, des études numérologiques complètes imprimables en illimité et un espace de communication privilégié.</p>
                 </div>
             </div>
 
@@ -305,7 +311,6 @@
             <hr class="divider my-4">
             <div class="row">
                 <div class="col-lg-12 mr-auto text-center">
-                    <p>Obtenez un devis personnalisé afin d'avoir accès au service qui répond précisément à vos besoins.</p>
                     <a class="d-block" href="{{ path('site_contact') }}"><i class="fas fa-envelope fa-3x mb-3 text-muted"></i><br>Contactez-nous</a>
                 </div>
             </div>

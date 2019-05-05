@@ -3,12 +3,16 @@ site_homepage:
     defaults: { _controller: SiteBundle:Default:homepage }
 
 site_try:
-    path:     /essayer
+    path:     /essayer/{version}
     defaults: { _controller: SiteBundle:Default:try }
 
 site_show:
     path:     /resultats/{hash}
     defaults: { _controller: SiteBundle:Default:show }
+
+site_edit:
+    path:     /editer/{hash}
+    defaults: { _controller: SiteBundle:Default:edit }
 
 site_show_details:
     path:     /resultats/{hash}/details

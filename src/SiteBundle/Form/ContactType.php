@@ -25,8 +25,7 @@ class ContactType extends AbstractType
                 'label' => false,
                 'attr' => [
                     'rows' => 5,
-                    'placeholder' => 'Votre message dans lequel vous pouvez préciser l\'offre qui vous intéresse, ou encore vos besoins.
-Plus vous nous en dites, mieux nous vous répondrons !',
+                    'placeholder' => 'Votre message',
                 ],
             ])
         ;

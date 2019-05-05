@@ -4,8 +4,10 @@ namespace SiteBundle\Controller;
 
 use Doctrine\Common\Persistence\ManagerRegistry;
 use ExtranetBundle\Entity\Analysis;
+use ExtranetBundle\Entity\Definition;
+use ExtranetBundle\Entity\Number;
 use ExtranetBundle\Services\Numerologie;
-use ExtranetBundle\Form\NumerologieType;
+use ExtranetBundle\Form\AnalysisType;
 use Knp\Bundle\SnappyBundle\Snappy\Response\PdfResponse;
 use SiteBundle\Form\ContactType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -29,10 +31,10 @@ class DefaultController extends Controller
         return $this->render('SiteBundle:Default:index.html.twig');
     }
 
-    public function tryAction(Request $request, ManagerRegistry $registry)
+    public function tryAction($version, Request $request, ManagerRegistry $registry)
     {
         $subject = new Analysis();
-        $form = $this->createForm(NumerologieType::class, $subject);
+        $form = $this->createForm(AnalysisType::class, $subject);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -48,6 +50,7 @@ class DefaultController extends Controller
 
         return $this->render('SiteBundle:Default:try.html.twig', [
             'form' => $form->createView(),
+            'version' => $version,
         ]);
     }
 
@@ -76,14 +79,21 @@ class DefaultController extends Controller
 
         $details = [];
         if ($request->query->has('definition')) {
-            $details['definition'] = $this->numerologieService->getDefinition($request->query->get('definition'));
+            /** @var Definition $definition */
+            $definition = $registry->getRepository(Definition::class)->findOneByName($request->query->get('definition'));
+
+            if ($definition) {
+                $details['definition'] = $definition->getContent();
+            }
 
             if ($request->query->has('value')) {
                 try {
-                    $details['value'] = $this->numerologieService->getAnalysis(
-                        $request->query->get('value'),
-                        $request->query->get('definition')
-                    );
+                    /** @var Number $value */
+                    $value = $registry->getRepository(Number::class)->findOneByValue($request->query->get('value'));
+
+                    if ($value) {
+                        $details['value'] = $value->get($request->query->get('definition'));
+                    }
                 } catch (\Exception $e) {}
             }
         }

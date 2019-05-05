@@ -5,7 +5,7 @@ namespace ExtranetBundle\Controller;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use ExtranetBundle\Entity\Analysis;
 use ExtranetBundle\Services\Numerologie;
-use ExtranetBundle\Form\NumerologieType;
+use ExtranetBundle\Form\AnalysisType;
 use Knp\Bundle\SnappyBundle\Snappy\Response\PdfResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -35,7 +35,7 @@ class AnalysisController extends Controller
     {
         $parameters = [];
         $subject = new Analysis();
-        $form = $this->createForm(NumerologieType::class, $subject);
+        $form = $this->createForm(AnalysisType::class, $subject);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -66,7 +66,7 @@ class AnalysisController extends Controller
             return $this->redirectToRoute('extranet_add');
         }
 
-        $form = $this->createForm(NumerologieType::class, $subject);
+        $form = $this->createForm(AnalysisType::class, $subject);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
