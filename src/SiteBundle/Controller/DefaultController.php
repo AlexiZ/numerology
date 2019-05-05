@@ -39,8 +39,8 @@ class DefaultController extends Controller
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $subject->setData($this->numerologieService->exportData($subject));
-            $subject->setUserId($this->getUser()->getId());
-            $subject->setLevel(Analysis::LEVEL_FREE);
+            $subject->setUserId($this->getUser() ? $this->getUser()->getId() : null);
+            $subject->setLevel($version);
 
             $registry->getManager()->persist($subject);
             $registry->getManager()->flush();
