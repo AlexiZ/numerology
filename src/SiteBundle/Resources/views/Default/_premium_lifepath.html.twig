@@ -1,0 +1,77 @@
+<div class="col-md-12 mb-5">
+    <h5>Parcours de vie</h5>
+    <hr class="divider my-4 underline-divider">
+
+    <div class="row">
+        <ul class="list-group col-md-12">
+            <li class="list-group-item d-flex justify-content-between align-items-center automatic-tippy"
+                data-ltippy="lifepath"
+                data-rtippy="{{ subject.data.lifePath.lifePathNumber }}">
+                Chemin de vie
+                <span class="badge badge-primary badge-pill">{{ subject.data.lifePath.lifePathNumber }}</span>
+            </li>
+
+            <li class="list-group-item d-flex justify-content-between align-items-center automatic-tippy"
+                data-ltippy="ideal"
+                data-rtippy="{{ subject.data.lifePath.idealNumber }}">
+                Chemin d'idéal
+                <span class="badge badge-primary badge-pill">{{ subject.data.lifePath.idealNumber }}</span>
+            </li>
+
+            <li class="list-group-item d-flex justify-content-between align-items-center automatic-tippy"
+                data-ltippy="majorturn">
+                Tournant majeur
+                <span class="badge badge-primary badge-pill">{{ subject.data.lifePath.majorTurnNumber }} ans</span>
+            </li>
+
+            <li class="list-group-item d-flex justify-content-between align-items-center automatic-tippy"
+                data-ltippy="personalyearnow"
+                data-rtippy="{{ subject.data.lifePath.personalYearNowNumber }}">
+                Année personnelle {{ "now"|date('Y') }}
+                <span class="badge badge-primary badge-pill">{{ subject.data.lifePath.personalYearNowNumber }}</span>
+            </li>
+
+            <li class="list-group-item d-flex justify-content-between align-items-center automatic-tippy"
+                data-ltippy="secret"
+                data-rtippy="{{ subject.data.lifePath.secretNumber }}">
+                Nombre secret
+                <span class="badge badge-primary badge-pill">{{ subject.data.lifePath.secretNumber }}</span>
+            </li>
+
+            <li class="list-group-item d-flex justify-content-between align-items-center automatic-tippy"
+                data-ltippy="astrological"
+                data-rtippy="{{ subject.data.lifePath.astrologicalNumber }}">
+                Nombre astrologique
+                <span class="badge badge-primary badge-pill">{{ subject.data.lifePath.astrologicalNumber }}</span>
+            </li>
+
+            <li class="list-group-item d-flex justify-content-between align-items-center automatic-tippy"
+                data-ltippy="veryshortterm"
+                data-rtippy="{{ subject.data.lifePath.veryShortTermNumber }}">
+                Nombre du très court terme
+                <span class="badge badge-primary badge-pill">{{ subject.data.lifePath.veryShortTermNumber }}</span>
+            </li>
+
+            <li class="list-group-item d-flex justify-content-between align-items-center automatic-tippy"
+                data-ltippy="shortterm"
+                data-rtippy="{{ subject.data.lifePath.shortTermNumber }}">
+                Nombre du court terme
+                <span class="badge badge-primary badge-pill">{{ subject.data.lifePath.shortTermNumber }}</span>
+            </li>
+
+            <li class="list-group-item d-flex justify-content-between align-items-center automatic-tippy"
+                data-ltippy="meanterm"
+                data-rtippy="{{ subject.data.lifePath.meanTermNumber }}">
+                Nombre du moyen terme
+                <span class="badge badge-primary badge-pill">{{ subject.data.lifePath.meanTermNumber }}</span>
+            </li>
+
+            <li class="list-group-item d-flex justify-content-between align-items-center automatic-tippy"
+                data-ltippy="longterm"
+                data-rtippy="{{ subject.data.lifePath.longTermNumber }}">
+                Nombre du long terme
+                <span class="badge badge-primary badge-pill">{{ subject.data.lifePath.longTermNumber }}</span>
+            </li>
+        </ul>
+    </div>
+</div>

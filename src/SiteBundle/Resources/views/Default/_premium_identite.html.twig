@@ -1,0 +1,41 @@
+<div class="col-md-12 mb-5">
+    <h5>Identité</h5>
+    <hr class="divider my-4 underline-divider">
+
+    <ul class="list-group">
+        <li class="list-group-item d-flex justify-content-between align-items-center automatic-tippy"
+            data-ltippy="global"
+            data-rtippy="{{ subject.data.identity.globalNumber }}">
+            Nombre global
+            <span class="badge badge-primary badge-pill">{{ subject.data.identity.globalNumber }}</span>
+        </li>
+
+        <li class="list-group-item d-flex justify-content-between align-items-center automatic-tippy"
+            data-ltippy="inherited"
+            data-rtippy="{{ subject.data.identity.inheritedNumber }}">
+            Nombre héréditaire
+            <span class="badge badge-primary badge-pill">{{ subject.data.identity.inheritedNumber }}</span>
+        </li>
+
+        <li class="list-group-item d-flex justify-content-between align-items-center automatic-tippy"
+            data-ltippy="duty"
+            data-rtippy="{{ subject.data.identity.dutyNumber }}">
+            Nombre de mission
+            <span class="badge badge-primary badge-pill">{{ subject.data.identity.dutyNumber }}</span>
+        </li>
+
+        <li class="list-group-item d-flex justify-content-between align-items-center automatic-tippy"
+            data-ltippy="social"
+            data-rtippy="{{ subject.data.identity.socialNumber }}">
+            Nombre social
+            <span class="badge badge-primary badge-pill">{{ subject.data.identity.socialNumber }}</span>
+        </li>
+
+        <li class="list-group-item d-flex justify-content-between align-items-center automatic-tippy"
+            data-ltippy="structure"
+            data-rtippy="{{ subject.data.identity.structureNumber }}">
+            Nombre de structure
+            <span class="badge badge-primary badge-pill">{{ subject.data.identity.structureNumber }}</span>
+        </li>
+    </ul>
+</div>

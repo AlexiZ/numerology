@@ -19,12 +19,23 @@
                                 <small>{{ subject.birthDate|localizeddate('long', 'short', 'fr') }}, {{ subject.birthPlace }} ({{ subject.data.geolocation|coordsToText }})</small>
                             </h5>
 
+                            {% if 'premium' == subject.level %}
+                                <div class="row mx-auto" id="premium-badge">
+                                    <i class="fa fa-3x fa-medal" title="Profil complet - offre premium"></i>
+                                </div>
+                                <div class="row mx-auto" id="premium-print">
+                                    <a href="{{ path('site_export_pdf', {'hash': subject.hash}) }}" title="Téléchargez pour imprimer">
+                                        <i class="fa fa-2x fa-print"></i>
+                                    </a>
+                                </div>
+                            {% endif %}
+
                             <div class="row">
                                 {% include '@Site/Default/_'~subject.level~'_identite.html.twig' with {'subject': subject} %}
                             </div>
 
                             <div class="row">
-                                {% include '@Site/Default/_'~subject.level~'_lettres.html.twig' with {'subject': subject} %}
+                                {% include '@Site/Default/_lettres.html.twig' with {'subject': subject} %}
                             </div>
 
                             <div class="row">

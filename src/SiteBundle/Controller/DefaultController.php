@@ -6,6 +6,7 @@ use Doctrine\Common\Persistence\ManagerRegistry;
 use ExtranetBundle\Entity\Analysis;
 use ExtranetBundle\Services\Numerologie;
 use ExtranetBundle\Form\NumerologieType;
+use Knp\Bundle\SnappyBundle\Snappy\Response\PdfResponse;
 use SiteBundle\Form\ContactType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -42,7 +43,7 @@ class DefaultController extends Controller
             $registry->getManager()->persist($subject);
             $registry->getManager()->flush();
 
-            return $this->redirectToRoute('site_show_free', ['hash' => $subject->getHash()]);
+            return $this->redirectToRoute('site_show', ['hash' => $subject->getHash()]);
         }
 
         return $this->render('SiteBundle:Default:try.html.twig', [
@@ -88,6 +89,25 @@ class DefaultController extends Controller
         }
 
         return new JsonResponse($details);
+    }
+
+    public function exportPdfAction($hash, ManagerRegistry $registry)
+    {
+        /** @var Analysis $subject */
+        $subject = $registry->getRepository(Analysis::class)->findOneByHash($hash);
+
+        if (!$subject || Analysis::STATUS_DELETED === $subject->getStatus() || Analysis::LEVEL_FREE === $subject->getLevel()) {
+            return $this->redirectToRoute('site_show', ['hash' => $hash]);
+        }
+
+        $html = $this->renderView('@Site/Default/export.pdf.twig', [
+            'subject' => $subject,
+        ]);
+
+        return new PdfResponse(
+            $this->get('knp_snappy.pdf')->getOutputFromHtml($html),
+            uniqid() . '.pdf'
+        );
     }
 
     public function contactAction(Request $request, \Swift_Mailer $mailer)

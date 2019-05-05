@@ -102,7 +102,7 @@ class Analysis
     private $updatedAt;
 
     /**
-     * @var string
+     * @var stringfree
      * @ORM\Column(type="string", length=255)
      */
     private $level;

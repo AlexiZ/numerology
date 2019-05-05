@@ -46,6 +46,25 @@
     height: auto !important;
     min-height: 100vh;
   }
+  #premium-badge {
+    margin: auto;
+
+    i {
+      position: absolute;
+      top: 0;
+      color: gold;
+    }
+  }
+  #premium-print {
+    margin: auto;
+
+    i {
+      position: absolute;
+      top: 25px;
+      right: 30px;
+      color: grey;
+    }
+  }
 }
 
 .tippy-tooltip {

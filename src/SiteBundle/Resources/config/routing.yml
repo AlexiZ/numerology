@@ -6,7 +6,7 @@ site_try:
     path:     /essayer
     defaults: { _controller: SiteBundle:Default:try }
 
-site_show_free:
+site_show:
     path:     /resultats/{hash}
     defaults: { _controller: SiteBundle:Default:show }
 
@@ -15,6 +15,10 @@ site_show_details:
     defaults: { _controller: SiteBundle:Default:showDetails }
     options:
         expose: true
+
+site_export_pdf:
+    path:     /exporter/{hash}
+    defaults: { _controller: SiteBundle:Default:exportPdf }
 
 site_contact:
     path:     /contact
