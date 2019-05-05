@@ -20,10 +20,11 @@
                             </h5>
 
                             {% if 'premium' == subject.level %}
-                                <div class="row mx-auto" id="premium-badge">
+                                <div class="row mx-auto premium-item" id="premium-badge">
                                     <i class="fa fa-3x fa-medal" title="Étude complète - offre premium"></i>
                                 </div>
-                                <div class="row mx-auto" id="premium-print">
+
+                                <div class="row mx-auto premium-item" id="premium-print">
                                     <a href="{{ path('site_export_pdf', {'hash': subject.hash}) }}" title="Téléchargez pour imprimer">
                                         <i class="fa fa-2x fa-print"></i>
                                     </a>

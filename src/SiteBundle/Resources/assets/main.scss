@@ -50,20 +50,18 @@ strong.font-weight-bold {
     height: auto !important;
     min-height: 100vh;
   }
-  #premium-badge {
+  .premium-item {
     margin: auto;
 
     i {
       position: absolute;
+    }
+
+    &#premium-badge i {
       top: 0;
       color: gold;
     }
-  }
-  #premium-print {
-    margin: auto;
-
-    i {
-      position: absolute;
+    &#premium-print i {
       top: 25px;
       right: 30px;
       color: grey;
