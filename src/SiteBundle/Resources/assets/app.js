@@ -41,8 +41,9 @@ $(document).ready(() => {
         automaticTippies.forEach((automaticTippy) => {
             let leftTippy = "ltippy" in automaticTippy.dataset ? automaticTippy.dataset.ltippy : '',
                 rightTippy = "rtippy" in automaticTippy.dataset ? automaticTippy.dataset.rtippy : '',
+                urlParts = window.location.pathname.split('/'),
                 urlParams = {
-                    'filename': /filename=([^&]+)/.exec(window.location.href)[1],
+                    'hash': urlParts[urlParts.length - 1],
                 },
                 commonOptions = {
                     interactive: true,
@@ -119,7 +120,7 @@ $(document).ready(() => {
                 const options = Object.assign(commonOptionsClone, {
                     placement: 'right',
                     theme: 'light',
-                    content: 'Cette information est disponible dans <a href="#premium" class="btn btn-primary">notre offre premium</a>',
+                    content: 'Cette information est disponible dans <a href="#premium" class="btn btn-primary">le profil complet</a>',
                 });
                 tippy(automaticTippy, options);
             }

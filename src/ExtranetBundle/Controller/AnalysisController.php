@@ -31,7 +31,7 @@ class AnalysisController extends Controller
         ]);
     }
 
-    public function addAction(Request $request, ManagerRegistry $registry, Numerologie $numerologieService)
+    public function addAction(Request $request, ManagerRegistry $registry, Numerologie $numerologie)
     {
         $parameters = [];
         $subject = new Analysis();
@@ -39,8 +39,9 @@ class AnalysisController extends Controller
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $subject->setData($numerologieService->exportData($subject));
+            $subject->setData($numerologie->exportData($subject));
             $subject->setUserId($this->getUser()->getId());
+            $subject->setLevel(Analysis::LEVEL_PREMIUM);
 
             $registry->getManager()->persist($subject);
             $registry->getManager()->flush();
@@ -121,7 +122,7 @@ class AnalysisController extends Controller
         /** @var Analysis $subject */
         $subject = $registry->getRepository(Analysis::class)->findOneByHash($hash);
 
-        if (!$subject || Analysis::STATUS_DELETED === $subject->getStatus()) {
+        if (!$subject || Analysis::STATUS_DELETED === $subject->getStatus() || Analysis::LEVEL_FREE === $subject->getLevel()) {
             return $this->redirectToRoute(self::ROUTE_SHOW, ['hash' => $hash]);
         }
 

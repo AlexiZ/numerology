@@ -6,12 +6,12 @@ site_try:
     path:     /essayer
     defaults: { _controller: SiteBundle:Default:try }
 
-site_show:
-    path:     /resultats
+site_show_free:
+    path:     /resultats/{hash}
     defaults: { _controller: SiteBundle:Default:show }
 
 site_show_details:
-    path:     /resultats/details
+    path:     /resultats/{hash}/details
     defaults: { _controller: SiteBundle:Default:showDetails }
     options:
         expose: true

@@ -2,10 +2,10 @@
 
 namespace SiteBundle\Controller;
 
+use Doctrine\Common\Persistence\ManagerRegistry;
 use ExtranetBundle\Entity\Analysis;
-use ExtranetBundle\Services\Numerologie as NumerologieService;
+use ExtranetBundle\Services\Numerologie;
 use ExtranetBundle\Form\NumerologieType;
-use ExtranetBundle\Services\JsonIO;
 use SiteBundle\Form\ContactType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -14,11 +14,11 @@ use Symfony\Component\HttpFoundation\Request;
 class DefaultController extends Controller
 {
     /**
-     * @var NumerologieService
+     * @var Numerologie
      */
     private $numerologieService;
 
-    public function __construct(NumerologieService $numerologieService)
+    public function __construct(Numerologie $numerologieService)
     {
         $this->numerologieService = $numerologieService;
     }
@@ -28,16 +28,21 @@ class DefaultController extends Controller
         return $this->render('SiteBundle:Default:index.html.twig');
     }
 
-    public function tryAction(Request $request, JsonIO $jsonIO)
+    public function tryAction(Request $request, ManagerRegistry $registry)
     {
         $subject = new Analysis();
         $form = $this->createForm(NumerologieType::class, $subject);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $filename = $jsonIO->writeNumerology($subject, $this->numerologieService->exportData($subject));
+            $subject->setData($this->numerologieService->exportData($subject));
+            $subject->setUserId($this->getUser()->getId());
+            $subject->setLevel(Analysis::LEVEL_FREE);
 
-            return $this->redirectToRoute('site_show', ['filename' => $filename]);
+            $registry->getManager()->persist($subject);
+            $registry->getManager()->flush();
+
+            return $this->redirectToRoute('site_show_free', ['hash' => $subject->getHash()]);
         }
 
         return $this->render('SiteBundle:Default:try.html.twig', [
@@ -45,33 +50,26 @@ class DefaultController extends Controller
         ]);
     }
 
-    public function showAction(Request $request)
+    public function showAction($hash, ManagerRegistry $registry)
     {
-        if (!$request->query->has('filename')) {
-            return $this->redirectToRoute('site_try');
-        }
+        /** @var Analysis $subject */
+        $subject = $registry->getRepository(Analysis::class)->findOneByHash($hash);
 
-        $numerologie = $this->numerologieService->getSubject($request->get('filename'));
-
-        if (!$numerologie) {
+        if (!$subject) {
             return $this->redirectToRoute('site_homepage');
         }
 
         return $this->render('@Site/Default/show.html.twig', [
-            'subject' => $numerologie,
-            'filename' => $request->get('filename')
+            'subject' => $subject,
         ]);
     }
 
-    public function showDetailsAction(Request $request)
+    public function showDetailsAction($hash, Request $request, ManagerRegistry $registry)
     {
-        if (!$request->query->has('filename')) {
-            return new JsonResponse(null, 404);
-        }
+        /** @var Analysis $subject */
+        $subject = $registry->getRepository(Analysis::class)->findOneByHash($hash);
 
-        $numerologie = $this->numerologieService->getSubject($request->get('filename'));
-
-        if (!$numerologie) {
+        if (!$subject) {
             return new JsonResponse(null, 404);
         }
 

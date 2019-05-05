@@ -20,229 +20,35 @@
                             </h5>
 
                             <div class="row">
-                                <div class="col-md-12 mb-5">
-                                    <h5>Identité</h5>
-                                    <hr class="divider my-4 underline-divider">
-
-                                    <ul class="list-group">
-                                        <li class="list-group-item d-flex justify-content-between align-items-center automatic-tippy"
-                                            data-ltippy="global"
-                                            data-rtippy="{{ subject.data.identity.globalNumber }}">
-                                            Nombre global
-                                            <span class="badge badge-primary badge-pill">{{ subject.data.identity.globalNumber }}</span>
-                                        </li>
-
-                                        <li class="list-group-item d-flex justify-content-between align-items-center automatic-tippy premium-only"
-                                            data-ltippy="inherited"
-                                            data-premium="true">
-                                            Nombre héréditaire
-                                            <span class="badge badge-info badge-pill">?</span>
-                                        </li>
-
-                                        <li class="list-group-item d-flex justify-content-between align-items-center automatic-tippy premium-only"
-                                            data-ltippy="duty"
-                                            data-premium="true">
-                                            Nombre de mission
-                                            <span class="badge badge-info badge-pill">?</span>
-                                        </li>
-
-                                        <li class="list-group-item d-flex justify-content-between align-items-center automatic-tippy premium-only"
-                                            data-ltippy="social"
-                                            data-premium="true">
-                                            Nombre social
-                                            <span class="badge badge-info badge-pill">?</span>
-                                        </li>
-
-                                        <li class="list-group-item d-flex justify-content-between align-items-center automatic-tippy premium-only"
-                                            data-ltippy="structure"
-                                            data-premium="true">
-                                            Nombre de structure
-                                            <span class="badge badge-info badge-pill">?</span>
-                                        </li>
-                                    </ul>
-                                </div>
+                                {% include '@Site/Default/_'~subject.level~'_identite.html.twig' with {'subject': subject} %}
                             </div>
 
                             <div class="row">
-                                <div class="col-md-12 mb-5">
-                                    <h5>Lettres</h5>
-                                    <hr class="divider my-4 underline-divider">
+                                {% include '@Site/Default/_'~subject.level~'_lettres.html.twig' with {'subject': subject} %}
+                            </div>
 
-                                    {% set progressBars = {
-                                        physical: {
-                                            value: ((subject.publicName|totalLettrePhysique|default(1) / subject.publicName|length)*100)|number_format(0),
-                                            label: "Lettres physiques",
-                                            bg: "success",
-                                        },
-                                        emotional: {
-                                            value: ((subject.publicName|totalLettreEmotive|default(1) / subject.publicName|length)*100)|number_format(0),
-                                            label: "Lettres émotives",
-                                            bg: "info",
-                                        },
-                                        brain: {
-                                            value: ((subject.publicName|totalLettreCerebrale|default(1) / subject.publicName|length)*100)|number_format(0),
-                                            label: "Lettres cérébrales",
-                                            bg: "warning",
-                                        },
-                                        intuitive: {
-                                            value: ((subject.publicName|totalLettreIntuitive|default(1) / subject.publicName|length)*100)|number_format(0),
-                                            label: "Lettres intuitives",
-                                            bg: "danger",
-                                        }
-                                    } %}
+                            <div class="row">
+                                {% include '@Site/Default/_'~subject.level~'_vibrations.html.twig' with {'subject': subject} %}
+                            </div>
 
-                                    {% for key, data in progressBars %}
-                                        <div class="progress">
-                                            <div class="progress-bar progress-bar-striped bg-{{ data.bg }} automatic-tippy"
-                                                 data-ltippy="{{ key }}"
-                                                 role="progressbar"
-                                                 style="width: {{ data.value }}%"
-                                                 aria-valuenow="{{ data.value }}" aria-valuemin="0" aria-valuemax="100">
-                                                {% if data.value|default %}{{ data.value }} %{% endif %}
-                                            </div>
-                                            <span>{{ data.label }}</span>
+                            <div class="row">
+                                {% include '@Site/Default/_'~subject.level~'_lifepath.html.twig' with {'subject': subject} %}
+                            </div>
+
+                            {% if 'free' == subject.level %}
+                                <div class="row" id="premium">
+                                    <div class="col-md-12">
+                                        <div class="alert alert-warning" role="alert">
+                                            <h5>Ce profil est incomplet - débloquez les informations manquantes</h5>
+                                            Recevez une <strong>analyse complète et détaillée</strong> de vos paramètres de vie en quelques clics.
+                                            <br>
+                                            Vous recevrez également un <strong>lien permanent vers votre profil</strong> à jour de nos dernières évolutions, que vous pourrez consulter à volonté.
+                                            <br><br>
+                                            <button type="button" class="btn btn-info" onclick="javascript:alert('Direction la page de paiement');">Commander pour 8.80€<br><em>(-15% offre de lancement)</em></button>
                                         </div>
-                                    {% endfor %}
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-12 mb-5">
-                                    <h5>Vibrations</h5>
-                                    <hr class="divider my-4 underline-divider">
-
-                                    {% set fullNames = subject.fullNames|replace({' ': ''}) %}
-                                    <ul class="list-group">
-                                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                                            Nombre total de lettres
-                                            <span class="badge badge-primary badge-pill">{{ fullNames|length }}</span>
-                                        </li>
-
-                                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                                            Nombre moyen de présence de chaque lettre
-                                            <span class="badge badge-primary badge-pill">{{ fullNames|nombreMoyenLettres|number_format(1, '.', ' ') }}</span>
-                                        </li>
-
-                                        <li class="list-group-item d-flex justify-content-between align-items-center automatic-tippy premium-only"
-                                            data-premium="true">
-                                            Nombres manquants
-                                            <span class="badge badge-info badge-pill">?</span>
-                                        </li>
-
-                                        <li class="list-group-item d-flex justify-content-between align-items-center automatic-tippy premium-only"
-                                            data-premium="true">
-                                            Nombres faibles
-                                            <span class="badge badge-info badge-pill">?</span>
-                                        </li>
-
-                                        <li class="list-group-item d-flex justify-content-between align-items-center automatic-tippy premium-only"
-                                            data-premium="true">
-                                            Nombres forts
-                                            <span class="badge badge-info badge-pill">?</span>
-                                        </li>
-
-                                        <li class="list-group-item d-flex justify-content-between align-items-center automatic-tippy premium-only"
-                                            data-premium="true">
-                                            Nombres moyens
-                                            <span class="badge badge-info badge-pill">?</span>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-12 mb-5">
-                                    <h5>Parcours de vie</h5>
-                                    <hr class="divider my-4 underline-divider">
-
-                                    <div class="row">
-                                        <ul class="list-group col-md-12">
-                                            <li class="list-group-item d-flex justify-content-between align-items-center automatic-tippy"
-                                                data-ltippy="lifepath"
-                                                data-rtippy="{{ subject.data.lifePath.lifePathNumber }}">
-                                                Chemin de vie
-                                                <span class="badge badge-primary badge-pill">{{ subject.data.lifePath.lifePathNumber }}</span>
-                                            </li>
-
-                                            <li class="list-group-item d-flex justify-content-between align-items-center automatic-tippy"
-                                                data-ltippy="ideal"
-                                                data-rtippy="{{ subject.data.lifePath.idealNumber }}">
-                                                Chemin d'idéal
-                                                <span class="badge badge-primary badge-pill">{{ subject.data.lifePath.idealNumber }}</span>
-                                            </li>
-
-                                            <li class="list-group-item d-flex justify-content-between align-items-center automatic-tippy"
-                                                data-ltippy="majorturn"
-                                                data-rtippy="{{ subject.data.lifePath.majorTurnNumber }}">
-                                                Tournant majeur
-                                                <span class="badge badge-primary badge-pill">{{ subject.data.lifePath.majorTurnNumber }} ans</span>
-                                            </li>
-
-                                            <li class="list-group-item d-flex justify-content-between align-items-center automatic-tippy"
-                                                data-ltippy="personalyearnow"
-                                                data-rtippy="{{ subject.data.lifePath.personalYearNowNumber }}">
-                                                Année personnelle {{ "now"|date('Y') }}
-                                                <span class="badge badge-primary badge-pill">{{ subject.data.lifePath.personalYearNowNumber }}</span>
-                                            </li>
-
-                                            <li class="list-group-item d-flex justify-content-between align-items-center automatic-tippy"
-                                                data-ltippy="secret"
-                                                data-rtippy="{{ subject.data.lifePath.secretNumber }}">
-                                                Nombre secret
-                                                <span class="badge badge-primary badge-pill">{{ subject.data.lifePath.secretNumber }}</span>
-                                            </li>
-
-                                            <li class="list-group-item d-flex justify-content-between align-items-center automatic-tippy premium-only"
-                                                data-ltippy="personalyearnow"
-                                                data-premium="true">
-                                                Nombre astrologique
-                                                <span class="badge badge-info badge-pill">?</span>
-                                            </li>
-
-                                            <li class="list-group-item d-flex justify-content-between align-items-center automatic-tippy premium-only"
-                                                data-ltippy="veryshortterm"
-                                                data-premium="true">
-                                                Nombre du très court terme
-                                                <span class="badge badge-info badge-pill">?</span>
-                                            </li>
-
-                                            <li class="list-group-item d-flex justify-content-between align-items-center automatic-tippy premium-only"
-                                                data-ltippy="shortterm"
-                                                data-premium="true">
-                                                Nombre du court terme
-                                                <span class="badge badge-info badge-pill">?</span>
-                                            </li>
-
-                                            <li class="list-group-item d-flex justify-content-between align-items-center automatic-tippy premium-only"
-                                                data-ltippy="meanterm"
-                                                data-premium="true">
-                                                Nombre du moyen terme
-                                                <span class="badge badge-info badge-pill">?</span>
-                                            </li>
-
-                                            <li class="list-group-item d-flex justify-content-between align-items-center automatic-tippy premium-only"
-                                                data-ltippy="longterm"
-                                                data-premium="true">
-                                                Nombre du long terme
-                                                <span class="badge badge-info badge-pill">?</span>
-                                            </li>
-                                        </ul>
                                     </div>
                                 </div>
-                            </div>
-
-                            <div class="row" id="premium">
-                                <div class="col-md-12">
-                                    <div class="alert alert-warning" role="alert">
-                                        <h5>Ce profil est incomplet - découvrez notre offre premium</h5>
-                                        Recevez une <strong>analyse complète et détaillée</strong> de vos paramètres de vie en quelques clics.
-                                        <br>
-                                        Vous recevrez également un <strong>lien permanent vers votre profil</strong> à jour de nos dernières évolutions, que vous pourrez consulter à volonté.
-                                        <br><br>
-                                        <button type="button" class="btn btn-info" onclick="javascript:alert('Direction la page de paiement');">Commander pour 8.80€<br><em>(-15% offre de lancement)</em></button>
-                                    </div>
-                                </div>
-                            </div>
+                            {% endif %}
                         </div>
                     </div>
                 </div>

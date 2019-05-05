@@ -12,6 +12,8 @@ class Analysis
 {
     const STATUS_ACTIVE = 'active';
     const STATUS_DELETED = 'deleted';
+    const LEVEL_FREE = 'free';
+    const LEVEL_PREMIUM = 'premium';
 
     /**
      * @var integer
@@ -99,9 +101,20 @@ class Analysis
      */
     private $updatedAt;
 
+    /**
+     * @var string
+     * @ORM\Column(type="string", length=255)
+     */
+    private $level;
+
     public static $statusValues = [
         self::STATUS_ACTIVE,
         self::STATUS_DELETED,
+    ];
+
+    public static $levelValues = [
+        self::LEVEL_FREE,
+        self::LEVEL_PREMIUM,
     ];
 
 
@@ -482,6 +495,28 @@ class Analysis
     public function setUpdatedAt($updatedAt)
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLevel()
+    {
+        return $this->level;
+    }
+
+    /**
+     * @param string $level
+     *
+     * @return Analysis
+     */
+    public function setLevel($level)
+    {
+        if (in_array($level, self::$levelValues)) {
+            $this->level = $level;
+        }
 
         return $this;
     }

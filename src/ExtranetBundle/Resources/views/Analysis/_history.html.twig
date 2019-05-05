@@ -1,6 +1,7 @@
 <table class="table automatic-table" id="historyTable">
     <thead>
         <tr>
+            <th></th>
             <th>Nom</th>
             <th>Date de modification</th>
             <th></th>
@@ -10,8 +11,9 @@
     <tbody>
         {% for subject in subjects %}
             <tr>
+                <td>{% if subject.userId == app.user.id %}<i class="fa fa-user-shield"></i>&nbsp;{% else %}<i class="fa fa-ban"></i>&nbsp;{% endif %}</td>
                 <td>
-                    <a href="{{ url('extranet_show', {'hash': subject.hash}) }}" title="Afficher" class="btn">{% if subject.userId == app.user.id %}<i class="fa fa-user-shield"></i>&nbsp;{% else %}<i class="fa fa-ban"></i>&nbsp;{% endif %}{{ subject }}</a>
+                    <a href="{{ url('extranet_show', {'hash': subject.hash}) }}" title="Afficher" class="btn">{{ subject }}</a>
                 </td>
                 <td>Le {{ subject.birthDate|date('d/m/Y \à H:m') }}</td>
                 <td>

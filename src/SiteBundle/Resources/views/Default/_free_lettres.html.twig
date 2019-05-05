@@ -1,0 +1,40 @@
+<div class="col-md-12 mb-5">
+    <h5>Lettres</h5>
+    <hr class="divider my-4 underline-divider">
+
+    {% set progressBars = {
+        physical: {
+            value: ((subject.publicName|totalLettrePhysique|default(1) / subject.publicName|length)*100)|number_format(0),
+            label: "Lettres physiques",
+            bg: "success",
+        },
+        emotional: {
+            value: ((subject.publicName|totalLettreEmotive|default(1) / subject.publicName|length)*100)|number_format(0),
+            label: "Lettres émotives",
+            bg: "info",
+        },
+        brain: {
+            value: ((subject.publicName|totalLettreCerebrale|default(1) / subject.publicName|length)*100)|number_format(0),
+            label: "Lettres cérébrales",
+            bg: "warning",
+        },
+        intuitive: {
+            value: ((subject.publicName|totalLettreIntuitive|default(1) / subject.publicName|length)*100)|number_format(0),
+            label: "Lettres intuitives",
+            bg: "danger",
+        }
+    } %}
+
+    {% for key, data in progressBars %}
+        <div class="progress">
+            <div class="progress-bar progress-bar-striped bg-{{ data.bg }} automatic-tippy"
+                 data-ltippy="{{ key }}"
+                 role="progressbar"
+                 style="width: {{ data.value }}%"
+                 aria-valuenow="{{ data.value }}" aria-valuemin="0" aria-valuemax="100">
+                {% if data.value|default %}{{ data.value }} %{% endif %}
+            </div>
+            <span>{{ data.label }}</span>
+        </div>
+    {% endfor %}
+</div>
