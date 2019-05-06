@@ -116,7 +116,7 @@ class DefaultController extends Controller
 
         return new PdfResponse(
             $this->get('knp_snappy.pdf')->getOutputFromHtml($html),
-            uniqid() . '.pdf'
+            $subject->getPublicName() . '.pdf'
         );
     }
 

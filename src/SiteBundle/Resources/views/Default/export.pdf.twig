@@ -5,56 +5,423 @@
         <title>Numérologie - {{ subject }}</title>
     
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-        <link rel="stylesheet" href="{{ 'https://' ~ app.request.httpHost ~ asset('compiled/site.css') }}">
+        <style>
+            .card-title {
+                text-align: center;
+                font-weight: 300;
+                font-size: 1.5rem;
+                margin-bottom: 2rem;
+            }
+            h5 {
+                font-size: 1.25rem;
+                font-family: "Merriweather Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+                font-weight: 500;
+                line-height: 1.2;
+                margin-bottom: 0.5rem;
+                margin-top: 0;
+            }
+            hr.divider {
+                border-color: #f4623a;
+                margin-top: 0 !important;
+                max-width: 100% !important;
+                border-width: 3px !important;
+            }
+            .mb-5, .my-5 {
+                margin-bottom: 3rem !important;
+            }
+            .mb-2 {
+                margin-bottom: 1rem !important;
+            }
+            .my-4 {
+                margin-bottom: 1.5rem !important;
+            }
+            .list-group {
+                display: -webkit-box;
+                display: -ms-flexbox;
+                display: flex;
+                -webkit-box-orient: vertical;
+                -webkit-box-direction: normal;
+                -ms-flex-direction: column;
+                flex-direction: column;
+                padding-left: 0;
+                margin-bottom: 0;
+            }
+            .list-group-item:first-child {
+                border-top-left-radius: 0.25rem;
+                border-top-right-radius: 0.25rem;
+            }
+            .align-items-center {
+                -webkit-box-align: center !important;
+                -ms-flex-align: center !important;
+                align-items: center !important;
+            }
+            .justify-content-between {
+                -webkit-box-pack: justify !important;
+                -ms-flex-pack: justify !important;
+                justify-content: space-between !important;
+            }
+            .d-flex {
+                display: -webkit-box !important;
+                display: -ms-flexbox !important;
+                display: flex !important;
+            }
+            .list-group-item {
+                position: relative;
+                display: block;
+                padding: 0.75rem 1.25rem;
+                background-color: #fff;
+                border: 1px solid rgba(0, 0, 0, 0.125);
+                margin-bottom: -1px;
+            }
+            .list-group-item p {
+                padding: 0;
+                margin-top: 0;
+                margin-bottom: 0;
+            }
+            .badge-primary {
+                color: #fff;
+                background-color: #f4623a;
+            }
+            .badge-pill {
+                padding-right: 0.6em;
+                padding-left: 0.6em;
+                border-radius: 10rem;
+            }
+            .badge {
+                display: inline-block;
+                padding: 0.25em 0.4em;
+                font-weight: 700;
+                line-height: 1;
+                text-align: center;
+                white-space: nowrap;
+                vertical-align: baseline;
+                border-radius: 0.25rem;
+                -webkit-transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+                transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+                transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+                transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+            }
+            .progress {
+                display: -webkit-box;
+                display: -ms-flexbox;
+                display: flex;
+                height: 2rem;
+                overflow: hidden;
+                font-size: 0.75rem;
+                background-color: #e9ecef;
+                border-radius: 0.25rem;
+            }
+            .progress:not(:first-of-type) {
+                margin-top: 20px;
+            }
+            .bg-success {
+                background-color: #28a745 !important;
+            }
+            .progress-bar-striped {
+                background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+                background-size: 1rem 1rem;
+            }
+            .progress-bar {
+                display: -webkit-box;
+                display: -ms-flexbox;
+                display: flex;
+                -webkit-box-orient: vertical;
+                -webkit-box-direction: normal;
+                -ms-flex-direction: column;
+                flex-direction: column;
+                -webkit-box-pack: center;
+                -ms-flex-pack: center;
+                justify-content: center;
+                color: #fff;
+                text-align: center;
+                white-space: nowrap;
+                background-color: #f4623a;
+                -webkit-transition: width 0.6s ease;
+                transition: width 0.6s ease;
+            }
+            .progress span {
+                position: relative;
+                right: -10px;
+                color: #6c757d !important;
+                top: 10px;
+            }
+            .bg-info {
+                background-color: #17a2b8 !important;
+            }
+            .bg-warning {
+                background-color: #ffc107 !important;
+            }
+            .bg-danger {
+                background-color: #dc3545 !important;
+            }
+        </style>
     </head>
-    
-    <body id="page-top">
-        <header class="masthead">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-10 col-xl-9 mx-auto">
-                        <div class="card card-signin flex-row my-5">
-                            <div class="card-body">
-                                <h5 class="card-title text-center">
-                                    {{ subject }}
-                                    <br>{% if subject.pseudos is not empty and subject.pseudos.0|default %}
-                                    {{ subject.pseudos|join(', ') }}<br>
-                                    {% endif %}
-                                    <small>{{ subject.birthDate|localizeddate('long', 'short', 'fr') }}, {{ subject.birthPlace }} ({{ subject.data.geolocation|coordsToText }})</small>
-                                </h5>
-    
-                                <div class="row mx-auto" id="premium-badge">
-                                    <i class="fa fa-3x fa-medal" title="Étude complète - offre premium"></i>
+
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="col-12 mx-auto">
+                    <div class="card card-signin flex-row my-5">
+                        <div class="card-body">
+                            <h5 class="card-title text-center">
+                                {{ subject }}
+                                <br>{% if subject.pseudos is not empty and subject.pseudos.0|default %}
+                                {{ subject.pseudos|join(', ') }}<br>
+                                {% endif %}
+                                <small>{{ subject.birthDate|localizeddate('long', 'short', 'fr') }}, {{ subject.birthPlace }} ({{ subject.data.geolocation|coordsToText }})</small>
+                            </h5>
+
+                            <div class="row">
+                                <div class="col-md-12 mb-5">
+                                    <h5>Identité</h5>
+                                    <hr class="divider my-4 underline-divider">
+
+                                    <ul class="list-group">
+                                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                                            <strong>Nombre global</strong>
+                                            <span class="badge badge-primary badge-pill">{{ subject.data.identity.globalNumber }}</span>
+                                        </li>
+                                        <li class="list-group-item d-flex justify-content-between align-items-center mb-2">
+                                            <p>
+                                                <em>{{ getDefinition('global') }}</em>
+                                                <br><br>
+                                                {{ subject.data.identity.globalNumber|getAnalysis('global')|raw }}
+                                            </p>
+                                        </li>
+
+                                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                                            <strong>Nombre héréditaire</strong>
+                                            <span class="badge badge-primary badge-pill">{{ subject.data.identity.inheritedNumber }}</span>
+                                        </li>
+                                        <li class="list-group-item d-flex justify-content-between align-items-center mb-2">
+                                            <p>
+                                                <em>{{ getDefinition('inherited') }}</em>
+                                                <br><br>
+                                                {{ subject.data.identity.inheritedNumber|getAnalysis('inherited')|raw }}
+                                            </p>
+                                        </li>
+
+                                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                                            <strong>Nombre de mission</strong>
+                                            <span class="badge badge-primary badge-pill">{{ subject.data.identity.dutyNumber }}</span>
+                                        </li>
+                                        <li class="list-group-item d-flex justify-content-between align-items-center mb-2">
+                                            <p>
+                                                <em>{{ getDefinition('duty') }}</em>
+                                                <br><br>
+                                                {{ subject.data.identity.dutyNumber|getAnalysis('duty')|raw }}
+                                            </p>
+                                        </li>
+
+                                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                                            <strong>Nombre social</strong>
+                                            <span class="badge badge-primary badge-pill">{{ subject.data.identity.socialNumber }}</span>
+                                        </li>
+                                        <li class="list-group-item d-flex justify-content-between align-items-center mb-2">
+                                            <p>
+                                                <em>{{ getDefinition('social') }}</em>
+                                                <br><br>
+                                                {{ subject.data.identity.socialNumber|getAnalysis('social')|raw }}
+                                            </p>
+                                        </li>
+
+                                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                                            <strong>Nombre de structure</strong>
+                                            <span class="badge badge-primary badge-pill">{{ subject.data.identity.structureNumber }}</span>
+                                        </li>
+                                        <li class="list-group-item d-flex justify-content-between align-items-center mb-2">
+                                            <p>
+                                                <em>{{ getDefinition('structure') }}</em>
+                                                <br><br>
+                                                {{ subject.data.identity.structureNumber|getAnalysis('structure')|raw }}
+                                            </p>
+                                        </li>
+                                    </ul>
                                 </div>
-                                <div class="row mx-auto" id="premium-print">
-                                    <a href="{{ path('site_export_pdf', {'hash': subject.hash}) }}" title="Téléchargez pour imprimer">
-                                        <i class="fa fa-2x fa-print"></i>
-                                    </a>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12 mb-5">
+                                    <h5>Lettres</h5>
+                                    <hr class="divider my-4 underline-divider">
+
+                                    {% set progressBars = {
+                                        physical: {
+                                            value: ((subject.publicName|totalLettrePhysique|default(1) / subject.publicName|length)*100)|number_format(0),
+                                            label: "Lettres physiques",
+                                            bg: "success",
+                                        },
+                                        emotional: {
+                                            value: ((subject.publicName|totalLettreEmotive|default(1) / subject.publicName|length)*100)|number_format(0),
+                                            label: "Lettres émotives",
+                                            bg: "info",
+                                        },
+                                        brain: {
+                                            value: ((subject.publicName|totalLettreCerebrale|default(1) / subject.publicName|length)*100)|number_format(0),
+                                            label: "Lettres cérébrales",
+                                            bg: "warning",
+                                        },
+                                        intuitive: {
+                                            value: ((subject.publicName|totalLettreIntuitive|default(1) / subject.publicName|length)*100)|number_format(0),
+                                            label: "Lettres intuitives",
+                                            bg: "danger",
+                                        }
+                                    } %}
+
+                                    {% for key, data in progressBars %}
+                                        <div class="progress">
+                                            <div class="progress-bar progress-bar-striped bg-{{ data.bg }}"
+                                                 role="progressbar"
+                                                 style="width: {{ data.value }}%"
+                                                 aria-valuenow="{{ data.value }}" aria-valuemin="0" aria-valuemax="100">
+                                                {% if data.value|default %}{{ data.value }} %{% endif %}
+                                            </div>
+                                            <span>{{ data.label }}</span>
+                                        </div>
+
+                                        <div class="mb-2">
+                                            <p><em>{{ getDefinition(key) }}</em></p>
+                                        </div>
+                                    {% endfor %}
                                 </div>
-    
-                                <div class="row">
-                                    {% include '@Site/Default/_premium_identite.html.twig' with {'subject': subject} %}
-                                </div>
-    
-                                <div class="row">
-                                    {% include '@Site/Default/_lettres.html.twig' with {'subject': subject} %}
-                                </div>
-    
-                                <div class="row">
-                                    {% include '@Site/Default/_premium_vibrations.html.twig' with {'subject': subject} %}
-                                </div>
-    
-                                <div class="row">
-                                    {% include '@Site/Default/_premium_lifepath.html.twig' with {'subject': subject} %}
+                            </div>
+
+                            <div class="row">
+                                {% include '@Site/Default/_premium_vibrations.html.twig' with {'subject': subject} %}
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12 mb-5">
+                                    <h5>Parcours de vie</h5>
+                                    <hr class="divider my-4 underline-divider">
+
+                                    <div class="row">
+                                        <ul class="list-group col-md-12">
+                                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                <strong>Chemin de vie</strong>
+                                                <span class="badge badge-primary badge-pill">{{ subject.data.lifePath.lifePathNumber }}</span>
+                                            </li>
+                                            <li class="list-group-item d-flex justify-content-between align-items-center mb-2">
+                                                <p>
+                                                    <em>{{ getDefinition('lifepath') }}</em>
+                                                    <br><br>
+                                                    {{ subject.data.lifePath.lifePathNumber|getAnalysis('lifepath')|raw }}
+                                                </p>
+                                            </li>
+
+                                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                <strong>Chemin d'idéal</strong>
+                                                <span class="badge badge-primary badge-pill">{{ subject.data.lifePath.idealNumber }}</span>
+                                            </li>
+                                            <li class="list-group-item d-flex justify-content-between align-items-center mb-2">
+                                                <p>
+                                                    <em>{{ getDefinition('ideal') }}</em>
+                                                    <br><br>
+                                                    {{ subject.data.lifePath.idealNumber|getAnalysis('ideal')|raw }}
+                                                </p>
+                                            </li>
+
+                                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                <strong>Tournant majeur</strong>
+                                                <span class="badge badge-primary badge-pill">{{ subject.data.lifePath.majorTurnNumber }} ans</span>
+                                            </li>
+                                            <li class="list-group-item d-flex justify-content-between align-items-center mb-2">
+                                                <p>
+                                                    <em>{{ getDefinition('majorturn') }}</em>
+                                                </p>
+                                            </li>
+
+                                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                <strong>Année personnelle {{ "now"|date('Y') }}</strong>
+                                                <span class="badge badge-primary badge-pill">{{ subject.data.lifePath.personalYearNowNumber }}</span>
+                                            </li>
+                                            <li class="list-group-item d-flex justify-content-between align-items-center mb-2">
+                                                <p>
+                                                    <em>{{ getDefinition('personalyearnow') }}</em>
+                                                    <br><br>
+                                                    {{ subject.data.lifePath.personalYearNowNumber|getAnalysis('personalyearnow')|raw }}
+                                                </p>
+                                            </li>
+
+                                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                <strong>Nombre secret</strong>
+                                                <span class="badge badge-primary badge-pill">{{ subject.data.lifePath.secretNumber }}</span>
+                                            </li>
+                                            <li class="list-group-item d-flex justify-content-between align-items-center mb-2">
+                                                <p>
+                                                    <em>{{ getDefinition('secret') }}</em>
+                                                    <br><br>
+                                                    {{ subject.data.lifePath.secretNumber|getAnalysis('secret')|raw }}
+                                                </p>
+                                            </li>
+
+                                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                <strong>Nombre astrologique</strong>
+                                                <span class="badge badge-primary badge-pill">{{ subject.data.lifePath.astrologicalNumber }}</span>
+                                            </li>
+                                            <li class="list-group-item d-flex justify-content-between align-items-center mb-2">
+                                                <p>
+                                                    <em>{{ getDefinition('astrological') }}</em>
+                                                    <br><br>
+                                                    {{ subject.data.lifePath.astrologicalNumber|getAnalysis('astrological')|raw }}
+                                                </p>
+                                            </li>
+
+                                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                <strong>Nombre du très court terme</strong>
+                                                <span class="badge badge-primary badge-pill">{{ subject.data.lifePath.veryShortTermNumber }}</span>
+                                            </li>
+                                            <li class="list-group-item d-flex justify-content-between align-items-center mb-2">
+                                                <p>
+                                                    <em>{{ getDefinition('veryshortterm') }}</em>
+                                                    <br><br>
+                                                    {{ subject.data.lifePath.veryShortTermNumber|getAnalysis('veryshortterm')|raw }}
+                                                </p>
+                                            </li>
+
+                                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                <strong>Nombre du court terme</strong>
+                                                <span class="badge badge-primary badge-pill">{{ subject.data.lifePath.shortTermNumber }}</span>
+                                            </li>
+                                            <li class="list-group-item d-flex justify-content-between align-items-center mb-2">
+                                                <p>
+                                                    <em>{{ getDefinition('shortterm') }}</em>
+                                                    <br><br>
+                                                    {{ subject.data.lifePath.shortTermNumber|getAnalysis('shortterm')|raw }}
+                                                </p>
+                                            </li>
+
+                                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                <strong>Nombre du moyen terme</strong>
+                                                <span class="badge badge-primary badge-pill">{{ subject.data.lifePath.meanTermNumber }}</span>
+                                            </li>
+                                            <li class="list-group-item d-flex justify-content-between align-items-center mb-2">
+                                                <p>
+                                                    <em>{{ getDefinition('meanterm') }}</em>
+                                                    <br><br>
+                                                    {{ subject.data.lifePath.meanTermNumber|getAnalysis('meanterm')|raw }}
+                                                </p>
+                                            </li>
+
+                                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                <strong>Nombre du long terme</strong>
+                                                <span class="badge badge-primary badge-pill">{{ subject.data.lifePath.longTermNumber }}</span>
+                                            </li>
+                                            <li class="list-group-item d-flex justify-content-between align-items-center mb-2">
+                                                <p>
+                                                    <em>{{ getDefinition('longterm') }}</em>
+                                                    <br><br>
+                                                    {{ subject.data.lifePath.longTermNumber|getAnalysis('longterm')|raw }}
+                                                </p>
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </header>
-        
-        <script type="text/javascript" src="{{ asset("compiled/common.js") }}"></script>
-        <script type="text/javascript" src="{{ asset("compiled/site.js") }}"></script>
+        </div>
     </body>
 </html>
