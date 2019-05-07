@@ -9,6 +9,7 @@ use ExtranetBundle\Entity\Number;
 use ExtranetBundle\Services\Numerologie;
 use ExtranetBundle\Form\AnalysisType;
 use Knp\Bundle\SnappyBundle\Snappy\Response\PdfResponse;
+use ReCaptcha\ReCaptcha;
 use SiteBundle\Form\ContactType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -165,24 +166,31 @@ class DefaultController extends Controller
         $form = $this->createForm(ContactType::class);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $message = (new \Swift_Message('Nouvelle demande de contact'))
-                ->setFrom('no-reply@numerologie.com')
-                ->setTo($this->getParameter('contact.email'))
-                ->setBody(
-                    $this->renderView(
-                        '@Site/Emails/contact.html.twig',
-                        ['message' => $form->getData()]
-                    ),
-                    'text/html'
-                )
-            ;
+            $recaptcha = new ReCaptcha($this->getParameter('google_recaptcha.secret_key'));
+            $resp = $recaptcha->verify($request->request->get('g-recaptcha-response'), $request->getClientIp());
 
-            try {
-                $mailer->send($message);
+            if (!$resp->isSuccess()) {
+                $this->addFlash('danger', 'Une erreur s\'est produite lors de l\'envoi de votre message.');
+            } else {
+                $message = (new \Swift_Message('Nouvelle demande de contact'))
+                    ->setFrom('no-reply@numerologie.com')
+                    ->setTo($this->getParameter('contact.email'))
+                    ->setBody(
+                        $this->renderView(
+                            '@Site/Emails/contact.html.twig',
+                            ['message' => $form->getData()]
+                        ),
+                        'text/html'
+                    )
+                ;
 
-                $this->addFlash('success', 'Votre message a bien été envoyé');
-            } catch (\Exception $e) {
-                $this->addFlash('error', 'Une erreur s\'est produite lors de l\'envoi de votre message.');
+                try {
+                    $mailer->send($message);
+
+                    $this->addFlash('success', 'Votre message a bien été envoyé');
+                } catch (\Exception $e) {
+                    $this->addFlash('danger', 'Une erreur s\'est produite lors de l\'envoi de votre message.');
+                }
             }
 
             return $this->redirectToRoute('site_contact');

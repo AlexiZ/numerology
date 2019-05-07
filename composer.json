@@ -29,6 +29,7 @@
         "doctrine/orm": "^2.5",
         "friendsofsymfony/jsrouting-bundle": "^1.6",
         "gedmo/doctrine-extensions": "^2.4",
+        "google/recaptcha": "^1.2",
         "guzzlehttp/psr7": "^1.4",
         "h4cc/wkhtmltopdf-amd64": "^0.12.4",
         "hwi/oauth-bundle": ">=0.6",

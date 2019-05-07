@@ -19,7 +19,7 @@
 
                             {% form_theme form '@Site/Commons/_form_theme.html.twig' %}
 
-                            {{ form_start(form, {'attr': {'class': 'form-signin'}}) }}
+                            {{ form_start(form, {'attr': {'class': 'form-signin', 'id': 'form-contact'}}) }}
                                 {{ form_errors(form) }}
 
                                 <div class="row">
@@ -39,7 +39,7 @@
 
                                 <hr class="my-4">
 
-                                <button class="btn btn-lg btn-info btn-block text-uppercase" type="submit">
+                                <button class="btn btn-lg btn-info btn-block text-uppercase g-recaptcha" type="submit" data-sitekey="6LegRKIUAAAAALPapqtI6fw8cImolYb5TYGx2tef" data-callback='onSubmit'>
                                     <i class="fa fa-check mr-2"></i> Envoyer ce message
                                 </button>
                             {{ form_end(form) }}
@@ -50,3 +50,14 @@
         </div>
     </header>
 {% endblock body %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script type="text/javascript" src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script type="text/javascript">
+        function onSubmit(token) {
+            document.getElementById("form-contact").submit();
+        }
+    </script>
+{% endblock javascripts %}

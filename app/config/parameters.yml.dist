@@ -40,3 +40,5 @@ parameters:
     osm.geocoding_api: xxx
 
     contact.email: xxx
+
+    google_recaptcha.secret_key: xxx
