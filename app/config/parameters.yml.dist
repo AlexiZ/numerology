@@ -41,4 +41,5 @@ parameters:
 
     contact.email: xxx
 
+    google_recaptcha.public_key: xxx
     google_recaptcha.secret_key: xxx
