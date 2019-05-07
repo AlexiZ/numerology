@@ -10,9 +10,13 @@ site_show:
     path:     /resultats/{hash}
     defaults: { _controller: SiteBundle:Default:show }
 
-site_edit:
-    path:     /editer/{hash}
-    defaults: { _controller: SiteBundle:Default:edit }
+site_payment:
+    path:     /paiement/{hash}
+    defaults: { _controller: SiteBundle:Default:payment }
+
+site_payment_confirmation:
+    path:     /paiement/confirmation/{hash}
+    defaults: { _controller: SiteBundle:Default:paymentConfirmation }
 
 site_show_details:
     path:     /resultats/{hash}/details

@@ -42,6 +42,15 @@ class DefaultController extends Controller
             $subject->setUserId($this->getUser() ? $this->getUser()->getId() : null);
             $subject->setLevel($version);
 
+            if (Analysis::LEVEL_PREMIUM === $version) {
+                $subject->setStatus(Analysis::STATUS_PENDING);
+
+                $registry->getManager()->persist($subject);
+                $registry->getManager()->flush();
+
+                return $this->redirectToRoute('site_payment', ['hash' => $subject->getHash()]);
+            }
+
             $registry->getManager()->persist($subject);
             $registry->getManager()->flush();
 
@@ -54,12 +63,43 @@ class DefaultController extends Controller
         ]);
     }
 
+    public function paymentAction($hash, ManagerRegistry $registry)
+    {
+        /** @var Analysis $subject */
+        $subject = $registry->getRepository(Analysis::class)->findOneByHash($hash);
+
+        if (!$subject || Analysis::STATUS_PENDING !== $subject->getStatus()) {
+            return $this->redirectToRoute('site_homepage');
+        }
+
+        return $this->render('SiteBundle:Default:payment.html.twig', [
+            'subject' => $subject,
+        ]);
+    }
+
+    public function paymentConfirmationAction($hash, ManagerRegistry $registry)
+    {
+        /** @var Analysis $subject */
+        $subject = $registry->getRepository(Analysis::class)->findOneByHash($hash);
+
+        if (!$subject || Analysis::STATUS_PENDING !== $subject->getStatus()) {
+            return $this->redirectToRoute('site_homepage');
+        }
+
+        $subject->setStatus(Analysis::STATUS_ACTIVE);
+
+        $registry->getManager()->persist($subject);
+        $registry->getManager()->flush();
+
+        return $this->redirectToRoute('site_show', ['hash' => $hash]);
+    }
+
     public function showAction($hash, ManagerRegistry $registry)
     {
         /** @var Analysis $subject */
         $subject = $registry->getRepository(Analysis::class)->findOneByHash($hash);
 
-        if (!$subject) {
+        if (!$subject || Analysis::STATUS_ACTIVE !== $subject->getStatus()) {
             return $this->redirectToRoute('site_homepage');
         }
 
@@ -106,7 +146,7 @@ class DefaultController extends Controller
         /** @var Analysis $subject */
         $subject = $registry->getRepository(Analysis::class)->findOneByHash($hash);
 
-        if (!$subject || Analysis::STATUS_DELETED === $subject->getStatus() || Analysis::LEVEL_FREE === $subject->getLevel()) {
+        if (!$subject || Analysis::STATUS_ACTIVE !== $subject->getStatus() || Analysis::LEVEL_FREE === $subject->getLevel()) {
             return $this->redirectToRoute('site_show', ['hash' => $hash]);
         }
 

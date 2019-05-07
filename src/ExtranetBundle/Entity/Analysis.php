@@ -11,6 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Analysis
 {
     const STATUS_ACTIVE = 'active';
+    const STATUS_PENDING = 'pending';
     const STATUS_DELETED = 'deleted';
     const LEVEL_FREE = 'free';
     const LEVEL_PREMIUM = 'premium';
@@ -109,6 +110,7 @@ class Analysis
 
     public static $statusValues = [
         self::STATUS_ACTIVE,
+        self::STATUS_PENDING,
         self::STATUS_DELETED,
     ];
 
@@ -286,7 +288,7 @@ class Analysis
      */
     public function getOtherFirstnames()
     {
-        return $this->otherFirstnames;
+        return $this->otherFirstnames ?? [];
     }
 
     /**
@@ -320,7 +322,7 @@ class Analysis
      */
     public function getPseudos()
     {
-        return $this->pseudos;
+        return $this->pseudos ?? [];
     }
 
     /**
