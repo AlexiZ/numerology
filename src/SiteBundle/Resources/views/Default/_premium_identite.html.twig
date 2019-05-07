@@ -2,40 +2,103 @@
     <h5>Identité</h5>
     <hr class="divider my-4 underline-divider">
 
-    <ul class="list-group">
-        <li class="list-group-item d-flex justify-content-between align-items-center automatic-tippy"
-            data-ltippy="global"
-            data-rtippy="{{ subject.data.identity.globalNumber }}">
-            Nombre global
-            <span class="badge badge-primary badge-pill">{{ subject.data.identity.globalNumber }}</span>
-        </li>
+    <div class="accordion mb-2" id="accordionGlobal">
+        <div class="card">
+            <div class="card-header" id="headingGlobal">
+                <h6 class="mb-0">
+                    <a class="d-flex justify-content-between align-items-center" href="#" data-toggle="collapse" data-target="#collapseGlobal" aria-expanded="true" aria-controls="collapseGlobal">
+                        Nombre global
+                        <span class="badge badge-primary badge-pill">{{ subject.data.identity.globalNumber }}</span>
+                    </a>
+                </h6>
+            </div>
 
-        <li class="list-group-item d-flex justify-content-between align-items-center automatic-tippy"
-            data-ltippy="inherited"
-            data-rtippy="{{ subject.data.identity.inheritedNumber }}">
-            Nombre héréditaire
-            <span class="badge badge-primary badge-pill">{{ subject.data.identity.inheritedNumber }}</span>
-        </li>
+            <div id="collapseGlobal" class="collapse" aria-labelledby="headingGlobal" data-parent="#accordionGlobal">
+                <div class="card-body">
+                    <p><small><em>{{ getDefinition('global')|raw }}</em></small></p>
+                    <p>{{ subject.data.identity.globalNumber|getAnalysis('global')|raw }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
 
-        <li class="list-group-item d-flex justify-content-between align-items-center automatic-tippy"
-            data-ltippy="duty"
-            data-rtippy="{{ subject.data.identity.dutyNumber }}">
-            Nombre de mission
-            <span class="badge badge-primary badge-pill">{{ subject.data.identity.dutyNumber }}</span>
-        </li>
+    <div class="accordion mb-2" id="accordionInherited">
+        <div class="card">
+            <div class="card-header" id="headingInherited">
+                <h6 class="mb-0">
+                    <a class="d-flex justify-content-between align-items-center" href="#" data-toggle="collapse" data-target="#collapseInherited" aria-expanded="true" aria-controls="collapseInherited">
+                        Nombre héréditaire
+                        <span class="badge badge-primary badge-pill">{{ subject.data.identity.inheritedNumber }}</span>
+                    </a>
+                </h6>
+            </div>
 
-        <li class="list-group-item d-flex justify-content-between align-items-center automatic-tippy"
-            data-ltippy="social"
-            data-rtippy="{{ subject.data.identity.socialNumber }}">
-            Nombre social
-            <span class="badge badge-primary badge-pill">{{ subject.data.identity.socialNumber }}</span>
-        </li>
+            <div id="collapseInherited" class="collapse" aria-labelledby="headingInherited" data-parent="#accordionInherited">
+                <div class="card-body">
+                    <p><small><em>{{ getDefinition('inherited')|raw }}</em></small></p>
+                    <p>{{ subject.data.identity.inheritedNumber|getAnalysis('inherited')|raw }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
 
-        <li class="list-group-item d-flex justify-content-between align-items-center automatic-tippy"
-            data-ltippy="structure"
-            data-rtippy="{{ subject.data.identity.structureNumber }}">
-            Nombre de structure
-            <span class="badge badge-primary badge-pill">{{ subject.data.identity.structureNumber }}</span>
-        </li>
-    </ul>
+    <div class="accordion mb-2" id="accordionDuty">
+        <div class="card">
+            <div class="card-header" id="headingDuty">
+                <h6 class="mb-0">
+                    <a class="d-flex justify-content-between align-items-center" href="#" data-toggle="collapse" data-target="#collapseDuty" aria-expanded="true" aria-controls="collapseDuty">
+                        Nombre de mission
+                        <span class="badge badge-primary badge-pill">{{ subject.data.identity.dutyNumber }}</span>
+                    </a>
+                </h6>
+            </div>
+
+            <div id="collapseDuty" class="collapse" aria-labelledby="headingDuty" data-parent="#accordionDuty">
+                <div class="card-body">
+                    <p><small><em>{{ getDefinition('duty')|raw }}</em></small></p>
+                    <p>{{ subject.data.identity.dutyNumber|getAnalysis('duty')|raw }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="accordion mb-2" id="accordionSocial">
+        <div class="card">
+            <div class="card-header" id="headingSocial">
+                <h6 class="mb-0">
+                    <a class="d-flex justify-content-between align-items-center" href="#" data-toggle="collapse" data-target="#collapseSocial" aria-expanded="true" aria-controls="collapseSocial">
+                        Nombre social
+                        <span class="badge badge-primary badge-pill">{{ subject.data.identity.socialNumber }}</span>
+                    </a>
+                </h6>
+            </div>
+
+            <div id="collapseSocial" class="collapse" aria-labelledby="headingSocial" data-parent="#accordionSocial">
+                <div class="card-body">
+                    <p><small><em>{{ getDefinition('social')|raw }}</em></small></p>
+                    <p>{{ subject.data.identity.socialNumber|getAnalysis('social')|raw }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="accordion mb-2" id="accordionStructure">
+        <div class="card">
+            <div class="card-header" id="headingStructure">
+                <h6 class="mb-0">
+                    <a class="d-flex justify-content-between align-items-center" href="#" data-toggle="collapse" data-target="#collapseStructure" aria-expanded="true" aria-controls="collapseStructure">
+                        Nombre de structure
+                        <span class="badge badge-primary badge-pill">{{ subject.data.identity.structureNumber }}</span>
+                    </a>
+                </h6>
+            </div>
+
+            <div id="collapseStructure" class="collapse" aria-labelledby="headingStructure" data-parent="#accordionStructure">
+                <div class="card-body">
+                    <p><small><em>{{ getDefinition('structure')|raw }}</em></small></p>
+                    <p>{{ subject.data.identity.structureNumber|getAnalysis('structure')|raw }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

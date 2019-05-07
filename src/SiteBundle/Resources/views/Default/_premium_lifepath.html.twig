@@ -3,75 +3,204 @@
     <hr class="divider my-4 underline-divider">
 
     <div class="row">
-        <ul class="list-group col-md-12">
-            <li class="list-group-item d-flex justify-content-between align-items-center automatic-tippy"
-                data-ltippy="lifepath"
-                data-rtippy="{{ subject.data.lifePath.lifePathNumber }}">
-                Chemin de vie
-                <span class="badge badge-primary badge-pill">{{ subject.data.lifePath.lifePathNumber }}</span>
-            </li>
+        <div class="accordion mb-2 col-md-12" id="accordionLifePath">
+            <div class="card">
+                <div class="card-header" id="headingLifePath">
+                    <h6 class="mb-0">
+                        <a class="d-flex justify-content-between align-items-center" href="#" data-toggle="collapse" data-target="#collapseLifePath" aria-expanded="true" aria-controls="collapseLifePath">
+                            Chemin de vie
+                            <span class="badge badge-primary badge-pill">{{ subject.data.lifePath.lifePathNumber }}</span>
+                        </a>
+                    </h6>
+                </div>
 
-            <li class="list-group-item d-flex justify-content-between align-items-center automatic-tippy"
-                data-ltippy="ideal"
-                data-rtippy="{{ subject.data.lifePath.idealNumber }}">
-                Chemin d'idéal
-                <span class="badge badge-primary badge-pill">{{ subject.data.lifePath.idealNumber }}</span>
-            </li>
+                <div id="collapseLifePath" class="collapse" aria-labelledby="headingLifePath" data-parent="#accordionLifePath">
+                    <div class="card-body">
+                        <p><small><em>{{ getDefinition('lifepath')|raw }}</em></small></p>
+                        <p>{{ subject.data.lifePath.lifePathNumber|getAnalysis('lifepath')|raw }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-            <li class="list-group-item d-flex justify-content-between align-items-center automatic-tippy"
-                data-ltippy="majorturn">
-                Tournant majeur
-                <span class="badge badge-primary badge-pill">{{ subject.data.lifePath.majorTurnNumber }} ans</span>
-            </li>
+        <div class="accordion mb-2 col-md-12" id="accordionIdeal">
+            <div class="card">
+                <div class="card-header" id="headingIdeal">
+                    <h6 class="mb-0">
+                        <a class="d-flex justify-content-between align-items-center" href="#" data-toggle="collapse" data-target="#collapseIdeal" aria-expanded="true" aria-controls="collapseIdeal">
+                            Chemin d'idéal
+                            <span class="badge badge-primary badge-pill">{{ subject.data.lifePath.idealNumber }}</span>
+                        </a>
+                    </h6>
+                </div>
 
-            <li class="list-group-item d-flex justify-content-between align-items-center automatic-tippy"
-                data-ltippy="personalyearnow"
-                data-rtippy="{{ subject.data.lifePath.personalYearNowNumber }}">
-                Année personnelle {{ "now"|date('Y') }}
-                <span class="badge badge-primary badge-pill">{{ subject.data.lifePath.personalYearNowNumber }}</span>
-            </li>
+                <div id="collapseIdeal" class="collapse" aria-labelledby="headingIdeal" data-parent="#accordionIdeal">
+                    <div class="card-body">
+                        <p><small><em>{{ getDefinition('ideal')|raw }}</em></small></p>
+                        <p>{{ subject.data.lifePath.idealNumber|getAnalysis('ideal')|raw }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-            <li class="list-group-item d-flex justify-content-between align-items-center automatic-tippy"
-                data-ltippy="secret"
-                data-rtippy="{{ subject.data.lifePath.secretNumber }}">
-                Nombre secret
-                <span class="badge badge-primary badge-pill">{{ subject.data.lifePath.secretNumber }}</span>
-            </li>
+        <div class="accordion mb-2 col-md-12" id="accordionMajorTurn">
+            <div class="card">
+                <div class="card-header" id="headingMajorTurn">
+                    <h6 class="mb-0">
+                        <a class="d-flex justify-content-between align-items-center" href="#" data-toggle="collapse" data-target="#collapseMajorTurn" aria-expanded="true" aria-controls="collapseMajorTurn">
+                            Tournant majeur
+                            <span class="badge badge-primary badge-pill">{{ subject.data.lifePath.majorTurnNumber }} ans</span>
+                        </a>
+                    </h6>
+                </div>
 
-            <li class="list-group-item d-flex justify-content-between align-items-center automatic-tippy"
-                data-ltippy="astrological"
-                data-rtippy="{{ subject.data.lifePath.astrologicalNumber }}">
-                Nombre astrologique
-                <span class="badge badge-primary badge-pill">{{ subject.data.lifePath.astrologicalNumber }}</span>
-            </li>
+                <div id="collapseMajorTurn" class="collapse" aria-labelledby="headingMajorTurn" data-parent="#accordionMajorTurn">
+                    <div class="card-body">
+                        <p><small><em>{{ getDefinition('majorturn')|raw }}</em></small></p>
+                        <p>{{ subject.data.lifePath.majorTurnNumber|getAnalysis('majorturn')|raw }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-            <li class="list-group-item d-flex justify-content-between align-items-center automatic-tippy"
-                data-ltippy="veryshortterm"
-                data-rtippy="{{ subject.data.lifePath.veryShortTermNumber }}">
-                Nombre du très court terme
-                <span class="badge badge-primary badge-pill">{{ subject.data.lifePath.veryShortTermNumber }}</span>
-            </li>
+        <div class="accordion mb-2 col-md-12" id="accordionPersonalYearNow">
+            <div class="card">
+                <div class="card-header" id="headingPersonalYearNow">
+                    <h6 class="mb-0">
+                        <a class="d-flex justify-content-between align-items-center" href="#" data-toggle="collapse" data-target="#collapsePersonalYearNow" aria-expanded="true" aria-controls="collapsePersonalYearNow">
+                            Année personnelle {{ "now"|date('Y') }}
+                            <span class="badge badge-primary badge-pill">{{ subject.data.lifePath.personalYearNowNumber }}</span>
+                        </a>
+                    </h6>
+                </div>
 
-            <li class="list-group-item d-flex justify-content-between align-items-center automatic-tippy"
-                data-ltippy="shortterm"
-                data-rtippy="{{ subject.data.lifePath.shortTermNumber }}">
-                Nombre du court terme
-                <span class="badge badge-primary badge-pill">{{ subject.data.lifePath.shortTermNumber }}</span>
-            </li>
+                <div id="collapsePersonalYearNow" class="collapse" aria-labelledby="headingPersonalYearNow" data-parent="#accordionPersonalYearNow">
+                    <div class="card-body">
+                        <p><small><em>{{ getDefinition('personalyearnow')|raw }}</em></small></p>
+                        <p>{{ subject.data.lifePath.personalYearNowNumber|getAnalysis('personalyearnow')|raw }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-            <li class="list-group-item d-flex justify-content-between align-items-center automatic-tippy"
-                data-ltippy="meanterm"
-                data-rtippy="{{ subject.data.lifePath.meanTermNumber }}">
-                Nombre du moyen terme
-                <span class="badge badge-primary badge-pill">{{ subject.data.lifePath.meanTermNumber }}</span>
-            </li>
+        <div class="accordion mb-2 col-md-12" id="accordionSecret">
+            <div class="card">
+                <div class="card-header" id="headingSecret">
+                    <h6 class="mb-0">
+                        <a class="d-flex justify-content-between align-items-center" href="#" data-toggle="collapse" data-target="#collapseSecret" aria-expanded="true" aria-controls="collapseSecret">
+                            Nombre secret
+                            <span class="badge badge-primary badge-pill">{{ subject.data.lifePath.secretNumber }}</span>
+                        </a>
+                    </h6>
+                </div>
 
-            <li class="list-group-item d-flex justify-content-between align-items-center automatic-tippy"
-                data-ltippy="longterm"
-                data-rtippy="{{ subject.data.lifePath.longTermNumber }}">
-                Nombre du long terme
-                <span class="badge badge-primary badge-pill">{{ subject.data.lifePath.longTermNumber }}</span>
-            </li>
-        </ul>
+                <div id="collapseSecret" class="collapse" aria-labelledby="headingSecret" data-parent="#accordionSecret">
+                    <div class="card-body">
+                        <p><small><em>{{ getDefinition('secret')|raw }}</em></small></p>
+                        <p>{{ subject.data.lifePath.secretNumber|getAnalysis('secret')|raw }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="accordion mb-2 col-md-12" id="accordionAstrological">
+            <div class="card">
+                <div class="card-header premium-only" id="headingAstrological">
+                    <h6 class="mb-0">
+                        <a class="d-flex justify-content-between align-items-center" href="#" data-toggle="collapse" data-target="#collapseAstrological" aria-expanded="true" aria-controls="collapseAstrological">
+                            Nombre astrologique
+                            <span class="badge badge-info badge-pill">{{ subject.data.lifePath.astrologicalNumber }}</span>
+                        </a>
+                    </h6>
+                </div>
+
+                <div id="collapseAstrological" class="collapse" aria-labelledby="headingAstrological" data-parent="#accordionAstrological">
+                    <div class="card-body">
+                        <p><small><em>{{ getDefinition('astrological')|raw }}</em></small></p>
+                        <p>{{ subject.data.lifePath.astrologicalNumber|getAnalysis('astrological') }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="accordion mb-2 col-md-12" id="accordionVeryShortTerm">
+            <div class="card">
+                <div class="card-header premium-only" id="headingVeryShortTerm">
+                    <h6 class="mb-0">
+                        <a class="d-flex justify-content-between align-items-center" href="#" data-toggle="collapse" data-target="#collapseVeryShortTerm" aria-expanded="true" aria-controls="collapseVeryShortTerm">
+                            Nombre du très court terme
+                            <span class="badge badge-info badge-pill">{{ subject.data.lifePath.veryShortTermNumber }}</span>
+                        </a>
+                    </h6>
+                </div>
+
+                <div id="collapseVeryShortTerm" class="collapse" aria-labelledby="headingVeryShortTerm" data-parent="#accordionVeryShortTerm">
+                    <div class="card-body">
+                        <p><small><em>{{ getDefinition('veryshortterm')|raw }}</em></small></p>
+                        <p>{{ subject.data.lifePath.veryShortTermNumber|getAnalysis('veryshortterm') }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="accordion mb-2 col-md-12" id="accordionShortTerm">
+            <div class="card">
+                <div class="card-header premium-only" id="headingShortTerm">
+                    <h6 class="mb-0">
+                        <a class="d-flex justify-content-between align-items-center" href="#" data-toggle="collapse" data-target="#collapseShortTerm" aria-expanded="true" aria-controls="collapseShortTerm">
+                            Nombre du court terme
+                            <span class="badge badge-info badge-pill">{{ subject.data.lifePath.shortTermNumber }}</span>
+                        </a>
+                    </h6>
+                </div>
+
+                <div id="collapseShortTerm" class="collapse" aria-labelledby="headingShortTerm" data-parent="#accordionShortTerm">
+                    <div class="card-body">
+                        <p><small><em>{{ getDefinition('shortterm')|raw }}</em></small></p>
+                        <p>{{ subject.data.lifePath.shortTermNumber|getAnalysis('shortterm') }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="accordion mb-2 col-md-12" id="accordionMeanTerm">
+            <div class="card">
+                <div class="card-header premium-only" id="headingMeanTerm">
+                    <h6 class="mb-0">
+                        <a class="d-flex justify-content-between align-items-center" href="#" data-toggle="collapse" data-target="#collapseMeanTerm" aria-expanded="true" aria-controls="collapseMeanTerm">
+                            Nombre du moyen terme
+                            <span class="badge badge-info badge-pill">{{ subject.data.lifePath.meanTermNumber }}</span>
+                        </a>
+                    </h6>
+                </div>
+
+                <div id="collapseMeanTerm" class="collapse" aria-labelledby="headingMeanTerm" data-parent="#accordionMeanTerm">
+                    <div class="card-body">
+                        <p><small><em>{{ getDefinition('meanterm')|raw }}</em></small></p>
+                        <p>{{ subject.data.lifePath.meanTermNumber|getAnalysis('meanterm') }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="accordion mb-2 col-md-12" id="accordionLongTerm">
+            <div class="card">
+                <div class="card-header premium-only" id="headingLongTerm">
+                    <h6 class="mb-0">
+                        <a class="d-flex justify-content-between align-items-center" href="#" data-toggle="collapse" data-target="#collapseLongTerm" aria-expanded="true" aria-controls="collapseLongTerm">
+                            Nombre du moyen terme
+                            <span class="badge badge-info badge-pill">{{ subject.data.lifePath.longTermNumber }}</span>
+                        </a>
+                    </h6>
+                </div>
+
+                <div id="collapseLongTerm" class="collapse" aria-labelledby="headingLongTerm" data-parent="#accordionLongTerm">
+                    <div class="card-body">
+                        <p><small><em>{{ getDefinition('longterm')|raw }}</em></small></p>
+                        <p>{{ subject.data.lifePath.longTermNumber|getAnalysis('longterm') }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

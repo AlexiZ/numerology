@@ -45,6 +45,26 @@ strong.font-weight-bold {
   color: #495057;
 }
 
+.showPage {
+  .accordion {
+    .card-header {
+      a {
+        text-decoration: none;
+      }
+    }
+    .card-body {
+      p {
+        font-size: 1rem;
+      }
+    }
+  }
+
+  .text-progress p {
+    font-size: 1rem;
+    padding: 5px;
+  }
+}
+
 .showPage, .tryPage {
   header.masthead {
     height: auto !important;
@@ -100,8 +120,11 @@ strong.font-weight-bold {
 }
 
 .premium-only {
-  background-color: #e6e6e6;
-  cursor: not-allowed;
+  background-color: #e6e6e6 !important;
+
+  .card-header {
+    background-color: #e6e6e6;
+  }
 }
 
 hr.underline-divider {

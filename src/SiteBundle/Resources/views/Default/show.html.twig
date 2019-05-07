@@ -11,7 +11,7 @@
                 <div class="col-lg-10 col-xl-9 mx-auto">
                     <div class="card card-signin flex-row my-5">
                         <div class="card-body">
-                            <h5 class="card-title text-center">
+                            <h5 class="card-title text-center mt-4">
                                 {{ subject }}
                                 <br>{% if subject.pseudos is not empty and subject.pseudos.0|default %}
                                     {{ subject.pseudos|join(', ') }}<br>
@@ -56,7 +56,7 @@
                                             <br>
                                             Vous recevrez également un <strong>lien permanent vers votre étude</strong> à jour de nos dernières évolutions, que vous pourrez consulter à volonté.
                                             <br><br>
-                                            <button type="button" class="btn btn-info" onclick="javascript:alert('Direction la page de paiement');">Commander pour 8.80€</button>
+                                            <a href="{{ path('site_payment', {'hash': subject.hash}) }}" class="btn btn-info">Commander pour 8.80€</a>
                                         </div>
                                     </div>
                                 </div>
