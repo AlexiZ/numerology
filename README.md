@@ -18,9 +18,11 @@ Automatically calculate a person's numerology theme.
 - Internationalization
 - ~~Chat~~
 - ~~Data editing~~
-- PDF export
+- ~~PDF export public site~~
+- PDF export extranet
 - Comparison
 - ~~Notifications~~
+- Paypal payment
 
 ## How to
 - Create an account in Slack with the Gmail alias and customer's real name
