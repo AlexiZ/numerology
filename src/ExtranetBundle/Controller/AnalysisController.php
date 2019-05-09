@@ -122,17 +122,17 @@ class AnalysisController extends Controller
         /** @var Analysis $subject */
         $subject = $registry->getRepository(Analysis::class)->findOneByHash($hash);
 
-        if (!$subject || Analysis::STATUS_DELETED === $subject->getStatus() || Analysis::LEVEL_FREE === $subject->getLevel()) {
+        if (!$subject || Analysis::STATUS_ACTIVE !== $subject->getStatus() || Analysis::LEVEL_PREMIUM !== $subject->getLevel()) {
             return $this->redirectToRoute(self::ROUTE_SHOW, ['hash' => $hash]);
         }
 
-        $html = $this->renderView('@Extranet/Analysis/export.pdf.twig', [
+        $html = $this->renderView('@Site/Default/export.pdf.twig', [
             self::SUBJECT => $subject,
         ]);
 
         return new PdfResponse(
             $this->get('knp_snappy.pdf')->getOutputFromHtml($html),
-            uniqid() . '.pdf'
+            $subject->getPublicName() . '.pdf'
         );
     }
 }
