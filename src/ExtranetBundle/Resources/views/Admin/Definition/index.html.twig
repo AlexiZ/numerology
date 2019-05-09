@@ -1,0 +1,62 @@
+{% extends '@Extranet/base.html.twig' %}
+
+{% block title %}
+    Numérologie - Administration des définitions
+{% endblock %}
+
+{% block pagesubtitle %}
+    <a href="{{ path('admin_index') }}" class="btn btn-light btn-icon-split">
+        <span class="icon text-gray-600">
+            <i class="fa fa-arrow-left"></i>
+        </span>
+        <span class="text">Retour au panneau d'administration</span>
+    </a>
+{% endblock pagesubtitle %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">
+                        Liste des définitions
+                    </h6>
+                </div>
+
+                <div class="card-body">
+                    <table class="table automatic-table">
+                        <thead>
+                        <tr>
+                            <th>Nom</th>
+                            <th>Définition</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+                        {% for definition in definitions %}
+                            <tr>
+                                <td>{{ definition.name }}</td>
+                                <td><em>{{ definition.content|raw }}</em></td>
+                                <td>
+                                    {% if definition.content is not empty and definition.content|upper != 'XXX' %}
+                                        <a href="{{ path('admin_definition_edit', {'id': definition.id}) }}" title="Modifier" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                                            <i class="fas fa-pen fa-sm text-white-50"></i>&nbsp;
+                                            Modifier
+                                        </a>
+                                    {% else %}
+                                        <a href="{{ path('admin_definition_edit', {'id': definition.id}) }}" title="Modifier" class="d-none d-sm-inline-block btn btn-sm btn-warning shadow-sm">
+                                            <i class="fas fa-pen fa-sm text-white-50"></i>&nbsp;
+                                            Remplir
+                                        </a>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock body %}

@@ -19,7 +19,7 @@ Automatically calculate a person's numerology theme.
 - ~~Chat~~
 - ~~Data editing~~
 - ~~PDF export public site~~
-- PDF export extranet
+- ~~PDF export extranet~~
 - Comparison
 - ~~Notifications~~
 - Paypal payment

@@ -1,0 +1,88 @@
+{% extends '@Extranet/base.html.twig' %}
+
+{% block title %}
+    Numérologie - Administration des utilisateurs
+{% endblock %}
+
+{% block pagesubtitle %}
+    <a href="{{ path('admin_index') }}" class="btn btn-light btn-icon-split">
+        <span class="icon text-gray-600">
+            <i class="fa fa-arrow-left"></i>
+        </span>
+        <span class="text">Retour au panneau d'administration</span>
+    </a>
+{% endblock pagesubtitle %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">
+                        Liste des utilisateurs
+                    </h6>
+                </div>
+
+                <div class="card-body">
+                    <table class="table automatic-table">
+                        <thead>
+                            <tr>
+                                <th>Pseudo</th>
+                                <th>Email</th>
+                                <th>Adhésion</th>
+                                <th>Dernière connexion</th>
+                                <th>Statut</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            {% for user in users %}
+                                <tr>
+                                    <td>{{ user.nickname }}</td>
+                                    <td><i class="fa fa-{% if user.email_verified|default %}check{% else %}times{% endif %}"></i>&nbsp;{{ user.email }}</td>
+                                    <td>{{ user.created_at|date('Y-m-d H:i') }}</td>
+                                    <td>{{ user.last_login|default|date('Y-m-d H:i') }}</td>
+                                    <td>
+                                        {% if user.app_metadata is not defined %}
+                                            <a href="#" class="btn btn-sm btn-warning btn-icon-split">
+                                                <span class="icon text-white-50"><i class="fas fa-spinner"></i></span>
+                                                <span class="text">En attente</span>
+                                            </a>
+                                        {% elseif 'ROLE_ADMIN' in user.app_metadata.roles %}
+                                            <a href="#" class="btn btn-sm btn-primary btn-icon-split">
+                                                <span class="icon text-white-50"><i class="fas fa-user"></i></span>
+                                                <span class="text">Administrateur</span>
+                                            </a>
+                                        {% elseif 'ROLE_USER' in user.app_metadata.roles %}
+                                            <a href="#" class="btn btn-sm btn-success btn-icon-split">
+                                                <span class="icon text-white-50"><i class="fas fa-check"></i></span>
+                                                <span class="text">Autorisé</span>
+                                            </a>
+                                        {% else %}
+                                            <a href="#" class="btn btn-sm btn-danger btn-icon-split">
+                                                <span class="icon text-white-50"><i class="fas fa-times"></i></span>
+                                                <span class="text">Refusé</span>
+                                            </a>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        {% if user.app_metadata is not defined or 'ROLE_USER' not in user.app_metadata.roles %}
+                                            <a href="#" data-userid="{{ user.user_id }}" title="Valider l'utilisateur" class="btn btn-success btn-circle btn-sm userValidate">
+                                                <i class="fas fa-check"></i>
+                                            </a>
+                                        {% elseif 'ROLE_USER' in user.app_metadata.roles %}
+                                            <a href="#" data-userid="{{ user.user_id }}" title="Empêcher l'accès" class="btn btn-danger btn-circle btn-sm userRefuse">
+                                                <i class="fas fa-times"></i>
+                                            </a>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock body %}

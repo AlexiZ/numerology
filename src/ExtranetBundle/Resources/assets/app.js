@@ -5,6 +5,7 @@ import 'startbootstrap-sb-admin-2/js/sb-admin-2.min';
 import 'chart.js';
 import 'datatables.net-bs4';
 import Shepherd from "shepherd.js";
+import Quill from 'quill';
 
 import './main.scss';
 
@@ -118,6 +119,22 @@ $(document).ready(() => {
                 tutorial();
             });
         }
+    }
+
+    let automaticQuillDivs = document.querySelectorAll('div.automatic-quill'),
+        automaticQuillForm = document.querySelector('form.automatic-quill');
+    if (automaticQuillDivs) {
+        automaticQuillDivs.forEach( (automaticQuill) => {
+            new Quill(automaticQuill, {
+                theme: 'snow',
+            });
+        });
+
+        automaticQuillForm.addEventListener('submit', () => {
+            automaticQuillDivs.forEach( (automaticQuill) => {
+                document.querySelector('input[name="' + automaticQuill.dataset.hidden + '"]').value = automaticQuill.querySelector('.ql-editor').innerHTML;
+            });
+        });
     }
 });
 

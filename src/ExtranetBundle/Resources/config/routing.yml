@@ -28,6 +28,10 @@ admin_index:
     path: /administrer/
     defaults: { _controller: ExtranetBundle:Admin:index }
 
+admin_users_list:
+    path: /administrer/utilisateurs/
+    defaults: { _controller: ExtranetBundle:Admin:usersList }
+
 admin_user_validate:
     path: /administrer/utilisateur/valider/{userId}
     defaults: { _controller: ExtranetBundle:Admin:userValidate }
@@ -39,6 +43,22 @@ admin_user_refuse:
     defaults: { _controller: ExtranetBundle:Admin:userRefuse }
     options:
         expose: true
+
+admin_numbers_list:
+    path: /administrer/numeros/
+    defaults: { _controller: ExtranetBundle:Admin:numbersList }
+
+admin_number_edit:
+    path: /administrer/numero/{id}
+    defaults: { _controller: ExtranetBundle:Admin:numberEdit }
+
+admin_definitions_list:
+    path: /administrer/definitions/
+    defaults: { _controller: ExtranetBundle:Admin:definitionsList }
+
+admin_definition_edit:
+    path: /administrer/definition/{id}
+    defaults: { _controller: ExtranetBundle:Admin:definitionEdit }
 
 messages_number:
     path: /messages/tous/total/

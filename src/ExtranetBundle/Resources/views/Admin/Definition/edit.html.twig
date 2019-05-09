@@ -1,0 +1,56 @@
+{% extends '@Extranet/base.html.twig' %}
+
+{% block title %}
+    Numérologie - Administration des définitions
+{% endblock %}
+
+{% block pagesubtitle %}
+    <a href="{{ path('admin_definitions_list') }}" class="btn btn-light btn-icon-split">
+        <span class="icon text-gray-600">
+            <i class="fa fa-arrow-left"></i>
+        </span>
+        <span class="text">Retour à la liste des définitions</span>
+    </a>
+{% endblock pagesubtitle %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">
+                        Modification de la définition de "{{ definition.name }}"
+                    </h6>
+                </div>
+
+                <div class="card-body">
+                    {{ form_start(form, {'attr': {'class': 'automatic-quill'}}) }}
+                    {{ form_errors(form) }}
+
+                    {% for child in form.children if child.vars.name != '_token' %}
+                        <div class="form-group row">
+                            {{ form_label(child, null, {'label_attr': {'class': 'col-md-2'}}) }}
+
+                            <div class="col-sm-10">
+                                <div class="automatic-quill" data-hidden="{{ child.vars.full_name }}">
+                                    {{ child.vars.value|raw }}
+                                </div>
+
+                                {{ form_widget(child) }}
+                            </div>
+                        </div>
+                    {% endfor %}
+
+                    {{ form_rest(form) }}
+
+                    <button type="submit" class="btn btn-success btn-icon-split mt-4">
+                        <span class="icon text-white-50"><i class="fas fa-check"></i></span>
+                        <span class="text">Valider les modifications</span>
+                    </button>
+
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock body %}

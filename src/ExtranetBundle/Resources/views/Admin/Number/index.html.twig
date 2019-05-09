@@ -1,0 +1,74 @@
+{% extends '@Extranet/base.html.twig' %}
+
+{% block title %}
+    Numérologie - Administration des nombres
+{% endblock %}
+
+{% block pagesubtitle %}
+    <a href="{{ path('admin_index') }}" class="btn btn-light btn-icon-split">
+        <span class="icon text-gray-600">
+            <i class="fa fa-arrow-left"></i>
+        </span>
+        <span class="text">Retour au panneau d'administration</span>
+    </a>
+{% endblock pagesubtitle %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">
+                        Liste des nombres
+                    </h6>
+                </div>
+
+                <div class="card-body">
+                    <table class="table automatic-table">
+                        <thead>
+                            <tr>
+                                <th>Numéro</th>
+                                <th>Taux de remplissage</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            {% for number in numbers %}
+                                <tr>
+                                    <td>{{ number.value }}</td>
+                                    <td>
+                                        {% if number.fillingRate.percentage < 25 %}
+                                            {% set progressBg = 'danger' %}
+                                        {% elseif number.fillingRate.percentage < 50 %}
+                                            {% set progressBg = 'warning' %}
+                                        {% elseif number.fillingRate.percentage < 75 %}
+                                            {% set progressBg = 'info' %}
+                                        {% else %}
+                                            {% set progressBg = 'success' %}
+                                        {% endif %}
+
+                                        <div class="progress">
+                                            <div class="progress-bar progress-bar-striped bg-{{ progressBg }}"
+                                                 role="progressbar"
+                                                 style="width: {{ number.fillingRate.percentage }}%"
+                                                 aria-valuenow="{{ number.fillingRate.percentage }}" aria-valuemin="0" aria-valuemax="{{ number.fillingRate.total }}">
+                                                {% if number.fillingRate.percentage|default %}{{ number.fillingRate.percentage }} %&nbsp;({{ number.fillingRate.count }} sur {{ number.fillingRate.total }}){% endif %}
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <a href="{{ path('admin_number_edit', {'id': number.id}) }}" title="Modifier" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                                            <i class="fas fa-pen fa-sm text-white-50"></i>&nbsp;
+                                            Modifier
+                                        </a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock body %}

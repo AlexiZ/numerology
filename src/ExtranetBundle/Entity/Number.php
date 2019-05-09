@@ -155,6 +155,11 @@ class Number
     private $average;
 
 
+    public function __toString()
+    {
+        return $this->getValue();
+    }
+
     /**
      * Get id.
      *
@@ -629,5 +634,51 @@ class Number
     public function getAverage()
     {
         return $this->average;
+    }
+
+    public static function getProperties()
+    {
+        return [
+            'inherited',
+            'duty',
+            'social',
+            'structure',
+            'global',
+            'lifePath',
+            'ideal',
+            'personalYearNow',
+            'secret',
+            'astrological',
+            'veryShortTerm',
+            'shortTerm',
+            'meanTerm',
+            'longTerm',
+            'missing',
+            'weak',
+            'strong',
+            'average',
+        ];
+    }
+
+    public function getFillingRate()
+    {
+        $properties = [];
+        foreach ($this->getProperties() as $property) {
+            $function = 'get' . ucfirst($property);
+            $properties[$property] = $this->$function();
+        }
+
+        $count = 0;
+        foreach ($properties as $value) {
+            if ($value && false === strpos(strtoupper($value), 'XXX')) {
+                $count++;
+            }
+        }
+
+        return [
+            'count' => $count,
+            'total' => count($properties),
+            'percentage' => round($count / count($properties) * 100, 0),
+        ];
     }
 }
