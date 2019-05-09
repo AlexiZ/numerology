@@ -23,6 +23,8 @@ Automatically calculate a person's numerology theme.
 - Comparison
 - ~~Notifications~~
 - Paypal payment
+- Admin UI to manage numbers' details
+- Admin UI to manage definitions
 
 ## How to
 - Create an account in Slack with the Gmail alias and customer's real name
