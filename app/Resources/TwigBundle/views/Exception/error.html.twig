@@ -10,12 +10,12 @@
 
     <body id="page-top">
         <div id="wrapper">
-            <div id="content-wrapper" class="d-flex flex-column">
+            <div id="content-wrapper" class="d-flex flex-column" style="height: 100vh;">
                 <div id="content">
                     <div class="container-fluid">
-                        <div class="text-center">
+                        <div class="text-center" style="padding-top: 20vh;">
                             <div class="error rotate-15 mx-auto" data-text="Erreur">Erreur</div>
-                            <p class="lead text-gray-800 mb-5">Danger Will Robinson !</p>
+                            <p class="lead text-gray-800 mb-5"></p>
                             <p class="text-gray-500 mb-0">Il y a quelque chose qui cloche...</p>
                             <a href="{{ url('extranet_index') }}">&larr; Retourner sur le site</a>
                         </div>
@@ -35,7 +35,7 @@
                 </footer>
             </div>
         </div>
-        
+
         <script type="text/javascript" src="{{ asset("compiled/common.js") }}"></script>
         <script type="text/javascript" src="{{ asset("compiled/extranet.js") }}"></script>
         <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
