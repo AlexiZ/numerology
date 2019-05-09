@@ -1,14 +1,44 @@
-{% extends '@Site/base.html.twig' %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Numérologie - Page non trouvée</title>
+        <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+        <link rel="stylesheet" href="{{ asset('compiled/extranet.css') }}">
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
+    </head>
 
-{% block title %}
-    Numérologie - Page non trouvée
-{% endblock %}
+    <body id="page-top">
+        <div id="wrapper">
+            <div id="content-wrapper" class="d-flex flex-column">
+                <div id="content">
+                    <div class="container-fluid">
+                        <div class="text-center">
+                            <div class="error rotate-15 mx-auto" data-text="Erreur">Erreur</div>
+                            <p class="lead text-gray-800 mb-5">Danger Will Robinson !</p>
+                            <p class="text-gray-500 mb-0">Il y a quelque chose qui cloche...</p>
+                            <a href="{{ url('extranet_index') }}">&larr; Retourner sur le site</a>
+                        </div>
+                    </div>
+                </div>
 
-{% block body %}
-    <div class="text-center">
-        <div class="error rotate-15 mx-auto" data-text="Erreur">Erreur</div>
-        <p class="lead text-gray-800 mb-5">Danger Will Robinson !</p>
-        <p class="text-gray-500 mb-0">Il y a quelque chose qui cloche...</p>
-        <a href="{{ url('extranet_index') }}">&larr; Retourner sur le site</a>
-    </div>
-{% endblock body %}
+                <footer class="sticky-footer bg-white">
+                    <div class="container my-auto">
+                        <div class="copyright text-center my-auto">
+                            <span>Copyright &copy; Jean-Michel Mazaudier 2019</span>
+
+                            <a class="nav-link" href="javascript:void(0);">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><em>Date de dernière mise à jour : {% include 'latest.html.twig' %}</em></span>
+                            </a>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+        
+        <script type="text/javascript" src="{{ asset("compiled/common.js") }}"></script>
+        <script type="text/javascript" src="{{ asset("compiled/extranet.js") }}"></script>
+        <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+        <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
+    </body>
+</html>
