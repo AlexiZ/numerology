@@ -295,7 +295,7 @@
 
             <div class="row">
                 <div class="col-lg-6 col-md-6 mr-auto text-center">
-                    <a class="d-block text-white" href="javascript:alert('popin vidéo présentation');"><i class="fas fa-play fa-3x mb-3"></i><br>Voir la démo</a>
+                    <a class="d-block text-white" href="javascript:void(0);" data-toggle="modal" data-target="#modalPrez"><i class="fas fa-play fa-3x mb-3"></i><br>Voir la présentation</a>
                 </div>
 
                 <div class="col-lg-6 col-md-6 mr-auto text-center">
@@ -316,4 +316,27 @@
             </div>
         </div>
     </section>
+
+    <div class="modal fade" id="modalPrez" tabindex="-1" role="dialog" aria-labelledby="modalPrezLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalPrezLabel">Présentation de notre solution pour les professionnels</h5>
+
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <div class="embed-responsive embed-responsive-16by9">
+                        <video class="embed-responsive-item" width="320" height="240" controls>
+                            <source src="{{ asset('bundles/site/video/presentation.mp4') }}" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock body %}

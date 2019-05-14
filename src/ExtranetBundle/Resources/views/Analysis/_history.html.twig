@@ -15,7 +15,7 @@
                 <td>
                     <a href="{{ url('extranet_show', {'hash': subject.hash}) }}" title="Afficher" class="btn">{{ subject }}</a>
                 </td>
-                <td>Le {{ subject.birthDate|date('d/m/Y \à H:m') }}</td>
+                <td>Le {{ subject.createdAt|date('d/m/Y \à H:m') }}</td>
                 <td>
                     <a href="{{ url('extranet_show', {'hash': subject.hash}) }}" title="Afficher" class="btn btn-success btn-circle btn-sm">
                         <i class="fas fa-eye"></i>
