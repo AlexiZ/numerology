@@ -24,7 +24,7 @@ class PaymentController extends Controller
         /** @var Analysis $subject */
         $subject = $this->registry->getRepository(Analysis::class)->findOneByHash($hash);
 
-        if (!$subject || Analysis::STATUS_PENDING !== $subject->getStatus()) {
+        if (!$subject || !$subject->isPaymentAvailable()) {
             return $this->redirectToRoute('site_homepage');
         }
 
@@ -42,10 +42,11 @@ class PaymentController extends Controller
         /** @var Analysis $subject */
         $subject = $this->registry->getRepository(Analysis::class)->findOneByHash($hash);
 
-        if (!$subject || Analysis::STATUS_PENDING !== $subject->getStatus()) {
+        if (!$subject || !$subject->isPaymentAvailable()) {
             return $this->redirectToRoute('site_homepage');
         }
         $subject->setStatus(Analysis::STATUS_ACTIVE);
+        $subject->setLevel(Analysis::LEVEL_PREMIUM);
 
         $this->registry->getManager()->persist($subject);
         $this->registry->getManager()->flush();
@@ -62,7 +63,7 @@ class PaymentController extends Controller
         /** @var Analysis $subject */
         $subject = $this->registry->getRepository(Analysis::class)->findOneByHash($hash);
 
-        if (!$subject || Analysis::STATUS_PENDING !== $subject->getStatus()) {
+        if (!$subject || !$subject->isPaymentAvailable()) {
             return $this->redirectToRoute('site_homepage');
         }
 
@@ -84,7 +85,7 @@ class PaymentController extends Controller
         /** @var Analysis $subject */
         $subject = $this->registry->getRepository(Analysis::class)->findOneByHash($hash);
 
-        if (!$subject || Analysis::STATUS_PENDING !== $subject->getStatus()) {
+        if (!$subject || !$subject->isPaymentAvailable()) {
             return $this->redirectToRoute('site_homepage');
         }
 

@@ -524,4 +524,13 @@ class Analysis
 
         return $this;
     }
+
+    public function isPaymentAvailable()
+    {
+        if ((self::LEVEL_PREMIUM === $this->getLevel() && self::STATUS_PENDING === $this->getStatus()) || (self::LEVEL_FREE === $this->getLevel() && self::STATUS_ACTIVE === $this->getStatus())) {
+            return true;
+        }
+
+        return false;
+    }
 }
