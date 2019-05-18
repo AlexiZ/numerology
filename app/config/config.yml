@@ -39,6 +39,7 @@ twig:
     strict_variables: '%kernel.debug%'
     globals:
         gr_public_key: '%google_recaptcha.public_key%'
+        pp_hosted_btn_id: '%paypal.hosted_button_id%'
 
 # Doctrine Configuration
 doctrine:

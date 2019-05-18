@@ -13,6 +13,7 @@ class Analysis
     const STATUS_ACTIVE = 'active';
     const STATUS_PENDING = 'pending';
     const STATUS_DELETED = 'deleted';
+    const STATUS_CANCELED = 'canceled';
     const LEVEL_FREE = 'free';
     const LEVEL_PREMIUM = 'premium';
 
@@ -111,6 +112,7 @@ class Analysis
     public static $statusValues = [
         self::STATUS_ACTIVE,
         self::STATUS_PENDING,
+        self::STATUS_CANCELED,
         self::STATUS_DELETED,
     ];
 

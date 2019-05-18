@@ -1,33 +1,49 @@
+## DEFAULT ##
+
 site_homepage:
     path:     /
     defaults: { _controller: SiteBundle:Default:homepage }
 
+site_contact:
+    path:     /contact
+    defaults: { _controller: SiteBundle:Default:contact }
+
+
+## ANALYSIS ##
+
 site_try:
     path:     /essayer/{version}
-    defaults: { _controller: SiteBundle:Default:try }
+    defaults: { _controller: SiteBundle:Analysis:try }
 
 site_show:
     path:     /resultats/{hash}
-    defaults: { _controller: SiteBundle:Default:show }
-
-site_payment:
-    path:     /paiement/{hash}
-    defaults: { _controller: SiteBundle:Default:payment }
-
-site_payment_confirmation:
-    path:     /paiement/confirmation/{hash}
-    defaults: { _controller: SiteBundle:Default:paymentConfirmation }
+    defaults: { _controller: SiteBundle:Analysis:show }
 
 site_show_details:
     path:     /resultats/{hash}/details
-    defaults: { _controller: SiteBundle:Default:showDetails }
+    defaults: { _controller: SiteBundle:Analysis:showDetails }
     options:
         expose: true
 
 site_export_pdf:
     path:     /exporter/{hash}
-    defaults: { _controller: SiteBundle:Default:exportPdf }
+    defaults: { _controller: SiteBundle:Analysis:exportPdf }
 
-site_contact:
-    path:     /contact
-    defaults: { _controller: SiteBundle:Default:contact }
+
+## PAYMENT ##
+
+site_payment_confirmation:
+    path:     /paiement/confirmation
+    defaults: { _controller: SiteBundle:Payment:paymentConfirmation }
+
+site_payment_error:
+    path:     /paiement/erreur
+    defaults: { _controller: SiteBundle:Payment:paymentError }
+
+site_payment_roll_back:
+    path:     /paiement/retour
+    defaults: { _controller: SiteBundle:Payment:paymentRollBack }
+
+site_payment:
+    path:     /paiement/{hash}
+    defaults: { _controller: SiteBundle:Payment:payment }

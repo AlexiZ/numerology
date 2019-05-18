@@ -43,3 +43,5 @@ parameters:
 
     google_recaptcha.public_key: xxx
     google_recaptcha.secret_key: xxx
+
+    paypal.hosted_button_id: xxx
