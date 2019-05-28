@@ -362,6 +362,15 @@ class Analysis
     }
 
     /**
+     * @return \Datetime
+     */
+    public function getUTCBirthDate()
+    {
+        $utcBirthDate = $this->birthDate;
+        return $utcBirthDate->setTimezone(new \DateTimeZone('UTC'));
+    }
+
+    /**
      * @param \Datetime $birthDate
      *
      * @return Analysis

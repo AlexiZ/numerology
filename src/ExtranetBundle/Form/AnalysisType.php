@@ -64,7 +64,7 @@ class AnalysisType extends AbstractType
             ])
 
             ->add('birthDate', DateTimeType::class, [
-                'label' => 'Date et heure de naissance (UTC)',
+                'label' => 'Date et heure de naissance',
                 'widget' => 'single_text',
                 'required' => false,
             ])
