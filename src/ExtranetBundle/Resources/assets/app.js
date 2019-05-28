@@ -123,11 +123,21 @@ $(document).ready(() => {
 
     let automaticQuillDivs = document.querySelectorAll('div.automatic-quill'),
         automaticQuillForm = document.querySelector('form.automatic-quill');
-    if (automaticQuillDivs) {
+    if (automaticQuillDivs && automaticQuillForm) {
         automaticQuillDivs.forEach( (automaticQuill) => {
-            new Quill(automaticQuill, {
+            if (-1 !== automaticQuill.classList.contains('quill-div-wrapper')) {
+                let Block = Quill.import('blots/block');
+                Block.tagName = 'DIV';
+                Quill.register(Block, true);
+            }
+
+            let quill = new Quill(automaticQuill, {
                 theme: 'snow',
             });
+
+            if (-1 !== automaticQuill.classList.contains('quill-div-wrapper')) {
+                quill.deleteText(quill.getLength() - 1, 1);
+            }
         });
 
         automaticQuillForm.addEventListener('submit', () => {

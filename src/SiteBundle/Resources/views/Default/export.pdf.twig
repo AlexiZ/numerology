@@ -182,11 +182,11 @@
                                             <span class="badge badge-primary badge-pill">{{ subject.data.identity.globalNumber }}</span>
                                         </li>
                                         <li class="list-group-item d-flex justify-content-between align-items-center mb-2">
-                                            <p>
-                                                <em>{{ getDefinition('global') }}</em>
+                                            <div>
+                                                <em>{{ getDefinition('global')|raw }}</em>
                                                 <br><br>
                                                 {{ subject.data.identity.globalNumber|getAnalysis('global')|raw }}
-                                            </p>
+                                            </div>
                                         </li>
 
                                         <li class="list-group-item d-flex justify-content-between align-items-center">
@@ -194,11 +194,11 @@
                                             <span class="badge badge-primary badge-pill">{{ subject.data.identity.inheritedNumber }}</span>
                                         </li>
                                         <li class="list-group-item d-flex justify-content-between align-items-center mb-2">
-                                            <p>
-                                                <em>{{ getDefinition('inherited') }}</em>
+                                            <div>
+                                                <em>{{ getDefinition('inherited')|raw }}</em>
                                                 <br><br>
                                                 {{ subject.data.identity.inheritedNumber|getAnalysis('inherited')|raw }}
-                                            </p>
+                                            </div>
                                         </li>
 
                                         <li class="list-group-item d-flex justify-content-between align-items-center">
@@ -206,11 +206,11 @@
                                             <span class="badge badge-primary badge-pill">{{ subject.data.identity.dutyNumber }}</span>
                                         </li>
                                         <li class="list-group-item d-flex justify-content-between align-items-center mb-2">
-                                            <p>
-                                                <em>{{ getDefinition('duty') }}</em>
+                                            <div>
+                                                <em>{{ getDefinition('duty')|raw }}</em>
                                                 <br><br>
                                                 {{ subject.data.identity.dutyNumber|getAnalysis('duty')|raw }}
-                                            </p>
+                                            </div>
                                         </li>
 
                                         <li class="list-group-item d-flex justify-content-between align-items-center">
@@ -218,11 +218,11 @@
                                             <span class="badge badge-primary badge-pill">{{ subject.data.identity.socialNumber }}</span>
                                         </li>
                                         <li class="list-group-item d-flex justify-content-between align-items-center mb-2">
-                                            <p>
-                                                <em>{{ getDefinition('social') }}</em>
+                                            <div>
+                                                <em>{{ getDefinition('social')|raw }}</em>
                                                 <br><br>
                                                 {{ subject.data.identity.socialNumber|getAnalysis('social')|raw }}
-                                            </p>
+                                            </div>
                                         </li>
 
                                         <li class="list-group-item d-flex justify-content-between align-items-center">
@@ -230,11 +230,11 @@
                                             <span class="badge badge-primary badge-pill">{{ subject.data.identity.structureNumber }}</span>
                                         </li>
                                         <li class="list-group-item d-flex justify-content-between align-items-center mb-2">
-                                            <p>
-                                                <em>{{ getDefinition('structure') }}</em>
+                                            <div>
+                                                <em>{{ getDefinition('structure')|raw }}</em>
                                                 <br><br>
                                                 {{ subject.data.identity.structureNumber|getAnalysis('structure')|raw }}
-                                            </p>
+                                            </div>
                                         </li>
                                     </ul>
                                 </div>
@@ -299,11 +299,11 @@
                                             <span class="badge badge-primary badge-pill">{{ fullNames|length }}</span>
                                         </li>
                                         <li class="list-group-item d-flex justify-content-between align-items-center mb-2">
-                                            <p>
+                                            <div>
                                                 <em>XXX</em>
                                                 <br><br>
                                                 XXX
-                                            </p>
+                                            </div>
                                         </li>
 
                                         <li class="list-group-item d-flex justify-content-between align-items-center">
@@ -311,11 +311,11 @@
                                             <span class="badge badge-primary badge-pill">{{ fullNames|nombreMoyenLettres|number_format(1, '.', ' ') }}</span>
                                         </li>
                                         <li class="list-group-item d-flex justify-content-between align-items-center mb-2">
-                                            <p>
+                                            <div>
                                                 <em>XXX</em>
                                                 <br><br>
                                                 XXX
-                                            </p>
+                                            </div>
                                         </li>
 
                                         <li class="list-group-item d-flex justify-content-between align-items-center">
@@ -323,11 +323,11 @@
                                             <span class="badge badge-primary badge-pill">{{ fullNames|numerosLettresManquantes|number_format(1, '.', ' ') }}</span>
                                         </li>
                                         <li class="list-group-item d-flex justify-content-between align-items-center mb-2">
-                                            <p>
+                                            <div>
                                                 <em>XXX</em>
                                                 <br><br>
                                                 XXX
-                                            </p>
+                                            </div>
                                         </li>
 
                                         <li class="list-group-item d-flex justify-content-between align-items-center">
@@ -335,11 +335,11 @@
                                             <span class="badge badge-primary badge-pill">{{ fullNames|numerosLettresFaibles|number_format(1, '.', ' ') }}</span>
                                         </li>
                                         <li class="list-group-item d-flex justify-content-between align-items-center mb-2">
-                                            <p>
+                                            <div>
                                                 <em>XXX</em>
                                                 <br><br>
                                                 XXX
-                                            </p>
+                                            </div>
                                         </li>
 
                                         <li class="list-group-item d-flex justify-content-between align-items-center">
@@ -347,11 +347,11 @@
                                             <span class="badge badge-primary badge-pill">{{ fullNames|numerosLettresFortes|number_format(1, '.', ' ') }}</span>
                                         </li>
                                         <li class="list-group-item d-flex justify-content-between align-items-center mb-2">
-                                            <p>
+                                            <div>
                                                 <em>XXX</em>
                                                 <br><br>
                                                 XXX
-                                            </p>
+                                            </div>
                                         </li>
 
                                         <li class="list-group-item d-flex justify-content-between align-items-center">
@@ -359,11 +359,11 @@
                                             <span class="badge badge-primary badge-pill">{{ fullNames|numerosLettresMoyennes|number_format(1, '.', ' ') }}</span>
                                         </li>
                                         <li class="list-group-item d-flex justify-content-between align-items-center mb-2">
-                                            <p>
+                                            <div>
                                                 <em>XXX</em>
                                                 <br><br>
                                                 XXX
-                                            </p>
+                                            </div>
                                         </li>
                                     </ul>
                                 </div>
@@ -381,11 +381,11 @@
                                                 <span class="badge badge-primary badge-pill">{{ subject.data.lifePath.lifePathNumber }}</span>
                                             </li>
                                             <li class="list-group-item d-flex justify-content-between align-items-center mb-2">
-                                                <p>
-                                                    <em>{{ getDefinition('lifepath') }}</em>
+                                                <div>
+                                                    <em>{{ getDefinition('lifepath')|raw }}</em>
                                                     <br><br>
                                                     {{ subject.data.lifePath.lifePathNumber|getAnalysis('lifepath')|raw }}
-                                                </p>
+                                                </div>
                                             </li>
 
                                             <li class="list-group-item d-flex justify-content-between align-items-center">
@@ -393,11 +393,11 @@
                                                 <span class="badge badge-primary badge-pill">{{ subject.data.lifePath.idealNumber }}</span>
                                             </li>
                                             <li class="list-group-item d-flex justify-content-between align-items-center mb-2">
-                                                <p>
-                                                    <em>{{ getDefinition('ideal') }}</em>
+                                                <div>
+                                                    <em>{{ getDefinition('ideal')|raw }}</em>
                                                     <br><br>
                                                     {{ subject.data.lifePath.idealNumber|getAnalysis('ideal')|raw }}
-                                                </p>
+                                                </div>
                                             </li>
 
                                             <li class="list-group-item d-flex justify-content-between align-items-center">
@@ -405,9 +405,9 @@
                                                 <span class="badge badge-primary badge-pill">{{ subject.data.lifePath.majorTurnNumber }} ans</span>
                                             </li>
                                             <li class="list-group-item d-flex justify-content-between align-items-center mb-2">
-                                                <p>
-                                                    <em>{{ getDefinition('majorturn') }}</em>
-                                                </p>
+                                                <div>
+                                                    <em>{{ getDefinition('majorturn')|raw }}</em>
+                                                </div>
                                             </li>
 
                                             <li class="list-group-item d-flex justify-content-between align-items-center">
@@ -415,11 +415,11 @@
                                                 <span class="badge badge-primary badge-pill">{{ subject.data.lifePath.personalYearNowNumber }}</span>
                                             </li>
                                             <li class="list-group-item d-flex justify-content-between align-items-center mb-2">
-                                                <p>
-                                                    <em>{{ getDefinition('personalyearnow') }}</em>
+                                                <div>
+                                                    <em>{{ getDefinition('personalyearnow')|raw }}</em>
                                                     <br><br>
                                                     {{ subject.data.lifePath.personalYearNowNumber|getAnalysis('personalyearnow')|raw }}
-                                                </p>
+                                                </div>
                                             </li>
 
                                             <li class="list-group-item d-flex justify-content-between align-items-center">
@@ -427,11 +427,11 @@
                                                 <span class="badge badge-primary badge-pill">{{ subject.data.lifePath.secretNumber }}</span>
                                             </li>
                                             <li class="list-group-item d-flex justify-content-between align-items-center mb-2">
-                                                <p>
-                                                    <em>{{ getDefinition('secret') }}</em>
+                                                <div>
+                                                    <em>{{ getDefinition('secret')|raw }}</em>
                                                     <br><br>
                                                     {{ subject.data.lifePath.secretNumber|getAnalysis('secret')|raw }}
-                                                </p>
+                                                </div>
                                             </li>
 
                                             <li class="list-group-item d-flex justify-content-between align-items-center">
@@ -439,11 +439,11 @@
                                                 <span class="badge badge-primary badge-pill">{{ subject.data.lifePath.astrologicalNumber }}</span>
                                             </li>
                                             <li class="list-group-item d-flex justify-content-between align-items-center mb-2">
-                                                <p>
-                                                    <em>{{ getDefinition('astrological') }}</em>
+                                                <div>
+                                                    <em>{{ getDefinition('astrological')|raw }}</em>
                                                     <br><br>
                                                     {{ subject.data.lifePath.astrologicalNumber|getAnalysis('astrological')|raw }}
-                                                </p>
+                                                </div>
                                             </li>
 
                                             <li class="list-group-item d-flex justify-content-between align-items-center">
@@ -451,11 +451,11 @@
                                                 <span class="badge badge-primary badge-pill">{{ subject.data.lifePath.veryShortTermNumber }}</span>
                                             </li>
                                             <li class="list-group-item d-flex justify-content-between align-items-center mb-2">
-                                                <p>
-                                                    <em>{{ getDefinition('veryshortterm') }}</em>
+                                                <div>
+                                                    <em>{{ getDefinition('veryshortterm')|raw }}</em>
                                                     <br><br>
                                                     {{ subject.data.lifePath.veryShortTermNumber|getAnalysis('veryshortterm')|raw }}
-                                                </p>
+                                                </div>
                                             </li>
 
                                             <li class="list-group-item d-flex justify-content-between align-items-center">
@@ -463,11 +463,11 @@
                                                 <span class="badge badge-primary badge-pill">{{ subject.data.lifePath.shortTermNumber }}</span>
                                             </li>
                                             <li class="list-group-item d-flex justify-content-between align-items-center mb-2">
-                                                <p>
-                                                    <em>{{ getDefinition('shortterm') }}</em>
+                                                <div>
+                                                    <em>{{ getDefinition('shortterm')|raw }}</em>
                                                     <br><br>
                                                     {{ subject.data.lifePath.shortTermNumber|getAnalysis('shortterm')|raw }}
-                                                </p>
+                                                </div>
                                             </li>
 
                                             <li class="list-group-item d-flex justify-content-between align-items-center">
@@ -475,11 +475,11 @@
                                                 <span class="badge badge-primary badge-pill">{{ subject.data.lifePath.meanTermNumber }}</span>
                                             </li>
                                             <li class="list-group-item d-flex justify-content-between align-items-center mb-2">
-                                                <p>
-                                                    <em>{{ getDefinition('meanterm') }}</em>
+                                                <div>
+                                                    <em>{{ getDefinition('meanterm')|raw }}</em>
                                                     <br><br>
                                                     {{ subject.data.lifePath.meanTermNumber|getAnalysis('meanterm')|raw }}
-                                                </p>
+                                                </div>
                                             </li>
 
                                             <li class="list-group-item d-flex justify-content-between align-items-center">
@@ -487,11 +487,11 @@
                                                 <span class="badge badge-primary badge-pill">{{ subject.data.lifePath.longTermNumber }}</span>
                                             </li>
                                             <li class="list-group-item d-flex justify-content-between align-items-center mb-2">
-                                                <p>
-                                                    <em>{{ getDefinition('longterm') }}</em>
+                                                <div>
+                                                    <em>{{ getDefinition('longterm')|raw }}</em>
                                                     <br><br>
                                                     {{ subject.data.lifePath.longTermNumber|getAnalysis('longterm')|raw }}
-                                                </p>
+                                                </div>
                                             </li>
                                         </ul>
                                     </div>
