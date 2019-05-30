@@ -9,22 +9,22 @@ Automatically calculate a person's numerology theme.
 ## Roadmap
 - ~~History~~
 - ~~Homepage~~
-- Fill analysis with book's data
+- **Fill analysis with book's data**
 - ~~Graphic redesign~~
 - ~~Users' list~~
 - ~~Basic log in~~
 - ~~Auth0~~
 - ~~Roles' managing~~
-- Internationalization
+- Internationalization (?)
 - ~~Chat~~
 - ~~Data editing~~
 - ~~PDF export public site~~
 - ~~PDF export extranet~~
-- Comparison
+- **Comparison**
 - ~~Notifications~~
-- Paypal payment
-- Admin UI to manage numbers' details
-- Admin UI to manage definitions
+- ~~Paypal payment~~
+- ~~Admin UI to manage numbers' details~~
+- ~~Admin UI to manage definitions~~
 
 ## How to
 - Create an account in Slack with the Gmail alias and customer's real name
