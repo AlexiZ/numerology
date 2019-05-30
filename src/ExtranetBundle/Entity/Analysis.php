@@ -366,7 +366,7 @@ class Analysis
      */
     public function getUTCBirthDate()
     {
-        $utcBirthDate = $this->birthDate;
+        $utcBirthDate = clone $this->birthDate;
         return $utcBirthDate->setTimezone(new \DateTimeZone('UTC'));
     }
 
