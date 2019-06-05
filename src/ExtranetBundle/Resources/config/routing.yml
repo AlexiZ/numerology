@@ -24,6 +24,16 @@ extranet_show:
     path: /afficher/{hash}
     defaults: { _controller: ExtranetBundle:Analysis:show }
 
+extranet_list_comparisons:
+    path: /comparaisons/{hash}
+    defaults: { _controller: ExtranetBundle:Analysis:listComparisons }
+    options:
+        expose: true
+
+extranet_compare:
+    path: /comparer/{hash1}/{hash2}
+    defaults: { _controller: ExtranetBundle:Analysis:compare }
+
 admin_index:
     path: /administrer/
     defaults: { _controller: ExtranetBundle:Admin:index }

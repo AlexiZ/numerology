@@ -1,0 +1,119 @@
+{% extends '@Extranet/Analysis/show.html.twig' %}
+
+{% block bodyAttr %}class="comparison"{% endblock bodyAttr %}
+
+{% set subject0 = subjects.0 %}
+{% set subject1 = subjects.1 %}
+
+{% block title %}
+    Numérologie - Comparaison d'études entre {{ subject0 }} et {{ subject1 }}
+{% endblock %}
+
+{% block pagetitle %}
+    <div class="row">
+        <div class="col-md-6">
+            <a href="{{ path('extranet_show', {'hash': subject0.hash}) }}" title="Voir l'étude de {{ subject0 }}" class="text-gray-800">
+                {{ subject0 }}
+            </a>
+        </div>
+        <div class="col-md-6 text-right">
+            <a href="{{ path('extranet_show', {'hash': subject1.hash}) }}" title="Voir l'étude de {{ subject1 }}" class="text-gray-800">
+                {{ subject1 }}
+            </a>
+        </div>
+    </div>
+{% endblock pagetitle %}
+
+{% block pagesubtitle %}
+    <div class="row">
+        <div class="col-md-6">
+            {% if subject0.pseudos is not empty and subject0.pseudos.0|default %}
+                {{ subject0.pseudos|join(', ') }}<br>
+            {% endif %}
+            <small>{{ subject0.birthDate|localizeddate('long', 'short', 'fr') }}, {{ subject0.birthPlace }} ({{ subject0.data.geolocation|coordsToText }})</small>
+        </div>
+
+        <div class="col-md-6 text-right">
+            {% if subject1.pseudos is not empty and subject1.pseudos.0|default %}
+                {{ subject1.pseudos|join(', ') }}<br>
+            {% endif %}
+            <small>{{ subject1.birthDate|localizeddate('long', 'short', 'fr') }}, {{ subject1.birthPlace }} ({{ subject1.data.geolocation|coordsToText }})</small>
+        </div>
+    </div>
+{% endblock pagesubtitle %}
+
+{% block callback_actions '' %}
+
+{% block body %}
+    <div id="tab1" class="custom-tab">
+        <div class="row">
+            <div class="col-md-6">
+                {% include '@Extranet/Analysis/_resume_identite.html.twig' with {'subject': subject0, 'mode': 'compact'} %}
+            </div>
+
+            <div class="col-md-6">
+                {% include '@Extranet/Analysis/_resume_identite.html.twig' with {'subject': subject1, 'mode': 'compact'} %}
+            </div>
+        </div>
+    </div>
+
+    <div id="tab2" class="custom-tab d-none">
+        <div class="row">
+            <div class="col-md-6">
+                {% include '@Extranet/Analysis/_identite.html.twig' with {'subject': subject0, 'mode': 'compact'} %}
+            </div>
+
+            <div class="col-md-6">
+                {% include '@Extranet/Analysis/_identite.html.twig' with {'subject': subject1, 'mode': 'compact'} %}
+            </div>
+        </div>
+    </div>
+
+    <div id="tab3" class="custom-tab d-none">
+        <div class="row">
+            <div class="col-md-6">
+                {% include '@Extranet/Analysis/_resume_lettres.html.twig' with {'subject': subject0, 'mode': 'compact', 'details': 'left'} %}
+            </div>
+
+            <div class="col-md-6">
+                {% include '@Extranet/Analysis/_resume_lettres.html.twig' with {'subject': subject1, 'mode': 'compact', 'details': 'right'} %}
+            </div>
+        </div>
+    </div>
+
+    <div id="tab4" class="custom-tab d-none">
+        <div class="row">
+            <div class="col-md-6">
+                {% include '@Extranet/Analysis/_lettres.html.twig' with {'subject': subject0, 'mode': 'compact'} %}
+            </div>
+
+            <div class="col-md-6">
+                {% include '@Extranet/Analysis/_lettres.html.twig' with {'subject': subject1, 'mode': 'compact'} %}
+            </div>
+        </div>
+    </div>
+
+    <div id="tab5" class="custom-tab d-none">
+        <div class="row">
+            <div class="col-md-6">
+                {% include '@Extranet/Analysis/_vibrations.html.twig' with {'subject': subject0, 'mode': 'compact'} %}
+            </div>
+
+            <div class="col-md-6">
+                {% include '@Extranet/Analysis/_vibrations.html.twig' with {'subject': subject1, 'mode': 'compact'} %}
+            </div>
+        </div>
+    </div>
+
+    <div id="tab6" class="custom-tab d-none">
+        <div class="row">
+            <div class="col-md-6">
+                {% include '@Extranet/Analysis/_parcours.html.twig' with {'subject': subject0, 'mode': 'compact'} %}
+            </div>
+
+            <div class="col-md-6">
+                {% include '@Extranet/Analysis/_parcours.html.twig' with {'subject': subject1, 'mode': 'compact'} %}
+            </div>
+        </div>
+    </div>
+{% endblock body %}

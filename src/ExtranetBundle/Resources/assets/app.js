@@ -9,27 +9,27 @@ import Quill from 'quill';
 
 import './main.scss';
 
-// Handle sidebar navigation
-let customTabs = document.querySelectorAll('.custom-tab'),
-    customTabLinks = document.querySelectorAll('.custom-tab-link');
-if (customTabs && customTabLinks) {
-    customTabLinks.forEach((customTabLink) => {
-        customTabLink.addEventListener('click', () => {
-            customTabs.forEach((customTab) => {
-                customTab.classList.add('d-none');
-            });
-
-            document.querySelector('#' + customTabLink.dataset.target).classList.remove('d-none');
-
-            customTabLinks.forEach((customTabLink) => {
-                customTabLink.classList.remove('active');
-            });
-            customTabLink.classList.add('active');
-        });
-    });
-}
-
 $(document).ready(() => {
+    // Handle sidebar navigation
+    let customTabs = document.querySelectorAll('.custom-tab'),
+        customTabLinks = document.querySelectorAll('.custom-tab-link');
+    if (customTabs && customTabLinks) {
+        customTabLinks.forEach((customTabLink) => {
+            customTabLink.addEventListener('click', () => {
+                customTabs.forEach((customTab) => {
+                    customTab.classList.add('d-none');
+                });
+
+                document.querySelector('#' + customTabLink.dataset.target).classList.remove('d-none');
+
+                customTabLinks.forEach((customTabLink) => {
+                    customTabLink.classList.remove('active');
+                });
+                customTabLink.classList.add('active');
+            });
+        });
+    }
+
     let automaticTables = document.querySelectorAll('.automatic-table');
     if (automaticTables) {
         automaticTables.forEach((automaticTable) => {
@@ -146,203 +146,224 @@ $(document).ready(() => {
             });
         });
     }
-});
 
-// Handle automatic pie charts
-Chart.defaults.global.defaultFontFamily = 'Nunito,-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
-Chart.defaults.global.defaultFontColor = '#858796';
+    // Handle automatic pie charts
+    Chart.defaults.global.defaultFontFamily = 'Nunito,-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
+    Chart.defaults.global.defaultFontColor = '#858796';
 
-// Pie Chart generation
-let automaticPieCharts = document.querySelectorAll(".automaticPieChart"),
-    pieCharts = [], // eslint-disable-line no-unused-vars
-    pieChartsIndex = 0;
-if (automaticPieCharts) {
-    automaticPieCharts.forEach((automaticPieChart) => {
-        let labels = automaticPieChart.dataset.labels.split(','),
-            data = automaticPieChart.dataset.values.split(',');
-        pieCharts[pieChartsIndex] = new Chart(automaticPieChart, {
-            type: 'doughnut',
-            data: {
-                labels: labels,
-                datasets: [{
-                    data: data,
-                    backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc'],
-                    hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf'],
+    // Pie Chart generation
+    let automaticPieCharts = document.querySelectorAll(".automaticPieChart"),
+        pieCharts = [], // eslint-disable-line no-unused-vars
+        pieChartsIndex = 0;
+    if (automaticPieCharts) {
+        automaticPieCharts.forEach((automaticPieChart) => {
+            let labels = automaticPieChart.dataset.labels.split(','),
+                data = automaticPieChart.dataset.values.split(',');
+            pieCharts[pieChartsIndex] = new Chart(automaticPieChart, {
+                type: 'doughnut',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        data: data,
+                        backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc'],
+                        hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf'],
+                        hoverBorderColor: "rgba(234, 236, 244, 1)",
+                    }],
+                },
+                options: {
+                    maintainAspectRatio: false,
+                    tooltips: {
+                        backgroundColor: "rgb(255,255,255)",
+                        bodyFontColor: "#858796",
+                        borderColor: '#dddfeb',
+                        borderWidth: 1,
+                        xPadding: 15,
+                        yPadding: 15,
+                        displayColors: false,
+                        caretPadding: 10,
+                        callbacks: {
+                            label: (tooltipItem, data) => {
+                                let label = data.labels[tooltipItem.index] || '',
+                                    value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index] || '';
+
+                                return label + ' : ' + value + '%';
+                            },
+                        },
+                    },
+                    legend: {
+                        display: true,
+                    },
+                    cutoutPercentage: 0,
+                },
+            });
+
+            pieChartsIndex++;
+        });
+    }
+
+    // Bar Chart generation
+    let automaticBarCharts = document.querySelectorAll(".automaticBarChart"),
+        barCharts = [], // eslint-disable-line no-unused-vars
+        barChartsIndex = 0;
+    if (automaticBarCharts) {
+        automaticBarCharts.forEach((automaticBarChart) => {
+            let labels = automaticBarChart.dataset.labels.split(','),
+                rawData = automaticBarChart.dataset.values,
+                legends = automaticBarChart.dataset.legends.split(','),
+                datasets = [],
+                datasetOptions = {
+                    borderWidth: '2',
                     hoverBorderColor: "rgba(234, 236, 244, 1)",
-                }],
-            },
-            options: {
-                maintainAspectRatio: false,
-                tooltips: {
-                    backgroundColor: "rgb(255,255,255)",
-                    bodyFontColor: "#858796",
-                    borderColor: '#dddfeb',
-                    borderWidth: 1,
-                    xPadding: 15,
-                    yPadding: 15,
-                    displayColors: false,
-                    caretPadding: 10,
-                    callbacks: {
-                        label: (tooltipItem, data) => {
-                            let label = data.labels[tooltipItem.index] || '',
-                                value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index] || '';
+                };
 
-                            return label + ' : ' + value + '%';
+            if (-1 !== rawData.indexOf('||')) {
+                let data = rawData.split('||');
+
+                for (let i = 0; i < data.length; i++) {
+                    let colors = [32, 64, 96, 128, 160, 192],
+                        color = 'rgba(' + colors[Math.floor(Math.random() * colors.length)] + ', ' + colors[Math.floor(Math.random() * colors.length)] + ', ' + colors[Math.floor(Math.random() * colors.length)] + ', 0.5)';
+                    datasets[i] = Object.assign(
+                        {
+                            data: data[i].split(','),
+                            label: legends[i],
+                            backgroundColor: color,
+                            borderColor: color,
+                            hoverBackgroundColor: color
                         },
-                    },
-                },
-                legend: {
-                    display: true,
-                },
-                cutoutPercentage: 0,
-            },
-        });
-
-        pieChartsIndex++;
-    });
-}
-
-// Bar Chart generation
-let automaticBarCharts = document.querySelectorAll(".automaticBarChart"),
-    barCharts = [], // eslint-disable-line no-unused-vars
-    barChartsIndex = 0;
-if (automaticBarCharts) {
-    automaticBarCharts.forEach((automaticBarChart) => {
-        let labels = automaticBarChart.dataset.labels.split(','),
-            rawData = automaticBarChart.dataset.values,
-            legends = automaticBarChart.dataset.legends.split(','),
-            datasets = [],
-            datasetOptions = {
-                borderWidth: '2',
-                hoverBorderColor: "rgba(234, 236, 244, 1)",
-            };
-
-        if (-1 !== rawData.indexOf('||')) {
-            let data = rawData.split('||');
-
-            for (let i = 0; i < data.length; i++) {
-                let colors = [32, 64, 96, 128, 160, 192],
-                    color = 'rgba(' + colors[Math.floor(Math.random() * colors.length)] + ', ' + colors[Math.floor(Math.random() * colors.length)] + ', ' + colors[Math.floor(Math.random() * colors.length)] + ', 0.5)';
-                datasets[i] = Object.assign(
-                    {
-                        data: data[i].split(','),
-                        label: legends[i],
-                        backgroundColor: color,
-                        borderColor: color,
-                        hoverBackgroundColor: color
-                    },
+                        datasetOptions
+                    );
+                }
+            } else {
+                datasets = [Object.assign(
+                    {data: rawData.split(',')},
                     datasetOptions
-                );
+                )];
             }
-        } else {
-            datasets = [Object.assign(
-                {data: rawData.split(',')},
-                datasetOptions
-            )];
-        }
 
-        barCharts[barChartsIndex] = new Chart(automaticBarChart, {
-            type: 'bar',
-            data: {
-                labels: labels,
-                datasets: datasets,
-            },
-            options: {
-                maintainAspectRatio: false,
-                tooltips: {
-                    backgroundColor: "rgb(255,255,255)",
-                    bodyFontColor: "#858796",
-                    borderColor: '#dddfeb',
-                    borderWidth: 1,
-                    xPadding: 15,
-                    yPadding: 15,
-                    displayColors: false,
-                    caretPadding: 10,
-                    callbacks: {
-                        label: (tooltipItem, data) => {
-                            let label = data.labels[tooltipItem.index] || '',
-                                value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index] || '';
+            barCharts[barChartsIndex] = new Chart(automaticBarChart, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: datasets,
+                },
+                options: {
+                    maintainAspectRatio: false,
+                    tooltips: {
+                        backgroundColor: "rgb(255,255,255)",
+                        bodyFontColor: "#858796",
+                        borderColor: '#dddfeb',
+                        borderWidth: 1,
+                        xPadding: 15,
+                        yPadding: 15,
+                        displayColors: false,
+                        caretPadding: 10,
+                        callbacks: {
+                            label: (tooltipItem, data) => {
+                                let label = data.labels[tooltipItem.index] || '',
+                                    value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index] || '';
 
-                            return label + ' : ' + value + '%';
+                                return label + ' : ' + value + '%';
+                            },
                         },
                     },
+                    legend: {
+                        display: true,
+                    },
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    },
                 },
-                legend: {
-                    display: true,
-                },
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true
+            });
+
+            barChartsIndex++;
+        });
+    }
+
+    // Activate user
+    let userValidates = document.querySelectorAll('.userValidate');
+    if (userValidates) {
+        userValidates.forEach((userValidate) => {
+            userValidate.addEventListener('click', (e) => {
+                e.preventDefault();
+
+                let xmlhttp = new XMLHttpRequest();
+                xmlhttp.onreadystatechange = () => {
+                    if (xmlhttp.readyState === XMLHttpRequest.DONE) {
+                        if (xmlhttp.status === 200) {
+                            let data = JSON.parse(xmlhttp.response);
+                            modalMessage('Mise à jour réussie', 'L\'utilisateur ' + data.nickname + ' a bien été activé');
                         }
-                    }]
-                },
-            },
+                        else {
+                            modalMessage('Raté', 'Il semblerait qu\'il y ait eu un souci...');
+                        }
+                    }
+                };
+
+                xmlhttp.open("GET", Routing.generate('admin_user_validate', {'userId': userValidate.dataset.userid}), true);
+                xmlhttp.send();
+            });
         });
+    }
 
-        barChartsIndex++;
-    });
-}
+    // Revoke user access
+    let userRefuses = document.querySelectorAll('.userRefuse');
+    if (userRefuses) {
+        userRefuses.forEach((userRefuse) => {
+            userRefuse.addEventListener('click', (e) => {
+                e.preventDefault();
 
-// Activate user
-let userValidates = document.querySelectorAll('.userValidate');
-if (userValidates) {
-    userValidates.forEach((userValidate) => {
-        userValidate.addEventListener('click', (e) => {
+                let xmlhttp = new XMLHttpRequest();
+                xmlhttp.onreadystatechange = () => {
+                    if (xmlhttp.readyState === XMLHttpRequest.DONE) {
+                        if (xmlhttp.status === 200) {
+                            let data = JSON.parse(xmlhttp.response);
+                            modalMessage('Blocage réussi', 'L\'utilisateur ' + data.nickname + ' a bien été bloqué');
+                        } else {
+                            modalMessage('Raté', 'Il semblerait qu\'il y ait eu un souci...');
+                        }
+                    }
+                };
+
+                xmlhttp.open("GET", Routing.generate('admin_user_refuse', {'userId': userRefuse.dataset.userid}), true);
+                xmlhttp.send();
+            });
+        });
+    }
+
+    let messagesDropdown = document.querySelector('#messagesDropdown');
+    if (messagesDropdown) {
+        messagesDropdown.addEventListener('click', (e) => {
             e.preventDefault();
 
-            let xmlhttp = new XMLHttpRequest();
+            getMessages();
+        });
+    }
+
+    // Comparison trigger from analysis show
+    let triggerComparisonModal = document.querySelector('#triggerComparisonModal');
+    if (triggerComparisonModal) {
+        $('#triggerComparisonModal').on('shown.bs.modal', () => {
+            let xmlhttp = new XMLHttpRequest(),
+                hash = triggerComparisonModal.dataset.hash;
             xmlhttp.onreadystatechange = () => {
                 if (xmlhttp.readyState === XMLHttpRequest.DONE) {
                     if (xmlhttp.status === 200) {
-                        let data = JSON.parse(xmlhttp.response);
-                        modalMessage('Mise à jour réussie', 'L\'utilisateur ' + data.nickname + ' a bien été activé');
-                    }
-                    else {
-                        modalMessage('Raté', 'Il semblerait qu\'il y ait eu un souci...');
+                        triggerComparisonModal.querySelector('.modal-body').innerHTML = JSON.parse(xmlhttp.response);
                     }
                 }
             };
 
-            xmlhttp.open("GET", Routing.generate('admin_user_validate', {'userId': userValidate.dataset.userid}), true);
+            xmlhttp.open("GET", Routing.generate('extranet_list_comparisons', {'hash': hash}), true);
             xmlhttp.send();
+        }).on('hidden.bs.modal', () => {
+            triggerComparisonModal.querySelector('.modal-body').innerHTML = '<div class="spinner-border text-primary" role="status"><span class="sr-only">Chargement...</span></div>';
         });
-    });
-}
-
-// Revoke user access
-let userRefuses = document.querySelectorAll('.userRefuse');
-if (userRefuses) {
-    userRefuses.forEach((userRefuse) => {
-        userRefuse.addEventListener('click', (e) => {
-            e.preventDefault();
-
-            let xmlhttp = new XMLHttpRequest();
-            xmlhttp.onreadystatechange = () => {
-                if (xmlhttp.readyState === XMLHttpRequest.DONE) {
-                    if (xmlhttp.status === 200) {
-                        let data = JSON.parse(xmlhttp.response);
-                        modalMessage('Blocage réussi', 'L\'utilisateur ' + data.nickname + ' a bien été bloqué');
-                    } else {
-                        modalMessage('Raté', 'Il semblerait qu\'il y ait eu un souci...');
-                    }
-                }
-            };
-
-            xmlhttp.open("GET", Routing.generate('admin_user_refuse', {'userId': userRefuse.dataset.userid}), true);
-            xmlhttp.send();
-        });
-    });
-}
-
-let messagesDropdown = document.querySelector('#messagesDropdown');
-if (messagesDropdown) {
-    messagesDropdown.addEventListener('click', (e) => {
-        e.preventDefault();
-
-        getMessages();
-    });
-}
+    }
+});
 
 // Get unread messages count
 const getUnreadMessagesCount = () => {

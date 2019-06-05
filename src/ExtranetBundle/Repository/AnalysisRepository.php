@@ -2,6 +2,7 @@
 
 namespace ExtranetBundle\Repository;
 
+use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\EntityRepository;
 use ExtranetBundle\Entity\Analysis;
 
@@ -10,8 +11,13 @@ use ExtranetBundle\Entity\Analysis;
  */
 class AnalysisRepository extends EntityRepository
 {
-    public function getSingleUserHistory($userId)
+    public function getSingleUserHistory($userId, $asArray = false)
     {
+        $returnFormat = AbstractQuery::HYDRATE_OBJECT;
+        if ($asArray) {
+            $returnFormat = AbstractQuery::HYDRATE_ARRAY;
+        }
+
         return $this
             ->createQueryBuilder('a')
             ->where('a.userId = :userId')
@@ -19,7 +25,7 @@ class AnalysisRepository extends EntityRepository
             ->andWhere('a.status = :status')
             ->setParameter('status', Analysis::STATUS_ACTIVE)
             ->getQuery()
-            ->getResult()
+            ->getResult($returnFormat)
         ;
     }
 

@@ -1,3 +1,7 @@
+{% if mode|default and 'compact' == mode %}
+    {% set compact = true %}
+{% endif %}
+
 <div class="row">
     <div class="col-lg-12">
         <div class="card shadow mb-4">
@@ -10,7 +14,7 @@
                 </h6>
             </a>
 
-            <div class="collapse show" id="collapseGlobalNumber">
+            <div class="collapse{% if not compact|default %} show{% endif %}" id="collapseGlobalNumber">
                 <div class="card-body">
                     <p class="mb-3"><small><em>{{ getDefinition('global')|raw }}</em></small></p>
                     <p>{{ subject.data.identity.globalNumber|getAnalysis('global')|raw }}</p>
@@ -19,7 +23,7 @@
         </div>
     </div>
 
-    <div class="col-lg-6">
+    <div class="col-lg-{% if compact|default %}12{% else %}6{% endif %}">
         <div class="card shadow mb-4">
             <a href="#collapseInheritedNumber" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseInheritedNumber">
                 <h6 class="m-0 font-weight-bold text-primary">
@@ -30,7 +34,7 @@
                 </h6>
             </a>
 
-            <div class="collapse show" id="collapseInheritedNumber">
+            <div class="collapse{% if not compact|default %} show{% endif %}" id="collapseInheritedNumber">
                 <div class="card-body">
                     <p class="mb-3"><small><em>{{ getDefinition('inherited')|raw }}</em></small></p>
                     <p>{{ subject.data.identity.inheritedNumber|getAnalysis('inherited')|raw }}</p>
@@ -48,7 +52,7 @@
                 </h6>
             </a>
 
-            <div class="collapse show" id="collapseDutyNumber">
+            <div class="collapse{% if not compact|default %} show{% endif %}" id="collapseDutyNumber">
                 <div class="card-body">
                     <p class="mb-3"><small><em>{{ getDefinition('duty')|raw }}</em></small></p>
                     <p>{{ subject.data.identity.dutyNumber|getAnalysis('duty')|raw }}</p>
@@ -57,7 +61,7 @@
         </div>
     </div>
 
-    <div class="col-lg-6 mb-4">
+    <div class="col-lg-{% if compact|default %}12{% else %}6{% endif %} mb-4">
         <div class="card shadow mb-4">
             <a href="#collapseSocialNumber" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseSocialNumber">
                 <h6 class="m-0 font-weight-bold text-primary">
@@ -68,7 +72,7 @@
                 </h6>
             </a>
 
-            <div class="collapse show" id="collapseSocialNumber">
+            <div class="collapse{% if not compact|default %} show{% endif %}" id="collapseSocialNumber">
                 <div class="card-body">
                     <p class="mb-3"><small><em>{{ getDefinition('social')|raw }}</em></small></p>
                     <p>{{ subject.data.identity.socialNumber|getAnalysis('social')|raw }}</p>
@@ -86,7 +90,7 @@
                 </h6>
             </a>
 
-            <div class="collapse show" id="collapseStructureNumber">
+            <div class="collapse{% if not compact|default %} show{% endif %}" id="collapseStructureNumber">
                 <div class="card-body">
                     <p class="mb-3"><small><em>{{ getDefinition('structure')|raw }}</em></small></p>
                     <p>{{ subject.data.identity.structureNumber|getAnalysis('structure')|raw }}</p>

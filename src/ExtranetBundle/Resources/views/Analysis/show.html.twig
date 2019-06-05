@@ -84,13 +84,17 @@
         <i class="fas fa-pen fa-sm text-white-50"></i>&nbsp;
         Modifier
     </a>
+    <a href="javascript:void(0);" data-toggle="modal" data-target="#triggerComparisonModal" title="Comparer avec une autre de vos études" class="d-none d-sm-inline-block btn btn-sm btn-warning shadow-sm">
+        <i class="fas fa-not-equal fa-sm text-white-50"></i>&nbsp;
+        Comparer
+    </a>
+    <a href="{{ path('extranet_delete', {'hash': subject.hash}) }}" title="Supprimer" class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm">
+        <i class="fas fa-times fa-sma hxt-white-50"></i>&nbsp;
+        Supprimer
+    </a>
     <a href="{{ path('extranet_export_pdf', {'hash': subject.hash}) }}" title="Télécharger pour imprimer" class="d-none d-sm-inline-block btn btn-sm btn-info shadow-sm">
         <i class="fas fa-print fa-sm text-white-50"></i>&nbsp;
         Télécharger pour imprimer
-    </a>
-    <a href="{{ path('extranet_delete', {'hash': subject.hash}) }}" title="Supprimer" class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm">
-        <i class="fas fa-times fa-sm text-white-50"></i>&nbsp;
-        Supprimer
     </a>
 {% endblock callback_actions %}
 
@@ -112,5 +116,28 @@
     </div>
     <div id="tab6" class="custom-tab d-none">
         {% include '@Extranet/Analysis/_parcours.html.twig' with {'subject': subject} %}
+    </div>
+
+    <div class="modal fade" id="triggerComparisonModal" tabindex="-1" role="dialog" aria-labelledby="triggerComparisonModalLabel" aria-hidden="true" data-hash="{{ subject.hash }}">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="triggerComparisonModalLabel">Comparer</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body text-center">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="sr-only">Chargement...</span>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                </div>
+            </div>
+        </div>
     </div>
 {% endblock body %}

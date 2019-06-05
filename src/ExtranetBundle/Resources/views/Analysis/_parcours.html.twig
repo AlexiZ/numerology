@@ -1,5 +1,9 @@
+{% if mode|default and 'compact' == mode %}
+    {% set compact = true %}
+{% endif %}
+
 <div class="row">
-    <div class="col-lg-4">
+    <div class="col-lg-{% if compact|default %}12{% else %}4{% endif %}">
         <div class="card shadow mb-4">
             <div class="card-header py-3"à>
                 <h6 class="m-0 font-weight-bold text-primary">
@@ -60,7 +64,7 @@
         </div>
     </div>
 
-    <div class="col-lg-4">
+    <div class="col-lg-{% if compact|default %}6{% else %}4{% endif %}">
         <div class="card shadow mb-4">
             <a href="#collapseCardExample0" class="d-block card-header py-3 collapsed" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseCardExample0">
                 <h6 class="m-0 font-weight-bold text-primary">
@@ -143,7 +147,7 @@
         </div>
     </div>
 
-    <div class="col-lg-4">
+    <div class="col-lg-{% if compact|default %}6{% else %}4{% endif %}">
         <div class="card shadow mb-4">
             <a href="#collapseCardExample5" class="d-block card-header py-3 collapsed" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseCardExample5">
                 <h6 class="m-0 font-weight-bold text-primary">

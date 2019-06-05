@@ -1,3 +1,7 @@
+{% if mode|default and 'compact' == mode %}
+    {% set compact = true %}
+{% endif %}
+
 <div class="row">
     <div class="col-lg-12 mb-4">
         <div class="card shadow mb-4">
@@ -7,7 +11,7 @@
                 </h6>
             </a>
 
-            <div class="collapse show" id="collapseIdentity">
+            <div class="collapse{% if not compact|default %} show{% endif %}" id="collapseIdentity">
                 <div class="card-body">
                     <table class="table">
                         <thead>
@@ -89,7 +93,7 @@
                     </h6>
                 </a>
 
-                <div class="collapse show" id="collapseUseName">
+                <div class="collapse{% if not compact|default %} show{% endif %}" id="collapseUseName">
                     <div class="card-body">
                         {% include '@Extranet/Analysis/_table_identite.html.twig' with {'mot': subject.useName, 'type': 'lastname'} %}
                     </div>
@@ -105,7 +109,7 @@
                     </h6>
                 </a>
 
-                <div class="collapse show" id="collapseBirthName">
+                <div class="collapse{% if not compact|default %} show{% endif %}" id="collapseBirthName">
                     <div class="card-body">
                         {% include '@Extranet/Analysis/_table_identite.html.twig' with {'mot': subject.birthName, 'type': 'lastname'} %}
                     </div>
@@ -122,7 +126,7 @@
                         </h6>
                     </a>
 
-                    <div class="collapse show" id="collapsePseudo">
+                    <div class="collapse{% if not compact|default %} show{% endif %}" id="collapsePseudo">
                         <div class="card-body">
                             {% include '@Extranet/Analysis/_table_identite.html.twig' with {'mot': pseudo, 'type': 'lastname'} %}
                         </div>
@@ -138,7 +142,7 @@
                 </h6>
             </a>
 
-            <div class="collapse show" id="collapseFirstname">
+            <div class="collapse{% if not compact|default %} show{% endif %}" id="collapseFirstname">
                 <div class="card-body">
                     {% include '@Extranet/Analysis/_table_identite.html.twig' with {'mot': subject.firstname, 'type': 'firstname'} %}
                 </div>
@@ -154,7 +158,7 @@
                         </h6>
                     </a>
 
-                    <div class="collapse show" id="collapseOtherFirstnames">
+                    <div class="collapse{% if not compact|default %} show{% endif %}" id="collapseOtherFirstnames">
                         <div class="card-body">
                             {% include '@Extranet/Analysis/_table_identite.html.twig' with {'mot': otherFirstname, 'type': 'firstname'} %}
                         </div>

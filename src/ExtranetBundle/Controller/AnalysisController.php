@@ -8,8 +8,8 @@ use ExtranetBundle\Services\Numerologie;
 use ExtranetBundle\Form\AnalysisType;
 use Knp\Bundle\SnappyBundle\Snappy\Response\PdfResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 
 class AnalysisController extends Controller
 {
@@ -115,6 +115,31 @@ class AnalysisController extends Controller
 
         return $this->render('@Extranet/Analysis/show.html.twig', [
             self::SUBJECT => $subject,
+        ]);
+    }
+
+    public function listComparisonsAction($hash, ManagerRegistry $registry)
+    {
+        $subjects = $registry->getRepository(Analysis::class)->getSingleUserHistory($this->getUser()->getId());
+        $source = $registry->getRepository(Analysis::class)->findOneByHash($hash);
+
+        return new JsonResponse($this->render('@Extranet/Analysis/_list_comparisons.html.twig', [
+            'subjects' => $subjects,
+            'source' => $source,
+        ])->getContent());
+    }
+
+    public function compareAction($hash1, $hash2, ManagerRegistry $registry)
+    {
+        /** @var Analysis[] $subjects */
+        $subjects = $registry->getRepository(Analysis::class)->findByHash([$hash1, $hash2]);
+
+        if (2 !== count($subjects) || Analysis::STATUS_DELETED === $subjects[0]->getStatus() || Analysis::STATUS_DELETED === $subjects[1]->getStatus()) {
+            return $this->redirectToRoute(self::ROUTE_INDEX);
+        }
+
+        return $this->render('@Extranet/Analysis/compare.html.twig', [
+            'subjects' => $subjects,
         ]);
     }
 

@@ -1,5 +1,9 @@
+{% if mode|default and 'compact' == mode %}
+    {% set compact = true %}
+{% endif %}
+
 <div class="row">
-    <div class="col-lg-6">
+    <div class="col-lg-{% if compact|default %}12{% else %}6{% endif %}">
         <div class="card shadow mb-4">
             <a href="#collapseName" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseName">
                 <h6 class="m-0 font-weight-bold text-primary">
@@ -7,7 +11,7 @@
                 </h6>
             </a>
 
-            <div class="collapse show" id="collapseName">
+            <div class="collapse{% if not compact|default %} show{% endif %}" id="collapseName">
                 <div class="card-body">
                     <div class="chart-pie pt-4 pb-2">
                         <canvas class="automaticBarChart"
@@ -21,7 +25,7 @@
         </div>
     </div>
 
-    <div class="col-lg-6">
+    <div class="col-lg-{% if compact|default %}12{% else %}6{% endif %}">
         <div class="card shadow mb-4">
             <a href="#collapseAllNames" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseAllNames">
                 <h6 class="m-0 font-weight-bold text-primary">
@@ -29,7 +33,7 @@
                 </h6>
             </a>
 
-            <div class="collapse show" id="collapseAllNames">
+            <div class="collapse{% if not compact|default %} show{% endif %}" id="collapseAllNames">
                 <div class="card-body">
                     <div class="chart-pie pt-4 pb-2">
                         <canvas class="automaticBarChart"
@@ -43,75 +47,79 @@
         </div>
     </div>
 
-    <div class="col-lg-3">
-        <div class="card shadow mb-4">
-            <a href="#collapsePhysical" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapsePhysical">
-                <h6 class="m-0 font-weight-bold text-primary">
-                    Lettres physiques
-                </h6>
-            </a>
+    {% if details is not defined or (details|default and 'left' == details) %}
+        <div class="col-lg-{% if compact|default %}6{% else %}3{% endif %}">
+            <div class="card shadow mb-4">
+                <a href="#collapsePhysical" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapsePhysical">
+                    <h6 class="m-0 font-weight-bold text-primary">
+                        Lettres physiques
+                    </h6>
+                </a>
 
-            <div class="collapse show" id="collapsePhysical">
-                <div class="card-body">
-                    <p>
-                        {{ getDefinition('physical')|raw }}
-                    </p>
+                <div class="collapse{% if not compact|default %} show{% endif %}" id="collapsePhysical">
+                    <div class="card-body">
+                        <p>
+                            {{ getDefinition('physical')|raw }}
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="col-lg-3">
-        <div class="card shadow mb-4">
-            <a href="#collapseEmotional" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseEmotional">
-                <h6 class="m-0 font-weight-bold text-primary">
-                    Lettres émotives
-                </h6>
-            </a>
+        <div class="col-lg-{% if compact|default %}6{% else %}3{% endif %}">
+            <div class="card shadow mb-4">
+                <a href="#collapseEmotional" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseEmotional">
+                    <h6 class="m-0 font-weight-bold text-primary">
+                        Lettres émotives
+                    </h6>
+                </a>
 
-            <div class="collapse show" id="collapseEmotional">
-                <div class="card-body">
-                    <p>
-                        {{ getDefinition('emotional')|raw }}
-                    </p>
+                <div class="collapse{% if not compact|default %} show{% endif %}" id="collapseEmotional">
+                    <div class="card-body">
+                        <p>
+                            {{ getDefinition('emotional')|raw }}
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    {% endif %}
 
-    <div class="col-lg-3">
-        <div class="card shadow mb-4">
-            <a href="#collapseBrain" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseBrain">
-                <h6 class="m-0 font-weight-bold text-primary">
-                    Lettres cérébrales
-                </h6>
-            </a>
+    {% if details is not defined or (details|default and 'right' == details) %}
+        <div class="col-lg-{% if compact|default %}6{% else %}3{% endif %}">
+            <div class="card shadow mb-4">
+                <a href="#collapseBrain" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseBrain">
+                    <h6 class="m-0 font-weight-bold text-primary">
+                        Lettres cérébrales
+                    </h6>
+                </a>
 
-            <div class="collapse show" id="collapseBrain">
-                <div class="card-body">
-                    <p>
-                        {{ getDefinition('brain')|raw }}
-                    </p>
+                <div class="collapse{% if not compact|default %} show{% endif %}" id="collapseBrain">
+                    <div class="card-body">
+                        <p>
+                            {{ getDefinition('brain')|raw }}
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="col-lg-3">
-        <div class="card shadow mb-4">
-            <a href="#collapseFeel" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseFeel">
-                <h6 class="m-0 font-weight-bold text-primary">
-                    Lettres intuitives
-                </h6>
-            </a>
+        <div class="col-lg-{% if compact|default %}6{% else %}3{% endif %}">
+            <div class="card shadow mb-4">
+                <a href="#collapseFeel" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseFeel">
+                    <h6 class="m-0 font-weight-bold text-primary">
+                        Lettres intuitives
+                    </h6>
+                </a>
 
-            <div class="collapse show" id="collapseFeel">
-                <div class="card-body">
-                    <p>
-                        {{ getDefinition('intuitive')|raw }}
-                    </p>
+                <div class="collapse{% if not compact|default %} show{% endif %}" id="collapseFeel">
+                    <div class="card-body">
+                        <p>
+                            {{ getDefinition('intuitive')|raw }}
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    {% endif %}
 </div>

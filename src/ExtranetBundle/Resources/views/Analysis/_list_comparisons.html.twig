@@ -1,0 +1,18 @@
+<p><em>Cliquez sur une de vos études dans la liste ci-dessous pour comparer avec {{ source }} :</em></p>
+
+<table class="table">
+    <tbody>
+        {% for subject in subjects if subject.hash != source.hash %}
+            <tr>
+                <td>
+                    <a href="{{ url('extranet_compare', {'hash1': source.hash, 'hash2': subject.hash}) }}" title="Comparer avec {{ subject }}" class="btn">{{ subject }}</a>
+                </td>
+                <td>
+                    <a href="{{ url('extranet_compare', {'hash1': source.hash, 'hash2': subject.hash}) }}" title="Comparer avec {{ subject }}" class="btn btn-success btn-circle btn-sm">
+                        <i class="fas fa-check"></i>
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
