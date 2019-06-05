@@ -77,7 +77,8 @@
 
             <div class="collapse" id="collapseCardExample0" style="">
                 <div class="card-body">
-                    <p class="mb-3"><small><em>{{ getDefinition('lifepath')|raw }}</em></small></p>
+                    <p><small><em>{{ getDefinition('lifepath')|raw }}</em></small></p>
+                    <p class="mb-3">{{ subject.data.lifePath.lifePathNumber|getAnalysis('lifepath')|raw }}</p>
                 </div>
             </div>
         </div>
@@ -93,7 +94,8 @@
             </a>
             <div class="collapse" id="collapseCardExample1" style="">
                 <div class="card-body">
-                    <p class="mb-3"><small><em>{{ getDefinition('ideal')|raw }}</em></small></p>
+                    <p><small><em>{{ getDefinition('ideal')|raw }}</em></small></p>
+                    <p class="mb-3">{{ subject.data.lifePath.idealNumber|getAnalysis('ideal')|raw }}</p>
                 </div>
             </div>
         </div>
@@ -125,7 +127,8 @@
             </a>
             <div class="collapse" id="collapseCardExample3" style="">
                 <div class="card-body">
-                    <p class="mb-3"><small><em>{{ getDefinition('personalyearnow')|raw }}</em></small></p>
+                    <p><small><em>{{ getDefinition('personalyearnow')|raw }}</em></small></p>
+                    <p class="mb-3">{{ subject.data.lifePath.personalYearNowNumber|getAnalysis('personalyearnow')|raw }}</p>
                 </div>
             </div>
         </div>
@@ -141,7 +144,8 @@
             </a>
             <div class="collapse" id="collapseCardExample4" style="">
                 <div class="card-body">
-                    <p class="mb-3"><small><em>{{ getDefinition('astrological')|raw }}</em></small></p>
+                    <p><small><em>{{ getDefinition('astrological')|raw }}</em></small></p>
+                    <p class="mb-3">{{ subject.data.lifePath.astrologicalNumber|getAnalysis('astrological')|raw }}</p>
                 </div>
             </div>
         </div>
@@ -159,7 +163,8 @@
             </a>
             <div class="collapse" id="collapseCardExample5" style="">
                 <div class="card-body">
-                    <p class="mb-3"><small><em>{{ getDefinition('veryshortterm'|raw) }}</em></small></p>
+                    <p><small><em>{{ getDefinition('veryshortterm'|raw) }}</em></small></p>
+                    <p class="mb-3">{{ subject.data.lifePath.veryShortTermNumber|getAnalysis('veryshortterm')|raw }}</p>
                 </div>
             </div>
         </div>
@@ -175,7 +180,8 @@
             </a>
             <div class="collapse" id="collapseCardExample6" style="">
                 <div class="card-body">
-                    <p class="mb-3"><small><em>{{ getDefinition('shortterm')|raw }}</em></small></p>
+                    <p><small><em>{{ getDefinition('shortterm')|raw }}</em></small></p>
+                    <p class="mb-3">{{ subject.data.lifePath.shortTermNumber|getAnalysis('shortterm')|raw }}</p>
                 </div>
             </div>
         </div>
@@ -191,7 +197,8 @@
             </a>
             <div class="collapse" id="collapseCardExample7" style="">
                 <div class="card-body">
-                    <p class="mb-3"><small><em>{{ getDefinition('meanterm')|raw }}</em></small></p>
+                    <p><small><em>{{ getDefinition('meanterm')|raw }}</em></small></p>
+                    <p class="mb-3">{{ subject.data.lifePath.meanTermNumber|getAnalysis('meanterm')|raw }}</p>
                 </div>
             </div>
         </div>
@@ -207,7 +214,8 @@
             </a>
             <div class="collapse" id="collapseCardExample8" style="">
                 <div class="card-body">
-                    <p class="mb-3"><small><em>{{ getDefinition('longterm')|raw }}</em></small></p>
+                    <p><small><em>{{ getDefinition('longterm')|raw }}</em></small></p>
+                    <p class="mb-3">{{ subject.data.lifePath.longTermNumber|getAnalysis('longterm')|raw }}</p>
                 </div>
             </div>
         </div>
@@ -223,7 +231,8 @@
             </a>
             <div class="collapse" id="collapseCardExample9" style="">
                 <div class="card-body">
-                    <p class="mb-3"><small><em>{{ getDefinition('secret')|raw }}</em></small></p>
+                    <p><small><em>{{ getDefinition('secret')|raw }}</em></small></p>
+                    <p class="mb-3">{{ subject.data.lifePath.secretNumber|getAnalysis('secret')|raw }}</p>
                 </div>
             </div>
         </div>
