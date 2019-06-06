@@ -10,6 +10,7 @@ use Knp\Bundle\SnappyBundle\Snappy\Response\PdfResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class AnalysisController extends Controller
 {
@@ -143,7 +144,7 @@ class AnalysisController extends Controller
         ]);
     }
 
-    public function exportPdfAction($hash, ManagerRegistry $registry)
+    public function exportPdfAction($hash, Request $request, ManagerRegistry $registry)
     {
         /** @var Analysis $subject */
         $subject = $registry->getRepository(Analysis::class)->findOneByHash($hash);
@@ -152,12 +153,21 @@ class AnalysisController extends Controller
             return $this->redirectToRoute(self::ROUTE_SHOW, ['hash' => $hash]);
         }
 
-        $html = $this->renderView('@Site/Default/export.pdf.twig', [
+        $header = $this->renderView('@Site/PDF/header.html.twig', [
             self::SUBJECT => $subject,
+            'path' => rtrim($request->server->get('DOCUMENT_ROOT'), "/"),
         ]);
+        $html = $this->renderView('@Site/PDF/content.html.twig', [
+            self::SUBJECT => $subject,
+            'path' => rtrim($request->server->get('DOCUMENT_ROOT'), "/"),
+        ]);
+        $footer = $this->renderView('@Site/PDF/footer.html.twig');
 
         return new PdfResponse(
-            $this->get('knp_snappy.pdf')->getOutputFromHtml($html),
+            $this->get('knp_snappy.pdf')->getOutputFromHtml($html, [
+                'header-html' => $header,
+                'footer-html' => $footer,
+            ]),
             $subject->getPublicName() . '.pdf'
         );
     }
