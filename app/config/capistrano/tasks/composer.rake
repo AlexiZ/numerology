@@ -23,7 +23,7 @@ namespace :composer do
     args.with_defaults(:command => :list)
     on release_roles(fetch(:composer_roles)) do
       within fetch(:composer_working_dir) do
-        execute "php7.1-cli", "#{fetch(:deploy_to)}shared/composer.phar", args[:command], *args.extras
+        execute "php7.1-cli", "#{fetch(:deploy_to)}/shared/composer.phar", args[:command], *args.extras
       end
     end
   end
