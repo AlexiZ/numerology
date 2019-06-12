@@ -34,8 +34,6 @@ $(document).ready(() => {
     if (automaticTables) {
         automaticTables.forEach((automaticTable) => {
             $(automaticTable).DataTable({
-                sorting: false,
-                paging: false,
                 language: {
                     search: "",
                     searchPlaceholder: "Rechercher...",
@@ -45,8 +43,14 @@ $(document).ready(() => {
                     loadingRecords: "Chargement en cours...",
                     zeroRecords: "Aucun &eacute;l&eacute;ment &agrave; afficher",
                     emptyTable: "Aucune donnée disponible dans le tableau",
+                    paginate: {
+                        first: "<<",
+                        last: ">>",
+                        next: ">",
+                        previous: "<",
+                    },
                 },
-                dom: '<"top"f>rt<"bottom"i><"clear">'
+                dom: '<"top"f>rt<"bottom row"<"col-md-8"i><"col-md-4"p>><"clear">'
             });
         });
     }
