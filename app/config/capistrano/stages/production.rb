@@ -10,4 +10,4 @@ set :composer_install_flags, '--no-dev --prefer-dist --no-interaction --quiet --
 
 SSHKit.config.command_map[:composer] = "#{fetch(:deploy_to)}/shared/composer.phar"
 SSHKit.config.command_map[:composer] = "#{shared_path.join("composer.phar")}"
-
+SSHKit.config.command_map[:php] = "php7.1-cli"
