@@ -24,6 +24,7 @@ class AnalysisRepository extends EntityRepository
             ->setParameter('userId', $userId)
             ->andWhere('a.status = :status')
             ->setParameter('status', Analysis::STATUS_ACTIVE)
+            ->orderBy('a.createdAt', 'DESC')
             ->getQuery()
             ->getResult($returnFormat)
         ;
@@ -35,6 +36,7 @@ class AnalysisRepository extends EntityRepository
             ->createQueryBuilder('a')
             ->where('a.status = :status')
             ->setParameter('status', Analysis::STATUS_ACTIVE)
+            ->orderBy('a.createdAt', 'DESC')
             ->getQuery()
             ->getResult()
         ;
