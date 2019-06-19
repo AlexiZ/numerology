@@ -20,7 +20,7 @@ Automatically calculate a person's numerology theme.
 - ~~Data editing~~
 - ~~PDF export public site~~
 - ~~PDF export extranet~~
-- **Comparison**
+- ~~Comparison~~
 - ~~Notifications~~
 - ~~Paypal payment~~
 - ~~Admin UI to manage numbers' details~~
