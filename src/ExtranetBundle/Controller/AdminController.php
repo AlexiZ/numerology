@@ -48,6 +48,7 @@ class AdminController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $user = $auth0Manager->createUser([
                 'email' => $form->get('email')->getData(),
+                'password' => $form->get('password')->getData(),
                 'slackId' => $form->get('slackId')->getData(),
             ]);
 

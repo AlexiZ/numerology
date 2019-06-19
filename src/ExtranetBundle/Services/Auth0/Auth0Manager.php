@@ -407,7 +407,7 @@ class Auth0Manager
      */
     public function createUser(array $attributes = null)
     {
-        if (!$attributes['email']) {
+        if (!$attributes['email'] || !$attributes['password']) {
             throw new \Exception('Missing input data');
         }
 
@@ -421,7 +421,7 @@ class Auth0Manager
         return $api->users->create([
             'connection' => 'Username-Password-Authentication',
             'email' => $attributes['email'],
-            'password' => uniqid('', true).'!A',
+            'password' => $attributes['password'],
             'email_verified' => true,
             'user_metadata' => [
                 'slack_id' => $attributes['slackId'],
