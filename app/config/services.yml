@@ -54,6 +54,7 @@ services:
                 clientSecret: "%auth0.api.client_secret%"
                 loginClientId: "%auth0.login.client_id%"
                 auth0EmailTtl: "%auth0.api.ttl_sec%"
+            $baseEmail: "%contact.email%"
 
     ExtranetBundle\Services\SendBird\SendBirdManager:
         arguments:

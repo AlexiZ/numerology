@@ -7,6 +7,7 @@ use Auth0\SDK\API\Header\Authorization\AuthorizationBearer;
 use Auth0\SDK\API\Header\ContentType;
 use Auth0\SDK\API\Helpers\ApiClient;
 use Auth0\SDK\API\Management;
+use Gedmo\Sluggable\Util\Urlizer;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\RequestException;
 use ExtranetBundle\Exception\ExistingUserException;
@@ -35,8 +36,12 @@ class Auth0Manager
      * @var int
      */
     private $auth0EmailTtl;
+    /**
+     * @var string
+     */
+    private $baseEmail;
 
-    public function __construct(UrlGeneratorInterface $router, RoleHierarchyInterface $roleHierarchy, array $auth0Data)
+    public function __construct(UrlGeneratorInterface $router, RoleHierarchyInterface $roleHierarchy, array $auth0Data, $baseEmail)
     {
         $this->domain = trim($auth0Data['domain'], 'https://');
         $this->clientId = $auth0Data['clientId'];
@@ -45,6 +50,7 @@ class Auth0Manager
         $this->loginClientId = $auth0Data['loginClientId'];
         $this->roleHierarchy = $roleHierarchy;
         $this->auth0EmailTtl = $auth0Data['auth0EmailTtl'];
+        $this->baseEmail = $baseEmail;
     }
 
     public function getAccessToken()
@@ -393,38 +399,35 @@ class Auth0Manager
     }
 
     /**
-     * @param $email
-     * @param string $role
      * @param array|null $attributes
      *
      * @return mixed
      *
      * @throws \Exception
      */
-    public function createUser($email, $role, array $attributes = null)
+    public function createUser(array $attributes = null)
     {
-        $api = $this->getManagementApi();
+        if (!$attributes['email']) {
+            throw new \Exception('Missing input data');
+        }
 
-        $existingUser = $this->getUser($email);
+        $api = $this->getManagementApi();
+        $existingUser = $this->getUser($attributes['email']);
 
         if (!empty($existingUser)) {
             throw new ExistingUserException('A user with this email already exists');
         }
 
-        $roles = $this->getInheritedRoles($role);
-
-
         return $api->users->create([
             'connection' => 'Username-Password-Authentication',
-            'email' => $email,
-            'password' => uniqid('', true).'!',
+            'email' => $attributes['email'],
+            'password' => uniqid('', true).'!A',
             'email_verified' => true,
             'user_metadata' => [
-                'firstname' => $attributes['firstname'] ?? null,
-                'lastname' => $attributes['lastname'] ?? null,
+                'slack_id' => $attributes['slackId'],
             ],
             'app_metadata' => [
-                'roles' => $roles,
+                'roles' => ['ROLE_USER'],
             ],
         ]);
     }

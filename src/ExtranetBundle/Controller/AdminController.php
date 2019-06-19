@@ -7,7 +7,9 @@ use ExtranetBundle\Entity\Definition;
 use ExtranetBundle\Entity\Number;
 use ExtranetBundle\Form\DefinitionType;
 use ExtranetBundle\Form\NumberType;
+use ExtranetBundle\Form\UserType;
 use ExtranetBundle\Services\Auth0\Auth0Manager;
+use ExtranetBundle\Services\Slack\SlackManager;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -36,6 +38,30 @@ class AdminController extends Controller
     public function userRefuseAction(Auth0Manager $auth0Manager, $userId)
     {
         return new JsonResponse($auth0Manager->removeRole($userId, 'ROLE_USER'));
+    }
+
+    public function userAddAction(Request $request, Auth0Manager $auth0Manager)
+    {
+        $form = $this->createForm(UserType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $user = $auth0Manager->createUser([
+                'email' => $form->get('email')->getData(),
+                'slackId' => $form->get('slackId')->getData(),
+            ]);
+
+            if ($user) {
+                return $this->redirectToRoute('admin_users_list');
+            }
+        }
+
+        $content = $this->render('@Extranet/Admin/User/_add.html.twig', [
+            'form' => $form->createView(),
+            'baseEmailParts' => explode('@', $this->getParameter('contact.email')),
+        ]);
+
+        return new JsonResponse($content->getContent());
     }
 
     /** NUMBER */

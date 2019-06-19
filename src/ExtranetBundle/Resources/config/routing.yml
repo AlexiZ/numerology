@@ -42,6 +42,12 @@ admin_users_list:
     path: /administrer/utilisateurs/
     defaults: { _controller: ExtranetBundle:Admin:usersList }
 
+admin_user_add:
+    path: /administrer/utilisateur/ajouter
+    defaults: { _controller: ExtranetBundle:Admin:userAdd }
+    options:
+        expose: true
+
 admin_user_validate:
     path: /administrer/utilisateur/valider/{userId}
     defaults: { _controller: ExtranetBundle:Admin:userValidate }

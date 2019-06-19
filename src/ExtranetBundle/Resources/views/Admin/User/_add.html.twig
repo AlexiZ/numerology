@@ -1,0 +1,43 @@
+{% form_theme form '@Extranet/Admin/User/_form_theme.html.twig' %}
+
+{{ form_start(form) }}
+    {{ form_errors(form) }}
+
+    <fieldset>
+        <legend>Etape 1 : Slack</legend>
+        <ul>
+            <li>Se rendre sur <a href="https://mazaudier.slack.com/admin">la page d'administration des utilisateurs du groupe Slack</a>.</li>
+            <li>Cliquer sur "Inviter" en haut à droite.</li>
+            <li>Dans le premier champ, utiliser un faux email de la forme "{{ baseEmailParts.0 }}+nomprenom@{{ baseEmailParts.1 }}" (remplacer "nomprenom" uniquement, garder le reste).</li>
+            <li>Un mail vient d'être envoyé sur la boîte mail "{{ baseEmailParts.0 }}@{{ baseEmailParts.1 }}. Ouvrir ce mail et cliquer sur "Rejoindre maintenant".</li>
+            <li>Sur la page de première connexion qui s'affiche, renseigner un mot de passe. Ce mot de passe est sans intérêt puisque personne ne viendra s'y connecter.</li>
+            <li>Il faut maintenant récupérer l'identifiant unique de cet utilisateur créé. Pour ça, il suffit de cliquer à gauche sur ses propres messages, c'est-à-dire la conversation qui affiche "nomprenom (vous)" puis, dans l'url récupérer la chaîne de caractères qui suit "messages" et précède "team", c'est l'identifiant de l'utilisateur. Exemple d'identifiant : "DKPJLT9TN".</li>
+        </ul>
+    </fieldset>
+
+    <fieldset>
+        <legend>Etape 2 : Compte client</legend>
+        <p>Remplir les champs du formulaire ci-dessous :</p>
+
+        <div class="form-row">
+            <div class="col-8">
+                {{ form_widget(form.email) }}
+            </div>
+
+            <div class="col-4">
+                {{ form_widget(form.slackId) }}
+            </div>
+        </div>
+    </fieldset>
+
+    {{ form_rest(form) }}
+
+    <div class="form-row mt-3">
+        <div class="col">
+            <button type="submit" id="submitAdminUserAdd" class="btn btn-success btn-icon-split">
+                <span class="icon text-white-50"><i class="fas fa-check"></i></span>
+                <span class="text">Ajouter</span>
+            </button>
+        </div>
+    </div>
+{{ form_end(form) }}

@@ -367,6 +367,27 @@ $(document).ready(() => {
             triggerComparisonModal.querySelector('.modal-body').innerHTML = '<div class="spinner-border text-primary" role="status"><span class="sr-only">Chargement...</span></div>';
         });
     }
+
+    // Add user from admin panel
+    let adminUserAdd = document.querySelector('#adminUserAdd');
+    if (adminUserAdd) {
+        adminUserAdd.addEventListener('click', (e) => {
+            e.preventDefault();
+
+            let xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = () => {
+                if (xmlhttp.readyState === XMLHttpRequest.DONE) {
+                    if (xmlhttp.status === 200) {
+                        let data = JSON.parse(xmlhttp.response);
+                        modalMessage('Création d\'un nouvel utilisateur', data);
+                    }
+                }
+            };
+
+            xmlhttp.open("GET", Routing.generate('admin_user_add'), true);
+            xmlhttp.send();
+        });
+    }
 });
 
 // Get unread messages count

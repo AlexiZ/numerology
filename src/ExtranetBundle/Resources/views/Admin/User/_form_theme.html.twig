@@ -1,0 +1,62 @@
+{%- block collection_widget -%}
+    {% if prototype is defined %}
+        <ul id="{{ name }}-fields-list"
+            data-prototype="{{ form_widget(prototype)|e }}"
+            data-widget-tags="{{ '<li></li>'|e }}">
+            {% for field in form %}
+                <li>
+                    {{- form_errors(form) -}}
+                    <input type="text" class="form-control" id="{{ field.vars.id }}" name="{{ field.vars.full_name }}" value="{{ field.vars.data }}" required="{{ field.vars.required }}" />
+                </li>
+            {% endfor %}
+        </ul>
+
+        <button type="button"
+                class="add-another-collection-widget btn btn-primary"
+                data-list="#{{ name }}-fields-list">Ajouter</button>
+        <button type="button"
+                class="delete-from-collection-widget btn btn-primary"
+                data-list="#{{ name }}-fields-list">Retirer</button>
+    {% endif %}
+{%- endblock collection_widget -%}
+
+{%- block form_row -%}
+    <div>
+        {{- form_errors(form) -}}
+
+        <div class="form-group row">
+            {{ form_label(form, null, {'label_attr': {'class': 'col-md-4'}}) }}
+
+            <div class="col-sm-8">
+                {{ form_widget(form, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+    </div>
+{%- endblock form_row -%}
+
+{% use 'form_div_layout.html.twig' with form_label as base_form_label %}
+
+{%- block form_label -%}
+    {% if label is not same as(false) -%}
+        {% if not compound -%}
+            {% set label_attr = label_attr|merge({'for': id}) %}
+        {%- endif -%}
+        {% if label is empty -%}
+            {%- if label_format is not empty -%}
+                {% set label = label_format|replace({
+                    '%name%': name,
+                    '%id%': id,
+                }) %}
+            {%- else -%}
+                {% set label = name|humanize %}
+            {%- endif -%}
+        {%- endif -%}
+        <{{ element|default('label') }}{% if label_attr %}{% with { attr: label_attr } %}{{ block('attributes') }}{% endwith %}{% endif %}>
+        {%- if translation_domain is same as(false) -%}
+            {{- label -}}
+        {%- else -%}
+            {{- label|trans({}, translation_domain) -}}
+        {%- endif -%}
+        </{{ element|default('label') }}>
+    {%- endif -%}
+{%- endblock -%}
