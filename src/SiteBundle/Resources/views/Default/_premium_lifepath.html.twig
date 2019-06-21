@@ -117,7 +117,7 @@
                 <div id="collapseAstrological" class="collapse" aria-labelledby="headingAstrological" data-parent="#accordionAstrological">
                     <div class="card-body">
                         <p><small><em>{{ getDefinition('astrological')|raw }}</em></small></p>
-                        <p>{{ subject.data.lifePath.astrologicalNumber|getAnalysis('astrological') }}</p>
+                        <p>{{ subject.data.lifePath.astrologicalNumber|getAnalysis('astrological')|raw }}</p>
                     </div>
                 </div>
             </div>
@@ -137,7 +137,7 @@
                 <div id="collapseVeryShortTerm" class="collapse" aria-labelledby="headingVeryShortTerm" data-parent="#accordionVeryShortTerm">
                     <div class="card-body">
                         <p><small><em>{{ getDefinition('veryshortterm')|raw }}</em></small></p>
-                        <p>{{ subject.data.lifePath.veryShortTermNumber|getAnalysis('veryshortterm') }}</p>
+                        <p>{{ subject.data.lifePath.veryShortTermNumber|getAnalysis('veryshortterm')|raw }}</p>
                     </div>
                 </div>
             </div>
@@ -157,7 +157,7 @@
                 <div id="collapseShortTerm" class="collapse" aria-labelledby="headingShortTerm" data-parent="#accordionShortTerm">
                     <div class="card-body">
                         <p><small><em>{{ getDefinition('shortterm')|raw }}</em></small></p>
-                        <p>{{ subject.data.lifePath.shortTermNumber|getAnalysis('shortterm') }}</p>
+                        <p>{{ subject.data.lifePath.shortTermNumber|getAnalysis('shortterm')|raw }}</p>
                     </div>
                 </div>
             </div>
@@ -177,7 +177,7 @@
                 <div id="collapseMeanTerm" class="collapse" aria-labelledby="headingMeanTerm" data-parent="#accordionMeanTerm">
                     <div class="card-body">
                         <p><small><em>{{ getDefinition('meanterm')|raw }}</em></small></p>
-                        <p>{{ subject.data.lifePath.meanTermNumber|getAnalysis('meanterm') }}</p>
+                        <p>{{ subject.data.lifePath.meanTermNumber|getAnalysis('meanterm')|raw }}</p>
                     </div>
                 </div>
             </div>
@@ -197,7 +197,7 @@
                 <div id="collapseLongTerm" class="collapse" aria-labelledby="headingLongTerm" data-parent="#accordionLongTerm">
                     <div class="card-body">
                         <p><small><em>{{ getDefinition('longterm')|raw }}</em></small></p>
-                        <p>{{ subject.data.lifePath.longTermNumber|getAnalysis('longterm') }}</p>
+                        <p>{{ subject.data.lifePath.longTermNumber|getAnalysis('longterm')|raw }}</p>
                     </div>
                 </div>
             </div>
