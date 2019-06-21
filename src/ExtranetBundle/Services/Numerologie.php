@@ -161,9 +161,11 @@ class Numerologie
         return $total > 0 ? $this->reduceNumber((string) $total) : '-';
     }
 
-    protected function reduceNumber($stringN, $moreExceptions = [])
+    protected function reduceNumber($stringN, $exceptions = [])
     {
-        $exceptions = array_merge(self::$numberExceptions, $moreExceptions);
+        if (empty($exceptions)) {
+            $exceptions = self::$numberExceptions;
+        }
 
         if (in_array($stringN, $exceptions)) {
             return (int) $stringN;
@@ -344,7 +346,7 @@ class Numerologie
     {
         $cityCoordinates = str_replace([',', '.'], '', $this->geocoding->getGeolocation($subject->getBirthPlace()));
 
-        return $this->reduceNumber($subject->getUTCBirthDate()->format('dmYHi').$cityCoordinates, [10]);
+        return $this->reduceNumber($subject->getUTCBirthDate()->format('dmYHi').$cityCoordinates, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
     }
 
     public function getVeryShortTermNumber(Analysis $subject)
