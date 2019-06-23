@@ -1,63 +1,129 @@
 {% if mode|default and 'compact' == mode %}
     {% set compact = true %}
 {% endif %}
+{% set fullNames = subject.fullNames|replace({' ': ''}) %}
 
 <div class="row">
-    <div class="col-lg-{% if compact|default %}12{% else %}6{% endif %} mb-4">
+    <div class="col-lg-{% if compact|default %}12{% else %}7{% endif %}">
         <div class="card shadow mb-4">
             <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">
-                    Nombres manquants, faibles et forts : vibrations de soutien
+                    Vibrations de soutien
                 </h6>
             </div>
 
             <div class="card-body">
-                <p>Les nombres les plus fréquents ont une forte influence sur la personnalité et le comportement de l’individu, tandis que ceux qui sont manquants ne soutiennent pas la vibration des noms et prénoms.</p>
+                <p>
+                    <strong>Les nombres les plus fréquents (nombres forts) ont une influence importante sur la personnalité et le comportement de l’individu, tandis que ceux qui sont manquants ne soutiennent pas la vibration des noms et prénoms.</strong>
+                </p>
 
-                {% set occurrences = subject.fullNames|replace({' ': ''})|occurrencesNombresLettres %}
-                <table>
-                    <tr>
-                        {% for i in 1..9 %}
-                        <td style="border:solid 1px gray; width: 20px; text-align: center;">{{ occurrences[i] }}</td>
-                        {% if i % 3 == 0 and i < 9 %}
-                    </tr>
-                    <tr>
-                        {% endif %}
-                        {% endfor %}
-                    </tr>
-                </table>
+                <ul>
+                    {% if identity['strong']|length > 0 %}
+                        <li>Nombres forts : Les nombres <strong>{{ identity['strong']|join(', ') }}</strong> sont naturellement renforcés par les nombres forts {{ fullNames|numerosLettresFortes|join(', ') }}. Ils exercent un poids important sur la personnalité.</li>
+                    {% endif %}
+
+                    {% if identity['missing']|length > 0 %}
+                        <li>Nombres manquants :
+                            <ul>
+                                <li>On retrouve le(s) nombre(s) manquant(s) {{ fullNames|numerosLettresManquantes|join(', ') }} dans le(s) nombre(s) <strong>{{ identity['missing']|join(', ') }}</strong>. La force de ce(s) nombre(s) <strong>{{ identity['missing']|join(', ') }}</strong> n’est pas soutenue par les lettres de l’identité mais se construit à travers le mode de vie de la personne et s’amplifie plus ou moins dans le temps, selon le vécu individuel qui les oriente vers la face positive ou bien négative de la vibration de ces nombres.</li>
+
+                                <li>Le(s) nombre(s) manquant(s) {{ fullNames|numerosLettresManquantes|join(', ') }} ne se retrouve(nt) nulle part dans ce qui a trait à l’identité de la personne. Celle-ci ne soutient donc aucun des traits de caractère liés à ce(s) nombre(s). Ce manque peut être compensé par d’autres paramètres de la personnalité (astrologique, génétique, etc.).</li>
+                            </ul>
+                        </li>
+                    {% endif %}
+
+                    <li>Nombres faibles : {{ fullNames|numerosLettresFaibles|join(', ') }} soutiennent peu les vibrations qui leur correspondent. Ils peuvent servir de base de travail sur soi-même à moins qu’ils soient, eux aussi, compensés par d’autres paramètres de la personnalité.</li>
+                </ul>
             </div>
         </div>
     </div>
 
-    <div class="col-lg-{% if compact|default %}12{% else %}6{% endif %} mb-4">
+    <div class="col-lg-{% if compact|default %}12{% else %}5{% endif %}">
         <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">
+                    Rappel des nombres de l'identité
+                </h6>
+            </div>
+
+            <div class="card-body text-center">
+                <p>
+                    <a href="#" class="btn btn-info btn-icon-split disabled-btn {% if subject.data.identity.globalNumber in fullNames|numerosLettresManquantes %}blue{% elseif subject.data.identity.globalNumber in fullNames|numerosLettresFaibles %}yellow{% elseif subject.data.identity.globalNumber in fullNames|numerosLettresMoyennes %}orange{% elseif subject.data.identity.globalNumber in fullNames|numerosLettresFortes %}red{% endif %}">
+                        <span class="icon">{{ subject.data.identity.globalNumber }}</span>
+                        <span class="text">Nombre global</span>
+                    </a>
+                </p>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <p>
+                            <a href="#" class="btn btn-info btn-icon-split disabled-btn {% if subject.data.identity.inheritedNumber in fullNames|numerosLettresManquantes %}blue{% elseif subject.data.identity.inheritedNumber in fullNames|numerosLettresFaibles %}yellow{% elseif subject.data.identity.inheritedNumber in fullNames|numerosLettresMoyennes %}orange{% elseif subject.data.identity.inheritedNumber in fullNames|numerosLettresFortes %}red{% endif %}">
+                                <span class="icon">{{ subject.data.identity.inheritedNumber }}</span>
+                                <span class="text">Nombre héréditaire</span>
+                            </a>
+                        </p>
+                        <p>
+                            <a href="#" class="btn btn-info btn-icon-split disabled-btn {% if subject.data.identity.dutyNumber in fullNames|numerosLettresManquantes %}blue{% elseif subject.data.identity.dutyNumber in fullNames|numerosLettresFaibles %}yellow{% elseif subject.data.identity.dutyNumber in fullNames|numerosLettresMoyennes %}orange{% elseif subject.data.identity.dutyNumber in fullNames|numerosLettresFortes %}red{% endif %}">
+                                <span class="icon">{{ subject.data.identity.dutyNumber }}</span>
+                                <span class="text">Nombre de mission</span>
+                            </a>
+                        </p>
+                    </div>
+
+                    <div class="col-md-6">
+                        <p>
+                            <a href="#" class="btn btn-info btn-icon-split disabled-btn {% if subject.data.identity.socialNumber in fullNames|numerosLettresManquantes %}blue{% elseif subject.data.identity.socialNumber in fullNames|numerosLettresFaibles %}yellow{% elseif subject.data.identity.socialNumber in fullNames|numerosLettresMoyennes %}orange{% elseif subject.data.identity.socialNumber in fullNames|numerosLettresFortes %}red{% endif %}">
+                                <span class="icon">{{ subject.data.identity.socialNumber }}</span>
+                                <span class="text">Nombre social</span>
+                            </a>
+                        </p>
+                        <p>
+                            <a href="#" class="btn btn-info btn-icon-split disabled-btn {% if subject.data.identity.structureNumber in fullNames|numerosLettresManquantes %}blue{% elseif subject.data.identity.structureNumber in fullNames|numerosLettresFaibles %}yellow{% elseif subject.data.identity.structureNumber in fullNames|numerosLettresMoyennes %}orange{% elseif subject.data.identity.structureNumber in fullNames|numerosLettresFortes %}red{% endif %}">
+                                <span class="icon">{{ subject.data.identity.structureNumber }}</span>
+                                <span class="text">Nombre de structure</span>
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">
+                    Nombres forts, manquants et faibles
+                </h6>
+            </div>
+
             <div class="card-body">
-                {% set fullNames = subject.fullNames|replace({' ': ''}) %}
-                <p><a href="#" class="btn btn-info btn-icon-split disabled-btn">
-                    <span class="icon text-white-50">{{ fullNames|length }}</span>
-                    <span class="text">Nombre total de lettres</span>
-                </a></p>
-                <p><a href="#" class="btn btn-info btn-icon-split disabled-btn">
-                    <span class="icon text-white-50">{{ fullNames|nombreMoyenLettres|number_format(1, '.', ' ') }}</span>
-                    <span class="text">Nombre moyen de présence de chaque lettre</span>
-                </a></p>
-                <p><a href="#" class="btn btn-info btn-icon-split disabled-btn">
-                    <span class="icon text-white-50">{{ fullNames|numerosLettresManquantes|join(', ') }}</span>
-                    <span class="text">Nombres manquants</span>
-                </a></p>
-                <p><a href="#" class="btn btn-info btn-icon-split disabled-btn">
-                    <span class="icon text-white-50">{{ fullNames|numerosLettresFaibles|join(', ') }}</span>
-                    <span class="text">Nombres faibles</span>
-                </a></p>
-                <p><a href="#" class="btn btn-info btn-icon-split disabled-btn">
-                    <span class="icon text-white-50">{{ fullNames|numerosLettresFortes|join(', ') }}</span>
-                    <span class="text">Nombres forts</span>
-                </a></p>
-                <p><a href="#" class="btn btn-info btn-icon-split disabled-btn">
-                    <span class="icon text-white-50">{{ fullNames|numerosLettresMoyennes|join(', ') }}</span>
-                    <span class="text">Nombres moyens</span>
-                </a></p>
+                <div class="row">
+                    <div class="col-md-6">
+                        <table class="vibrationsTable">
+                            <tr>
+                                {% for i in 1..9 %}
+                                <td class="{% if i in fullNames|numerosLettresManquantes %}blue{% elseif i in fullNames|numerosLettresFaibles %}yellow{% elseif i in fullNames|numerosLettresMoyennes %}orange{% elseif i in fullNames|numerosLettresFortes %}red{% endif %}">{{ i }}</td>
+                                {% if i % 3 == 0 and i < 9 %}
+                            </tr>
+
+                            <tr>
+                                {% endif %}
+                                {% endfor %}
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="col-md-6 row">
+                        <div class="col-md-12 vibrationsLegend">
+                            <p class="red">Nombres forts</p>
+                            <p class="orange">Nombres moyens</p>
+                        </div>
+
+                        <div class="col-md-12 vibrationsLegend">
+                            <p class="yellow">Nombres faibles</p>
+                            <p class="blue">Nombres manquants</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

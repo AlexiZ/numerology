@@ -3,6 +3,11 @@
 @import "~shepherd.js/dist/css/shepherd-theme-square.css";
 @import "~quill/dist/quill.snow.css";
 
+$pastel-red: #ff6962;
+$pastel-orange: #ffcb99;
+$pastel-yellow: #fefec8;
+$pastel-blue: #abe1fb;
+
 .bg-login-image {
   background: url(http://www.editions-bussiere.com/1297-thickbox_default/numerologie-essentielle-heritages-et-parcours-de-vie.jpg);
   background-position: center;
@@ -17,6 +22,105 @@
 .adminAddUser {
   #standardModal .modal-dialog {
     max-width: 800px;
+  }
+}
+
+.vibrationsLegend {
+  p {
+    font-weight: bolder;
+    font-size: 1.2em;
+    font-variant: small-caps;
+    padding: 5px;
+    text-align: center;
+  }
+}
+
+.vibrationsTable {
+  width: 200px;
+  height: 200px;
+
+  tr:nth-child(1) {
+    td:nth-child(1) {
+      border-radius: 10px 0px 0px 0px;
+    }
+
+    td:nth-child(3) {
+      border-radius: 0px 10px 0px 0px;
+    }
+  }
+
+  tr:nth-child(3) {
+    td:nth-child(1) {
+      border-radius: 0px 0px 0px 10px;
+    }
+
+    td:nth-child(3) {
+      border-radius: 0px 0px 10px 0px;
+    }
+  }
+
+  td {
+    width: 40px;
+    height: 40px;
+    text-align: center;
+  }
+}
+
+.vibrationsTable td, .vibrationsLegend p {
+  &.red {
+    background-color: $pastel-red;
+    color: white;
+  }
+  &.orange {
+    background-color: $pastel-orange;
+    color: white;
+  }
+  &.yellow {
+    background-color: $pastel-yellow;
+    color: #858796;
+  }
+  &.blue {
+    background-color: $pastel-blue;
+    color: #858796;
+  }
+}
+
+.btn-icon-split {
+  &.red {
+    .icon {
+      background: rgba(0,0,0,.10);
+    }
+
+    background-color: $pastel-red;
+    color: white;
+    border-color: #858796;
+  }
+  &.orange {
+    .icon {
+      background: rgba(0,0,0,.10);
+    }
+
+    background-color: $pastel-orange;
+    color: white;
+    border-color: #858796;
+  }
+  &.yellow {
+    .icon {
+      background: rgba(0,0,0,.10);
+    }
+
+    background-color: $pastel-yellow;
+    color: #858796;
+    border-color: #858796;
+  }
+  &.blue {
+    .icon {
+      background: rgba(0,0,0,.10);
+    }
+
+    background-color: $pastel-blue;
+    color: #858796;
+    border-color: #858796;
   }
 }
 

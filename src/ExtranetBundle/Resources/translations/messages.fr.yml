@@ -1,0 +1,9 @@
+analysis:
+    show:
+        vibrations:
+            identity:
+                social: "social"
+                structure: "de structure"
+                duty: "de mission"
+                inherited: "héréditaire"
+                global: "global"

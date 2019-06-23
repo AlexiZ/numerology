@@ -11,6 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class AnalysisController extends Controller
 {
@@ -105,7 +106,7 @@ class AnalysisController extends Controller
         return $this->redirectToRoute(self::ROUTE_INDEX);
     }
 
-    public function showAction($hash, ManagerRegistry $registry)
+    public function showAction($hash, ManagerRegistry $registry, Numerologie $numerologieService, TranslatorInterface $translator)
     {
         /** @var Analysis $subject */
         $subject = $registry->getRepository(Analysis::class)->findOneByHash($hash);
@@ -114,8 +115,41 @@ class AnalysisController extends Controller
             return $this->redirectToRoute(self::ROUTE_INDEX);
         }
 
+        $a = [];
+        $b = [
+            $numerologieService->getGlobalNumber($subject) => 'global',
+            $numerologieService->getInheritedNumber($subject) => 'inherited',
+            $numerologieService->getDutyNumber($subject) => 'duty',
+            $numerologieService->getSocialNumber($subject) => 'social',
+            $numerologieService->getStructureNumber($subject) => 'structure',
+        ];
+        $c = [
+            'strong' => array_values($numerologieService->getStrongLettersNumbers(str_replace(' ', '', $subject->getFullNames()))),
+            'missing' => array_values($numerologieService->getMissingLettersNumbers(str_replace(' ', '', $subject->getFullNames()))),
+        ];
+
+        foreach ($c as $i => $j) {
+            if (!isset($a[$i])) {
+                $a[$i] = [];
+            }
+
+            foreach ($j as $k) {
+                if (isset($b[$k])) {
+                    $a[$i][] = $b[$k];
+                }
+            }
+        }
+
+        $d = [];
+        foreach ($a as $l => $m) {
+            foreach ($m as $n => $o) {
+                $d[$l][$n] = $translator->trans('analysis.show.vibrations.identity.' . $o);
+            }
+        }
+
         return $this->render('@Extranet/Analysis/show.html.twig', [
             self::SUBJECT => $subject,
+            'identity' => $d,
         ]);
     }
 
