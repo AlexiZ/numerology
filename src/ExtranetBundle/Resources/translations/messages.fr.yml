@@ -7,3 +7,15 @@ analysis:
                 duty: "de mission"
                 inherited: "héréditaire"
                 global: "global"
+                strong: "
+                    {1}Nombres forts : Le nombre <strong>%1%</strong> est naturellement renforcé par le nombre fort %2%. Il exerce un poids important sur la personnalité.
+                    |[2,Inf[Nombres forts : Les nombres <strong>%1%</strong> sont naturellement renforcés par les nombres forts %2%. Ils exercent un poids important sur la personnalité."
+                missingIn: "
+                    {1}On retrouve le nombre manquant %1% dans le nombre <strong>%2%</strong>. La force de ce nombre <strong>%3%</strong> n’est pas soutenue par les lettres de l’identité mais se construit à travers le mode de vie de la personne et augmente plus ou moins dans le temps, selon le vécu personnel.
+                    |[2,Inf[On retrouve les nombres manquants %1% dans les nombres <strong>%2%</strong>. La force de ces nombres <strong>%3%</strong> n’est pas soutenue par les lettres de l’identité mais se construit à travers le mode de vie de la personne et augmente plus ou moins dans le temps, selon le vécu personnel."
+                missingOut: "
+                    {1}Le nombre manquant %1% ne se retrouve nulle part dans ce qui a trait à l’identité de la personne. Celle-ci ne soutient donc aucun des traits de caractère liés à ce nombre. Ce manque peut être compensé par d’autres paramètres de la personnalité (astrologique, génétique, etc.).
+                    |[2,Inf[Les nombres manquants %1% ne se retrouvent nulle part dans ce qui a trait à l’identité de la personne. Celle-ci ne soutient donc aucun des traits de caractère liés à ces nombres. Ce manque peut être compensé par d’autres paramètres de la personnalité (astrologique, génétique, etc.)."
+                weak: "
+                    {1}Nombres faibles : %1% soutient peu les vibrations qui lui correspondent. Il peut servir de base de travail sur soi-même à moins qu’il soit, lui aussi, compensé par d’autres paramètres de la personnalité.
+                    |[2,Inf[Nombres faibles : %1% soutiennent peu les vibrations qui leur correspondent. Ils peuvent servir de base de travail sur soi-même à moins qu’ils soient, eux aussi, compensés par d’autres paramètres de la personnalité."

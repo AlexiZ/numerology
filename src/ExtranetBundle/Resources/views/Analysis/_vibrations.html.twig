@@ -18,21 +18,27 @@
                 </p>
 
                 <ul>
-                    {% if identity['strong']|length > 0 %}
-                        <li>Nombres forts : Les nombres <strong>{{ identity['strong']|join(', ') }}</strong> sont naturellement renforcés par les nombres forts {{ fullNames|numerosLettresFortes|join(', ') }}. Ils exercent un poids important sur la personnalité.</li>
+                    {% if identity['strong']|default|length > 0 %}
+                        <li>{{ 'analysis.show.vibrations.identity.strong'|transchoice(identity['strong']|length, {'%1%': identity['strong']|natJoin(', '), '%2%' : identity['strong']|keys|natJoin(', ')})|raw }}</li>
                     {% endif %}
 
-                    {% if identity['missing']|length > 0 %}
+                    {% if identity['missingIn']|default|length > 0 or identity['missingOut']|default|length > 0 %}
                         <li>Nombres manquants :
                             <ul>
-                                <li>On retrouve le(s) nombre(s) manquant(s) {{ fullNames|numerosLettresManquantes|join(', ') }} dans le(s) nombre(s) <strong>{{ identity['missing']|join(', ') }}</strong>. La force de ce(s) nombre(s) <strong>{{ identity['missing']|join(', ') }}</strong> n’est pas soutenue par les lettres de l’identité mais se construit à travers le mode de vie de la personne et s’amplifie plus ou moins dans le temps, selon le vécu individuel qui les oriente vers la face positive ou bien négative de la vibration de ces nombres.</li>
+                                {% if identity['missingIn']|default|length > 0 %}
+                                    <li>{{ 'analysis.show.vibrations.identity.missingIn'|transchoice(identity['missingIn']|length, {'%1%': identity['missingIn']|keys|natJoin(', '), '%2%': identity['missingIn']|natJoin(', '), '%3%': identity['missingIn']|natJoin(', ')})|raw }}</li>
+                                {% endif %}
 
-                                <li>Le(s) nombre(s) manquant(s) {{ fullNames|numerosLettresManquantes|join(', ') }} ne se retrouve(nt) nulle part dans ce qui a trait à l’identité de la personne. Celle-ci ne soutient donc aucun des traits de caractère liés à ce(s) nombre(s). Ce manque peut être compensé par d’autres paramètres de la personnalité (astrologique, génétique, etc.).</li>
+                                {% if identity['missingOut']|default|length > 0 %}
+                                    <li>{{ 'analysis.show.vibrations.identity.missingOut'|transchoice(identity['missingOut']|length, {'%1%': identity['missingOut']|natJoin(', ')}) }}</li>
+                                {% endif %}
                             </ul>
                         </li>
                     {% endif %}
 
-                    <li>Nombres faibles : {{ fullNames|numerosLettresFaibles|join(', ') }} soutiennent peu les vibrations qui leur correspondent. Ils peuvent servir de base de travail sur soi-même à moins qu’ils soient, eux aussi, compensés par d’autres paramètres de la personnalité.</li>
+                    {% if identity['weak']|default|length > 0 %}
+                        <li>{{ 'analysis.show.vibrations.identity.weak'|transchoice(identity['weak']|length, {'%1%': identity['weak']|keys|natJoin(', ')}) }}</li>
+                    {% endif %}
                 </ul>
             </div>
         </div>
