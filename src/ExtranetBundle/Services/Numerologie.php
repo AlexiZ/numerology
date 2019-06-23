@@ -6,6 +6,7 @@ use Doctrine\Common\Persistence\ManagerRegistry;
 use ExtranetBundle\Entity\Analysis as Analysis;
 use ExtranetBundle\Entity\Definition;
 use ExtranetBundle\Entity\Number;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class Numerologie
 {
@@ -67,10 +68,16 @@ class Numerologie
      */
     private $registry;
 
-    public function __construct(Geocoding $geocoding, ManagerRegistry $registry)
+    /**
+     * @var TranslatorInterface
+     */
+    private $translator;
+
+    public function __construct(Geocoding $geocoding, ManagerRegistry $registry, TranslatorInterface $translator)
     {
         $this->geocoding = $geocoding;
         $this->registry = $registry;
+        $this->translator = $translator;
     }
 
     public function exportData(Analysis $subject)
@@ -372,5 +379,96 @@ class Numerologie
     public function getSecretNumber(Analysis $subject)
     {
         return $this->reduceNumber((string) ($this->getGlobalNumber($subject) + $this->getIdealNumber($subject)));
+    }
+
+    public function getIdentityDetails(Analysis $subject)
+    {
+        $a = [];
+        $b = [
+            $this->getGlobalNumber($subject) => 'global',
+            $this->getInheritedNumber($subject) => 'inherited',
+            $this->getDutyNumber($subject) => 'duty',
+            $this->getSocialNumber($subject) => 'social',
+            $this->getStructureNumber($subject) => 'structure',
+        ];
+        $missing = array_values($this->getMissingLettersNumbers(str_replace(' ', '', $subject->getFullNames())));
+        $c = [
+            'strong' => array_values($this->getStrongLettersNumbers(str_replace(' ', '', $subject->getFullNames()))),
+            'missingIn' => array_values(array_intersect(array_keys($b), $missing)),
+            'weak' => array_values($this->getWeakLettersNumbers(str_replace(' ', '', $subject->getFullNames()))),
+        ];
+
+        foreach ($c as $i => $j) {
+            if (!isset($a[$i])) {
+                $a[$i] = [];
+            }
+
+            foreach ($j as $k) {
+                if (isset($b[$k])) {
+                    $a[$i][$k] = $b[$k];
+                }
+            }
+        }
+
+        $d = [];
+        foreach ($a as $l => $m) {
+            foreach ($m as $n => $o) {
+                $d[$l][$n] = $this->translator->trans('analysis.show.vibrations.identity.' . $o);
+            }
+        }
+
+        return array_merge($d, ['missingOut' => array_values(array_diff($missing, array_keys($b)))]);
+    }
+
+    public function getLettersChartValues(Analysis $subject)
+    {
+        /*
+        (
+            (subject.publicName|totalLettrePhysique|default(1) / subject.publicName|length)*100
+        ) | number_format(0)
+        (
+            (subject.publicName|totalLettreEmotive|default(1) / subject.publicName|length)*100
+        ) | number_format(0)
+        (
+            (subject.publicName|totalLettreCerebrale|default(1) / subject.publicName|length)*100
+        ) | number_format(0)
+        (
+            (subject.publicName|totalLettreIntuitive|default(1) / subject.publicName|length)*100
+        ) | number_format(0)
+        */
+
+        $values = [
+            'public' => [
+                'physical' => (int) round($this->count('physical', $subject->getPublicName()) / strlen($subject->getPublicName()) * 100, 0),
+                'emotional' => (int) round($this->count('emotional', $subject->getPublicName()) / strlen($subject->getPublicName()) * 100, 0),
+                'brain' => (int) round($this->count('brain', $subject->getPublicName()) / strlen($subject->getPublicName()) * 100, 0),
+                'intuitive' => (int) round($this->count('intuitive', $subject->getPublicName()) / strlen($subject->getPublicName()) * 100, 0),
+            ],
+            'private' => [
+                'physical' => (int) round($this->count('physical', $subject->getFullNames()) / strlen($subject->getFullNames()) * 100, 0),
+                'emotional' => (int) round($this->count('emotional', $subject->getFullNames()) / strlen($subject->getFullNames()) * 100, 0),
+                'brain' => (int) round($this->count('brain', $subject->getFullNames()) / strlen($subject->getFullNames()) * 100, 0),
+                'intuitive' => (int) round($this->count('intuitive', $subject->getFullNames()) / strlen($subject->getFullNames()) * 100, 0),
+            ],
+        ];
+        $average = [
+            'physical' => 25,
+            'emotional' => 30,
+            'brain' => 27,
+            'intuitive' => 13
+        ];
+
+        $return = [];
+        foreach ($values as $type => $data) {
+            foreach ($data as $name => $value) {
+                if (!isset($return[$type])) {
+                    $return[$type] = [];
+                }
+
+                $return[$type][] = $value - $average[$name];
+            }
+        }
+
+        return array_merge($return, $average);
     }
 }

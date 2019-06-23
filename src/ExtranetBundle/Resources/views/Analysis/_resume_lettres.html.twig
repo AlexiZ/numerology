@@ -16,8 +16,7 @@
                     <div class="chart-pie pt-4 pb-2">
                         <canvas class="automaticBarChart"
                                 data-labels="Physique,Émotive,Cérébrale,Intuitive"
-                                data-values="{{ ((subject.publicName|totalLettrePhysique|default(1) / subject.publicName|length)*100)|number_format(0) }},{{ ((subject.publicName|totalLettreEmotive|default(1) / subject.publicName|length)*100)|number_format(0) }},{{ ((subject.publicName|totalLettreCerebrale|default(1) / subject.publicName|length)*100)|number_format(0) }},{{ ((subject.publicName|totalLettreIntuitive|default(1) / subject.publicName|length)*100)|number_format(0) }}||25,30,27,13"
-                                data-legends="{{ subject.firstName }},Moyenne">
+                                data-values="{{ lettersChartValues.public|join(',') }}">
                         </canvas>
                     </div>
                 </div>
@@ -38,8 +37,7 @@
                     <div class="chart-pie pt-4 pb-2">
                         <canvas class="automaticBarChart"
                                 data-labels="Physique,Émotive,Cérébrale,Intuitive"
-                                data-values="{{ ((subject.fullNames|totalLettrePhysique / subject.fullNames|length)*100)|number_format(0) }},{{ ((subject.fullNames|totalLettreEmotive / subject.fullNames|length)*100)|number_format(0) }},{{ ((subject.fullNames|totalLettreCerebrale / subject.fullNames|length)*100)|number_format(0) }},{{ ((subject.fullNames|totalLettreIntuitive / subject.fullNames|length)*100)|number_format(0) }}||25,30,27,13"
-                                data-legends="{{ subject.firstName }},Moyenne">
+                                data-values="{{ lettersChartValues.private|join(',') }}">
                         </canvas>
                     </div>
                 </div>

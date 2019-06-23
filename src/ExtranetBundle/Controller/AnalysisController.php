@@ -106,7 +106,7 @@ class AnalysisController extends Controller
         return $this->redirectToRoute(self::ROUTE_INDEX);
     }
 
-    public function showAction($hash, ManagerRegistry $registry, Numerologie $numerologieService, TranslatorInterface $translator)
+    public function showAction($hash, ManagerRegistry $registry, Numerologie $numerologieService)
     {
         /** @var Analysis $subject */
         $subject = $registry->getRepository(Analysis::class)->findOneByHash($hash);
@@ -115,43 +115,10 @@ class AnalysisController extends Controller
             return $this->redirectToRoute(self::ROUTE_INDEX);
         }
 
-        $a = [];
-        $b = [
-            $numerologieService->getGlobalNumber($subject) => 'global',
-            $numerologieService->getInheritedNumber($subject) => 'inherited',
-            $numerologieService->getDutyNumber($subject) => 'duty',
-            $numerologieService->getSocialNumber($subject) => 'social',
-            $numerologieService->getStructureNumber($subject) => 'structure',
-        ];
-        $missing = array_values($numerologieService->getMissingLettersNumbers(str_replace(' ', '', $subject->getFullNames())));
-        $c = [
-            'strong' => array_values($numerologieService->getStrongLettersNumbers(str_replace(' ', '', $subject->getFullNames()))),
-            'missingIn' => array_values(array_intersect(array_keys($b), $missing)),
-            'weak' => array_values($numerologieService->getWeakLettersNumbers(str_replace(' ', '', $subject->getFullNames()))),
-        ];
-
-        foreach ($c as $i => $j) {
-            if (!isset($a[$i])) {
-                $a[$i] = [];
-            }
-
-            foreach ($j as $k) {
-                if (isset($b[$k])) {
-                    $a[$i][$k] = $b[$k];
-                }
-            }
-        }
-
-        $d = [];
-        foreach ($a as $l => $m) {
-            foreach ($m as $n => $o) {
-                $d[$l][$n] = $translator->trans('analysis.show.vibrations.identity.' . $o);
-            }
-        }
-
         return $this->render('@Extranet/Analysis/show.html.twig', [
             self::SUBJECT => $subject,
-            'identity' => array_merge($d, ['missingOut' => array_values(array_diff($missing, array_keys($b)))]),
+            'identity' => $numerologieService->getIdentityDetails($subject),
+            'lettersChartValues' => $numerologieService->getLettersChartValues($subject),
         ]);
     }
 

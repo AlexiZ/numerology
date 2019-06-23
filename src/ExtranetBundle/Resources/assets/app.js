@@ -2,7 +2,8 @@ import 'bootstrap';
 import 'jquery';
 import 'jquery-easing';
 import 'startbootstrap-sb-admin-2/js/sb-admin-2.min';
-import 'chart.js';
+import Chart from 'chart.js';
+import 'chartjs-plugin-annotation';
 import 'datatables.net-bs4';
 import Shepherd from "shepherd.js";
 import Quill from 'quill';
@@ -213,36 +214,19 @@ $(document).ready(() => {
         automaticBarCharts.forEach((automaticBarChart) => {
             let labels = automaticBarChart.dataset.labels.split(','),
                 rawData = automaticBarChart.dataset.values,
-                legends = automaticBarChart.dataset.legends.split(','),
-                datasets = [],
+                legends = 'legends' in automaticBarChart.dataset ? automaticBarChart.dataset.legends.split(',') : false,
                 datasetOptions = {
                     borderWidth: '2',
                     hoverBorderColor: "rgba(234, 236, 244, 1)",
-                };
-
-            if (-1 !== rawData.indexOf('||')) {
-                let data = rawData.split('||');
-
-                for (let i = 0; i < data.length; i++) {
-                    let colors = [32, 64, 96, 128, 160, 192],
-                        color = 'rgba(' + colors[Math.floor(Math.random() * colors.length)] + ', ' + colors[Math.floor(Math.random() * colors.length)] + ', ' + colors[Math.floor(Math.random() * colors.length)] + ', 0.5)';
-                    datasets[i] = Object.assign(
-                        {
-                            data: data[i].split(','),
-                            label: legends[i],
-                            backgroundColor: color,
-                            borderColor: color,
-                            hoverBackgroundColor: color
-                        },
-                        datasetOptions
-                    );
-                }
-            } else {
-                datasets = [Object.assign(
-                    {data: rawData.split(',')},
-                    datasetOptions
-                )];
-            }
+                },
+                datasets = [
+                Object.assign(
+                {
+                    data: rawData.split(','),
+                    backgroundColor: ['rgba(255, 105, 98, 0.5)', 'rgba(254, 254, 200, 0.5)', 'rgba(255, 203, 153, 0.5)', 'rgba(171, 225, 251, 0.5)'],
+                },
+                datasetOptions
+            )];
 
             barCharts[barChartsIndex] = new Chart(automaticBarChart, {
                 type: 'bar',
@@ -271,18 +255,65 @@ $(document).ready(() => {
                         },
                     },
                     legend: {
-                        display: true,
+                        display: legends ? true : false,
                     },
                     scales: {
                         yAxes: [{
+                            id: 'y-axis-0',
                             ticks: {
                                 beginAtZero: true
+                            },
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Moyenne'
                             }
                         }]
                     },
+                    annotation: {
+                        annotations: [{
+                            type: 'line',
+                            mode: 'horizontal',
+                            scaleID: 'y-axis-0',
+                            value: '8',
+                            borderColor: 'red',
+                            borderWidth: 2,
+                            borderDash: [2, 2],
+                            label: {
+                                backgroundColor: 'rgba(1,1,1,0)',
+                                fontFamily: "sans-serif",
+                                fontSize: 10,
+                                fontStyle: "bold",
+                                fontColor: "#000",
+                                position: "right",
+                                xAdjust: 0,
+                                yAdjust: -10,
+                                enabled: true,
+                                content: "Excès"
+                            },
+                        }, {
+                            type: 'line',
+                            mode: 'horizontal',
+                            scaleID: 'y-axis-0',
+                            value: '-8',
+                            borderColor: 'red',
+                            borderWidth: 2,
+                            borderDash: [2, 2],
+                            label: {
+                                backgroundColor: 'rgba(1,1,1,0)',
+                                fontFamily: "sans-serif",
+                                fontSize: 10,
+                                fontStyle: "bold",
+                                fontColor: "#000",
+                                position: "right",
+                                xAdjust: 0,
+                                yAdjust: 10,
+                                enabled: true,
+                                content: "Manque"
+                            },
+                        }]
+                    }
                 },
             });
-
             barChartsIndex++;
         });
     }
