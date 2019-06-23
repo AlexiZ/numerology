@@ -127,7 +127,6 @@ class AnalysisController extends Controller
         $c = [
             'strong' => array_values($numerologieService->getStrongLettersNumbers(str_replace(' ', '', $subject->getFullNames()))),
             'missingIn' => array_values(array_intersect(array_keys($b), $missing)),
-            'missingOut' => array_values(array_diff($missing, array_keys($b))),
             'weak' => array_values($numerologieService->getWeakLettersNumbers(str_replace(' ', '', $subject->getFullNames()))),
         ];
 
@@ -152,7 +151,7 @@ class AnalysisController extends Controller
 
         return $this->render('@Extranet/Analysis/show.html.twig', [
             self::SUBJECT => $subject,
-            'identity' => $d,
+            'identity' => array_merge($d, ['missingOut' => array_values(array_diff($missing, array_keys($b)))]),
         ]);
     }
 
