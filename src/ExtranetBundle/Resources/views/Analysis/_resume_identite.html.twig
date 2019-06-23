@@ -16,7 +16,7 @@
 
             <div class="collapse{% if not compact|default %} show{% endif %}" id="collapseGlobalNumber">
                 <div class="card-body">
-                    <p class="mb-3"><small><em>{{ getDefinition('global')|raw }}</em></small></p>
+                    <p class="mb-3">{{ getDefinition('global')|raw }}</p>
                     <p>{{ subject.data.identity.globalNumber|getAnalysis('global')|raw }}</p>
                 </div>
             </div>
@@ -36,7 +36,7 @@
 
             <div class="collapse{% if not compact|default %} show{% endif %}" id="collapseInheritedNumber">
                 <div class="card-body">
-                    <p class="mb-3"><small><em>{{ getDefinition('inherited')|raw }}</em></small></p>
+                    <p class="mb-3">{{ getDefinition('inherited')|raw }}</p>
                     <p>{{ subject.data.identity.inheritedNumber|getAnalysis('inherited')|raw }}</p>
                 </div>
             </div>
@@ -54,7 +54,7 @@
 
             <div class="collapse{% if not compact|default %} show{% endif %}" id="collapseDutyNumber">
                 <div class="card-body">
-                    <p class="mb-3"><small><em>{{ getDefinition('duty')|raw }}</em></small></p>
+                    <p class="mb-3">{{ getDefinition('duty')|raw }}</p>
                     <p>{{ subject.data.identity.dutyNumber|getAnalysis('duty')|raw }}</p>
                 </div>
             </div>
@@ -74,7 +74,7 @@
 
             <div class="collapse{% if not compact|default %} show{% endif %}" id="collapseSocialNumber">
                 <div class="card-body">
-                    <p class="mb-3"><small><em>{{ getDefinition('social')|raw }}</em></small></p>
+                    <p class="mb-3">{{ getDefinition('social')|raw }}</p>
                     <p>{{ subject.data.identity.socialNumber|getAnalysis('social')|raw }}</p>
                 </div>
             </div>
@@ -92,7 +92,7 @@
 
             <div class="collapse{% if not compact|default %} show{% endif %}" id="collapseStructureNumber">
                 <div class="card-body">
-                    <p class="mb-3"><small><em>{{ getDefinition('structure')|raw }}</em></small></p>
+                    <p class="mb-3">{{ getDefinition('structure')|raw }}</p>
                     <p>{{ subject.data.identity.structureNumber|getAnalysis('structure')|raw }}</p>
                 </div>
             </div>
