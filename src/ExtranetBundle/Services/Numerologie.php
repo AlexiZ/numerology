@@ -484,10 +484,10 @@ class Numerologie
 
             foreach ([0 => 'physical', 1 => 'emotional', 2 => 'brain', 3 => 'intuitive'] as $index => $type) {
                 if ($lettersChartValues[$property][$index] >= self::LETTERS_LIMIT_VALUE) {
-                    $differences[$property][] = $this->translator->trans('analysis.show.letters.' . $type . '.excess');
+                    $differences[$property][$type] = $this->translator->trans('analysis.show.letters.' . $type . '.excess');
                 }
                 else if ($lettersChartValues[$property][$index] <= -self::LETTERS_LIMIT_VALUE) {
-                    $differences[$property][] = $this->translator->trans('analysis.show.letters.' . $type . '.lack');
+                    $differences[$property][$type] = $this->translator->trans('analysis.show.letters.' . $type . '.lack');
                 }
             }
         }

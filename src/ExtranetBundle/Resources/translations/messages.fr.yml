@@ -32,3 +32,16 @@ analysis:
             intuitive:
                 excess: "Une surcapacité intuitive vous permet d’improviser et de vous adapter à la plupart des situations. Vous vous servez de votre intuition avant de chercher à comprendre, ressentir ou agir."
                 lack: "Un manque d’intuition vous expose à être surpris(e) par ce qui arrive, à ne pas écouter la petite voix intérieure qui vous prévient du danger ou des opportunités à saisir. Ce déficit vous oblige à compenser le manque d’intuition par une réflexion accrue, par l’acquisition de connaissances et d’expériences physiques ou émotionnelles auxquelles vous référer pour savoir comment réagir."
+            synthesis:
+                physical: "physique"
+                emotional: "émotionnel"
+                brain: "cérébral"
+                intuitive: "intuitif"
+                public: "
+                     {0}Votre comportement <strong>apparent</strong> tel que le révèle votre identité est équilibré entre les aspects physique, émotif, cérébral et intuitif.
+                     |{1}Le moteur de votre comportement <strong>apparent</strong> est d’abord <strong>%1%</strong>.
+                     |[2,Inf[Le moteur de votre comportement <strong>apparent</strong> est d’abord <strong>%1%</strong>. Il s’appuie ensuite sur le versant <strong>%2%</strong> de votre personnalité."
+                private: "
+                    {0}Votre comportement <strong>réel</strong> tel que le révèle votre identité est équilibré entre les aspects physique, émotif, cérébral et intuitif.
+                    |{1}Le moteur de votre comportement <strong>réel</strong> est d’abord <strong>%1%</strong>.
+                    |[2,Inf[Le moteur de votre comportement <strong>réel</strong> est d’abord <strong>%1%</strong>. Il s’appuie ensuite sur le versant <strong>%2%</strong> de votre personnalité."

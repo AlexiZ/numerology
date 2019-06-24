@@ -5,6 +5,44 @@
 <div class="row">
     <div class="col-lg-{% if compact|default %}12{% else %}6{% endif %}">
         <div class="card shadow mb-4">
+            <div class="card-body text-center">
+                {% if lettersDifferences.public|default %}
+                    {% if lettersDifferences.public|length == 1 %}
+                        <p>
+                            {{ 'analysis.show.letters.synthesis.public'|transchoice(lettersDifferences.public|length, {'%1%': ('analysis.show.letters.synthesis.'~lettersDifferences.public|keys.0)|trans})|raw }}
+                        </p>
+                    {% elseif lettersDifferences.public|length > 1 %}
+                        <p>
+                            {{ 'analysis.show.letters.synthesis.public'|transchoice(lettersDifferences.public|length, {'%1%': ('analysis.show.letters.synthesis.'~lettersDifferences.public|keys.0)|trans, '%2%': ('analysis.show.letters.synthesis.'~lettersDifferences.public|keys.1)|trans})|raw }}
+                        </p>
+                    {% endif %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-{% if compact|default %}12{% else %}6{% endif %}">
+        <div class="card shadow mb-4">
+            <div class="card-body text-center">
+                {% if lettersDifferences.private|default %}
+                    {% if lettersDifferences.private|length == 1 %}
+                        <p>
+                            {{ 'analysis.show.letters.synthesis.private'|transchoice(lettersDifferences.private|length, {'%1%': ('analysis.show.letters.synthesis.'~lettersDifferences.private|keys.0)|trans})|raw }}
+                        </p>
+                    {% elseif lettersDifferences.private|length > 1 %}
+                        <p>
+                            {{ 'analysis.show.letters.synthesis.private'|transchoice(lettersDifferences.private|length, {'%1%': ('analysis.show.letters.synthesis.'~lettersDifferences.private|keys.0)|trans, '%2%': ('analysis.show.letters.synthesis.'~lettersDifferences.private|keys.1)|trans})|raw }}
+                        </p>
+                    {% endif %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-{% if compact|default %}12{% else %}6{% endif %}">
+        <div class="card shadow mb-4">
             <a href="#collapseName" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseName">
                 <h6 class="m-0 font-weight-bold text-primary">
                     Votre personnalité apparente : nom et prénom d'usage
@@ -13,7 +51,7 @@
 
             <div class="collapse{% if not compact|default %} show{% endif %}" id="collapseName">
                 <div class="card-body">
-                    <p>C’est l’identité que les autres connaissent et dont ils ressentent la vibration, qui n’est pas forcément identique à celle donnée par votre identité complète.</p>
+                    <p>La personnalité apparente est celle que les autres connaissent et dont ils ressentent la vibration, qui n’est pas forcément identique à celle donnée par votre identité complète.</p>
 
                     <div class="chart-pie pt-4 pb-2">
                         <canvas class="automaticBarChart"
