@@ -7,18 +7,28 @@
         <div class="card shadow mb-4">
             <a href="#collapseName" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseName">
                 <h6 class="m-0 font-weight-bold text-primary">
-                    Nom et prénom d'usage
+                    Votre personnalité apparente : nom et prénom d'usage
                 </h6>
             </a>
 
             <div class="collapse{% if not compact|default %} show{% endif %}" id="collapseName">
                 <div class="card-body">
+                    <p>C’est l’identité que les autres connaissent et dont ils ressentent la vibration, qui n’est pas forcément identique à celle donnée par votre identité complète.</p>
+
                     <div class="chart-pie pt-4 pb-2">
                         <canvas class="automaticBarChart"
                                 data-labels="Physique,Émotive,Cérébrale,Intuitive"
                                 data-values="{{ lettersChartValues.public|join(',') }}">
                         </canvas>
                     </div>
+
+                    {% if lettersDifferences.public|default %}
+                        <ul>
+                            {% for public in lettersDifferences.public %}
+                                <li>{{ public|raw }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -28,96 +38,87 @@
         <div class="card shadow mb-4">
             <a href="#collapseAllNames" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseAllNames">
                 <h6 class="m-0 font-weight-bold text-primary">
-                    Tous les noms et prénoms
+                    Votre personnalité réelle : tous les noms et prénoms
                 </h6>
             </a>
 
             <div class="collapse{% if not compact|default %} show{% endif %}" id="collapseAllNames">
                 <div class="card-body">
+                    <p>C’est en intégrant votre identité complète que l’on peut connaître les véritables moteurs de votre comportement.</p>
                     <div class="chart-pie pt-4 pb-2">
                         <canvas class="automaticBarChart"
                                 data-labels="Physique,Émotive,Cérébrale,Intuitive"
                                 data-values="{{ lettersChartValues.private|join(',') }}">
                         </canvas>
                     </div>
+
+                    {% if lettersDifferences.private|default %}
+                        <ul>
+                            {% for public in lettersDifferences.private %}
+                                <li>{{ public|raw }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
                 </div>
             </div>
         </div>
     </div>
+</div>
 
-    {% if details is not defined or (details|default and 'left' == details) %}
-        <div class="col-lg-{% if compact|default %}6{% else %}3{% endif %}">
-            <div class="card shadow mb-4">
-                <a href="#collapsePhysical" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapsePhysical">
-                    <h6 class="m-0 font-weight-bold text-primary">
-                        Lettres physiques
-                    </h6>
-                </a>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card shadow mb-4">
+            <a href="#collapsePhysical" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapsePhysical">
+                <h6 class="m-0 font-weight-bold text-primary">
+                    Lettres physiques, émotives, cérébrales et intuitives : définitions
+                </h6>
+            </a>
 
-                <div class="collapse{% if not compact|default %} show{% endif %}" id="collapsePhysical">
-                    <div class="card-body">
-                        <p>
-                            {{ getDefinition('physical')|raw }}
-                        </p>
+            <div class="collapse{% if not compact|default %} show{% endif %}" id="collapsePhysical">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <a href="#" class="list-group-item-action flex-column align-items-start disabled-btn">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h5 class="mb-1">Lettres physiques</h5>
+                                </div>
+
+                                <p class="mb-1">{{ getDefinition('physical')|raw }}</p>
+                            </a>
+                        </div>
+
+                        <div class="col-md-3">
+                            <a href="#" class="list-group-item-action flex-column align-items-start disabled-btn">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h5 class="mb-1">Lettres émotives</h5>
+                                </div>
+
+                                <p class="mb-1">{{ getDefinition('emotional')|raw }}</p>
+                            </a>
+                        </div>
+
+                        <div class="col-md-3">
+                            <a href="#" class="list-group-item-action flex-column align-items-start disabled-btn">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h5 class="mb-1">Lettres cérébrales</h5>
+                                </div>
+
+                                <p class="mb-1">{{ getDefinition('brain')|raw }}</p>
+                            </a>
+                        </div>
+
+                        <div class="col-md-3">
+                            <a href="#" class="list-group-item-action flex-column align-items-start disabled-btn">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h5 class="mb-1">Lettres intuitives</h5>
+                                </div>
+
+                                <p class="mb-1">{{ getDefinition('intuitive')|raw }}</p>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-
-        <div class="col-lg-{% if compact|default %}6{% else %}3{% endif %}">
-            <div class="card shadow mb-4">
-                <a href="#collapseEmotional" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseEmotional">
-                    <h6 class="m-0 font-weight-bold text-primary">
-                        Lettres émotives
-                    </h6>
-                </a>
-
-                <div class="collapse{% if not compact|default %} show{% endif %}" id="collapseEmotional">
-                    <div class="card-body">
-                        <p>
-                            {{ getDefinition('emotional')|raw }}
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    {% endif %}
-
-    {% if details is not defined or (details|default and 'right' == details) %}
-        <div class="col-lg-{% if compact|default %}6{% else %}3{% endif %}">
-            <div class="card shadow mb-4">
-                <a href="#collapseBrain" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseBrain">
-                    <h6 class="m-0 font-weight-bold text-primary">
-                        Lettres cérébrales
-                    </h6>
-                </a>
-
-                <div class="collapse{% if not compact|default %} show{% endif %}" id="collapseBrain">
-                    <div class="card-body">
-                        <p>
-                            {{ getDefinition('brain')|raw }}
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-lg-{% if compact|default %}6{% else %}3{% endif %}">
-            <div class="card shadow mb-4">
-                <a href="#collapseFeel" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseFeel">
-                    <h6 class="m-0 font-weight-bold text-primary">
-                        Lettres intuitives
-                    </h6>
-                </a>
-
-                <div class="collapse{% if not compact|default %} show{% endif %}" id="collapseFeel">
-                    <div class="card-body">
-                        <p>
-                            {{ getDefinition('intuitive')|raw }}
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    {% endif %}
+    </div>
 </div>

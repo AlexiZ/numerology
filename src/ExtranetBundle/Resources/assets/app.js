@@ -264,10 +264,11 @@ $(document).ready(() => {
                                 beginAtZero: true,
                                 suggestedMin: -15,
                                 suggestedMax: 15,
+                                minRotation : 90,
                             },
                             scaleLabel: {
                                 display: true,
-                                labelString: 'Moyenne'
+                                labelString: 'Moyenne',
                             }
                         }]
                     },

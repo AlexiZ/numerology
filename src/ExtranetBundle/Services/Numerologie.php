@@ -10,6 +10,8 @@ use Symfony\Component\Translation\TranslatorInterface;
 
 class Numerologie
 {
+    const LETTERS_LIMIT_VALUE = 8;
+
     private static $vowels = [
         'A' => 1,
         'E' => 5,
@@ -72,6 +74,13 @@ class Numerologie
      * @var TranslatorInterface
      */
     private $translator;
+
+    private static $averageLettersValues = [
+        'physical' => 25,
+        'emotional' => 30,
+        'brain' => 27,
+        'intuitive' => 13
+    ];
 
     public function __construct(Geocoding $geocoding, ManagerRegistry $registry, TranslatorInterface $translator)
     {
@@ -451,12 +460,6 @@ class Numerologie
                 'intuitive' => (int) round($this->count('intuitive', $subject->getFullNames()) / strlen($subject->getFullNames()) * 100, 0),
             ],
         ];
-        $average = [
-            'physical' => 25,
-            'emotional' => 30,
-            'brain' => 27,
-            'intuitive' => 13
-        ];
 
         $return = [];
         foreach ($values as $type => $data) {
@@ -465,10 +468,30 @@ class Numerologie
                     $return[$type] = [];
                 }
 
-                $return[$type][] = $value - $average[$name];
+                $return[$type][] = $value - self::$averageLettersValues[$name];
             }
         }
 
-        return array_merge($return, $average);
+        return array_merge($return);
+    }
+
+    public function getLettersDifferences(Analysis $subject)
+    {
+        $differences = [];
+
+        foreach (['public', 'private'] as $property) {
+            $lettersChartValues = $this->getLettersChartValues($subject);
+
+            foreach ([0 => 'physical', 1 => 'emotional', 2 => 'brain', 3 => 'intuitive'] as $index => $type) {
+                if ($lettersChartValues[$property][$index] >= self::LETTERS_LIMIT_VALUE) {
+                    $differences[$property][] = $this->translator->trans('analysis.show.letters.' . $type . '.excess');
+                }
+                else if ($lettersChartValues[$property][$index] <= -self::LETTERS_LIMIT_VALUE) {
+                    $differences[$property][] = $this->translator->trans('analysis.show.letters.' . $type . '.lack');
+                }
+            }
+        }
+
+        return $differences;
     }
 }

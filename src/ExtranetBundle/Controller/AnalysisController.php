@@ -119,6 +119,7 @@ class AnalysisController extends Controller
             self::SUBJECT => $subject,
             'identity' => $numerologieService->getIdentityDetails($subject),
             'lettersChartValues' => $numerologieService->getLettersChartValues($subject),
+            'lettersDifferences' => $numerologieService->getLettersDifferences($subject),
         ]);
     }
 
