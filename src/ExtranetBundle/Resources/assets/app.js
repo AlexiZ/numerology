@@ -250,7 +250,7 @@ $(document).ready(() => {
                                 let label = data.labels[tooltipItem.index] || '',
                                     value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index] || '';
 
-                                return label + ' : ' + value + '%';
+                                return label + ' : ' + (value > 0 ? '+' : '') + value + '%';
                             },
                         },
                     },
@@ -261,7 +261,9 @@ $(document).ready(() => {
                         yAxes: [{
                             id: 'y-axis-0',
                             ticks: {
-                                beginAtZero: true
+                                beginAtZero: true,
+                                suggestedMin: -15,
+                                suggestedMax: 15,
                             },
                             scaleLabel: {
                                 display: true,
@@ -277,7 +279,7 @@ $(document).ready(() => {
                             value: '8',
                             borderColor: 'red',
                             borderWidth: 2,
-                            borderDash: [2, 2],
+                            borderDash: [2, 5],
                             label: {
                                 backgroundColor: 'rgba(1,1,1,0)',
                                 fontFamily: "sans-serif",
@@ -297,7 +299,7 @@ $(document).ready(() => {
                             value: '-8',
                             borderColor: 'red',
                             borderWidth: 2,
-                            borderDash: [2, 2],
+                            borderDash: [2, 5],
                             label: {
                                 backgroundColor: 'rgba(1,1,1,0)',
                                 fontFamily: "sans-serif",
