@@ -483,15 +483,29 @@ class Numerologie
             $lettersChartValues = $this->getLettersChartValues($subject);
 
             foreach ([0 => 'physical', 1 => 'emotional', 2 => 'brain', 3 => 'intuitive'] as $index => $type) {
-                if ($lettersChartValues[$property][$index] >= self::LETTERS_LIMIT_VALUE) {
-                    $differences[$property][$type] = $this->translator->trans('analysis.show.letters.' . $type . '.excess');
-                }
-                else if ($lettersChartValues[$property][$index] <= -self::LETTERS_LIMIT_VALUE) {
-                    $differences[$property][$type] = $this->translator->trans('analysis.show.letters.' . $type . '.lack');
+                if (abs($lettersChartValues[$property][$index]) >= self::LETTERS_LIMIT_VALUE) {
+                    $t = $lettersChartValues[$property][$index] > 0 ? self::LETTERS_LIMIT_VALUE : (- self::LETTERS_LIMIT_VALUE);
+                    $differences[$property][$type] = $lettersChartValues[$property][$index] - $t;
                 }
             }
         }
 
         return $differences;
+    }
+
+    public function getLettersSynthesis(Analysis $subject)
+    {
+        $input = $this->getLettersDifferences($subject);
+        $output = [];
+
+        foreach ($input as $property => $data) {
+            $output[$property] = array_flip(array_filter($data, function ($a) {
+                return $a >= 0;
+            }));
+            krsort($output[$property]);
+            $output[$property] = array_values($output[$property]);
+        }
+
+        return $output;
     }
 }

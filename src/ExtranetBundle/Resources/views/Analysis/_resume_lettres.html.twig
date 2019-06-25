@@ -6,16 +6,18 @@
     <div class="col-lg-{% if compact|default %}12{% else %}6{% endif %}">
         <div class="card shadow mb-4">
             <div class="card-body text-center">
-                {% if lettersDifferences.public|default %}
-                    {% if lettersDifferences.public|length == 1 %}
-                        <p>
-                            {{ 'analysis.show.letters.synthesis.public'|transchoice(lettersDifferences.public|length, {'%1%': ('analysis.show.letters.synthesis.'~lettersDifferences.public|keys.0)|trans})|raw }}
-                        </p>
-                    {% elseif lettersDifferences.public|length > 1 %}
-                        <p>
-                            {{ 'analysis.show.letters.synthesis.public'|transchoice(lettersDifferences.public|length, {'%1%': ('analysis.show.letters.synthesis.'~lettersDifferences.public|keys.0)|trans, '%2%': ('analysis.show.letters.synthesis.'~lettersDifferences.public|keys.1)|trans})|raw }}
-                        </p>
-                    {% endif %}
+                {% if lettersSynthesis.public|default and lettersSynthesis.public|length == 1 %}
+                    <p>
+                        {{ 'analysis.show.letters.synthesis.public'|transchoice(lettersSynthesis.public|length, {'%1%': ('analysis.show.letters.synthesis.'~lettersSynthesis.public.0)|trans})|raw }}
+                    </p>
+                {% elseif lettersSynthesis.public|default and lettersSynthesis.public|length > 1 %}
+                    <p>
+                        {{ 'analysis.show.letters.synthesis.public'|transchoice(lettersSynthesis.public|length, {'%1%': ('analysis.show.letters.synthesis.'~lettersSynthesis.public.0)|trans, '%2%': ('analysis.show.letters.synthesis.'~lettersSynthesis.public.1)|trans})|raw }}
+                    </p>
+                {% else %}
+                    <p>
+                        {{ 'analysis.show.letters.synthesis.public'|transchoice(0)|raw }}
+                    </p>
                 {% endif %}
             </div>
         </div>
@@ -24,16 +26,18 @@
     <div class="col-lg-{% if compact|default %}12{% else %}6{% endif %}">
         <div class="card shadow mb-4">
             <div class="card-body text-center">
-                {% if lettersDifferences.private|default %}
-                    {% if lettersDifferences.private|length == 1 %}
-                        <p>
-                            {{ 'analysis.show.letters.synthesis.private'|transchoice(lettersDifferences.private|length, {'%1%': ('analysis.show.letters.synthesis.'~lettersDifferences.private|keys.0)|trans})|raw }}
-                        </p>
-                    {% elseif lettersDifferences.private|length > 1 %}
-                        <p>
-                            {{ 'analysis.show.letters.synthesis.private'|transchoice(lettersDifferences.private|length, {'%1%': ('analysis.show.letters.synthesis.'~lettersDifferences.private|keys.0)|trans, '%2%': ('analysis.show.letters.synthesis.'~lettersDifferences.private|keys.1)|trans})|raw }}
-                        </p>
-                    {% endif %}
+                {% if lettersSynthesis.private|default and lettersSynthesis.private|length == 1 %}
+                    <p>
+                        {{ 'analysis.show.letters.synthesis.private'|transchoice(lettersSynthesis.private|length, {'%1%': ('analysis.show.letters.synthesis.'~lettersSynthesis.private.0)|trans})|raw }}
+                    </p>
+                {% elseif lettersSynthesis.private|default and lettersSynthesis.private|length > 1 %}
+                    <p>
+                        {{ 'analysis.show.letters.synthesis.private'|transchoice(lettersSynthesis.private|length, {'%1%': ('analysis.show.letters.synthesis.'~lettersSynthesis.private.0)|trans, '%2%': ('analysis.show.letters.synthesis.'~lettersSynthesis.private.1)|trans})|raw }}
+                    </p>
+                {% else %}
+                    <p>
+                        {{ 'analysis.show.letters.synthesis.private'|transchoice(0)|raw }}
+                    </p>
                 {% endif %}
             </div>
         </div>
@@ -64,8 +68,8 @@
                     <br>
                     {% if lettersDifferences.public|default %}
                         <ul>
-                            {% for public in lettersDifferences.public %}
-                                <li>{{ public|raw }}</li>
+                            {% for public, value in lettersDifferences.public %}
+                                <li>{{ ('analysis.show.letters.'~public~'.'~(value >= 0 ? 'excess' : 'lack'))|trans|raw }}</li>
                             {% endfor %}
                         </ul>
                     {% endif %}
@@ -96,8 +100,8 @@
                     <br>
                     {% if lettersDifferences.private|default %}
                         <ul>
-                            {% for public in lettersDifferences.private %}
-                                <li>{{ public|raw }}</li>
+                            {% for private, value in lettersDifferences.private %}
+                                <li>{{ ('analysis.show.letters.'~private~'.'~(value >= 0 ? 'excess' : 'lack'))|trans|raw }}</li>
                             {% endfor %}
                         </ul>
                     {% endif %}

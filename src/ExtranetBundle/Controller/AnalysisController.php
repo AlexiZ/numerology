@@ -120,6 +120,7 @@ class AnalysisController extends Controller
             'identity' => $numerologieService->getIdentityDetails($subject),
             'lettersChartValues' => $numerologieService->getLettersChartValues($subject),
             'lettersDifferences' => $numerologieService->getLettersDifferences($subject),
+            'lettersSynthesis' => $numerologieService->getLettersSynthesis($subject),
         ]);
     }
 
