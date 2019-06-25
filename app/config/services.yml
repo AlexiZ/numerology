@@ -73,10 +73,3 @@ services:
     ExtranetBundle\Services\Geocoding:
         arguments:
             $apiKey: "%osm.geocoding_api%"
-
-    SiteBundle\Twig\ImageExtension:
-        arguments:
-            - "@router"
-            - "%kernel.project_dir%/web"
-        tags:
-            - { name: 'twig.extension' }

@@ -1,6 +1,5 @@
 web/bundles/
 web/compiled/
-web/image/
 vendor
 .idea
 var/cache/*
