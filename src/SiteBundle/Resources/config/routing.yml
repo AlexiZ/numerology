@@ -47,3 +47,19 @@ site_payment_roll_back:
 site_payment:
     path:     /paiement/{hash}
     defaults: { _controller: SiteBundle:Payment:payment }
+
+
+## UTILS ##
+
+site_media_preview:
+    path: /image/{width}x{height}/{mode}{path}
+    defaults: { _controller: SiteBundle:Media:resize, 'mode': 'i' }
+    methods: [GET]
+    requirements:
+        width: \d+
+        height: \d+
+        mode: i|o # i => inset | o => outbound
+        path: ".+"
+    options:
+        expose: true
+        dynamic: false

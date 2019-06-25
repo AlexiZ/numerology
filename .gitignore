@@ -1,12 +1,13 @@
 web/bundles/
 web/compiled/
+web/image/
 vendor
-app/config/parameters.yml
 .idea
 var/cache/*
 var/logs/*
 var/sessions/*
 app/logs/*
+app/Resources/database/*
 parameters.yml
 node_modules/
 .env
