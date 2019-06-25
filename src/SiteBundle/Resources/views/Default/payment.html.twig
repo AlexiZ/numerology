@@ -21,21 +21,54 @@
                                     </p>
                                 </div>
 
-                                <div class="col-lg-12 text-center">
-                                    <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-                                        <input type="hidden" name="cmd" value="_s-xclick">
-                                        <input type="hidden" name="hosted_button_id" value="{{ pp_hosted_btn_id }}">
-                                        <input type="image" src="{{ asset('bundles/site/img/payment-button-condensed.png') }}" name="submit" alt="PayPal, le réflexe sécurité pour payer en ligne" class="paymentButton">
-                                        <img alt="" src="https://www.paypalobjects.com/fr_FR/i/scr/pixel.gif" width="1" height="1">
-                                    </form>
+                                <div class="col-lg-12">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Produit</th>
+                                                <th scope="col">Prix HT</th>
+                                                <th scope="col">Taux TVA</th>
+                                                <th scope="col">Prix TTC</th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row">1</th>
+                                                <td>Étude numérologique complète<br>"<em>{{ subject }}</em>"</td>
+                                                <td>9€38</td>
+                                                <td>5,5</td>
+                                                <td>9€90</td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="5">
+                                                    <em>Transaction sécurisée par notre partenaire de paiement Paypal</em>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div class="col-lg-12 row">
+                                    <div class="col-lg-8">
+                                        <img height="50px" src="{{ asset('bundles/site/img/payment-rassurance.png') }}" alt="">
+                                    </div>
+                                    <div class="col-lg-4 text-right">
+                                        <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+                                            <input type="hidden" name="cmd" value="_s-xclick">
+                                            <input type="hidden" name="hosted_button_id" value="{{ pp_hosted_btn_id }}">
+                                            <input type="image" src="{{ asset('bundles/site/img/payment-simplest.png') }}" name="submit" alt="PayPal, le réflexe sécurité pour payer en ligne" class="paymentButton">
+                                            <img alt="" src="https://www.paypalobjects.com/fr_FR/i/scr/pixel.gif" width="1" height="1">
+                                        </form>
+                                    </div>
                                 </div>
 
                                 <div class="col-lg-12 text-center">
                                     <hr>
-                                    <p>
-                                        <em>Si vous préférez accéder directement à votre étude numérologique gratuite mais incomplète, cliquez sur le bouton ci-dessous.</em>
-                                    </p>
-                                    <a href="{{ path('site_payment_roll_back') }}" class="btn btn-info">Votre étude gratuite incomplète</a>
+                                    <a href="{{ path('site_payment_roll_back') }}" class="btn btn-link">
+                                        <small><em>Ou accédez directement à votre étude numérologique gratuite incomplète.</em></small>
+                                    </a>
                                 </div>
                             </div>
                         </div>
