@@ -372,6 +372,15 @@ hr.underline-divider {
   }
 }
 
-#try.page-section {
+.page-section {
   padding: 5rem 0;
+}
+
+#try.page-section {
+  padding-bottom: 3rem;
+}
+
+section.buffer {
+  margin: 0;
+  padding: 2rem;
 }
