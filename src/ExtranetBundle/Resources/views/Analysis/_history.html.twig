@@ -23,7 +23,7 @@
                     <a href="{{ url('extranet_edit', {'hash': subject.hash}) }}" title="Modifier" class="btn btn-primary btn-circle btn-sm">
                         <i class="fas fa-pen"></i>
                     </a>
-                    <a href="{{ path('extranet_export_pdf', {'hash': subject.hash}) }}" title="Télécharger pour imprimer" class="btn btn-info btn-circle btn-sm">
+                    <a href="{{ path('site_export_pdf', {'hash': subject.hash}) }}" title="Télécharger pour imprimer" class="btn btn-info btn-circle btn-sm">
                         <i class="fas fa-print"></i>
                     </a>
                     <a href="{{ url('extranet_delete', {'hash': subject.hash}) }}" title="Supprimer" class="btn btn-danger btn-circle btn-sm">
