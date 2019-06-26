@@ -16,10 +16,6 @@ extranet_delete:
     path: /supprimer/{hash}
     defaults: { _controller: ExtranetBundle:Analysis:supprimer }
 
-extranet_export_pdf:
-    path: /exporter/pdf/{hash}
-    defaults: { _controller: ExtranetBundle:Analysis:exportPdf }
-
 extranet_show:
     path: /afficher/{hash}
     defaults: { _controller: ExtranetBundle:Analysis:show }

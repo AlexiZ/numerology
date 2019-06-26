@@ -8,6 +8,7 @@ use ExtranetBundle\Entity\Definition;
 use ExtranetBundle\Entity\Number;
 use ExtranetBundle\Form\AnalysisType;
 use ExtranetBundle\Services\Numerologie;
+use Knp\Bundle\SnappyBundle\Snappy\Response\PdfResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -113,5 +114,37 @@ class AnalysisController extends Controller
         }
 
         return new JsonResponse($details);
+    }
+
+    public function exportPdfAction($hash, Request $request, ManagerRegistry $registry, Numerologie $numerologieService)
+    {
+        /** @var Analysis $subject */
+        $subject = $registry->getRepository(Analysis::class)->findOneByHash($hash);
+
+        if (!$subject || Analysis::STATUS_ACTIVE !== $subject->getStatus() || Analysis::LEVEL_PREMIUM !== $subject->getLevel()) {
+            return $this->redirectToRoute('site_show', ['hash' => $hash]);
+        }
+
+        $header = $this->renderView('@Site/PDF/header.html.twig', [
+            self::SUBJECT => $subject,
+            'path' => rtrim($request->server->get('DOCUMENT_ROOT'), "/"),
+        ]);
+        $html = $this->renderView('@Site/PDF/content.html.twig', [
+            self::SUBJECT => $subject,
+            'path' => rtrim($request->server->get('DOCUMENT_ROOT'), "/"),
+            'identity' => $numerologieService->getIdentityDetails($subject),
+            'lettersChartValues' => $numerologieService->getLettersChartValues($subject),
+            'lettersDifferences' => $numerologieService->getLettersDifferences($subject),
+            'lettersSynthesis' => $numerologieService->getLettersSynthesis($subject),
+        ]);
+        $footer = $this->renderView('@Site/PDF/footer.html.twig');
+
+        return new PdfResponse(
+            $this->get('knp_snappy.pdf')->getOutputFromHtml($html, [
+                'header-html' => $header,
+                'footer-html' => $footer,
+            ]),
+            $subject->getPublicName() . '.pdf'
+        );
     }
 }
