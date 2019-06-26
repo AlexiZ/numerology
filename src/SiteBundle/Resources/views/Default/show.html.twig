@@ -36,7 +36,7 @@
                             </div>
 
                             <div class="row">
-                                {% include '@Site/Default/_lettres.html.twig' with {'subject': subject} %}
+                                {% include '@Site/Default/_'~subject.level~'_lettres.html.twig' with {'subject': subject} %}
                             </div>
 
                             <div class="row">

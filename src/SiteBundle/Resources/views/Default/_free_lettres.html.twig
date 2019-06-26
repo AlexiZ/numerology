@@ -1,0 +1,120 @@
+<div class="col-md-12 mb-5">
+    <h5>Lettres</h5>
+    <hr class="divider my-4 underline-divider">
+
+    <div class="accordion mb-2 premium-only" id="accordionPublic">
+        <div class="card">
+            <div class="card-header" id="headingPublic">
+                <h6 class="mb-0">
+                    <a class="d-flex justify-content-between align-items-center" href="#" data-toggle="collapse" data-target="#collapsePublic" aria-expanded="true" aria-controls="collapsePublic">
+                        Votre personnalité apparente : nom et prénom d'usage
+                    </a>
+                </h6>
+            </div>
+
+            <div id="collapsePublic" class="collapse" aria-labelledby="headingPublic" data-parent="#accordionPublic">
+                <div class="card-body">
+                    <p>La personnalité apparente est celle que les autres connaissent et dont ils ressentent la vibration, qui n’est pas forcément identique à celle donnée par votre identité complète.</p>
+
+                    <div class="pt-4 pb-2">
+                        {% set progressBars = {
+                            physical: {
+                                value: ((subject.publicName|totalLettrePhysique|default(1) / subject.publicName|length)*100)|number_format(0),
+                                label: "Lettres physiques",
+                                bg: "success",
+                            },
+                            emotional: {
+                                value: ((subject.publicName|totalLettreEmotive|default(1) / subject.publicName|length)*100)|number_format(0),
+                                label: "Lettres émotives",
+                                bg: "info",
+                            },
+                            brain: {
+                                value: ((subject.publicName|totalLettreCerebrale|default(1) / subject.publicName|length)*100)|number_format(0),
+                                label: "Lettres cérébrales",
+                                bg: "warning",
+                            },
+                            intuitive: {
+                                value: ((subject.publicName|totalLettreIntuitive|default(1) / subject.publicName|length)*100)|number_format(0),
+                                label: "Lettres intuitives",
+                                bg: "danger",
+                            }
+                        } %}
+
+                        <div class="row progress mb-4">
+                            {% for key, data in progressBars %}
+                                <div class="progress-bar progress-bar-striped bg-{{ data.bg }} automatic-tippy" data-ltippy="{{ key }}" role="progressbar" style="width:{{ data.value }}%">{{ data.value }}%</div>
+                            {% endfor %}
+                        </div>
+
+                        <div class="row text-center">
+                            <div class="col-md-3"><p><span class="badge bg-success badge-pill">&nbsp;</span>&nbsp;Lettres physiques</p></div>
+                            <div class="col-md-3"><p><span class="badge bg-info badge-pill">&nbsp;</span>&nbsp;Lettres émotives</p></div>
+                            <div class="col-md-3"><p><span class="badge bg-warning badge-pill">&nbsp;</span>&nbsp;Lettres cérébrales</p></div>
+                            <div class="col-md-3"><p><span class="badge bg-danger badge-pill">&nbsp;</span>&nbsp;Lettres intuitives</p></div>
+                        </div>
+                    </div>
+
+                    <p>Cette information est disponible dans l'étude complète ou dans <a href="https://www.editions-bussiere.com/home/748-numerologie-essentielle-heritages-et-parcours-de-vie-9782850907227.html" class="btn-link">la Numérologie essentielle - Héritages et parcours de vie</a>.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="accordion mb-2 premium-only" id="accordionPrivate">
+        <div class="card">
+            <div class="card-header" id="headingPrivate">
+                <h6 class="mb-0">
+                    <a class="d-flex justify-content-between align-items-center" href="#" data-toggle="collapse" data-target="#collapsePrivate" aria-expanded="true" aria-controls="collapsePrivate">
+                        Votre personnalité réelle : tous les noms et prénoms
+                    </a>
+                </h6>
+            </div>
+
+            <div id="collapsePrivate" class="collapse" aria-labelledby="headingPrivate" data-parent="#accordionPrivate">
+                <div class="card-body">
+                    <p>C’est en intégrant votre identité complète que l’on peut connaître les véritables moteurs de votre comportement.</p>
+
+                    <div class="pt-4 pb-2">
+                        {% set progressBars = {
+                            physical: {
+                                value: ((subject.fullNames|totalLettrePhysique|default(1) / subject.fullNames|length)*100)|number_format(0),
+                                label: "Lettres physiques",
+                                bg: "success",
+                            },
+                            emotional: {
+                                value: ((subject.fullNames|totalLettreEmotive|default(1) / subject.fullNames|length)*100)|number_format(0),
+                                label: "Lettres émotives",
+                                bg: "info",
+                            },
+                            brain: {
+                                value: ((subject.fullNames|totalLettreCerebrale|default(1) / subject.fullNames|length)*100)|number_format(0),
+                                label: "Lettres cérébrales",
+                                bg: "warning",
+                            },
+                            intuitive: {
+                                value: ((subject.fullNames|totalLettreIntuitive|default(1) / subject.fullNames|length)*100)|number_format(0),
+                                label: "Lettres intuitives",
+                                bg: "danger",
+                            }
+                        } %}
+
+                        <div class="row progress mb-4">
+                            {% for key, data in progressBars %}
+                                <div class="progress-bar progress-bar-striped bg-{{ data.bg }} automatic-tippy" data-ltippy="{{ key }}" role="progressbar" style="width:{{ data.value }}%">{{ data.value }}%</div>
+                            {% endfor %}
+                        </div>
+
+                        <div class="row text-center">
+                            <div class="col-md-3"><p><span class="badge bg-success badge-pill">&nbsp;</span>&nbsp;Lettres physiques</p></div>
+                            <div class="col-md-3"><p><span class="badge bg-info badge-pill">&nbsp;</span>&nbsp;Lettres émotives</p></div>
+                            <div class="col-md-3"><p><span class="badge bg-warning badge-pill">&nbsp;</span>&nbsp;Lettres cérébrales</p></div>
+                            <div class="col-md-3"><p><span class="badge bg-danger badge-pill">&nbsp;</span>&nbsp;Lettres intuitives</p></div>
+                        </div>
+                    </div>
+
+                    <p>Cette information est disponible dans l'étude complète ou dans <a href="https://www.editions-bussiere.com/home/748-numerologie-essentielle-heritages-et-parcours-de-vie-9782850907227.html" class="btn-link">la Numérologie essentielle - Héritages et parcours de vie</a>.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

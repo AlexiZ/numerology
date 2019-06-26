@@ -4,6 +4,8 @@ import 'jquery-easing';
 import 'magnific-popup';
 import tippy from 'tippy.js';
 import './creative.js';
+import Chart from 'chart.js';
+import 'chartjs-plugin-annotation';
 
 import './main.scss';
 
@@ -124,6 +126,121 @@ $(document).ready(() => {
                 });
                 tippy(automaticTippy, options);
             }
+        });
+    }
+
+    // Bar Chart generation
+    let automaticBarCharts = document.querySelectorAll(".automaticBarChart"),
+        barCharts = [], // eslint-disable-line no-unused-vars
+        barChartsIndex = 0;
+    if (automaticBarCharts) {
+        automaticBarCharts.forEach((automaticBarChart) => {
+            let labels = automaticBarChart.dataset.labels.split(','),
+                rawData = automaticBarChart.dataset.values,
+                legends = 'legends' in automaticBarChart.dataset ? automaticBarChart.dataset.legends.split(',') : false,
+                datasetOptions = {
+                    borderWidth: '2',
+                    hoverBorderColor: "rgba(234, 236, 244, 1)",
+                },
+                datasets = [
+                    Object.assign(
+                        {
+                            data: rawData.split(','),
+                            backgroundColor: ['rgba(255, 105, 98, 0.5)', 'rgba(254, 254, 200, 0.5)', 'rgba(255, 203, 153, 0.5)', 'rgba(171, 225, 251, 0.5)'],
+                        },
+                        datasetOptions
+                    )];
+
+            barCharts[barChartsIndex] = new Chart(automaticBarChart, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: datasets,
+                },
+                options: {
+                    maintainAspectRatio: false,
+                    tooltips: {
+                        backgroundColor: "rgb(255,255,255)",
+                        bodyFontColor: "#858796",
+                        borderColor: '#dddfeb',
+                        borderWidth: 1,
+                        xPadding: 15,
+                        yPadding: 15,
+                        displayColors: false,
+                        caretPadding: 10,
+                        callbacks: {
+                            label: (tooltipItem, data) => {
+                                let label = data.labels[tooltipItem.index] || '',
+                                    value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index] || '';
+
+                                return label + ' : ' + (value > 0 ? '+' : '') + value + '%';
+                            },
+                        },
+                    },
+                    legend: {
+                        display: legends ? true : false,
+                    },
+                    scales: {
+                        yAxes: [{
+                            id: 'y-axis-0',
+                            ticks: {
+                                beginAtZero: true,
+                                suggestedMin: -15,
+                                suggestedMax: 15,
+                                minRotation : 90,
+                            },
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Moyenne',
+                            }
+                        }]
+                    },
+                    annotation: {
+                        annotations: [{
+                            type: 'line',
+                            mode: 'horizontal',
+                            scaleID: 'y-axis-0',
+                            value: '8',
+                            borderColor: 'red',
+                            borderWidth: 2,
+                            borderDash: [2, 5],
+                            label: {
+                                backgroundColor: 'rgba(1,1,1,0)',
+                                fontFamily: "sans-serif",
+                                fontSize: 10,
+                                fontStyle: "bold",
+                                fontColor: "#000",
+                                position: "right",
+                                xAdjust: 0,
+                                yAdjust: -10,
+                                enabled: true,
+                                content: "Excès"
+                            },
+                        }, {
+                            type: 'line',
+                            mode: 'horizontal',
+                            scaleID: 'y-axis-0',
+                            value: '-8',
+                            borderColor: 'red',
+                            borderWidth: 2,
+                            borderDash: [2, 5],
+                            label: {
+                                backgroundColor: 'rgba(1,1,1,0)',
+                                fontFamily: "sans-serif",
+                                fontSize: 10,
+                                fontStyle: "bold",
+                                fontColor: "#000",
+                                position: "right",
+                                xAdjust: 0,
+                                yAdjust: 10,
+                                enabled: true,
+                                content: "Manque"
+                            },
+                        }]
+                    }
+                },
+            });
+            barChartsIndex++;
         });
     }
 });
