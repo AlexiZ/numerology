@@ -8,13 +8,14 @@ use ExtranetBundle\Entity\Definition;
 use ExtranetBundle\Entity\Number;
 use ExtranetBundle\Form\AnalysisType;
 use ExtranetBundle\Services\Numerologie;
-use Knp\Bundle\SnappyBundle\Snappy\Response\PdfResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 class AnalysisController extends Controller
 {
+    const SUBJECT = 'subject';
+
     /**
      * @var Numerologie
      */
@@ -112,24 +113,5 @@ class AnalysisController extends Controller
         }
 
         return new JsonResponse($details);
-    }
-
-    public function exportPdfAction($hash)
-    {
-        /** @var Analysis $subject */
-        $subject = $this->registry->getRepository(Analysis::class)->findOneByHash($hash);
-
-        if (!$subject || Analysis::STATUS_ACTIVE !== $subject->getStatus() || Analysis::LEVEL_FREE === $subject->getLevel()) {
-            return $this->redirectToRoute('site_show', ['hash' => $hash]);
-        }
-
-        $html = $this->renderView('@Site/Default/export.pdf.twig', [
-            'subject' => $subject,
-        ]);
-
-        return new PdfResponse(
-            $this->get('knp_snappy.pdf')->getOutputFromHtml($html),
-            $subject->getPublicName() . '.pdf'
-        );
     }
 }

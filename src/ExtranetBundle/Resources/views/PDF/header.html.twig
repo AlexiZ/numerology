@@ -9,7 +9,6 @@
             .container {
                 margin: auto;
                 padding-bottom: 10px;
-                border-bottom: grey solid 1px;
             }
             .one {
                 width: 15%;
@@ -35,7 +34,7 @@
             </div>
 
             <div class="two">
-                <p>Numérologie {{ subject }}</p>
+                <p>Numérologie {{ subject }} - {{ "now"|date("d-m-Y") }}</p>
             </div>
         </header>
     </body>

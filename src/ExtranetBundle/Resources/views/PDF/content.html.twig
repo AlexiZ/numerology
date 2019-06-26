@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <title>Numérologie - {{ subject }}</title>
-    
+
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
         <style>
             .card-title {
@@ -154,6 +154,27 @@
             .bg-danger {
                 background-color: #dc3545 !important;
             }
+            .no-page-break {
+                page-break-inside: avoid;
+            }
+            .break-after {
+                page-break-after: always;
+            }
+            .logo {
+                margin: auto;
+                width: 40%;
+                padding: 10px;
+            }
+            .logo img {
+                width: 100%;
+            }
+            .centered {
+                padding-top: 150px;
+            }
+            .card h3 {
+                font-size: 1.6rem;
+                font-weight: 600;
+            }
             .text-center {
                 text-align: center;
             }
@@ -261,22 +282,33 @@
     </head>
 
     <body>
-        <div class="container">
+        <div class="container break-after centered">
+            <h1 class="card-title text-center mb-0">Numérologie Essentielle</h1>
+            <h2 class="card-subtitle text-center mb-0"><em>Héritages et parcours de vie</em></h2>
+
+            <div class="logo">
+                <img src="{{ path ~ asset('bundles/site/img/Logo-photoshop.png') }}" alt="Logo" />
+            </div>
+
+            <h4 class="card-title text-center mb-0">
+                {{ subject }}
+            </h4>
+            <h4 class="card-subtitle text-center mb-0">
+                {% if subject.pseudos is not empty and subject.pseudos.0|default %}
+                    {{ subject.pseudos|join(', ') }}<br>
+                {% endif %}
+                <small>{{ subject.birthDate|localizeddate('long', 'short', 'fr') }}, {{ subject.birthPlace }} ({{ subject.data.geolocation|coordsToText }})</small>
+            </h4>
+        </div>
+
+        <div class="container no-page-break">
             <div class="row">
                 <div class="col-12 mx-auto">
                     <div class="card card-signin flex-row my-5">
                         <div class="card-body">
-                            <h5 class="card-title text-center">
-                                {{ subject }}
-                                <br>{% if subject.pseudos is not empty and subject.pseudos.0|default %}
-                                {{ subject.pseudos|join(', ') }}<br>
-                                {% endif %}
-                                <small>{{ subject.birthDate|localizeddate('long', 'short', 'fr') }}, {{ subject.birthPlace }} ({{ subject.data.geolocation|coordsToText }})</small>
-                            </h5>
-
-                            <div class="row">
+                            <div class="row break-after">
                                 <div class="col-md-12 mb-5">
-                                    <h5>Identité</h5>
+                                    <h3 class="text-center">Identité</h3>
                                     <hr class="divider my-4 underline-divider">
 
                                     <ul class="list-group">
@@ -343,9 +375,9 @@
                                 </div>
                             </div>
 
-                            <div class="row">
+                            <div class="row break-after">
                                 <div class="col-md-12 mb-5">
-                                    <h5>Lettres</h5>
+                                    <h3 class="text-center">Lettres</h3>
                                     <hr class="divider my-4 underline-divider">
 
                                     <ul class="list-group">
@@ -464,9 +496,9 @@
                                 </div>
                             </div>
 
-                            <div class="row">
+                            <div class="row break-after">
                                 <div class="col-md-12 mb-5">
-                                    <h5>Vibrations</h5>
+                                    <h3 class="text-center">Vibrations</h3>
                                     <hr class="divider my-4 underline-divider">
 
                                     {% set fullNames = subject.fullNames|replace({' ': ''}) %}
@@ -571,7 +603,7 @@
 
                             <div class="row">
                                 <div class="col-md-12 mb-5">
-                                    <h5>Parcours de vie</h5>
+                                    <h3 class="text-center">Parcours de vie</h3>
                                     <hr class="divider my-4 underline-divider">
 
                                     <div class="row">

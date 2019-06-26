@@ -149,7 +149,7 @@ class AnalysisController extends Controller
         ]);
     }
 
-    public function exportPdfAction($hash, Request $request, ManagerRegistry $registry)
+    public function exportPdfAction($hash, Request $request, ManagerRegistry $registry, Numerologie $numerologieService)
     {
         /** @var Analysis $subject */
         $subject = $registry->getRepository(Analysis::class)->findOneByHash($hash);
@@ -158,15 +158,19 @@ class AnalysisController extends Controller
             return $this->redirectToRoute(self::ROUTE_SHOW, ['hash' => $hash]);
         }
 
-        $header = $this->renderView('@Site/PDF/header.html.twig', [
+        $header = $this->renderView('@Extranet/PDF/header.html.twig', [
             self::SUBJECT => $subject,
             'path' => rtrim($request->server->get('DOCUMENT_ROOT'), "/"),
         ]);
-        $html = $this->renderView('@Site/PDF/content.html.twig', [
+        $html = $this->renderView('@Extranet/PDF/content.html.twig', [
             self::SUBJECT => $subject,
             'path' => rtrim($request->server->get('DOCUMENT_ROOT'), "/"),
+            'identity' => $numerologieService->getIdentityDetails($subject),
+            'lettersChartValues' => $numerologieService->getLettersChartValues($subject),
+            'lettersDifferences' => $numerologieService->getLettersDifferences($subject),
+            'lettersSynthesis' => $numerologieService->getLettersSynthesis($subject),
         ]);
-        $footer = $this->renderView('@Site/PDF/footer.html.twig');
+        $footer = $this->renderView('@Extranet/PDF/footer.html.twig');
 
         return new PdfResponse(
             $this->get('knp_snappy.pdf')->getOutputFromHtml($html, [
