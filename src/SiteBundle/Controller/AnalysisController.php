@@ -63,7 +63,7 @@ class AnalysisController extends Controller
         ]);
     }
 
-    public function showAction($hash)
+    public function showAction($hash, Numerologie $numerologieService)
     {
         /** @var Analysis $subject */
         $subject = $this->registry->getRepository(Analysis::class)->findOneByHash($hash);
@@ -74,6 +74,10 @@ class AnalysisController extends Controller
 
         return $this->render('@Site/Default/show.html.twig', [
             'subject' => $subject,
+            'identity' => $numerologieService->getIdentityDetails($subject),
+            'lettersChartValues' => $numerologieService->getLettersChartValues($subject),
+            'lettersDifferences' => $numerologieService->getLettersDifferences($subject),
+            'lettersSynthesis' => $numerologieService->getLettersSynthesis($subject),
         ]);
     }
 

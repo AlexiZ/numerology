@@ -4,121 +4,148 @@
 
     {% set fullNames = subject.fullNames|replace({' ': ''}) %}
 
-    <div class="accordion mb-2" id="accordionLength">
+    <div class="accordion mb-2" id="accordionVibrationsSynthesis">
         <div class="card">
-            <div class="card-header" id="headingLength">
+            <div class="card-header" id="headingVibrationsSynthesis">
                 <h6 class="mb-0">
-                    <a class="d-flex justify-content-between align-items-center" href="#" data-toggle="collapse" data-target="#collapseLength" aria-expanded="true" aria-controls="collapseLength">
-                        Nombre total de lettres
-                        <span class="badge badge-primary badge-pill">{{ fullNames|length }}</span>
+                    <a class="d-flex justify-content-between align-items-center" href="#" data-toggle="collapse" data-target="#collapseVibrationsSynthesis" aria-expanded="true" aria-controls="collapseVibrationsSynthesis">
+                        Synthèse de vos vibrations de soutien
                     </a>
                 </h6>
             </div>
 
-            <div id="collapseLength" class="collapse" aria-labelledby="headingLength" data-parent="#accordionLength">
+            <div id="collapseVibrationsSynthesis" class="collapse" aria-labelledby="headingVibrationsSynthesis" data-parent="#accordionVibrationsSynthesis">
                 <div class="card-body">
-                    <p><small><em>{{ getDefinition('total')|raw }}</em></small></p>
-                    <p>XXX</p>
+                    <p>
+                        <strong>Les nombres les plus fréquents (nombres forts) ont une influence importante sur la personnalité et le comportement de l’individu, tandis que ceux qui sont manquants ne soutiennent pas la vibration des noms et prénoms.</strong>
+                    </p>
+
+                    <ul>
+                        {% if identity['strong']|default|length > 0 %}
+                            <li>{{ 'analysis.show.vibrations.identity.strong'|transchoice(identity['strong']|length, {'%1%': identity['strong']|natJoin(', '), '%2%' : identity['strong']|keys|natJoin(', ')})|raw }}</li>
+                        {% endif %}
+
+                        {% if identity['missingIn']|default|length > 0 or identity['missingOut']|default|length > 0 %}
+                            <li>Nombres manquants :
+                                <ul>
+                                    {% if identity['missingIn']|default|length > 0 %}
+                                        <li>{{ 'analysis.show.vibrations.identity.missingIn'|transchoice(identity['missingIn']|length, {'%1%': identity['missingIn']|keys|natJoin(', '), '%2%': identity['missingIn']|natJoin(', '), '%3%': identity['missingIn']|natJoin(', ')})|raw }}</li>
+                                    {% endif %}
+
+                                    {% if identity['missingOut']|default|length > 0 %}
+                                        <li>{{ 'analysis.show.vibrations.identity.missingOut'|transchoice(identity['missingOut']|length, {'%1%': identity['missingOut']|natJoin(', ')}) }}</li>
+                                    {% endif %}
+                                </ul>
+                            </li>
+                        {% endif %}
+
+                        {% if identity['weak']|default|length > 0 %}
+                            <li>{{ 'analysis.show.vibrations.identity.weak'|transchoice(identity['weak']|length, {'%1%': identity['weak']|keys|natJoin(', ')}) }}</li>
+                        {% endif %}
+                    </ul>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="accordion mb-2" id="accordionNombreMoyen">
-        <div class="card">
-            <div class="card-header" id="headingNombreMoyen">
-                <h6 class="mb-0">
-                    <a class="d-flex justify-content-between align-items-center" href="#" data-toggle="collapse" data-target="#collapseNombreMoyen" aria-expanded="true" aria-controls="collapseNombreMoyen">
-                        Nombre moyen de présence de chaque lettre
-                        <span class="badge badge-primary badge-pill">{{ fullNames|nombreMoyenLettres|number_format(1, '.', ' ') }}</span>
-                    </a>
-                </h6>
-            </div>
+    <div class="row">
+        <div class="col-md-6 accordion mb-2" id="accordionReminder">
+            <div class="card">
+                <div class="card-header" id="headingReminder">
+                    <h6 class="mb-0">
+                        <a class="d-flex justify-content-between align-items-center" href="#" data-toggle="collapse" data-target="#collapseReminder" aria-expanded="true" aria-controls="collapseReminder">
+                            Rappel des nombres de votre identité
+                        </a>
+                    </h6>
+                </div>
 
-            <div id="collapseNombreMoyen" class="collapse" aria-labelledby="headingNombreMoyen" data-parent="#accordionNombreMoyen">
-                <div class="card-body">
-                    <p><small><em>{{ getDefinition('meanLetter')|raw }}</em></small></p>
-                    <p>XXX</p>
+                <div id="collapseReminder" class="collapse" aria-labelledby="headingReminder">
+                    <div class="card-body text-center">
+                        <p>
+                            <a href="javascript:void(0);" class="btn btn-icon-split disabled-btn {% if subject.data.identity.globalNumber in fullNames|numerosLettresManquantes %}blue{% elseif subject.data.identity.globalNumber in fullNames|numerosLettresFaibles %}yellow{% elseif subject.data.identity.globalNumber in fullNames|numerosLettresMoyennes %}orange{% elseif subject.data.identity.globalNumber in fullNames|numerosLettresFortes %}red{% endif %}">
+                                <span class="icon">{{ subject.data.identity.globalNumber }}</span>
+                                <span class="text">Global</span>
+                            </a>
+                        </p>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p>
+                                    <a href="javascript:void(0);" class="btn btn-icon-split disabled-btn {% if subject.data.identity.inheritedNumber in fullNames|numerosLettresManquantes %}blue{% elseif subject.data.identity.inheritedNumber in fullNames|numerosLettresFaibles %}yellow{% elseif subject.data.identity.inheritedNumber in fullNames|numerosLettresMoyennes %}orange{% elseif subject.data.identity.inheritedNumber in fullNames|numerosLettresFortes %}red{% endif %}">
+                                        <span class="icon">{{ subject.data.identity.inheritedNumber }}</span>
+                                        <span class="text">Héréditaire</span>
+                                    </a>
+                                </p>
+                                <p>
+                                    <a href="javascript:void(0);" class="btn btn-icon-split disabled-btn {% if subject.data.identity.dutyNumber in fullNames|numerosLettresManquantes %}blue{% elseif subject.data.identity.dutyNumber in fullNames|numerosLettresFaibles %}yellow{% elseif subject.data.identity.dutyNumber in fullNames|numerosLettresMoyennes %}orange{% elseif subject.data.identity.dutyNumber in fullNames|numerosLettresFortes %}red{% endif %}">
+                                        <span class="icon">{{ subject.data.identity.dutyNumber }}</span>
+                                        <span class="text">Mission</span>
+                                    </a>
+                                </p>
+                            </div>
+
+                            <div class="col-md-6">
+                                <p>
+                                    <a href="javascript:void(0);" class="btn btn-icon-split disabled-btn {% if subject.data.identity.socialNumber in fullNames|numerosLettresManquantes %}blue{% elseif subject.data.identity.socialNumber in fullNames|numerosLettresFaibles %}yellow{% elseif subject.data.identity.socialNumber in fullNames|numerosLettresMoyennes %}orange{% elseif subject.data.identity.socialNumber in fullNames|numerosLettresFortes %}red{% endif %}">
+                                        <span class="icon">{{ subject.data.identity.socialNumber }}</span>
+                                        <span class="text">Social</span>
+                                    </a>
+                                </p>
+                                <p>
+                                    <a href="javascript:void(0);" class="btn btn-icon-split disabled-btn {% if subject.data.identity.structureNumber in fullNames|numerosLettresManquantes %}blue{% elseif subject.data.identity.structureNumber in fullNames|numerosLettresFaibles %}yellow{% elseif subject.data.identity.structureNumber in fullNames|numerosLettresMoyennes %}orange{% elseif subject.data.identity.structureNumber in fullNames|numerosLettresFortes %}red{% endif %}">
+                                        <span class="icon">{{ subject.data.identity.structureNumber }}</span>
+                                        <span class="text">Structure</span>
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="accordion mb-2" id="accordionMissing">
-        <div class="card">
-            <div class="card-header" id="headingMissing">
-                <h6 class="mb-0">
-                    <a class="d-flex justify-content-between align-items-center" href="#" data-toggle="collapse" data-target="#collapseMissing" aria-expanded="true" aria-controls="collapseMissing">
-                        Nombres manquants
-                        <span class="badge badge-primary badge-pill">{{ fullNames|numerosLettresManquantes|join(', ') }}</span>
-                    </a>
-                </h6>
-            </div>
-
-            <div id="collapseMissing" class="collapse" aria-labelledby="headingMissing" data-parent="#accordionMissing">
-                <div class="card-body">
-                    <p><small><em>{{ getDefinition('missing')|raw }}</em></small></p>
-                    <p>XXX</p>
+        <div class="col-md-6 accordion mb-2" id="accordionNumbers">
+            <div class="card">
+                <div class="card-header" id="headingNumbers">
+                    <h6 class="mb-0">
+                        <a class="d-flex justify-content-between align-items-center" href="#" data-toggle="collapse" data-target="#collapseNumbers" aria-expanded="true" aria-controls="collapseNumbers">
+                            Nombres forts, manquants et faibles
+                        </a>
+                    </h6>
                 </div>
-            </div>
-        </div>
-    </div>
 
-    <div class="accordion mb-2" id="accordionWeak">
-        <div class="card">
-            <div class="card-header" id="headingWeak">
-                <h6 class="mb-0">
-                    <a class="d-flex justify-content-between align-items-center" href="#" data-toggle="collapse" data-target="#collapseWeak" aria-expanded="true" aria-controls="collapseWeak">
-                        Nombres faibles
-                        <span class="badge badge-primary badge-pill">{{ fullNames|numerosLettresFaibles|join(', ') }}</span>
-                    </a>
-                </h6>
-            </div>
+                <div id="collapseNumbers" class="collapse" aria-labelledby="headingNumbers">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <table class="vibrationsTable mx-auto">
+                                    <tr>
+                                        {% for i in 1..9 %}
+                                        <td class="{% if i in fullNames|numerosLettresManquantes %}blue{% elseif i in fullNames|numerosLettresFaibles %}yellow{% elseif i in fullNames|numerosLettresMoyennes %}orange{% elseif i in fullNames|numerosLettresFortes %}red{% endif %}">{{ i }}</td>
+                                        {% if i % 3 == 0 and i < 9 %}
+                                    </tr>
 
-            <div id="collapseWeak" class="collapse" aria-labelledby="headingWeak" data-parent="#accordionWeak">
-                <div class="card-body">
-                    <p><small><em>{{ getDefinition('weak')|raw }}</em></small></p>
-                    <p>XXX</p>
-                </div>
-            </div>
-        </div>
-    </div>
+                                    <tr>
+                                        {% endif %}
+                                        {% endfor %}
+                                    </tr>
+                                </table>
+                            </div>
 
-    <div class="accordion mb-2" id="accordionStrong">
-        <div class="card">
-            <div class="card-header" id="headingStrong">
-                <h6 class="mb-0">
-                    <a class="d-flex justify-content-between align-items-center" href="#" data-toggle="collapse" data-target="#collapseStrong" aria-expanded="true" aria-controls="collapseStrong">
-                        Nombres forts
-                        <span class="badge badge-primary badge-pill">{{ fullNames|numerosLettresFortes|join(', ') }}</span>
-                    </a>
-                </h6>
-            </div>
-
-            <div id="collapseStrong" class="collapse" aria-labelledby="headingStrong" data-parent="#accordionStrong">
-                <div class="card-body">
-                    <p><small><em>{{ getDefinition('strong')|raw }}</em></small></p>
-                    <p>XXX</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="accordion mb-2" id="accordionAverage">
-        <div class="card">
-            <div class="card-header" id="headingAverage">
-                <h6 class="mb-0">
-                    <a class="d-flex justify-content-between align-items-center" href="#" data-toggle="collapse" data-target="#collapseAverage" aria-expanded="true" aria-controls="collapseAverage">
-                        Nombres moyens
-                        <span class="badge badge-primary badge-pill">{{ fullNames|numerosLettresMoyennes|join(', ') }}</span>
-                    </a>
-                </h6>
-            </div>
-
-            <div id="collapseAverage" class="collapse" aria-labelledby="headingAverage" data-parent="#accordionAverage">
-                <div class="card-body">
-                    <p><small><em>{{ getDefinition('mean')|raw }}</em></small></p>
-                    <p>XXX</p>
+                            <div class="col-md-12 vibrationsLegend">
+                                <p>
+                                    <span class="badge red badge-pill ">&nbsp;</span>
+                                    <small>Forts</small>
+                                    <span class="badge orange badge-pill ">&nbsp;</span>
+                                    <small>Moyens</small>
+                                    <span class="badge yellow badge-pill ">&nbsp;</span>
+                                    <small>Faibles</small>
+                                    <span class="badge blue badge-pill ">&nbsp;</span>
+                                    <small>Manquants</small>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

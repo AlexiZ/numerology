@@ -4,6 +4,11 @@
 @import "~tippy.js/themes/light-border.css";
 @import "pricing.css";
 
+$pastel-red: #ff6962;
+$pastel-orange: #ffcb99;
+$pastel-yellow: #fefec8;
+$pastel-blue: #abe1fb;
+
 .float {
   position: fixed;
   width: 60px;
@@ -41,6 +46,132 @@ strong.font-weight-bold {
 
 .paymentButton {
   width: 200px;
+}
+
+.disabled-btn {
+  cursor: default;
+}
+
+.vibrationsLegend {
+  padding: 0;
+
+  p {
+    font-weight: bolder;
+    font-size: 1.2em;
+    padding: 5px;
+    text-align: center;
+  }
+}
+
+.vibrationsTable {
+  width: 150px;
+  height: 150px;
+
+  tr:nth-child(1) {
+    td:nth-child(1) {
+      border-radius: 10px 0px 0px 0px;
+    }
+
+    td:nth-child(3) {
+      border-radius: 0px 10px 0px 0px;
+    }
+  }
+
+  tr:nth-child(3) {
+    td:nth-child(1) {
+      border-radius: 0px 0px 0px 10px;
+    }
+
+    td:nth-child(3) {
+      border-radius: 0px 0px 10px 0px;
+    }
+  }
+
+  td {
+    width: 40px;
+    height: 40px;
+    text-align: center;
+  }
+}
+
+.vibrationsTable td, .vibrationsLegend p, .vibrationsLegend span {
+  &.red {
+    background-color: $pastel-red;
+    color: white;
+  }
+  &.orange {
+    background-color: $pastel-orange;
+    color: white;
+  }
+  &.yellow {
+    background-color: $pastel-yellow;
+    color: #858796;
+  }
+  &.blue {
+    background-color: $pastel-blue;
+    color: #858796;
+  }
+}
+
+.btn-icon-split {
+  padding: 0;
+  overflow: hidden;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-align: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+
+  .icon {
+    display: inline-block;
+    padding: .375rem .75rem;
+  }
+
+  .text {
+    display: inline-block;
+    padding: .375rem .75rem;
+  }
+
+  &.red {
+    .icon {
+      background: rgba(0,0,0,.10);
+    }
+
+    background-color: $pastel-red;
+    color: white;
+    border-color: #858796;
+  }
+  &.orange {
+    .icon {
+      background: rgba(0,0,0,.10);
+    }
+
+    background-color: $pastel-orange;
+    color: white;
+    border-color: #858796;
+  }
+  &.yellow {
+    .icon {
+      background: rgba(0,0,0,.10);
+    }
+
+    background-color: $pastel-yellow;
+    color: #858796;
+    border-color: #858796;
+  }
+  &.blue {
+    .icon {
+      background: rgba(0,0,0,.10);
+    }
+
+    background-color: $pastel-blue;
+    color: #858796;
+    border-color: #858796;
+  }
 }
 
 .tryPage {
