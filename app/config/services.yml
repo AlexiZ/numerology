@@ -46,6 +46,11 @@ services:
         tags:
             - { name: twig.extension }
 
+    ExtranetBundle\EventListener\AccessDeniedListener:
+        arguments: ["@router"]
+        tags:
+            - { name: kernel.event_listener, event: kernel.exception, method: onAccessDeniedException }
+
     ExtranetBundle\Services\Auth0\Auth0Manager:
         arguments:
             $auth0Data:

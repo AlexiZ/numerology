@@ -23,6 +23,10 @@ class AnalysisController extends Controller
 
         $history = $repository->getSingleUserHistory($this->getUser()->getId());
 
+        if (empty($history)) {
+            $history = $repository->getDemoHistory();
+        }
+
         return $this->render('@Extranet/Analysis/index.html.twig', [
             'subjects' => $history,
         ]);
@@ -65,6 +69,10 @@ class AnalysisController extends Controller
         /** @var Analysis $subject */
         $subject = $registry->getRepository(Analysis::class)->findOneByHash($hash);
 
+        if ($subject->getUserId() !== $this->getUser()->getId()) {
+            return $this->redirectToRoute('extranet_index');
+        }
+
         if (!$subject || Analysis::STATUS_DELETED === $subject->getStatus()) {
             return $this->redirectToRoute('extranet_add');
         }
@@ -96,6 +104,10 @@ class AnalysisController extends Controller
     {
         /** @var Analysis $subject */
         $subject = $registry->getRepository(Analysis::class)->findOneByHash($hash);
+
+        if ($subject->getUserId() !== $this->getUser()->getId()) {
+            return $this->redirectToRoute('extranet_index');
+        }
 
         if (!$subject) {
             return $this->redirectToRoute(self::ROUTE_INDEX);

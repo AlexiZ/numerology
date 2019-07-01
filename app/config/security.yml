@@ -27,7 +27,7 @@ security:
         # Extranet
         - { path: ^/extranet/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/extranet/connect, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/extranet/, roles: ROLE_USER }
+        - { path: ^/extranet/, roles: [ROLE_USER, ROLE_DEMO] }
 
         # Site
         - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }

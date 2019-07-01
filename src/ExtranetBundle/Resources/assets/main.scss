@@ -292,3 +292,7 @@ $pastel-blue: #abe1fb;
     justify-content: space-between!important;
   }
 }
+
+#historyTable tbody td:last-child {
+  min-width: 80px;
+}

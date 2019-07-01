@@ -20,15 +20,19 @@
                     <a href="{{ url('extranet_show', {'hash': subject.hash}) }}" title="Afficher" class="btn btn-success btn-circle btn-sm">
                         <i class="fas fa-eye"></i>
                     </a>
-                    <a href="{{ url('extranet_edit', {'hash': subject.hash}) }}" title="Modifier" class="btn btn-primary btn-circle btn-sm">
-                        <i class="fas fa-pen"></i>
-                    </a>
+                    {% if subject.userId == app.user.id %}
+                        <a href="{{ url('extranet_edit', {'hash': subject.hash}) }}" title="Modifier" class="btn btn-primary btn-circle btn-sm">
+                            <i class="fas fa-pen"></i>
+                        </a>
+                    {% endif %}
                     <a href="{{ path('site_export_pdf', {'hash': subject.hash}) }}" title="Télécharger pour imprimer" class="btn btn-info btn-circle btn-sm">
                         <i class="fas fa-print"></i>
                     </a>
-                    <a href="{{ url('extranet_delete', {'hash': subject.hash}) }}" title="Supprimer" class="btn btn-danger btn-circle btn-sm">
-                        <i class="fas fa-times"></i>
-                    </a>
+                    {% if subject.userId == app.user.id %}
+                        <a href="{{ url('extranet_delete', {'hash': subject.hash}) }}" title="Supprimer" class="btn btn-danger btn-circle btn-sm">
+                            <i class="fas fa-times"></i>
+                        </a>
+                    {% endif %}
                 </td>
             </tr>
         {% endfor %}
