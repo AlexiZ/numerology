@@ -431,21 +431,6 @@ class Numerologie
 
     public function getLettersChartValues(Analysis $subject)
     {
-        /*
-        (
-            (subject.publicName|totalLettrePhysique|default(1) / subject.publicName|length)*100
-        ) | number_format(0)
-        (
-            (subject.publicName|totalLettreEmotive|default(1) / subject.publicName|length)*100
-        ) | number_format(0)
-        (
-            (subject.publicName|totalLettreCerebrale|default(1) / subject.publicName|length)*100
-        ) | number_format(0)
-        (
-            (subject.publicName|totalLettreIntuitive|default(1) / subject.publicName|length)*100
-        ) | number_format(0)
-        */
-
         $values = [
             'public' => [
                 'physical' => (int) round($this->count('physical', $subject->getPublicName()) / strlen($subject->getPublicName()) * 100, 0),
