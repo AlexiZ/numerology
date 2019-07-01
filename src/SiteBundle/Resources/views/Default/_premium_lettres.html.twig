@@ -16,43 +16,15 @@
                 <div class="card-body">
                     <p>La personnalité apparente est celle que les autres connaissent et dont ils ressentent la vibration, qui n’est pas forcément identique à celle donnée par votre identité complète.</p>
 
-                    <div class="pt-4 pb-2">
-                        {% set progressBars = {
-                            physical: {
-                                value: ((subject.publicName|totalLettrePhysique|default(1) / subject.publicName|length)*100)|number_format(0),
-                                label: "Lettres physiques",
-                                bg: "success",
-                            },
-                            emotional: {
-                                value: ((subject.publicName|totalLettreEmotive|default(1) / subject.publicName|length)*100)|number_format(0),
-                                label: "Lettres émotives",
-                                bg: "info",
-                            },
-                            brain: {
-                                value: ((subject.publicName|totalLettreCerebrale|default(1) / subject.publicName|length)*100)|number_format(0),
-                                label: "Lettres cérébrales",
-                                bg: "warning",
-                            },
-                            intuitive: {
-                                value: ((subject.publicName|totalLettreIntuitive|default(1) / subject.publicName|length)*100)|number_format(0),
-                                label: "Lettres intuitives",
-                                bg: "danger",
-                            }
-                        } %}
-
-                        <div class="row progress mb-4">
-                            {% for key, data in progressBars %}
-                                <div class="progress-bar progress-bar-striped bg-{{ data.bg }} automatic-tippy" data-ltippy="{{ key }}" role="progressbar" style="width:{{ data.value }}%">{{ data.value }}%</div>
-                            {% endfor %}
-                        </div>
-
-                        <div class="row text-center">
-                            <div class="col-md-3"><p><span class="badge bg-success badge-pill">&nbsp;</span>&nbsp;Lettres physiques</p></div>
-                            <div class="col-md-3"><p><span class="badge bg-info badge-pill">&nbsp;</span>&nbsp;Lettres émotives</p></div>
-                            <div class="col-md-3"><p><span class="badge bg-warning badge-pill">&nbsp;</span>&nbsp;Lettres cérébrales</p></div>
-                            <div class="col-md-3"><p><span class="badge bg-danger badge-pill">&nbsp;</span>&nbsp;Lettres intuitives</p></div>
-                        </div>
+                    <div class="chart-pie pt-4 pb-2">
+                        <canvas class="automaticBarChart"
+                                data-labels="Physique,Émotive,Cérébrale,Intuitive"
+                                data-values="{{ lettersChartValues.public|join(',') }}">
+                        </canvas>
                     </div>
+                    <p class="text-center"><small><em>Ce graphique affiche les excès ou les manques relatifs à la moyenne de chaque type de lettre.</em></small></p>
+
+                    <br>
 
                     {% if lettersDifferences.public|default %}
                         <ul>
@@ -80,43 +52,15 @@
                 <div class="card-body">
                     <p>C’est en intégrant votre identité complète que l’on peut connaître les véritables moteurs de votre comportement.</p>
 
-                    <div class="pt-4 pb-2">
-                        {% set progressBars = {
-                            physical: {
-                                value: ((subject.fullNames|totalLettrePhysique|default(1) / subject.fullNames|length)*100)|number_format(0),
-                                label: "Lettres physiques",
-                                bg: "success",
-                            },
-                            emotional: {
-                                value: ((subject.fullNames|totalLettreEmotive|default(1) / subject.fullNames|length)*100)|number_format(0),
-                                label: "Lettres émotives",
-                                bg: "info",
-                            },
-                            brain: {
-                                value: ((subject.fullNames|totalLettreCerebrale|default(1) / subject.fullNames|length)*100)|number_format(0),
-                                label: "Lettres cérébrales",
-                                bg: "warning",
-                            },
-                            intuitive: {
-                                value: ((subject.fullNames|totalLettreIntuitive|default(1) / subject.fullNames|length)*100)|number_format(0),
-                                label: "Lettres intuitives",
-                                bg: "danger",
-                            }
-                        } %}
-
-                        <div class="row progress mb-4">
-                            {% for key, data in progressBars %}
-                                <div class="progress-bar progress-bar-striped bg-{{ data.bg }} automatic-tippy" data-ltippy="{{ key }}" role="progressbar" style="width:{{ data.value }}%">{{ data.value }}%</div>
-                            {% endfor %}
-                        </div>
-
-                        <div class="row text-center">
-                            <div class="col-md-3"><p><span class="badge bg-success badge-pill">&nbsp;</span>&nbsp;Lettres physiques</p></div>
-                            <div class="col-md-3"><p><span class="badge bg-info badge-pill">&nbsp;</span>&nbsp;Lettres émotives</p></div>
-                            <div class="col-md-3"><p><span class="badge bg-warning badge-pill">&nbsp;</span>&nbsp;Lettres cérébrales</p></div>
-                            <div class="col-md-3"><p><span class="badge bg-danger badge-pill">&nbsp;</span>&nbsp;Lettres intuitives</p></div>
-                        </div>
+                    <div class="chart-pie pt-4 pb-2">
+                        <canvas class="automaticBarChart"
+                                data-labels="Physique,Émotive,Cérébrale,Intuitive"
+                                data-values="{{ lettersChartValues.private|join(',') }}">
+                        </canvas>
                     </div>
+                    <p class="text-center"><small><em>Ce graphique affiche les excès ou les manques relatifs à la moyenne de chaque type de lettre.</em></small></p>
+
+                    <br>
 
                     {% if lettersDifferences.private|default %}
                         <ul>

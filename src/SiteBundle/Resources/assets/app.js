@@ -9,6 +9,8 @@ import 'chartjs-plugin-annotation';
 
 import './main.scss';
 
+var barCharts = []; // eslint-disable-line no-unused-vars
+
 $(document).ready(() => {
     let addCollectionItems = document.querySelectorAll('.add-another-collection-widget');
     if (addCollectionItems) {
@@ -130,35 +132,43 @@ $(document).ready(() => {
     }
 
     // Bar Chart generation
-    let automaticBarCharts = document.querySelectorAll(".automaticBarChart"),
-        barCharts = [], // eslint-disable-line no-unused-vars
-        barChartsIndex = 0;
+    let automaticBarCharts = document.querySelectorAll(".automaticBarChart");
     if (automaticBarCharts) {
-        automaticBarCharts.forEach((automaticBarChart) => {
-            let labels = automaticBarChart.dataset.labels.split(','),
-                rawData = automaticBarChart.dataset.values,
-                legends = 'legends' in automaticBarChart.dataset ? automaticBarChart.dataset.legends.split(',') : false,
-                datasetOptions = {
-                    borderWidth: '2',
-                    hoverBorderColor: "rgba(234, 236, 244, 1)",
-                },
-                datasets = [
-                    Object.assign(
-                        {
-                            data: rawData.split(','),
-                            backgroundColor: ['rgba(255, 105, 98, 0.5)', 'rgba(254, 254, 200, 0.5)', 'rgba(255, 203, 153, 0.5)', 'rgba(171, 225, 251, 0.5)'],
-                        },
-                        datasetOptions
-                    )];
+        buildCharts(automaticBarCharts);
+    }
+}).on('shown.bs.collapse', () => {
+    let automaticBarCharts = document.querySelectorAll(".automaticBarChart");
+    if (automaticBarCharts) {
+        buildCharts(automaticBarCharts);
+    }
+});
 
-            barCharts[barChartsIndex] = new Chart(automaticBarChart, {
+const buildCharts = (automaticBarCharts) => {
+    let barChartsIndex = 0;
+    automaticBarCharts.forEach((automaticBarChart) => {
+        let labels = automaticBarChart.dataset.labels.split(','),
+            rawData = automaticBarChart.dataset.values,
+            legends = 'legends' in automaticBarChart.dataset ? automaticBarChart.dataset.legends.split(',') : false,
+            datasetOptions = {
+                borderWidth: '2',
+                hoverBorderColor: "rgba(234, 236, 244, 1)",
+            },
+            datasets = [
+                Object.assign(
+                    {
+                        data: rawData.split(','),
+                        backgroundColor: ['rgba(255, 105, 98, 0.5)', 'rgba(254, 254, 200, 0.5)', 'rgba(255, 203, 153, 0.5)', 'rgba(171, 225, 251, 0.5)'],
+                    },
+                    datasetOptions
+                )],
+            chart = new Chart(automaticBarChart, {
                 type: 'bar',
                 data: {
                     labels: labels,
                     datasets: datasets,
                 },
                 options: {
-                    maintainAspectRatio: false,
+                    maintainAspectRatio: true,
                     tooltips: {
                         backgroundColor: "rgb(255,255,255)",
                         bodyFontColor: "#858796",
@@ -239,8 +249,9 @@ $(document).ready(() => {
                         }]
                     }
                 },
-            });
-            barChartsIndex++;
         });
-    }
-});
+
+        barCharts[barChartsIndex] = chart;
+        barChartsIndex++;
+    });
+};

@@ -486,6 +486,10 @@ class Numerologie
                 if (abs($lettersChartValues[$property][$index]) >= self::LETTERS_LIMIT_VALUE) {
                     $t = $lettersChartValues[$property][$index] > 0 ? self::LETTERS_LIMIT_VALUE : (- self::LETTERS_LIMIT_VALUE);
                     $differences[$property][$type] = $lettersChartValues[$property][$index] - $t;
+
+                    if ($t < 0 && 0 === $differences[$property][$type]) {
+                        $differences[$property][$type]--;
+                    }
                 }
             }
         }
