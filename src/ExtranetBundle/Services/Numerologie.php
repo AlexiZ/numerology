@@ -196,7 +196,7 @@ class Numerologie
             return (int) $reduction;
         }
 
-        return $this->reduceNumber((string) $reduction);
+        return $this->reduceNumber((string) $reduction, $exceptions);
     }
 
     public function is($type, $letter)
@@ -355,7 +355,7 @@ class Numerologie
 
     public function getPersonnalYearNowNumber(Analysis $subject)
     {
-        return $this->reduceNumber($subject->getUTCBirthDate()->format('dm').date('Y'));
+        return $this->reduceNumber($subject->getUTCBirthDate()->format('dm').date('Y'), [1, 2, 3, 4, 5, 6, 7, 8, 9]);
     }
 
     public function getAstrologicalNumber(Analysis $subject)
