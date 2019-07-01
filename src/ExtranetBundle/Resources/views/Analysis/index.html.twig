@@ -10,8 +10,14 @@
     <div class="row">
         <div class="col-lg-8 mb-4" id="historyTable">
             <div class="card shadow mb-4">
-                <div class="card-header py-3">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                     <h6 class="m-0 font-weight-bold text-primary">Votre historique</h6>
+
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <div>
+                            <a href="{{ path('admin_index') }}">Voir l'historique complet <i class="fa fa-share"></i></a>
+                        </div>
+                    {% endif %}
                 </div>
 
                 <div class="card-body">

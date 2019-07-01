@@ -6,12 +6,10 @@ use Doctrine\Common\Persistence\ManagerRegistry;
 use ExtranetBundle\Entity\Analysis;
 use ExtranetBundle\Services\Numerologie;
 use ExtranetBundle\Form\AnalysisType;
-use Knp\Bundle\SnappyBundle\Snappy\Response\PdfResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Translation\TranslatorInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 class AnalysisController extends Controller
 {
@@ -23,17 +21,16 @@ class AnalysisController extends Controller
     {
         $repository = $this->getDoctrine()->getRepository(Analysis::class);
 
-        if ($this->isGranted('ROLE_ADMIN')) {
-            $history = $repository->getAllUsersHistory();
-        } else {
-            $history = $repository->getSingleUserHistory($this->getUser()->getId());
-        }
+        $history = $repository->getSingleUserHistory($this->getUser()->getId());
 
         return $this->render('@Extranet/Analysis/index.html.twig', [
             'subjects' => $history,
         ]);
     }
 
+    /**
+     * @Security("is_granted('ROLE_USER')")
+     */
     public function addAction(Request $request, ManagerRegistry $registry, Numerologie $numerologie)
     {
         $parameters = [];
@@ -59,6 +56,9 @@ class AnalysisController extends Controller
         return $this->render('@Extranet/Analysis/add.html.twig', $parameters);
     }
 
+    /**
+     * @Security("is_granted('ROLE_USER')")
+     */
     public function editAction($hash, Request $request, Numerologie $numerologieService, ManagerRegistry $registry)
     {
         $parameters = [];
@@ -89,6 +89,9 @@ class AnalysisController extends Controller
         return $this->render('@Extranet/Analysis/edit.html.twig', $parameters);
     }
 
+    /**
+     * @Security("is_granted('ROLE_USER')")
+     */
     public function supprimerAction($hash, ManagerRegistry $registry)
     {
         /** @var Analysis $subject */

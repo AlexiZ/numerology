@@ -1,0 +1,41 @@
+admin_index:
+    path: /
+    defaults: { _controller: ExtranetBundle:Admin\Default:index }
+
+admin_users_list:
+    path: /utilisateurs/
+    defaults: { _controller: ExtranetBundle:Admin\User:usersList }
+
+admin_user_add:
+    path: /utilisateur/ajouter
+    defaults: { _controller: ExtranetBundle:Admin\User:userAdd }
+    options:
+        expose: true
+
+admin_user_validate:
+    path: /utilisateur/valider/{userId}
+    defaults: { _controller: ExtranetBundle:Admin\User:userValidate }
+    options:
+        expose: true
+
+admin_user_refuse:
+    path: /utilisateur/refuser/{userId}
+    defaults: { _controller: ExtranetBundle:Admin\User:userRefuse }
+    options:
+        expose: true
+
+admin_numbers_list:
+    path: /numeros/
+    defaults: { _controller: ExtranetBundle:Admin\Number:numbersList }
+
+admin_number_edit:
+    path: /numero/{id}
+    defaults: { _controller: ExtranetBundle:Admin\Number:numberEdit }
+
+admin_definitions_list:
+    path: /definitions/
+    defaults: { _controller: ExtranetBundle:Admin\Definition:definitionsList }
+
+admin_definition_edit:
+    path: /definition/{id}
+    defaults: { _controller: ExtranetBundle:Admin\Definition:definitionEdit }

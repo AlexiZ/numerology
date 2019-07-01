@@ -2,99 +2,17 @@ extranet_index:
   path: /
   defaults: { _controller: ExtranetBundle:Analysis:index }
 
-extranet_add:
-    path: /ajouter/
-    defaults: { _controller: ExtranetBundle:Analysis:add }
-    options:
-        expose: true
+analysis:
+    resource: "routing/analysis.yml"
+    prefix: /
 
-extranet_edit:
-    path: /editer/{hash}
-    defaults: { _controller: ExtranetBundle:Analysis:edit }
+admin:
+    resource: "routing/admin.yml"
+    prefix: /administrer
 
-extranet_delete:
-    path: /supprimer/{hash}
-    defaults: { _controller: ExtranetBundle:Analysis:supprimer }
-
-extranet_show:
-    path: /afficher/{hash}
-    defaults: { _controller: ExtranetBundle:Analysis:show }
-
-extranet_list_comparisons:
-    path: /comparaisons/{hash}
-    defaults: { _controller: ExtranetBundle:Analysis:listComparisons }
-    options:
-        expose: true
-
-extranet_compare:
-    path: /comparer/{hash1}/{hash2}
-    defaults: { _controller: ExtranetBundle:Analysis:compare }
-
-admin_index:
-    path: /administrer/
-    defaults: { _controller: ExtranetBundle:Admin:index }
-
-admin_users_list:
-    path: /administrer/utilisateurs/
-    defaults: { _controller: ExtranetBundle:Admin:usersList }
-
-admin_user_add:
-    path: /administrer/utilisateur/ajouter
-    defaults: { _controller: ExtranetBundle:Admin:userAdd }
-    options:
-        expose: true
-
-admin_user_validate:
-    path: /administrer/utilisateur/valider/{userId}
-    defaults: { _controller: ExtranetBundle:Admin:userValidate }
-    options:
-        expose: true
-
-admin_user_refuse:
-    path: /administrer/utilisateur/refuser/{userId}
-    defaults: { _controller: ExtranetBundle:Admin:userRefuse }
-    options:
-        expose: true
-
-admin_numbers_list:
-    path: /administrer/numeros/
-    defaults: { _controller: ExtranetBundle:Admin:numbersList }
-
-admin_number_edit:
-    path: /administrer/numero/{id}
-    defaults: { _controller: ExtranetBundle:Admin:numberEdit }
-
-admin_definitions_list:
-    path: /administrer/definitions/
-    defaults: { _controller: ExtranetBundle:Admin:definitionsList }
-
-admin_definition_edit:
-    path: /administrer/definition/{id}
-    defaults: { _controller: ExtranetBundle:Admin:definitionEdit }
-
-messages_number:
-    path: /messages/tous/total/
-    defaults: { _controller: ExtranetBundle:Messages:getMessagesNumber }
-    options:
-        expose: true
-
-messages_list:
-    path: /messages/tous/
-    defaults: { _controller: ExtranetBundle:Messages:getMessages }
-    options:
-        expose: true
-
-messages_show:
-    path: /messages/afficher/
-    defaults: { _controller: ExtranetBundle:Messages:showMessages }
-    options:
-        expose: true
-
-messages_send:
-    path: /messages/envoyer/
-    defaults: { _controller: ExtranetBundle:Messages:sendMessage }
-    options:
-        expose: true
+messages:
+    resource: "routing/messages.yml"
+    prefix: /messages
 
 hwi_oauth_redirect:
     resource: "@HWIOAuthBundle/Resources/config/routing/redirect.xml"

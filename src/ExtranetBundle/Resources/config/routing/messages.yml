@@ -1,0 +1,23 @@
+messages_number:
+    path: /tous/total/
+    defaults: { _controller: ExtranetBundle:Messages:getMessagesNumber }
+    options:
+        expose: true
+
+messages_list:
+    path: /tous/
+    defaults: { _controller: ExtranetBundle:Messages:getMessages }
+    options:
+        expose: true
+
+messages_show:
+    path: /afficher/
+    defaults: { _controller: ExtranetBundle:Messages:showMessages }
+    options:
+        expose: true
+
+messages_send:
+    path: /envoyer/
+    defaults: { _controller: ExtranetBundle:Messages:sendMessage }
+    options:
+        expose: true

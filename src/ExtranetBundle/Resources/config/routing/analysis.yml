@@ -1,0 +1,27 @@
+extranet_add:
+    path: /ajouter/
+    defaults: { _controller: ExtranetBundle:Analysis:add }
+    options:
+        expose: true
+
+extranet_edit:
+    path: /editer/{hash}
+    defaults: { _controller: ExtranetBundle:Analysis:edit }
+
+extranet_delete:
+    path: /supprimer/{hash}
+    defaults: { _controller: ExtranetBundle:Analysis:supprimer }
+
+extranet_show:
+    path: /afficher/{hash}
+    defaults: { _controller: ExtranetBundle:Analysis:show }
+
+extranet_list_comparisons:
+    path: /comparaisons/{hash}
+    defaults: { _controller: ExtranetBundle:Analysis:listComparisons }
+    options:
+        expose: true
+
+extranet_compare:
+    path: /comparer/{hash1}/{hash2}
+    defaults: { _controller: ExtranetBundle:Analysis:compare }

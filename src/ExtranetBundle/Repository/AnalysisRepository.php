@@ -30,15 +30,20 @@ class AnalysisRepository extends EntityRepository
         ;
     }
 
-    public function getAllUsersHistory()
+    public function getAllUsersHistory($asArray = false)
     {
+        $returnFormat = AbstractQuery::HYDRATE_OBJECT;
+        if ($asArray) {
+            $returnFormat = AbstractQuery::HYDRATE_ARRAY;
+        }
+
         return $this
             ->createQueryBuilder('a')
             ->where('a.status = :status')
             ->setParameter('status', Analysis::STATUS_ACTIVE)
             ->orderBy('a.createdAt', 'DESC')
             ->getQuery()
-            ->getResult()
+            ->getResult($returnFormat)
         ;
     }
 }

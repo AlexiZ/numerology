@@ -78,4 +78,20 @@
             </div>
         </div>
     </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">
+                        Historique complet
+                    </h6>
+                </div>
+
+                <div class="card-body">
+                    {% include '@Extranet/Analysis/_history.html.twig' with {'subjects': subjects} %}
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock body %}

@@ -2,7 +2,6 @@
 
 namespace ExtranetBundle\Controller;
 
-use ExtranetBundle\Services\SendBird\SendBirdManager;
 use ExtranetBundle\Services\Slack\SlackManager;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -11,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 class MessagesController extends Controller
 {
     /**
-     * @var SendBirdManager
+     * @var SlackManager
      */
     private $slack;
 
