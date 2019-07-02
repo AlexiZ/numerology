@@ -76,11 +76,11 @@
                                         {% endif %}
                                     </td>
                                     <td>
-                                        {% if user.app_metadata is not defined or 'ROLE_USER' not in user.app_metadata.roles %}
+                                        {% if user.app_metadata is not defined or ('ROLE_USER' not in user.app_metadata.roles and 'ROLE_DEMO' not in user.app_metadata.roles ) %}
                                             <a href="#" data-userid="{{ user.user_id }}" title="Valider l'utilisateur" class="btn btn-success btn-circle btn-sm userValidate">
                                                 <i class="fas fa-check"></i>
                                             </a>
-                                        {% elseif 'ROLE_USER' in user.app_metadata.roles %}
+                                        {% elseif 'ROLE_USER' in user.app_metadata.roles or 'ROLE_DEMO' not in user.app_metadata.roles %}
                                             <a href="#" data-userid="{{ user.user_id }}" title="Empêcher l'accès" class="btn btn-danger btn-circle btn-sm userRefuse">
                                                 <i class="fas fa-times"></i>
                                             </a>
