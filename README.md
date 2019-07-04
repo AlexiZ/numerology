@@ -4,18 +4,18 @@ Numerology
 A Symfony project created on January 13, 2019, 7:44 pm.
 
 ## Purpose :
-Automatically calculate a person's numerology theme.
+Generate a person's numerology theme.
 
 ## Roadmap
 - ~~History~~
 - ~~Homepage~~
-- **Fill analysis with book's data**
+- ~~Fill analysis with book's data~~
 - ~~Graphic redesign~~
 - ~~Users' list~~
 - ~~Basic log in~~
 - ~~Auth0~~
 - ~~Roles' managing~~
-- Internationalization (?)
+- Internationalization (much later)
 - ~~Chat~~
 - ~~Data editing~~
 - ~~PDF export public site~~
@@ -25,6 +25,8 @@ Automatically calculate a person's numerology theme.
 - ~~Paypal payment~~
 - ~~Admin UI to manage numbers' details~~
 - ~~Admin UI to manage definitions~~
+- Roles management
+- Numbers total to improve its admin UI
 
 ## How to
 - Create an account in Slack with the Gmail alias and customer's real name
