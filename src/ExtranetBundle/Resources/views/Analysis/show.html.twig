@@ -80,26 +80,30 @@
 {% endblock pagesubtitle %}
 
 {% block callback_actions %}
-    {% if subject.userId == app.user.id %}
+    {% if subject.userId == app.user.id and is_granted('ROLE_ANALYSIS_EDIT') %}
         <a href="{{ path('extranet_edit', {'hash': subject.hash}) }}" title="Modifier" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
             <i class="fas fa-pen fa-sm text-white-50"></i>&nbsp;
             Modifier
         </a>
     {% endif %}
-    <a href="javascript:void(0);" data-toggle="modal" data-target="#triggerComparisonModal" title="Comparer avec une autre de vos études" class="d-none d-sm-inline-block btn btn-sm btn-warning shadow-sm">
-        <i class="fas fa-not-equal fa-sm text-white-50"></i>&nbsp;
-        Comparer
-    </a>
+    {% if is_granted('ROLE_ANALYSIS_COMPARE') %}
+        <a href="javascript:void(0);" data-toggle="modal" data-target="#triggerComparisonModal" title="Comparer avec une autre de vos études" class="d-none d-sm-inline-block btn btn-sm btn-warning shadow-sm">
+            <i class="fas fa-not-equal fa-sm text-white-50"></i>&nbsp;
+            Comparer
+        </a>
+    {% endif %}
     {% if subject.userId == app.user.id %}
         <a href="{{ path('extranet_delete', {'hash': subject.hash}) }}" title="Supprimer" class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm">
             <i class="fas fa-times fa-sma hxt-white-50"></i>&nbsp;
             Supprimer
         </a>
     {% endif %}
-    <a href="{{ path('site_export_pdf', {'hash': subject.hash}) }}" title="Télécharger pour imprimer" class="d-none d-sm-inline-block btn btn-sm btn-info shadow-sm">
-        <i class="fas fa-print fa-sm text-white-50"></i>&nbsp;
-        Télécharger pour imprimer
-    </a>
+    {% if is_granted('ROLE_ANALYSIS_EXPORT') %}
+        <a href="{{ path('site_export_pdf', {'hash': subject.hash}) }}" title="Télécharger pour imprimer" class="d-none d-sm-inline-block btn btn-sm btn-info shadow-sm">
+            <i class="fas fa-print fa-sm text-white-50"></i>&nbsp;
+            Télécharger pour imprimer
+        </a>
+    {% endif %}
 {% endblock callback_actions %}
 
 {% block body %}

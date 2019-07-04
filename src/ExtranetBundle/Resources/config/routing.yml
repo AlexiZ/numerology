@@ -8,7 +8,7 @@ analysis:
 
 admin:
     resource: "routing/admin.yml"
-    prefix: /administrer
+    prefix: /admin
 
 messages:
     resource: "routing/messages.yml"

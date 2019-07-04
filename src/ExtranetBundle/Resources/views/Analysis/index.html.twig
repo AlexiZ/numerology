@@ -37,13 +37,13 @@
                         <em>Cliquez ici pour voir la numérologie d'une nouvelle personne</em>
                     </p>
                     <hr class="sidebar-divider d-none d-md-block">
-                    {% if is_granted('ROLE_USER') %}
+                    {% if is_granted('ROLE_ANALYSIS_ADD') %}
                         <a href="{{ url('extranet_add') }}" id="newAnalysis" class="btn btn-info btn-icon-split">
                             <span class="icon text-white-50"><i class="fas fa-plus"></i></span>
                             <span class="text">Nouvelle personne</span>
                         </a>
                     {% else %}
-                        <p><em>Vous n'êtes pas autorisé à ajouter une étude avec un compte de démo.</em></p>
+                        <p><em>Vous n'êtes pas autorisé à faire de nouvelles études.</em></p>
                     {% endif %}
                 </div>
             </div>

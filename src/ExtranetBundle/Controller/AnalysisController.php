@@ -21,9 +21,9 @@ class AnalysisController extends Controller
     {
         $repository = $this->getDoctrine()->getRepository(Analysis::class);
 
-        $history = $repository->getSingleUserHistory($this->getUser()->getId());
-
-        if (empty($history)) {
+        if ($this->isGranted('ROLE_ANALYSIS_HISTORY')) {
+            $history = $repository->getSingleUserHistory($this->getUser()->getId());
+        } else {
             $history = $repository->getDemoHistory();
         }
 
@@ -33,7 +33,7 @@ class AnalysisController extends Controller
     }
 
     /**
-     * @Security("is_granted('ROLE_USER')")
+     * @Security("is_granted('ROLE_ANALYSIS_NEW')")
      */
     public function addAction(Request $request, ManagerRegistry $registry, Numerologie $numerologie)
     {
@@ -61,7 +61,7 @@ class AnalysisController extends Controller
     }
 
     /**
-     * @Security("is_granted('ROLE_USER')")
+     * @Security("is_granted('ROLE_ANALYSIS_EDIT')")
      */
     public function editAction($hash, Request $request, Numerologie $numerologieService, ManagerRegistry $registry)
     {
@@ -70,7 +70,7 @@ class AnalysisController extends Controller
         $subject = $registry->getRepository(Analysis::class)->findOneByHash($hash);
 
         if ($subject->getUserId() !== $this->getUser()->getId()) {
-            return $this->redirectToRoute('extranet_index');
+            return $this->redirectToRoute(self::ROUTE_INDEX);
         }
 
         if (!$subject || Analysis::STATUS_DELETED === $subject->getStatus()) {
@@ -98,7 +98,7 @@ class AnalysisController extends Controller
     }
 
     /**
-     * @Security("is_granted('ROLE_USER')")
+     * @Security("is_granted('ROLE_ANALYSIS_DELETE')")
      */
     public function supprimerAction($hash, ManagerRegistry $registry)
     {
@@ -106,7 +106,7 @@ class AnalysisController extends Controller
         $subject = $registry->getRepository(Analysis::class)->findOneByHash($hash);
 
         if ($subject->getUserId() !== $this->getUser()->getId()) {
-            return $this->redirectToRoute('extranet_index');
+            return $this->redirectToRoute(self::ROUTE_INDEX);
         }
 
         if (!$subject) {
@@ -121,6 +121,9 @@ class AnalysisController extends Controller
         return $this->redirectToRoute(self::ROUTE_INDEX);
     }
 
+    /**
+     * @Security("is_granted('ROLE_ANALYSIS_SHOW')")
+     */
     public function showAction($hash, ManagerRegistry $registry, Numerologie $numerologieService)
     {
         /** @var Analysis $subject */
@@ -139,6 +142,9 @@ class AnalysisController extends Controller
         ]);
     }
 
+    /**
+     * @Security("is_granted('ROLE_ANALYSIS_COMPARE')")
+     */
     public function listComparisonsAction($hash, ManagerRegistry $registry)
     {
         $subjects = $registry->getRepository(Analysis::class)->getSingleUserHistory($this->getUser()->getId());
@@ -150,6 +156,9 @@ class AnalysisController extends Controller
         ])->getContent());
     }
 
+    /**
+     * @Security("is_granted('ROLE_ANALYSIS_COMPARE')")
+     */
     public function compareAction($hash1, $hash2, ManagerRegistry $registry)
     {
         /** @var Analysis[] $subjects */
