@@ -25,7 +25,7 @@ Generate a person's numerology theme.
 - ~~Paypal payment~~
 - ~~Admin UI to manage numbers' details~~
 - ~~Admin UI to manage definitions~~
-- Roles management
+- ~~Roles management~~
 - Numbers total to improve its admin UI
 
 ## How to
