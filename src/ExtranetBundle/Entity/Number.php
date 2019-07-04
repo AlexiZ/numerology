@@ -29,6 +29,13 @@ class Number
     private $value;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(name="total", type="integer", options={"default" : 18})
+     */
+    private $total;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="inherited", type="text", nullable=true)
@@ -126,34 +133,6 @@ class Number
      */
     private $longTerm;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="missing", type="text", nullable=true)
-     */
-    private $missing;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="weak", type="text", nullable=true)
-     */
-    private $weak;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="strong", type="text", nullable=true)
-     */
-    private $strong;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="average", type="text", nullable=true)
-     */
-    private $average;
-
 
     public function __toString()
     {
@@ -192,6 +171,30 @@ class Number
     public function getValue()
     {
         return $this->value;
+    }
+
+    /**
+     * Get total.
+     *
+     * @return int
+     */
+    public function getTotal()
+    {
+        return $this->total;
+    }
+
+    /**
+     * Set total.
+     *
+     * @param int $total
+     *
+     * @return Number
+     */
+    public function setTotal($total)
+    {
+        $this->total = $total;
+
+        return $this;
     }
 
     public function get($name)
@@ -540,102 +543,6 @@ class Number
         return $this->longTerm;
     }
 
-    /**
-     * Set missing.
-     *
-     * @param string $missing
-     *
-     * @return Number
-     */
-    public function setMissing($missing)
-    {
-        $this->missing = $missing;
-
-        return $this;
-    }
-
-    /**
-     * Get missing.
-     *
-     * @return string
-     */
-    public function getMissing()
-    {
-        return $this->missing;
-    }
-
-    /**
-     * Set weak.
-     *
-     * @param string $weak
-     *
-     * @return Number
-     */
-    public function setWeak($weak)
-    {
-        $this->weak = $weak;
-
-        return $this;
-    }
-
-    /**
-     * Get weak.
-     *
-     * @return string
-     */
-    public function getWeak()
-    {
-        return $this->weak;
-    }
-
-    /**
-     * Set strong.
-     *
-     * @param string $strong
-     *
-     * @return Number
-     */
-    public function setStrong($strong)
-    {
-        $this->strong = $strong;
-
-        return $this;
-    }
-
-    /**
-     * Get strong.
-     *
-     * @return string
-     */
-    public function getStrong()
-    {
-        return $this->strong;
-    }
-
-    /**
-     * Set average.
-     *
-     * @param string $average
-     *
-     * @return Number
-     */
-    public function setAverage($average)
-    {
-        $this->average = $average;
-
-        return $this;
-    }
-
-    /**
-     * Get average.
-     *
-     * @return string
-     */
-    public function getAverage()
-    {
-        return $this->average;
-    }
-
     public static function getProperties()
     {
         return [
@@ -653,10 +560,6 @@ class Number
             'shortTerm',
             'meanTerm',
             'longTerm',
-            'missing',
-            'weak',
-            'strong',
-            'average',
         ];
     }
 
@@ -677,8 +580,8 @@ class Number
 
         return [
             'count' => $count,
-            'total' => count($properties),
-            'percentage' => round($count / count($properties) * 100, 0),
+            'total' => $this->getTotal(),
+            'percentage' => round($count / $this->getTotal() * 100, 0),
         ];
     }
 }

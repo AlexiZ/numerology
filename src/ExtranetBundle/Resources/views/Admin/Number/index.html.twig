@@ -42,7 +42,7 @@
                                             {% set progressBg = 'danger' %}
                                         {% elseif number.fillingRate.percentage < 50 %}
                                             {% set progressBg = 'warning' %}
-                                        {% elseif number.fillingRate.percentage < 75 %}
+                                        {% elseif number.fillingRate.percentage < 100 %}
                                             {% set progressBg = 'info' %}
                                         {% else %}
                                             {% set progressBg = 'success' %}
