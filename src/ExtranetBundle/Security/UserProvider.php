@@ -18,14 +18,19 @@ class UserProvider implements UserProviderInterface, OAuthAwareUserProviderInter
      * @var ObjectManager
      */
     protected $em;
+
+    /**
+     * @var Auth0Manager
+     */
     protected $auth0Manager;
 
     /**
      * Constructor.
      *
-     * @param EntityManager $em
+     * @param ObjectManager $em
+     * @param Auth0Manager $auth0Manager
      */
-    public function __construct(EntityManager $em, Auth0Manager $auth0Manager)
+    public function __construct(ObjectManager $em, Auth0Manager $auth0Manager)
     {
         $this->em = $em;
         $this->auth0Manager = $auth0Manager;

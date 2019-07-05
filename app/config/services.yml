@@ -36,13 +36,11 @@ services:
         public: true
         tags: ['controller.service_arguments']
 
-    twig.extension.text:
-        class: Twig\Extensions\TextExtension
+    Twig\Extensions\TextExtension:
         tags:
             - { name: twig.extension }
 
-    twig.extension.intl:
-        class: Twig\Extensions\IntlExtension
+    Twig\Extensions\IntlExtension:
         tags:
             - { name: twig.extension }
 
@@ -60,13 +58,6 @@ services:
                 loginClientId: "%auth0.login.client_id%"
                 auth0EmailTtl: "%auth0.api.ttl_sec%"
             $baseEmail: "%contact.email%"
-
-    ExtranetBundle\Services\SendBird\SendBirdManager:
-        arguments:
-            $sendbirdParams:
-                appId: "%sendbird.app_id%"
-                apiUrl: "%sendbird.api_url%"
-                apiToken: "%sendbird.api_token%"
 
     ExtranetBundle\Services\Slack\SlackManager:
         arguments:

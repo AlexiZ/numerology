@@ -23,6 +23,8 @@ security:
                 path:   /extranet/auth0/logout
                 target: /extranet/
 
+            logout_on_user_change: true
+
     access_control:
         # Extranet
         - { path: ^/extranet/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }

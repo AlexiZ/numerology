@@ -3,7 +3,7 @@
 namespace ExtranetBundle\Services\Slack;
 
 use ExtranetBundle\Security\User;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class SlackManager
 {
@@ -26,7 +26,7 @@ class SlackManager
      */
     private $user;
 
-    public function __construct(TokenStorage $tokenStorage, array $slackParams)
+    public function __construct(TokenStorageInterface $tokenStorage, array $slackParams)
     {
         $this->apiUrl = $slackParams['apiUrl'];
         $this->apiToken = $slackParams['apiToken'];
