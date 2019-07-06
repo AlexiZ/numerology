@@ -101,115 +101,29 @@
 
     <section id="portfolio">
         <div class="container-fluid p-0">
+            {% for example in examples %}
+                {% if loop.index == 1 %}
             <div class="row no-gutters">
-                <div class="col-lg-3 col-sm-6 text-center">
-                    <a class="portfolio-box" href="{{ path('site_show', {'hash': '5d1270028f716'}) }}">
-                        <img class="img-fluid" src="{{ asset('bundles/site/img/angela-merkel.jpg') }}" alt="">
-                        <div class="portfolio-box-caption">
-                            <div class="project-category text-white-50">
-                                Étude numérologique complète
-                            </div>
-                            <div class="project-name">
-                                Angela Dorothea Merkel
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-lg-3 col-sm-6 text-center">
-                    <a class="portfolio-box" href="{{ path('site_show', {'hash': '5d1270ade2ac8'}) }}">
-                        <img class="img-fluid" src="{{ asset('bundles/site/img/vladimir-poutine.jpg') }}" alt="">
-                        <div class="portfolio-box-caption">
-                            <div class="project-category text-white-50">
-                                Étude numérologique complète
-                            </div>
-                            <div class="project-name">
-                                Vladimir Vladimirovitch Poutine
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-lg-3 col-sm-6 text-center">
-                    <a class="portfolio-box" href="{{ path('site_show', {'hash': '5ccf253a33a63'}) }}">
-                        <img class="img-fluid" src="{{ asset('bundles/site/img/donald-trump.jpg') }}" alt="">
-                        <div class="portfolio-box-caption">
-                            <div class="project-category text-white-50">
-                                Étude numérologique complète
-                            </div>
-                            <div class="project-name">
-                                Donald John Trump
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-lg-3 col-sm-6 text-center">
-                    <a class="portfolio-box" href="{{ path('site_show', {'hash': '5d12675c06a39'}) }}">
-                        <img class="img-fluid" src="{{ asset('bundles/site/img/emmanuel-macron.jpg') }}" alt="">
-                        <div class="portfolio-box-caption">
-                            <div class="project-category text-white-50">
-                                Étude numérologique complète
-                            </div>
-                            <div class="project-name">
-                                Emmanuel Jean-Michel Macron
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            </div>
+                {% endif %}
 
-            <div class="row no-gutters">
                 <div class="col-lg-3 col-sm-6 text-center">
-                    <a class="portfolio-box" href="{{ path('site_show', {'hash': '5d185ffd6e886'}) }}">
-                        <img class="img-fluid" src="{{ asset('bundles/site/img/gerard-depardieu.png') }}" alt="">
+                    <a class="portfolio-box" href="{{ path('site_show', {'hash': example.hash}) }}">
+                        <img class="img-fluid" src="{{ asset('bundles/site/img/'~example.hash~'.png') }}" alt="">
                         <div class="portfolio-box-caption">
                             <div class="project-category text-white-50">
                                 Étude numérologique complète
                             </div>
                             <div class="project-name">
-                                Gérard Xavier Marcel Depardieu
+                                {{ example }}
                             </div>
                         </div>
                     </a>
                 </div>
-                <div class="col-lg-3 col-sm-6 text-center">
-                    <a class="portfolio-box" href="{{ path('site_show', {'hash': '5d185458c7184'}) }}">
-                        <img class="img-fluid" src="{{ asset('bundles/site/img/keanu-reeves.png') }}" alt="">
-                        <div class="portfolio-box-caption">
-                            <div class="project-category text-white-50">
-                                Étude numérologique complète
-                            </div>
-                            <div class="project-name">
-                                Keanu Charles Reeves
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-lg-3 col-sm-6 text-center">
-                    <a class="portfolio-box" href="{{ path('site_show', {'hash': '5d17d40c8b1a7'}) }}">
-                        <img class="img-fluid" src="{{ asset('bundles/site/img/paul-maccartney.png') }}" alt="">
-                        <div class="portfolio-box-caption">
-                            <div class="project-category text-white-50">
-                                Étude numérologique complète
-                            </div>
-                            <div class="project-name">
-                                Paul James Mac Cartney
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-lg-3 col-sm-6 text-center">
-                    <a class="portfolio-box" href="{{ path('site_show', {'hash': '5d17ccb52f9e0'}) }}">
-                        <img class="img-fluid" src="{{ asset('bundles/site/img/florence-foresti.png') }}" alt="">
-                        <div class="portfolio-box-caption">
-                            <div class="project-category text-white-50">
-                                Étude numérologique complète
-                            </div>
-                            <div class="project-name">
-                                Florence Anne Foresti
-                            </div>
-                        </div>
-                    </a>
-                </div>
+
+                {% if loop.index == examples|length %}
             </div>
+                {% endif %}
+            {% endfor %}
         </div>
     </section>
 

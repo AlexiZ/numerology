@@ -29,7 +29,7 @@ Generate a person's numerology theme.
 | 18 | -                 | -      | Admin UI to manage definitions                  |
 | 19 | -                 | -      | Roles management                                |
 | 20 | -                 | -      | Numbers total to improve its admin UI           |
-| 21 | 2                 | `todo` | Analysis example attribute                      |
+| 21 | 2                 | -      | Analysis example attribute                      |
 | 22 | 1                 | `todo` | Button on extranet show page to share front url |
 | 23 | 1                 | `todo` | Lifepath extranet block visual redesign         |
 | 24 | 1                 | `todo` | Identity extranet block visual redesign         |

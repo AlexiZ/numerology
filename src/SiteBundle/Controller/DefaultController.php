@@ -2,6 +2,7 @@
 
 namespace SiteBundle\Controller;
 
+use ExtranetBundle\Entity\Analysis;
 use ReCaptcha\ReCaptcha;
 use SiteBundle\Form\ContactType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -11,7 +12,11 @@ class DefaultController extends Controller
 {
     public function homepageAction()
     {
-        return $this->render('SiteBundle:Default:index.html.twig');
+        $repository = $this->getDoctrine()->getRepository(Analysis::class);
+
+        return $this->render('SiteBundle:Default:index.html.twig', [
+            'examples' => $repository->getExamples(),
+        ]);
     }
 
     public function contactAction(Request $request, \Swift_Mailer $mailer)
