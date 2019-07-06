@@ -34,7 +34,7 @@ class AnalysisController extends Controller
     }
 
     /**
-     * @Security("is_granted('ROLE_ANALYSIS_NEW')")
+     * @Security("is_granted('ROLE_ANALYSIS_ADD')")
      */
     public function addAction(Request $request, ManagerRegistry $registry, Numerologie $numerologie)
     {
