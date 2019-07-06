@@ -31,7 +31,7 @@ class Number
     /**
      * @var int
      *
-     * @ORM\Column(name="total", type="integer", options={"default" : 18})
+     * @ORM\Column(name="total", type="integer", options={"default" : 14})
      */
     private $total;
 

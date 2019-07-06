@@ -109,6 +109,12 @@ class Analysis
      */
     private $level;
 
+    /**
+     * @var bool
+     * @ORM\Column(type="boolean", options={"default" : false})
+     */
+    private $example;
+
     public static $statusValues = [
         self::STATUS_ACTIVE,
         self::STATUS_PENDING,
@@ -541,5 +547,29 @@ class Analysis
         }
 
         return false;
+    }
+
+    /**
+     * Get example.
+     *
+     * @return bool
+     */
+    public function isExample()
+    {
+        return $this->example;
+    }
+
+    /**
+     * Set example.
+     *
+     * @param bool $example
+     *
+     * @return Analysis
+     */
+    public function setExample($example)
+    {
+        $this->example = $example;
+
+        return $this;
     }
 }
