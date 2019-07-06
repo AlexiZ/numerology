@@ -136,6 +136,15 @@ $(document).ready(() => {
     if (automaticBarCharts) {
         buildCharts(automaticBarCharts);
     }
+
+    // Copy permanent link to clipboard
+    let freePremiumCopy = document.getElementById('free-premium-copy');
+    if (freePremiumCopy) {
+        freePremiumCopy.addEventListener('click', () => {
+            copyTextToClipboard(window.location.href);
+            freePremiumCopy.querySelector('i').style.color = '#f4623a';
+        });
+    }
 }).on('shown.bs.collapse', () => {
     let automaticBarCharts = document.querySelectorAll(".automaticBarChart");
     if (automaticBarCharts) {
@@ -253,5 +262,18 @@ const buildCharts = (automaticBarCharts) => {
 
         barCharts[barChartsIndex] = chart;
         barChartsIndex++;
+    });
+};
+
+const copyTextToClipboard = (text) => {
+    if (!navigator.clipboard) {
+        alert('Votre navigateur ne prend pas en charge cette fonctionnalité.');
+        return;
+    }
+
+    navigator.clipboard.writeText(text).then(() => {
+        console.log('Async: Copying to clipboard was successful!');
+    }, function(err) {
+        console.error('Async: Could not copy text: ', err);
     });
 };

@@ -25,11 +25,17 @@
                                 </div>
 
                                 <div class="row mx-auto premium-item" id="premium-print">
-                                    <a href="{{ path('site_export_pdf', {'hash': subject.hash}) }}" title="Téléchargez pour imprimer">
+                                    <a href="{{ path('site_export_pdf', {'hash': subject.hash}) }}" title="Télécharger la version imprimable">
                                         <i class="fa fa-2x fa-print"></i>
                                     </a>
                                 </div>
                             {% endif %}
+
+                            <div class="row mx-auto premium-item" id="free-premium-copy">
+                                <a href="javascript:void(0);" title="Copier le lien permanent de cette étude">
+                                    <i class="fa fa-2x fa-paste"></i>
+                                </a>
+                            </div>
 
                             <div class="row">
                                 {% include '@Site/Default/_'~subject.level~'_identite.html.twig' with {'subject': subject} %}
