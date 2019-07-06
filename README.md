@@ -7,28 +7,34 @@ A Symfony project created on January 13, 2019, 7:44 pm.
 Generate a person's numerology theme.
 
 ## Roadmap
-- ~~History~~
-- ~~Homepage~~
-- ~~Fill analysis with book's data~~
-- ~~Graphic redesign~~
-- ~~Users' list~~
-- ~~Basic log in~~
-- ~~Auth0~~
-- ~~Roles' managing~~
-- Internationalization (much later)
-- ~~Chat~~
-- ~~Data editing~~
-- ~~PDF export public site~~
-- ~~PDF export extranet~~
-- ~~Comparison~~
-- ~~Notifications~~
-- ~~Paypal payment~~
-- ~~Admin UI to manage numbers' details~~
-- ~~Admin UI to manage definitions~~
-- ~~Roles management~~
-- Numbers total to improve its admin UI
+| #  | priority (1 to 3) | status | label                                           |
+|----|-------------------|--------|-------------------------------------------------|
+| 1  | -                 | -      | History                                         |
+| 2  | -                 | -      | Homepage                                        |
+| 3  | -                 | -      | Fill analysis with book's data                  |
+| 4  | -                 | -      | Graphic redesign                                |
+| 5  | -                 | -      | Users' list                                     |
+| 6  | -                 | -      | Basic log in                                    |
+| 7  | -                 | -      | Auth0                                           |
+| 8  | -                 | -      | Roles' managing                                 |
+| 9  | 3                 | `todo` | Internationalization                            |
+| 10 | -                 | -      | Chat                                            |
+| 11 | -                 | -      | Data editing                                    |
+| 12 | -                 | -      | PDF export public site                          |
+| 13 | -                 | -      | PDF export extranet                             |
+| 14 | -                 | -      | Comparison                                      |
+| 15 | -                 | -      | Notifications                                   |
+| 16 | -                 | -      | Paypal payment                                  |
+| 17 | -                 | -      | Admin UI to manage numbers' details             |
+| 18 | -                 | -      | Admin UI to manage definitions                  |
+| 19 | -                 | -      | Roles management                                |
+| 20 | -                 | -      | Numbers total to improve its admin UI           |
+| 21 | 2                 | `todo` | Analysis example attribute                      |
+| 22 | 1                 | `todo` | Button on extranet show page to share front url |
+| 23 | 1                 | `todo` | Lifepath extranet block visual redesign         |
+| 24 | 1                 | `todo` | Identity extranet block visual redesign         |
 
-## How to
+## How to add a new customer
 - Create an account in Slack with the Gmail alias and customer's real name
 - Copy this new Slack user's id (in profile)
 - Create an Auth0 account with customer's email
@@ -48,8 +54,8 @@ Generate a person's numerology theme.
 ```
 - Done
 
-## Dev
-Add a pre-commit hook with this script to automatically update :
+## Pro-tip for developers
+Add a pre-commit hook with this script to automatically update pages' shared footer :
 ```bash
 #!/bin/bash
 
