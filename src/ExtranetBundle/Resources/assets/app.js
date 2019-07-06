@@ -422,6 +422,31 @@ $(document).ready(() => {
             xmlhttp.send();
         });
     }
+
+    // Examplarize analysis from admin analysis' list
+    let exemplarizers = document.querySelectorAll('.exemplarize');
+    if (exemplarizers) {
+        exemplarizers.forEach((exemplarize) => {
+            let hash = exemplarize.dataset.hash;
+
+            exemplarize.addEventListener('click', (e) => {
+                e.preventDefault();
+
+                let xmlhttp = new XMLHttpRequest();
+                xmlhttp.onreadystatechange = () => {
+                    if (xmlhttp.readyState === XMLHttpRequest.DONE) {
+                        if (xmlhttp.status === 200) {
+                            let data = JSON.parse(xmlhttp.response);
+                            modalMessage('Changement d\'exemple', data);
+                        }
+                    }
+                };
+
+                xmlhttp.open("GET", Routing.generate('extranet_exemplarize', {'hash': hash}), true);
+                xmlhttp.send();
+            });
+        });
+    }
 });
 
 // Get unread messages count
@@ -485,6 +510,9 @@ const modalMessage = (title, message) => {
     modale.querySelector('.modal-body').innerHTML = message;
 
     $(modale).modal('show');
+    $(modale).on('hidden.bs.modal', function () {
+        window.location.reload();
+    })
 };
 
 const sendMessage = (message) => {

@@ -11,7 +11,7 @@
     <tbody>
         {% for subject in subjects %}
             <tr>
-                <td>{% if subject.userId == app.user.id %}<i class="fa fa-user-shield"></i>&nbsp;{% else %}<i class="fa fa-ban"></i>&nbsp;{% endif %}</td>
+                <td><i class="fa fa-{% if subject.userId == app.user.id and subject.example != '1' %}lock-open{% else %}lock{% endif %}"></i>&nbsp;</td>
                 <td>
                     <a href="{{ url('extranet_show', {'hash': subject.hash}) }}" title="Afficher" class="btn">{{ subject }}</a>
                 </td>
@@ -28,10 +28,21 @@
                     <a href="{{ path('site_export_pdf', {'hash': subject.hash}) }}" title="Télécharger pour imprimer" class="btn btn-info btn-circle btn-sm">
                         <i class="fas fa-print"></i>
                     </a>
-                    {% if subject.userId == app.user.id %}
+                    {% if subject.userId == app.user.id and subject.example != '1' %}
                         <a href="{{ url('extranet_delete', {'hash': subject.hash}) }}" title="Supprimer" class="btn btn-danger btn-circle btn-sm">
                             <i class="fas fa-times"></i>
                         </a>
+                    {% endif %}
+                    {% if editExamples|default and is_granted('ROLE_ADMIN') %}
+                        {% if subject.example == '1' %}
+                            <a href="javascript:void(0);" title="Ne plus marquer comme exemple" class="btn btn-warning btn-circle btn-sm exemplarize" data-hash="{{ subject.hash }}">
+                                <i class="fas fa-globe"></i>
+                            </a>
+                        {% else %}
+                            <a href="javascript:void(0);" title="Marquer comme exemple" class="btn btn-secondary btn-circle btn-sm exemplarize" data-hash="{{ subject.hash }}">
+                                <i class="fas fa-globe"></i>
+                            </a>
+                        {% endif %}
                     {% endif %}
                 </td>
             </tr>

@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class AnalysisController extends Controller
 {
@@ -171,5 +172,24 @@ class AnalysisController extends Controller
         return $this->render('@Extranet/Analysis/compare.html.twig', [
             'subjects' => $subjects,
         ]);
+    }
+
+    /**
+     * @Security("is_granted('ROLE_ADMIN')")
+     */
+    public function exemplarizeAction($hash, ManagerRegistry $registry, TranslatorInterface $translator)
+    {
+        /** @var Analysis $subject */
+        $subject = $registry->getRepository(Analysis::class)->findOneByHash($hash);
+
+        if (!$subject) {
+            return $this->redirectToRoute(self::ROUTE_INDEX);
+        }
+
+        $subject->invertExample();
+        $registry->getManager()->persist($subject);
+        $registry->getManager()->flush();
+
+        return new JsonResponse($translator->transChoice('analysis.history.actions.examplarize.confirmation', $subject->isExample(), ['%subject%' => $subject->__toString()]));
     }
 }

@@ -572,4 +572,15 @@ class Analysis
 
         return $this;
     }
+
+    public function invertExample()
+    {
+        if ('0' == $this->example) {
+            $this->example = '1';
+        } else {
+            $this->example = '0';
+        }
+
+        return $this;
+    }
 }

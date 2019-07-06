@@ -1,4 +1,10 @@
 analysis:
+    history:
+        actions:
+            examplarize:
+                confirmation: "
+                    {0}%subject% n'apparaîtra plus en tant qu'exemple réel.
+                    |{1}%subject% sera désormais présent parmi les exemples réels."
     show:
         vibrations:
             identity:
