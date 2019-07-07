@@ -1,14 +1,14 @@
 #environment {
   position: relative;
-  width: 100%;
-  height: 28vw;
+  width: 731px;
+  height: 448px;
   overflow: hidden;
   -webkit-perspective: 800px;
   -moz-perspective: 800px;
   -ms-perspective: 800px;
   -o-perspective: 800px;
   perspective: 800px;
-  //margin-left: -1.2rem;
+  background-color: #d9fcff;
   border-radius: 1.5vh;
 
   #content {
@@ -65,8 +65,8 @@
         font: 12px Monaco, MonoSpace;
         font-weight: bold;
         position: absolute;
-        left: 23vw;
-        top: 17.5vw;
+        left: 51%;
+        bottom: 26.5%;
         height: 55px;
         transform-origin: bottom center;
 
@@ -91,8 +91,8 @@
         font: 12px Monaco, MonoSpace;
         font-weight: bold;
         position: absolute;
-        right: 12.5vw;
-        top: 13vw;
+        right: 27%;
+        bottom: 47%;
         transform: rotate(-14deg);
         text-align: center;
       }
@@ -107,8 +107,8 @@
       transform: translate3d( 0, 0, -48000px ) scale(64);
 
       #ideal {
-        right: 18vw;
-        top: 6vw;
+        right: 40%;
+        top: 21%;
         position: absolute;
         font: 12px Monaco, MonoSpace !important;
         font-weight: bold;
@@ -140,8 +140,8 @@
       transform: translate3d( 0, 0, -64000px ) scale(128);
 
       #astrological {
-        left: 12vw;
-        top: 5.5vw;
+        left: 26%;
+        top: 20%;
         position: absolute;
         font: 12px Monaco, MonoSpace !important;
         font-weight: bold;
