@@ -31,7 +31,7 @@ Generate a person's numerology theme.
 | 20 | -                 | -      | Numbers total to improve its admin UI           |
 | 21 | 2                 | -      | Analysis example attribute                      |
 | 22 | 1                 | -      | Button on extranet show page to share front url |
-| 23 | 1                 | -    ` | Lifepath extranet block visual redesign         |
+| 23 | 1                 | -      | Lifepath extranet block visual redesign         |
 | 24 | 1                 | `todo` | Identity extranet block visual redesign         |
 | 25 | 2                 | `todo` | Review PDF letters block and redesign           |
 
