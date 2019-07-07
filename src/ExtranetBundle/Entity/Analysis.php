@@ -133,6 +133,7 @@ class Analysis
         $this->status = self::STATUS_ACTIVE;
         $this->hash = uniqid();
         $this->setCreatedAt(new \DateTime());
+        $this->example = false;
     }
 
     public function __toString()
