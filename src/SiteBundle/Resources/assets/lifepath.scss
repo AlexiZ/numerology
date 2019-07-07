@@ -33,14 +33,10 @@
 
     &#first {
       background-image: url(../public/img/lifepath/landscape1.png);
-      -webkit-transform: translate3d( 0, 0, -11500px) scale(16);
-      -moz-transform: translate3d( 0, 0, -11500px) scale(16);
-      -ms-transform: translate3d( 0, 0, -11500px) scale(16);
-      -o-transform: translate3d( 0, 0, -11500px) scale(16);
-      transform: translate3d( 0, 0, -11500px) scale(16);
+      transform: translate3d(0, 5px, -1px);
 
       #secret {
-        left: 0;
+        left: 20px;
         bottom: 0;
         position: absolute;
         font: 12px Monaco, MonoSpace;
@@ -55,11 +51,7 @@
 
     &#second {
       background-image: url(../public/img/lifepath/landscape2.png);
-      -webkit-transform: translate3d( 0, 0, -24000px ) scale(32);
-      -moz-transform: translate3d( 0, 0, -24000px ) scale(32);
-      -ms-transform: translate3d( 0, 0, -24000px ) scale(32);
-      -o-transform: translate3d( 0, 0, -24000px ) scale(32);
-      transform: translate3d( 0, 0, -24000px ) scale(32);
+      transform: translate3d(0, 0, -2px);
 
       .lettering span {
         font: 12px Monaco, MonoSpace;
@@ -91,30 +83,43 @@
         font: 12px Monaco, MonoSpace;
         font-weight: bold;
         position: absolute;
-        right: 27%;
-        bottom: 47%;
-        transform: rotate(-14deg);
-        text-align: center;
+        right: 9%;
+        bottom: 37%;
       }
     }
 
     &#third {
       background-image: url(../public/img/lifepath/landscape3.png);
-      -webkit-transform: translate3d( 0, 0, -48000px ) scale(64);
-      -moz-transform: translate3d( 0, 0, -48000px ) scale(64);
-      -ms-transform: translate3d( 0, 0, -48000px ) scale(64);
-      -o-transform: translate3d( 0, 0, -48000px ) scale(64);
-      transform: translate3d( 0, 0, -48000px ) scale(64);
+      animation: shake 10s infinite linear;
+      transform: translate3d(0, 0, -3px);
+      transform-origin: bottom;
+
+      @keyframes shake {
+        10%, 90% {
+          transform: translate3d(-1px, -1px, -3px);
+        }
+
+        20%, 80% {
+          transform: translate3d(2px, 2px, -3px);
+        }
+
+        30%, 50%, 70% {
+          transform: translate3d(-2px, -2px, -3px);
+        }
+
+        40%, 60% {
+          transform: translate3d(2px, 2px, -3px);
+        }
+      }
 
       #ideal {
-        right: 40%;
+        right: 27.5%;
         top: 21%;
         position: absolute;
         font: 12px Monaco, MonoSpace !important;
         font-weight: bold;
-        width: 0px;
-        height: 0px;
-        float: left;
+        width: 90px;
+        text-align: center;
         transform: rotate(360deg);
         -ms-transform: rotate(360deg);
         -moz-transform: rotate(360deg);
@@ -162,6 +167,51 @@
         font-weight: bolder;
       }
     }
+
+    &#hikeress {
+      background-image: url(../public/img/lifepath/hikeress.png);
+      width: 80px;
+      left: -15%;
+      bottom: 8%;
+      animation: lost 10s infinite linear;
+
+      @keyframes lost {
+        40% {
+          left: -15%;
+        }
+        50% {
+          left: 5%;
+        }
+        54% {
+          left: 5%;
+          transform: scaleX(1);
+        }
+        55% {
+          left: 5%;
+          transform: scaleX(-1);
+        }
+        60% {
+          left: 5%;
+          transform: scaleX(-1);
+        }
+        61% {
+          left: 5%;
+          transform: scaleX(1);
+        }
+        81% {
+          left: 5%;
+          transform: scaleX(1);
+        }
+        82% {
+          left: 5%;
+          transform: scaleX(-1);
+        }
+        90% {
+          left: -15%;
+          transform: scaleX(-1);
+        }
+      }
+    }
   }
 
   /**
@@ -170,7 +220,7 @@
 
   $cream: #fef1e9;
   $sunny: #f5f9bf;
-  $shiny: #ecefc9;
+  $shiny: #f4ed8b;
 
   #sunshine {
     width: 15vw;
@@ -182,6 +232,13 @@
     left: -7vw;
     opacity: 0.3;
     z-index: 0;
+    animation: pulse 2s infinite ease-out;
+  }
+
+  @keyframes pulse {
+    50% {
+      transform: scale(1.2);
+    }
   }
 
   #sun {
