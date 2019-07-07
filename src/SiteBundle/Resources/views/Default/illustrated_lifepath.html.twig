@@ -1,0 +1,49 @@
+<div id="environment">
+    <div id="content">
+        <section id="sunshine"></section>
+        <section id="sun"></section>
+        <section id="cloud"></section>
+        <section id="cloud-1"></section>
+        <section id="cloud-2"></section>
+        <section id="first">
+            <div id="secret"><p>NOMBRE SECRET : {{ subject.data.lifePath.secretNumber }}</p></div>
+        </section>
+        <section id="second">
+            <div class="lettering">
+                <span class="char1">C</span>
+                <span class="char2">H</span>
+                <span class="char3">E</span>
+                <span class="char4">M</span>
+                <span class="char5">I</span>
+                <span class="char6">N</span>
+                <span class="char7">&nbsp;</span>
+                <span class="char8">D</span>
+                <span class="char9">E</span>
+                <span class="char10">&nbsp;</span>
+                <span class="char11">V</span>
+                <span class="char12">I</span>
+                <span class="char13">E</span>
+                <span class="char14">:</span>
+                <span class="char15">{{ subject.data.lifePath.lifePathNumber }}</span>
+            </div>
+            <span id="majorTurn">
+                {{ subject.data.lifePath.majorTurnNumber }} ans<br>TOURNANT MAJEUR
+            </span>
+        </section>
+        <section id="third">
+            <div id="ideal">
+                <p>{{ subject.data.lifePath.idealNumber }}<br>NOMBRE D'IDÉAL</p>
+            </div>
+        </section>
+        <section id="fourth">
+            <div id="astrological">
+                <span>NOMBRE ASTROLOGIQUE : {{ subject.data.lifePath.astrologicalNumber }}</span>
+            </div>
+        </section>
+        <section id="hiker">
+            <div id="personalYear">
+                ANNÉE PERSONNELLE 2019 : {{ subject.data.lifePath.personalYearNowNumber }}
+            </div>
+        </section>
+    </div>
+</div>
