@@ -138,7 +138,7 @@ class Analysis
 
     public function __toString()
     {
-        return $this->getFirstname() . ' ' . ($this->getOtherFirstnames() ? implode(' ', $this->getOtherFirstnames()) . ' ' : '') . (!empty($this->getUseName()) ? $this->getUseName() : $this->getBirthName());
+        return $this->getFirstname() . ' ' . ($this->getOtherFirstnames() ? implode(' ', $this->getOtherFirstnames()) . ' ' : '') . (!empty($this->getUseName()) ? $this->getUseName() . ' né(e) ' . $this->getBirthName() : $this->getBirthName());
     }
 
     public function serialize($data)
