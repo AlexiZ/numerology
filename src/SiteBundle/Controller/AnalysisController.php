@@ -9,6 +9,7 @@ use ExtranetBundle\Entity\Number;
 use ExtranetBundle\Form\AnalysisType;
 use ExtranetBundle\Services\Numerologie;
 use Knp\Bundle\SnappyBundle\Snappy\Response\PdfResponse;
+use ReCaptcha\ReCaptcha;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -40,23 +41,30 @@ class AnalysisController extends Controller
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $subject->setData($this->numerologieService->exportData($subject));
-            $subject->setUserId($this->getUser() ? $this->getUser()->getId() : null);
-            $subject->setLevel($version);
+            $recaptcha = new ReCaptcha($this->getParameter('google_recaptcha.secret_key'));
+            $resp = $recaptcha->verify($request->request->get('g-recaptcha-response'), $request->getClientIp());
 
-            if (Analysis::LEVEL_PREMIUM === $version) {
-                $subject->setStatus(Analysis::STATUS_PENDING);
+            if (!$resp->isSuccess()) {
+                $this->addFlash('danger', 'Une erreur s\'est produite lors de l\'envoi de votre message.');
+            } else {
+                $subject->setData($this->numerologieService->exportData($subject));
+                $subject->setUserId($this->getUser() ? $this->getUser()->getId() : null);
+                $subject->setLevel($version);
+
+                if (Analysis::LEVEL_PREMIUM === $version) {
+                    $subject->setStatus(Analysis::STATUS_PENDING);
+
+                    $this->registry->getManager()->persist($subject);
+                    $this->registry->getManager()->flush();
+
+                    return $this->redirectToRoute('site_payment', ['hash' => $subject->getHash()]);
+                }
 
                 $this->registry->getManager()->persist($subject);
                 $this->registry->getManager()->flush();
 
-                return $this->redirectToRoute('site_payment', ['hash' => $subject->getHash()]);
+                return $this->redirectToRoute('site_show', ['hash' => $subject->getHash()]);
             }
-
-            $this->registry->getManager()->persist($subject);
-            $this->registry->getManager()->flush();
-
-            return $this->redirectToRoute('site_show', ['hash' => $subject->getHash()]);
         }
 
         return $this->render('SiteBundle:Default:try.html.twig', [

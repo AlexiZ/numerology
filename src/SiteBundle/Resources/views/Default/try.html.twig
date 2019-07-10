@@ -13,9 +13,13 @@
                         <div class="card-body">
                             <h5 class="card-title text-center">Renseignez les paramètres de vie</h5>
 
+                            {% for key, message in app.session.flashbag.all %}
+                                <div class="alert alert-{{ key }}">{{ message|join('') }}</div>
+                            {% endfor %}
+
                             {% form_theme form '@Site/Commons/_form_theme.html.twig' %}
 
-                            {{ form_start(form, {'attr': {'class': 'form-signin'}}) }}
+                            {{ form_start(form, {'attr': {'class': 'form-signin', 'id': 'form-try'}}) }}
                                 {{ form_errors(form) }}
 
                                 <div class="row">
@@ -75,42 +79,26 @@
 
                                 <hr class="my-4">
 
+                                <div class="text-center text-muted">
+                                    <p>
+                                        <small>Assurez-vous que votre saisie soit correcte avant de passer à l'étape suivante.</small>
+                                        <br>
+                                        <small>Vous ne pourrez plus revenir en arrière !</small>
+                                    </p>
+                                </div>
+
                                 {% if 'free' == version %}
-                                    <button class="btn btn-lg btn-info btn-block text-uppercase" type="button" data-toggle="modal" data-target="#analysisConfirmation">
+                                    <button class="btn btn-lg btn-info btn-block text-uppercase g-recaptcha" type="submit" data-sitekey="{{ gr_public_key }}" data-callback='onSubmit'>
                                         <i class="fa fa-check mr-2"></i> Générer cette étude numérologique gratuite
                                         <br><small><em>(Pour que l'analyse soit correcte, n'oubliez aucun nom ou prénom.)</em></small>
                                     </button>
                                 {% else %}
-                                    <button class="btn btn-lg btn-success btn-block text-uppercase" type="button" data-toggle="modal" data-target="#analysisConfirmation">
+                                    <button class="btn btn-lg btn-success btn-block text-uppercase g-recaptcha" type="submit" data-sitekey="{{ gr_public_key }}" data-callback='onSubmit'>
                                         <i class="fa fa-check mr-2"></i> Générer cette étude numérologique complète
                                         <br><small><em>Pour que l'analyse soit correcte, n'oubliez aucun nom ou prénom.</em></small>
                                         <br><small><em>Vous allez être dirigé vers l'interface de paiement.</em></small>
                                     </button>
                                 {% endif %}
-
-                                <div class="modal fade" id="analysisConfirmation" tabindex="-1" role="dialog" aria-labelledby="analysisConfirmationLabel" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="analysisConfirmationLabel">Validez votre saisie</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-
-                                            <div class="modal-body">
-                                                Assurez-vous que votre saisie soit correcte avant de passer à l'étape suivante.
-                                                <br>
-                                                Vous ne pourrez plus revenir en arrière !
-                                            </div>
-
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Modifier ma saisie</button>
-                                                <button type="submit" class="btn btn-primary">Valider</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                             {{ form_end(form) }}
                         </div>
                     </div>
@@ -119,3 +107,14 @@
         </div>
     </header>
 {% endblock body %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script type="text/javascript" src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script type="text/javascript">
+        function onSubmit(token) {
+            document.getElementById("form-try").submit();
+        }
+    </script>
+{% endblock javascripts %}
