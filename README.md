@@ -33,7 +33,9 @@ Generate a person's numerology theme.
 | 22 | 1                 | -      | Button on extranet show page to share front url |
 | 23 | 1                 | -      | Lifepath extranet block visual redesign         |
 | 24 | 1                 | `todo` | Identity extranet block visual redesign         |
-| 25 | 2                 | `todo` | Review PDF letters block and redesign           |
+| 25 | 2                 | -      | Review PDF letters block and redesign           |
+| 26 | 1                 | `todo` | Add recaptcha to front forms                    |
+| 27 | 1                 | `todo` | Work on birth field to avoid uncertainties      |
 
 ## How to add a new customer
 - Create an account in Slack with the Gmail alias and customer's real name
