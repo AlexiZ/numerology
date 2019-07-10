@@ -62,7 +62,7 @@
                 <div id="collapseReminder" class="collapse" aria-labelledby="headingReminder">
                     <div class="card-body text-center">
                         <p>
-                            <a href="javascript:void(0);" class="btn btn-icon-split disabled-btn {% if subject.data.identity.globalNumber in fullNames|numerosLettresManquantes %}blue{% elseif subject.data.identity.globalNumber in fullNames|numerosLettresFaibles %}yellow{% elseif subject.data.identity.globalNumber in fullNames|numerosLettresMoyennes %}orange{% elseif subject.data.identity.globalNumber in fullNames|numerosLettresFortes %}red{% endif %}">
+                            <a href="javascript:void(0);" class="btn btn-icon-split disabled-btn {% if subject.data.identity.globalNumber in fullNames|numerosLettresManquantes %}blue{% elseif subject.data.identity.globalNumber in fullNames|numerosLettresFaibles %}yellow{% elseif subject.data.identity.globalNumber in fullNames|numerosLettresMoyennes %}orange{% elseif subject.data.identity.globalNumber in fullNames|numerosLettresFortes %}red{% else %}grey{% endif %}">
                                 <span class="icon">{{ subject.data.identity.globalNumber }}</span>
                                 <span class="text">Global</span>
                             </a>
@@ -71,13 +71,13 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <p>
-                                    <a href="javascript:void(0);" class="btn btn-icon-split disabled-btn {% if subject.data.identity.inheritedNumber in fullNames|numerosLettresManquantes %}blue{% elseif subject.data.identity.inheritedNumber in fullNames|numerosLettresFaibles %}yellow{% elseif subject.data.identity.inheritedNumber in fullNames|numerosLettresMoyennes %}orange{% elseif subject.data.identity.inheritedNumber in fullNames|numerosLettresFortes %}red{% endif %}">
+                                    <a href="javascript:void(0);" class="btn btn-icon-split disabled-btn {% if subject.data.identity.inheritedNumber in fullNames|numerosLettresManquantes %}blue{% elseif subject.data.identity.inheritedNumber in fullNames|numerosLettresFaibles %}yellow{% elseif subject.data.identity.inheritedNumber in fullNames|numerosLettresMoyennes %}orange{% elseif subject.data.identity.inheritedNumber in fullNames|numerosLettresFortes %}red{% else %}grey{% endif %}">
                                         <span class="icon">{{ subject.data.identity.inheritedNumber }}</span>
                                         <span class="text">Héréditaire</span>
                                     </a>
                                 </p>
                                 <p>
-                                    <a href="javascript:void(0);" class="btn btn-icon-split disabled-btn {% if subject.data.identity.dutyNumber in fullNames|numerosLettresManquantes %}blue{% elseif subject.data.identity.dutyNumber in fullNames|numerosLettresFaibles %}yellow{% elseif subject.data.identity.dutyNumber in fullNames|numerosLettresMoyennes %}orange{% elseif subject.data.identity.dutyNumber in fullNames|numerosLettresFortes %}red{% endif %}">
+                                    <a href="javascript:void(0);" class="btn btn-icon-split disabled-btn {% if subject.data.identity.dutyNumber in fullNames|numerosLettresManquantes %}blue{% elseif subject.data.identity.dutyNumber in fullNames|numerosLettresFaibles %}yellow{% elseif subject.data.identity.dutyNumber in fullNames|numerosLettresMoyennes %}orange{% elseif subject.data.identity.dutyNumber in fullNames|numerosLettresFortes %}red{% else %}grey{% endif %}">
                                         <span class="icon">{{ subject.data.identity.dutyNumber }}</span>
                                         <span class="text">Mission</span>
                                     </a>
@@ -86,13 +86,13 @@
 
                             <div class="col-md-6">
                                 <p>
-                                    <a href="javascript:void(0);" class="btn btn-icon-split disabled-btn {% if subject.data.identity.socialNumber in fullNames|numerosLettresManquantes %}blue{% elseif subject.data.identity.socialNumber in fullNames|numerosLettresFaibles %}yellow{% elseif subject.data.identity.socialNumber in fullNames|numerosLettresMoyennes %}orange{% elseif subject.data.identity.socialNumber in fullNames|numerosLettresFortes %}red{% endif %}">
+                                    <a href="javascript:void(0);" class="btn btn-icon-split disabled-btn {% if subject.data.identity.socialNumber in fullNames|numerosLettresManquantes %}blue{% elseif subject.data.identity.socialNumber in fullNames|numerosLettresFaibles %}yellow{% elseif subject.data.identity.socialNumber in fullNames|numerosLettresMoyennes %}orange{% elseif subject.data.identity.socialNumber in fullNames|numerosLettresFortes %}red{% else %}grey{% endif %}">
                                         <span class="icon">{{ subject.data.identity.socialNumber }}</span>
                                         <span class="text">Social</span>
                                     </a>
                                 </p>
                                 <p>
-                                    <a href="javascript:void(0);" class="btn btn-icon-split disabled-btn {% if subject.data.identity.structureNumber in fullNames|numerosLettresManquantes %}blue{% elseif subject.data.identity.structureNumber in fullNames|numerosLettresFaibles %}yellow{% elseif subject.data.identity.structureNumber in fullNames|numerosLettresMoyennes %}orange{% elseif subject.data.identity.structureNumber in fullNames|numerosLettresFortes %}red{% endif %}">
+                                    <a href="javascript:void(0);" class="btn btn-icon-split disabled-btn {% if subject.data.identity.structureNumber in fullNames|numerosLettresManquantes %}blue{% elseif subject.data.identity.structureNumber in fullNames|numerosLettresFaibles %}yellow{% elseif subject.data.identity.structureNumber in fullNames|numerosLettresMoyennes %}orange{% elseif subject.data.identity.structureNumber in fullNames|numerosLettresFortes %}red{% else %}grey{% endif %}">
                                         <span class="icon">{{ subject.data.identity.structureNumber }}</span>
                                         <span class="text">Structure</span>
                                     </a>

@@ -173,6 +173,15 @@ strong.font-weight-bold {
     color: #858796;
     border-color: #858796;
   }
+  &.grey {
+    .icon {
+      background: rgba(0,0,0,.10);
+    }
+
+    background-color: #e6e7ea;
+    color: #858796;
+    border-color: #858796;
+  }
 }
 
 .tryPage {

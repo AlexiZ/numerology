@@ -26,6 +26,22 @@
 
                     <br>
 
+                    {% if lettersSynthesis.public|default and lettersSynthesis.public|length == 1 %}
+                        <p>
+                            {{ 'analysis.show.letters.synthesis.public'|transchoice(lettersSynthesis.public|length, {'%1%': ('analysis.show.letters.synthesis.'~lettersSynthesis.public.0)|trans})|raw }}
+                        </p>
+                    {% elseif lettersSynthesis.public|default and lettersSynthesis.public|length > 1 %}
+                        <p>
+                            {{ 'analysis.show.letters.synthesis.public'|transchoice(lettersSynthesis.public|length, {'%1%': ('analysis.show.letters.synthesis.'~lettersSynthesis.public.0)|trans, '%2%': ('analysis.show.letters.synthesis.'~lettersSynthesis.public.1)|trans})|raw }}
+                        </p>
+                    {% else %}
+                        <p>
+                            {{ 'analysis.show.letters.synthesis.public'|transchoice(0)|raw }}
+                        </p>
+                    {% endif %}
+
+                    <br>
+
                     <p>Cette information est disponible dans l'étude complète ou dans <a href="https://www.editions-bussiere.com/home/748-numerologie-essentielle-heritages-et-parcours-de-vie-9782850907227.html" class="btn-link">la Numérologie essentielle - Héritages et parcours de vie</a>.</p>
                 </div>
             </div>
@@ -53,6 +69,22 @@
                         </canvas>
                     </div>
                     <p class="text-center"><small><em>Ce graphique affiche les excès ou les manques relatifs à la moyenne de chaque type de lettre.</em></small></p>
+
+                    <br>
+
+                    {% if lettersSynthesis.private|default and lettersSynthesis.private|length == 1 %}
+                        <p>
+                            {{ 'analysis.show.letters.synthesis.private'|transchoice(lettersSynthesis.private|length, {'%1%': ('analysis.show.letters.synthesis.'~lettersSynthesis.private.0)|trans})|raw }}
+                        </p>
+                    {% elseif lettersSynthesis.private|default and lettersSynthesis.private|length > 1 %}
+                        <p>
+                            {{ 'analysis.show.letters.synthesis.private'|transchoice(lettersSynthesis.private|length, {'%1%': ('analysis.show.letters.synthesis.'~lettersSynthesis.private.0)|trans, '%2%': ('analysis.show.letters.synthesis.'~lettersSynthesis.private.1)|trans})|raw }}
+                        </p>
+                    {% else %}
+                        <p>
+                            {{ 'analysis.show.letters.synthesis.private'|transchoice(0)|raw }}
+                        </p>
+                    {% endif %}
 
                     <br>
 

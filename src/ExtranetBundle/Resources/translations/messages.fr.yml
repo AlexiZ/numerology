@@ -38,6 +38,11 @@ analysis:
             intuitive:
                 excess: "Une surcapacité intuitive vous permet d’improviser et de vous adapter à la plupart des situations. Vous vous servez de votre intuition avant de chercher à comprendre, ressentir ou agir."
                 lack: "Un manque d’intuition vous expose à être surpris(e) par ce qui arrive, à ne pas écouter la petite voix intérieure qui vous prévient du danger ou des opportunités à saisir. Ce déficit vous oblige à compenser le manque d’intuition par une réflexion accrue, par l’acquisition de connaissances et d’expériences physiques ou émotionnelles auxquelles vous référer pour savoir comment réagir."
+            details:
+                physical: "Lettres physiques"
+                emotional: "Lettres émotives"
+                brain: "Lettres cérébrales"
+                intuitive: "Lettres intuitives"
             synthesis:
                 physical: "physique"
                 emotional: "émotionnel"

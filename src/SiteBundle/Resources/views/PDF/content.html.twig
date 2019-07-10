@@ -232,6 +232,14 @@
             .btn-icon-split.blue .icon {
                 background: rgba(0, 0, 0, .10);
             }
+            .btn-icon-split.grey {
+                background-color: #e6e7ea;
+                color: #858796;
+                border-color: #858796;
+            }
+            .btn-icon-split.grey .icon {
+                background: rgba(0, 0, 0, .10);
+            }
             .vibrationsLegend {
                 padding: 0;
             }
@@ -281,6 +289,19 @@
             p.subtitle {
                 font-size: 1rem !important;
                 font-style: italic;
+            }
+            .no-page-break {
+                page-break-after: avoid;
+            }
+            .break-after {
+                page-break-after: always;
+            }
+            .progress {
+                border-radius: 0;
+            }
+            .progress-bar-right {
+                float: right;
+                display: block;
             }
         </style>
     </head>
@@ -333,14 +354,20 @@
                                             <strong>Nombre héréditaire</strong>
                                             <span class="badge badge-primary badge-pill">{{ subject.data.identity.inheritedNumber }}</span>
                                         </li>
-                                        <li class="list-group-item d-flex justify-content-between align-items-center mb-2">
+                                        <li class="list-group-item d-flex justify-content-between align-items-center mb-2 break-after">
                                             <div>
                                                 <p>{{ getDefinition('inherited')|raw }}</p>
                                                 <br>
                                                 <p>{{ subject.data.identity.inheritedNumber|getAnalysis('inherited')|raw }}</p>
                                             </div>
                                         </li>
+                                    </ul>
+                                </div>
+                            </div>
 
+                            <div class="row break-after">
+                                <div class="col-md-12 mb-5">
+                                    <ul class="list-group">
                                         <li class="list-group-item d-flex justify-content-between align-items-center">
                                             <strong>Nombre de mission</strong>
                                             <span class="badge badge-primary badge-pill">{{ subject.data.identity.dutyNumber }}</span>
@@ -364,7 +391,13 @@
                                                 <p>{{ subject.data.identity.socialNumber|getAnalysis('social')|raw }}</p>
                                             </div>
                                         </li>
+                                    </ul>
+                                </div>
+                            </div>
 
+                            <div class="row break-after">
+                                <div class="col-md-12 mb-5">
+                                    <ul class="list-group">
                                         <li class="list-group-item d-flex justify-content-between align-items-center">
                                             <strong>Nombre de structure</strong>
                                             <span class="badge badge-primary badge-pill">{{ subject.data.identity.structureNumber }}</span>
@@ -392,106 +425,76 @@
                                         <li class="list-group-item d-flex justify-content-between align-items-center mb-2">
                                             <div>
                                                 <p>La personnalité apparente est celle que les autres connaissent et dont ils ressentent la vibration, qui n’est pas forcément identique à celle donnée par votre identité complète.</p>
+
                                                 <br>
 
-                                                {% set progressBars = {
-                                                    physical: {
-                                                        value: ((subject.publicName|totalLettrePhysique|default(1) / subject.publicName|length)*100)|number_format(0),
-                                                        label: "Lettres physiques",
-                                                        bg: "success",
-                                                    },
-                                                    emotional: {
-                                                        value: ((subject.publicName|totalLettreEmotive|default(1) / subject.publicName|length)*100)|number_format(0),
-                                                        label: "Lettres émotives",
-                                                        bg: "info",
-                                                    },
-                                                    brain: {
-                                                        value: ((subject.publicName|totalLettreCerebrale|default(1) / subject.publicName|length)*100)|number_format(0),
-                                                        label: "Lettres cérébrales",
-                                                        bg: "warning",
-                                                    },
-                                                    intuitive: {
-                                                        value: ((subject.publicName|totalLettreIntuitive|default(1) / subject.publicName|length)*100)|number_format(0),
-                                                        label: "Lettres intuitives",
-                                                        bg: "danger",
-                                                    }
-                                                } %}
-
-                                                <div class="row progress my-4">
-                                                    {% for key, data in progressBars %}
-                                                        <div class="progress-bar progress-bar-striped bg-{{ data.bg }} automatic-tippy" data-ltippy="{{ key }}" role="progressbar" style="width:{{ data.value }}%">{{ data.value }}%</div>
-                                                    {% endfor %}
-                                                </div>
-
-                                                <div class="row text-center my-4">
+                                                {% if lettersSynthesis.public|default and lettersSynthesis.public|length == 1 %}
                                                     <p>
-                                                        <span class="badge bg-success badge-pill">&nbsp;</span>&nbsp;Lettres physiques
-                                                        <span class="badge bg-info badge-pill">&nbsp;</span>&nbsp;Lettres émotives
-                                                        <span class="badge bg-warning badge-pill">&nbsp;</span>&nbsp;Lettres cérébrales
-                                                        <span class="badge bg-danger badge-pill">&nbsp;</span>&nbsp;Lettres intuitives
+                                                        {{ 'analysis.show.letters.synthesis.public'|transchoice(lettersSynthesis.public|length, {'%1%': ('analysis.show.letters.synthesis.'~lettersSynthesis.public.0)|trans})|raw }}
                                                     </p>
-                                                </div>
+                                                {% elseif lettersSynthesis.public|default and lettersSynthesis.public|length > 1 %}
+                                                    <p>
+                                                        {{ 'analysis.show.letters.synthesis.public'|transchoice(lettersSynthesis.public|length, {'%1%': ('analysis.show.letters.synthesis.'~lettersSynthesis.public.0)|trans, '%2%': ('analysis.show.letters.synthesis.'~lettersSynthesis.public.1)|trans})|raw }}
+                                                    </p>
+                                                {% else %}
+                                                    <p>
+                                                        {{ 'analysis.show.letters.synthesis.public'|transchoice(0)|raw }}
+                                                    </p>
+                                                {% endif %}
+
+                                                <br>
 
                                                 {% if lettersDifferences.public|default %}
                                                     <ul>
-                                                        {% for public, value in lettersDifferences.public %}
-                                                            <li>{{ ('analysis.show.letters.'~public~'.'~(value >= 0 ? 'excess' : 'lack'))|trans|raw }}</li>
+                                                        {% for index, value in lettersDifferences.public %}
+                                                            <li>
+                                                                <strong>{{ ('analysis.show.letters.details.'~index)|trans }} : {% if value > 0 %}+{% endif %}{{ value }}</strong> (relativement à la moyenne)
+                                                                <br>
+                                                                {{ ('analysis.show.letters.'~index~'.'~(value >= 0 ? 'excess' : 'lack'))|trans|raw }}</li>
                                                         {% endfor %}
                                                     </ul>
                                                 {% endif %}
                                             </div>
                                         </li>
+                                    </ul>
+                                </div>
+                            </div>
 
+                            <div class="row break-after">
+                                <div class="col-md-12 mb-5">
+                                    <ul class="list-group">
                                         <li class="list-group-item d-flex justify-content-between align-items-center">
                                             <strong>Votre personnalité réelle : tous les noms et prénoms</strong>
                                         </li>
                                         <li class="list-group-item d-flex justify-content-between align-items-center mb-2">
                                             <div>
                                                 <p>C’est en intégrant votre identité complète que l’on peut connaître les véritables moteurs de votre comportement.</p>
+
                                                 <br>
 
-                                                {% set progressBars = {
-                                                    physical: {
-                                                        value: ((subject.fullNames|totalLettrePhysique|default(1) / subject.fullNames|length)*100)|number_format(0),
-                                                        label: "Lettres physiques",
-                                                        bg: "success",
-                                                    },
-                                                    emotional: {
-                                                        value: ((subject.fullNames|totalLettreEmotive|default(1) / subject.fullNames|length)*100)|number_format(0),
-                                                        label: "Lettres émotives",
-                                                        bg: "info",
-                                                    },
-                                                    brain: {
-                                                        value: ((subject.fullNames|totalLettreCerebrale|default(1) / subject.fullNames|length)*100)|number_format(0),
-                                                        label: "Lettres cérébrales",
-                                                        bg: "warning",
-                                                    },
-                                                    intuitive: {
-                                                        value: ((subject.fullNames|totalLettreIntuitive|default(1) / subject.fullNames|length)*100)|number_format(0),
-                                                        label: "Lettres intuitives",
-                                                        bg: "danger",
-                                                    }
-                                                } %}
-
-                                                <div class="row progress my-4">
-                                                    {% for key, data in progressBars %}
-                                                        <div class="progress-bar progress-bar-striped bg-{{ data.bg }} automatic-tippy" data-ltippy="{{ key }}" role="progressbar" style="width:{{ data.value }}%">{{ data.value }}%</div>
-                                                    {% endfor %}
-                                                </div>
-
-                                                <div class="row text-center my-4">
+                                                {% if lettersSynthesis.private|default and lettersSynthesis.private|length == 1 %}
                                                     <p>
-                                                        <span class="badge bg-success badge-pill">&nbsp;</span>&nbsp;Lettres physiques
-                                                        <span class="badge bg-info badge-pill">&nbsp;</span>&nbsp;Lettres émotives
-                                                        <span class="badge bg-warning badge-pill">&nbsp;</span>&nbsp;Lettres cérébrales
-                                                        <span class="badge bg-danger badge-pill">&nbsp;</span>&nbsp;Lettres intuitives
+                                                        {{ 'analysis.show.letters.synthesis.private'|transchoice(lettersSynthesis.private|length, {'%1%': ('analysis.show.letters.synthesis.'~lettersSynthesis.private.0)|trans})|raw }}
                                                     </p>
-                                                </div>
+                                                {% elseif lettersSynthesis.private|default and lettersSynthesis.private|length > 1 %}
+                                                    <p>
+                                                        {{ 'analysis.show.letters.synthesis.private'|transchoice(lettersSynthesis.private|length, {'%1%': ('analysis.show.letters.synthesis.'~lettersSynthesis.private.0)|trans, '%2%': ('analysis.show.letters.synthesis.'~lettersSynthesis.private.1)|trans})|raw }}
+                                                    </p>
+                                                {% else %}
+                                                    <p>
+                                                        {{ 'analysis.show.letters.synthesis.private'|transchoice(0)|raw }}
+                                                    </p>
+                                                {% endif %}
+
+                                                <br>
 
                                                 {% if lettersDifferences.private|default %}
                                                     <ul>
-                                                        {% for private, value in lettersDifferences.private %}
-                                                            <li>{{ ('analysis.show.letters.'~private~'.'~(value >= 0 ? 'excess' : 'lack'))|trans|raw }}</li>
+                                                        {% for index, value in lettersDifferences.private %}
+                                                            <li>
+                                                                <strong>{{ ('analysis.show.letters.details.'~index)|trans|raw }} : {% if value > 0 %}+{% endif %}{{ value }}</strong> (relativement à la moyenne)
+                                                                <br>
+                                                                {{ ('analysis.show.letters.'~index~'.'~(value >= 0 ? 'excess' : 'lack'))|trans|raw }}</li>
                                                         {% endfor %}
                                                     </ul>
                                                 {% endif %}
@@ -548,23 +551,23 @@
                                         <li class="list-group-item d-flex justify-content-between align-items-center mb-2">
                                             <div>
                                                 <p>
-                                                    <a href="javascript:void(0);" class="btn btn-icon-split disabled-btn {% if subject.data.identity.globalNumber in fullNames|numerosLettresManquantes %}blue{% elseif subject.data.identity.globalNumber in fullNames|numerosLettresFaibles %}yellow{% elseif subject.data.identity.globalNumber in fullNames|numerosLettresMoyennes %}orange{% elseif subject.data.identity.globalNumber in fullNames|numerosLettresFortes %}red{% endif %}">
+                                                    <a href="javascript:void(0);" class="btn btn-icon-split disabled-btn {% if subject.data.identity.globalNumber in fullNames|numerosLettresManquantes %}blue{% elseif subject.data.identity.globalNumber in fullNames|numerosLettresFaibles %}yellow{% elseif subject.data.identity.globalNumber in fullNames|numerosLettresMoyennes %}orange{% elseif subject.data.identity.globalNumber in fullNames|numerosLettresFortes %}red{% else %}grey{% endif %}">
                                                         <span class="icon">{{ subject.data.identity.globalNumber }}</span>
                                                         <span class="text">Global</span>
                                                     </a>
-                                                    <a href="javascript:void(0);" class="btn btn-icon-split disabled-btn {% if subject.data.identity.inheritedNumber in fullNames|numerosLettresManquantes %}blue{% elseif subject.data.identity.inheritedNumber in fullNames|numerosLettresFaibles %}yellow{% elseif subject.data.identity.inheritedNumber in fullNames|numerosLettresMoyennes %}orange{% elseif subject.data.identity.inheritedNumber in fullNames|numerosLettresFortes %}red{% endif %}">
+                                                    <a href="javascript:void(0);" class="btn btn-icon-split disabled-btn {% if subject.data.identity.inheritedNumber in fullNames|numerosLettresManquantes %}blue{% elseif subject.data.identity.inheritedNumber in fullNames|numerosLettresFaibles %}yellow{% elseif subject.data.identity.inheritedNumber in fullNames|numerosLettresMoyennes %}orange{% elseif subject.data.identity.inheritedNumber in fullNames|numerosLettresFortes %}red{% else %}grey{% endif %}">
                                                         <span class="icon">{{ subject.data.identity.inheritedNumber }}</span>
                                                         <span class="text">Héréditaire</span>
                                                     </a>
-                                                    <a href="javascript:void(0);" class="btn btn-icon-split disabled-btn {% if subject.data.identity.dutyNumber in fullNames|numerosLettresManquantes %}blue{% elseif subject.data.identity.dutyNumber in fullNames|numerosLettresFaibles %}yellow{% elseif subject.data.identity.dutyNumber in fullNames|numerosLettresMoyennes %}orange{% elseif subject.data.identity.dutyNumber in fullNames|numerosLettresFortes %}red{% endif %}">
+                                                    <a href="javascript:void(0);" class="btn btn-icon-split disabled-btn {% if subject.data.identity.dutyNumber in fullNames|numerosLettresManquantes %}blue{% elseif subject.data.identity.dutyNumber in fullNames|numerosLettresFaibles %}yellow{% elseif subject.data.identity.dutyNumber in fullNames|numerosLettresMoyennes %}orange{% elseif subject.data.identity.dutyNumber in fullNames|numerosLettresFortes %}red{% else %}grey{% endif %}">
                                                         <span class="icon">{{ subject.data.identity.dutyNumber }}</span>
                                                         <span class="text">Mission</span>
                                                     </a>
-                                                    <a href="javascript:void(0);" class="btn btn-icon-split disabled-btn {% if subject.data.identity.socialNumber in fullNames|numerosLettresManquantes %}blue{% elseif subject.data.identity.socialNumber in fullNames|numerosLettresFaibles %}yellow{% elseif subject.data.identity.socialNumber in fullNames|numerosLettresMoyennes %}orange{% elseif subject.data.identity.socialNumber in fullNames|numerosLettresFortes %}red{% endif %}">
+                                                    <a href="javascript:void(0);" class="btn btn-icon-split disabled-btn {% if subject.data.identity.socialNumber in fullNames|numerosLettresManquantes %}blue{% elseif subject.data.identity.socialNumber in fullNames|numerosLettresFaibles %}yellow{% elseif subject.data.identity.socialNumber in fullNames|numerosLettresMoyennes %}orange{% elseif subject.data.identity.socialNumber in fullNames|numerosLettresFortes %}red{% else %}grey{% endif %}">
                                                         <span class="icon">{{ subject.data.identity.socialNumber }}</span>
                                                         <span class="text">Social</span>
                                                     </a>
-                                                    <a href="javascript:void(0);" class="btn btn-icon-split disabled-btn {% if subject.data.identity.structureNumber in fullNames|numerosLettresManquantes %}blue{% elseif subject.data.identity.structureNumber in fullNames|numerosLettresFaibles %}yellow{% elseif subject.data.identity.structureNumber in fullNames|numerosLettresMoyennes %}orange{% elseif subject.data.identity.structureNumber in fullNames|numerosLettresFortes %}red{% endif %}">
+                                                    <a href="javascript:void(0);" class="btn btn-icon-split disabled-btn {% if subject.data.identity.structureNumber in fullNames|numerosLettresManquantes %}blue{% elseif subject.data.identity.structureNumber in fullNames|numerosLettresFaibles %}yellow{% elseif subject.data.identity.structureNumber in fullNames|numerosLettresMoyennes %}orange{% elseif subject.data.identity.structureNumber in fullNames|numerosLettresFortes %}red{% else %}grey{% endif %}">
                                                         <span class="icon">{{ subject.data.identity.structureNumber }}</span>
                                                         <span class="text">Structure</span>
                                                     </a>
@@ -606,7 +609,7 @@
                                 </div>
                             </div>
 
-                            <div class="row">
+                            <div class="row break-after">
                                 <div class="col-md-12 mb-5">
                                     <h3 class="text-center">Parcours de vie</h3>
                                     <hr class="divider mt-4 underline-divider">
@@ -637,7 +640,15 @@
                                                     {{ subject.data.lifePath.idealNumber|getAnalysis('ideal')|raw }}
                                                 </div>
                                             </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
 
+                            <div class="row break-after">
+                                <div class="col-md-12 mb-5">
+                                    <div class="row">
+                                        <ul class="list-group col-md-12">
                                             <li class="list-group-item d-flex justify-content-between align-items-center">
                                                 <strong>Tournant majeur</strong>
                                                 <span class="badge badge-primary badge-pill">{{ subject.data.lifePath.majorTurnNumber }} ans</span>
@@ -683,7 +694,15 @@
                                                     {{ subject.data.lifePath.astrologicalNumber|getAnalysis('astrological')|raw }}
                                                 </div>
                                             </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
 
+                            <div class="row">
+                                <div class="col-md-12 mb-5">
+                                    <div class="row">
+                                        <ul class="list-group col-md-12">
                                             <li class="list-group-item d-flex justify-content-between align-items-center">
                                                 <strong>Nombre du très court terme</strong>
                                                 <span class="badge badge-primary badge-pill">{{ subject.data.lifePath.veryShortTermNumber }}</span>
