@@ -37,9 +37,9 @@
                                             <tr>
                                                 <th scope="row">1</th>
                                                 <td>Étude numérologique complète<br>"<em>{{ subject }}</em>"</td>
-                                                <td>9€38</td>
-                                                <td>5,5</td>
-                                                <td>9€90</td>
+                                                <td>{{ (9.9 - (5 / 100 * 9.9))|localizedcurrency('EUR') }}</td>
+                                                <td>{{ 5.5|number_format(1, ',', ' ') }} %</td>
+                                                <td>{{ 9.9|localizedcurrency('EUR') }}</td>
                                             </tr>
                                             <tr>
                                                 <td colspan="5">
