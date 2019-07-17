@@ -68,6 +68,12 @@ class Analysis
     private $birthPlace;
 
     /**
+     * @var string
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $birthPlaceCoordinates;
+
+    /**
      * @var array
      * @ORM\Column(type="array", nullable=true)
      */
@@ -405,6 +411,30 @@ class Analysis
     public function setBirthPlace($birthPlace)
     {
         $this->birthPlace = $this->cleanString($birthPlace);
+
+        return $this;
+    }
+
+    /**
+     * Get birthPlaceCoordinates.
+     *
+     * @return string
+     */
+    public function getBirthPlaceCoordinates()
+    {
+        return $this->birthPlaceCoordinates;
+    }
+
+    /**
+     * Set birthPlaceCoordinates.
+     *
+     * @param string $birthPlaceCoordinates
+     *
+     * @return Analysis
+     */
+    public function setBirthPlaceCoordinates($birthPlaceCoordinates)
+    {
+        $this->birthPlaceCoordinates = $birthPlaceCoordinates;
 
         return $this;
     }

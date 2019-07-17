@@ -14,7 +14,6 @@
     "datatables.net-bs4": "^1.10.19",
     "jquery": "^3.4.1",
     "jquery-easing": "0.0.1",
-    "jquery-ui": "^1.12.1",
     "magnific-popup": "^1.1.0",
     "node-gyp": "^4.0.0",
     "npm": "^6.10.0",

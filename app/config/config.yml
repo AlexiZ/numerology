@@ -40,6 +40,7 @@ twig:
     globals:
         gr_public_key: '%google_recaptcha.public_key%'
         pp_hosted_btn_id: '%paypal.hosted_button_id%'
+        gj_api_key: '%google_javascript_api_key%'
 
 # Doctrine Configuration
 doctrine:

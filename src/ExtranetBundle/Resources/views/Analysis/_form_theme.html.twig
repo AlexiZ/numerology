@@ -28,7 +28,11 @@
             {{ form_label(form, null, {'label_attr': {'class': 'col-md-4'}}) }}
 
             <div class="col-sm-8">
-                {{ form_widget(form, {'attr': {'class': 'form-control'}}) }}
+                {% set class = 'form-control' %}
+                {% if attr|default and attr.class|default %}
+                    {% set class = 'form-control ' ~ attr.class %}
+                {% endif %}
+                {{ form_widget(form, {'attr': {'class': class}}) }}
             </div>
         </div>
     </div>

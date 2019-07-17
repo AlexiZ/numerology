@@ -30,14 +30,14 @@
             {% if subject0.pseudos is not empty and subject0.pseudos.0|default %}
                 {{ subject0.pseudos|join(', ') }}<br>
             {% endif %}
-            <small>{{ subject0.birthDate|localizeddate('long', 'short', 'fr') }}, {{ subject0.birthPlace }} ({{ subject0.data.geolocation|coordsToText }})</small>
+            <small>{{ subject0.birthDate|localizeddate('long', 'short', 'fr') }}, {{ subject0.birthPlace }} ({{ subject0.birthPlaceCoordinates|coordsToText }})</small>
         </div>
 
         <div class="col-md-6 text-right">
             {% if subject1.pseudos is not empty and subject1.pseudos.0|default %}
                 {{ subject1.pseudos|join(', ') }}<br>
             {% endif %}
-            <small>{{ subject1.birthDate|localizeddate('long', 'short', 'fr') }}, {{ subject1.birthPlace }} ({{ subject1.data.geolocation|coordsToText }})</small>
+            <small>{{ subject1.birthDate|localizeddate('long', 'short', 'fr') }}, {{ subject1.birthPlace }} ({{ subject1.birthPlaceCoordinates|coordsToText }})</small>
         </div>
     </div>
 {% endblock pagesubtitle %}

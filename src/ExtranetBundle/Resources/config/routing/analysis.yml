@@ -31,3 +31,9 @@ extranet_exemplarize:
     defaults: { _controller: ExtranetBundle:Analysis:exemplarize }
     options:
         expose: true
+
+extranet_location_matches:
+    path: /_geolocaliser/{location}
+    defaults: { _controller: ExtranetBundle:Analysis:geocode }
+    options:
+        expose: true

@@ -111,7 +111,6 @@ class Numerologie
                 'longTermNumber' => $this->getLongTermNumber($subject),
                 'secretNumber' => $this->getSecretNumber($subject),
             ],
-            'geolocation' => $this->geocoding->getGeolocation($subject->getBirthPlace(), true),
         ];
     }
 
@@ -360,7 +359,7 @@ class Numerologie
 
     public function getAstrologicalNumber(Analysis $subject)
     {
-        $cityCoordinates = str_replace([',', '.'], '', $this->geocoding->getGeolocation($subject->getBirthPlace()));
+        $cityCoordinates = str_replace([',', '.'], '', $this->geocoding->DECtoDMS($subject->getBirthPlaceCoordinates()));
 
         return $this->reduceNumber($subject->getUTCBirthDate()->format('dmYHi').$cityCoordinates, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
     }
