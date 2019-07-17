@@ -117,4 +117,6 @@
             document.getElementById("form-try").submit();
         }
     </script>
-{% endblock javascripts %}
+    <script src="https://maps.googleapis.com/maps/api/js?key={{ gj_api_key }}&libraries=places&language=fr"></script>
+    <script async defer src="{{ asset('bundles/extranet/js/autocomplete.js') }}"></script>
+{% endblock %}
