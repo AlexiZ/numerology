@@ -359,7 +359,9 @@ class Numerologie
 
     public function getAstrologicalNumber(Analysis $subject)
     {
-        $cityCoordinates = str_replace([',', '.'], '', $this->geocoding->DECtoDMS($subject->getBirthPlaceCoordinates()));
+        $lat = implode('', $subject->getBirthPlaceCoordinates()['lat']);
+        $lng = implode('', $subject->getBirthPlaceCoordinates()['lng']);
+        $cityCoordinates = str_replace([',', '.'], '', $lat.$lng);
 
         return $this->reduceNumber($subject->getUTCBirthDate()->format('dmYHi').$cityCoordinates, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
     }

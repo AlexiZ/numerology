@@ -18,21 +18,6 @@ class AnalysisController extends Controller
     const ROUTE_INDEX = 'extranet_index';
     const SUBJECT = 'subject';
 
-    public function indexAction()
-    {
-        $repository = $this->getDoctrine()->getRepository(Analysis::class);
-
-        if ($this->isGranted('ROLE_ANALYSIS_HISTORY')) {
-            $history = $repository->getSingleUserHistory($this->getUser()->getId());
-        } else {
-            $history = $repository->getDemoHistory();
-        }
-
-        return $this->render('@Extranet/Analysis/index.html.twig', [
-            'subjects' => $history,
-        ]);
-    }
-
     /**
      * @Security("is_granted('ROLE_ANALYSIS_ADD')")
      */

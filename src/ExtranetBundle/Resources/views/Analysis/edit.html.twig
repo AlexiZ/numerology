@@ -41,3 +41,10 @@
         </div>
     </div>
 {% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script src="https://maps.googleapis.com/maps/api/js?key={{ gj_api_key }}&libraries=places&language=fr"></script>
+    <script async defer src="{{ asset('bundles/extranet/js/autocomplete.js') }}"></script>
+{% endblock %}

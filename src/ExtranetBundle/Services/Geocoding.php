@@ -4,9 +4,17 @@ namespace ExtranetBundle\Services;
 
 class Geocoding
 {
-    public function DECtoDMS($dec, $asArray = false)
+    /**
+     * Convert decimal coordinates as degrees.
+     *
+     * @param string $coordinates
+     * @param bool $asArray
+     *
+     * @return array|string
+     */
+    public function DECtoDMS($coordinates, $asArray = false)
     {
-        $vars = explode(".", $dec);
+        $vars = explode(".", $coordinates);
         $deg = (int) $vars[0];
         $tempma = "0." . $vars[1];
 
@@ -15,5 +23,17 @@ class Geocoding
         $sec = round($tempma - ($min * 60), 0);
 
         return $asArray ? [$deg, $min, $sec] : $deg . $min . $sec;
+    }
+
+    /**
+     * Convert degree coordinates as decimals.
+     *
+     * @param array $coordinates
+     *
+     * @return float|int|mixed
+     */
+    public function DMStoDEC($coordinates)
+    {
+        return $coordinates[0] + ((($coordinates[1] * 60) + ($coordinates[2])) / 3600);
     }
 }

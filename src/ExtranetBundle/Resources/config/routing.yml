@@ -1,6 +1,6 @@
 extranet_index:
   path: /
-  defaults: { _controller: ExtranetBundle:Analysis:index }
+  defaults: { _controller: ExtranetBundle:Default:index }
 
 analysis:
     resource: "routing/analysis.yml"

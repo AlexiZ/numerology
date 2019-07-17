@@ -68,8 +68,8 @@ class Analysis
     private $birthPlace;
 
     /**
-     * @var string
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @var array
+     * @ORM\Column(type="array", nullable=true)
      */
     private $birthPlaceCoordinates;
 
@@ -418,7 +418,7 @@ class Analysis
     /**
      * Get birthPlaceCoordinates.
      *
-     * @return string
+     * @return array
      */
     public function getBirthPlaceCoordinates()
     {
@@ -428,7 +428,7 @@ class Analysis
     /**
      * Set birthPlaceCoordinates.
      *
-     * @param string $birthPlaceCoordinates
+     * @param array $birthPlaceCoordinates
      *
      * @return Analysis
      */
