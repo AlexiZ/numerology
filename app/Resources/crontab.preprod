@@ -24,4 +24,4 @@
 SYMFONY_ENV=prod
 MAILTO=numerologie.mazaudier@gmail.com
 
-0       1       1       1       *       php current/bin/console import:open_marine > /dev/null
+0       1       1       1       *       php7.1-cli current/bin/console extranet:update:personal_year > /dev/null
