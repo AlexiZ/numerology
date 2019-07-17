@@ -35,7 +35,7 @@ Generate a person's numerology theme.
 | 24 | 1                 | `todo` | Identity extranet block visual redesign         |
 | 25 | 2                 | -      | Review PDF letters block and redesign           |
 | 26 | 1                 | -      | Add recaptcha to front forms                    |
-| 27 | 1                 | `todo` | Work on birth field to avoid uncertainties      |
+| 27 | 1                 | -      | Work on birth field to avoid uncertainties      |
 
 ## How to add a new customer
 - Create an account in Slack with the Gmail alias and customer's real name
