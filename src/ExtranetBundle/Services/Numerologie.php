@@ -354,7 +354,7 @@ class Numerologie
 
     public function getPersonnalYearNowNumber(Analysis $subject)
     {
-        return $this->reduceNumber($subject->getUTCBirthDate()->format('dm').date('Y'), [1, 2, 3, 4, 5, 6, 7, 8, 9]);
+        return $this->reduceNumber($subject->getUTCBirthDate()->format('dm') . date('Y'), [1, 2, 3, 4, 5, 6, 7, 8, 9]);
     }
 
     public function getAstrologicalNumber(Analysis $subject)
@@ -363,7 +363,7 @@ class Numerologie
         $lng = implode('', $subject->getBirthPlaceCoordinates()['lng']);
         $cityCoordinates = str_replace([',', '.'], '', $lat.$lng);
 
-        return $this->reduceNumber($subject->getUTCBirthDate()->format('dmYHi').$cityCoordinates, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
+        return $this->reduceNumber($subject->getUTCBirthDate()->format('dmYHi') . $cityCoordinates, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
     }
 
     public function getVeryShortTermNumber(Analysis $subject)
