@@ -448,7 +448,7 @@
                                                     <ul>
                                                         {% for index, value in lettersDifferences.public %}
                                                             <li>
-                                                                <strong>{{ ('analysis.show.letters.details.'~index)|trans }} : {% if value > 0 %}+{% endif %}{{ value }}</strong> (relativement à la moyenne)
+                                                                <strong>{{ ('analysis.show.letters.details.'~index)|trans }} : {% if value > 0 %}+{% endif %}{{ value }} %</strong> (relativement à la moyenne)
                                                                 <br>
                                                                 {{ ('analysis.show.letters.'~index~'.'~(value >= 0 ? 'excess' : 'lack'))|trans|raw }}</li>
                                                         {% endfor %}
