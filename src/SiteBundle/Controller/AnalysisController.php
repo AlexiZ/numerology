@@ -142,7 +142,7 @@ class AnalysisController extends Controller
             'path' => rtrim($request->server->get('DOCUMENT_ROOT'), "/"),
             'identity' => $numerologieService->getIdentityDetails($subject),
             'lettersChartValues' => $numerologieService->getLettersChartValues($subject),
-            'lettersDifferences' => $numerologieService->getLettersDifferences($subject),
+            'lettersDifferences' => $numerologieService->getFullLettersDifferences($subject),
             'lettersSynthesis' => $numerologieService->getLettersSynthesis($subject),
         ]);
         $footer = $this->renderView('@Site/PDF/footer.html.twig');

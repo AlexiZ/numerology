@@ -483,6 +483,28 @@ class Numerologie
         return $differences;
     }
 
+    public function getFullLettersDifferences(Analysis $subject)
+    {
+        $differences = [];
+
+        foreach (['public', 'private'] as $property) {
+            $lettersChartValues = $this->getLettersChartValues($subject);
+
+            foreach ([0 => 'physical', 1 => 'emotional', 2 => 'brain', 3 => 'intuitive'] as $index => $type) {
+                if (abs($lettersChartValues[$property][$index]) >= self::LETTERS_LIMIT_VALUE) {
+                    $t = $lettersChartValues[$property][$index] > 0 ? self::LETTERS_LIMIT_VALUE : (- self::LETTERS_LIMIT_VALUE);
+                    $differences[$property][$type] = $lettersChartValues[$property][$index];
+
+                    if ($t < 0 && 0 === $differences[$property][$type]) {
+                        $differences[$property][$type]--;
+                    }
+                }
+            }
+        }
+
+        return $differences;
+    }
+
     public function getLettersSynthesis(Analysis $subject)
     {
         $input = $this->getLettersDifferences($subject);
