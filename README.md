@@ -36,7 +36,8 @@ Generate a person's numerology theme.
 | 25 | 2                 | -      | Review PDF letters block and redesign           |
 | 26 | 1                 | -      | Add recaptcha to front forms                    |
 | 27 | 1                 | -      | Work on birth field to avoid uncertainties      |
-| 28 | 1                 | `todo` | Annualy change personal year number with a cron |
+| 28 | 1                 | -      | Annualy change personal year number with a cron |
+| 29 | 2                 | `todo` | Add a field to get studies by email             |
 
 ## How to add a new customer
 - Create an account in Slack with the Gmail alias and customer's real name
