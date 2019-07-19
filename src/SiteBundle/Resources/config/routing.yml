@@ -8,6 +8,10 @@ site_contact:
     path:     /contact
     defaults: { _controller: SiteBundle:Default:contact }
 
+site_page:
+    path:     /page/{slug}
+    defaults: { _controller: SiteBundle:Default:page }
+
 
 ## ANALYSIS ##
 

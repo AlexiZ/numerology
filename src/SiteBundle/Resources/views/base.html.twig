@@ -60,8 +60,12 @@
 
         <footer class="bg-light py-5">
             <div class="container">
-                <div class="small text-center text-muted">Copyright &copy; Jean-Michel Mazaudier 2019</div>
-                <div class="small text-center text-muted"><span class="mr-2 d-none d-lg-inline text-gray-600 small"><em>Date de dernière mise à jour : {% include 'latest.html.twig' %}</em></span></div>
+                <div class="small text-center text-muted">
+                    <a href="{{ path('site_page', {'slug': 'mentions-legales'}) }}">Copyright &copy; Jean-Michel Mazaudier 2019</a>
+                </div>
+                <div class="small text-center text-muted">
+                    <span class="mr-2 d-none d-lg-inline text-gray-600 small"><em>Date de dernière mise à jour : {% include 'latest.html.twig' %}</em></span>
+                </div>
             </div>
         </footer>
 

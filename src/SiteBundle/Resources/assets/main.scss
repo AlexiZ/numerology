@@ -404,3 +404,11 @@ p.subtitle {
   font-size: 1rem !important;
   font-style: italic;
 }
+
+i.fa-github {
+  color: black;
+
+  &::before {
+    vertical-align: middle;
+  }
+}

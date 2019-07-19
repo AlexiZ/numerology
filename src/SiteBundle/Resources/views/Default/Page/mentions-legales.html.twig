@@ -1,0 +1,47 @@
+{% extends '@Site/base.html.twig' %}
+
+{% block title %}{{ parent() }} - Mentions légales{% endblock %}
+
+{% block bodyAttr %}class="tryPage"{% endblock bodyAttr %}
+
+{% block body %}
+    <header class="masthead">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 col-xl-9 mx-auto">
+                    <div class="card card-signin flex-row my-5">
+                        <div class="card-body">
+                            <h5 class="card-title text-center">Mentions légales</h5>
+
+                            <div class="text-center text-muted">
+                                <p class="mb-0 text-gray-600">Informations légales</p>
+                                <br>
+                                <span class="text-gray-600 small">Jean Michel Mazaudier<br>
+                                    1 Route de Hent Glaz<br>
+                                    29530 Loqueffret<br>
+                                    Tél : 02 98 26 21 63<br>
+                                    N° de Siret : 53119681400036<br>
+                                    <a href="https://www.amazon.fr/l/B00T6SLN4Y?_encoding=UTF8&qid=1563548750&redirectedFromKindleDbs=true&ref=sr_ntt_srch_lnk_1&rfkd=1&shoppingPortalEnabled=true&sr=8-1" target="_blank">Bibliothèque Amazon</a></span>
+                                <br><br><br>
+                                <p class="mb-0 text-gray-600">Hébergeur du site</p>
+                                <br>
+                                <span class="text-gray-600 small">1&amp;1 Internet SARL<br>
+                                    7, place de la Gare<br>
+                                    BP 70109<br>
+                                    57201 Sarreguemines Cedex</span>
+                                <br><br><br>
+                                <p class="mb-0 text-gray-600">Réalisation du site</p>
+                                <br>
+                                <span class="text-gray-600 small"><a href="https://github.com/AlexiZ" target="_blank"><i class="fab fa-2x fa-github"></i>&nbsp;AlexiZ</a></span>
+                                <br>
+                                <span class="text-gray-600 small"><a href="https://startbootstrap.com/themes/creative/" target="_blank">Creative Theme</a> par <a href="http://davidmiller.io/">David Miller</a></span>
+                                <br>
+                                <span class="text-gray-600 small"><a href="https://startbootstrap.com/themes/sb-admin-2/" target="_blank">SB Admin 2</a> par <a href="http://davidmiller.io/">David Miller</a></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+{% endblock body %}

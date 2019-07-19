@@ -5,6 +5,7 @@ namespace SiteBundle\Controller;
 use ExtranetBundle\Entity\Analysis;
 use ReCaptcha\ReCaptcha;
 use SiteBundle\Form\ContactType;
+use Symfony\Bridge\Twig\TwigEngine;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -57,5 +58,14 @@ class DefaultController extends Controller
         return $this->render('@Site/Default/contact.html.twig', [
             'form' => $form->createView(),
         ]);
+    }
+
+    public function pageAction($slug, TwigEngine $twigEngine)
+    {
+        if (!$twigEngine->exists('@Site/Default/Page/' . $slug . '.html.twig')) {
+            return $this->redirectToRoute('site_homepage');
+        }
+
+        return $this->render('@Site/Default/Page/' . $slug . '.html.twig');
     }
 }
