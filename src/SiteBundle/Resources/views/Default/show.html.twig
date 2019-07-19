@@ -11,6 +11,12 @@
                 <div class="col-lg-10 col-xl-9 mx-auto">
                     <div class="card card-signin flex-row my-5">
                         <div class="card-body">
+                            {% if fileExists('bundles/site/img/'~subject.hash~'.png') %}
+                                <div class="crop mx-auto">
+                                    <img src="{{ asset('bundles/site/img/'~subject.hash~'.png') }}" alt="{{ subject }}">
+                                </div>
+                            {% endif %}
+
                             <h5 class="card-title text-center mt-4">
                                 {{ subject }}
                                 <br>{% if subject.pseudos is not empty and subject.pseudos.0|default %}

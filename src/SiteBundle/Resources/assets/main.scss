@@ -412,3 +412,15 @@ i.fa-github {
     vertical-align: middle;
   }
 }
+
+.crop {
+  width: 200px;
+  height: 200px;
+  overflow: hidden;
+  border-radius: 50%;
+
+  img {
+    margin: 0px 0 0 -65px;
+    width: 320px;
+  }
+}

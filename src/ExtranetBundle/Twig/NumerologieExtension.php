@@ -57,8 +57,6 @@ class NumerologieExtension extends AbstractExtension
             new TwigFilter('addNumberDigits', array($this, 'addNumberDigits')),
 
             new TwigFilter('getAnalysis', array($this, 'getAnalysis')),
-
-            new TwigFilter('natJoin', array($this, 'natJoin')),
         );
     }
 
@@ -225,24 +223,5 @@ class NumerologieExtension extends AbstractExtension
     public function getAnalysis($number, $context)
     {
         return $this->numerologie->getAnalysis($number, $context);
-    }
-
-    public function natJoin($array, $delimiter = ', ')
-    {
-        $array = array_values($array);
-        if (0 === count($array)) {
-            return '';
-        }
-        if (1 === count($array)) {
-            return $array[0];
-        }
-
-        $string = $array[0];
-
-        for ($i = 1; $i < count($array) - 1; $i++) {
-            $string .= $delimiter. $array[$i];
-        }
-
-        return $string . ' et ' . $array[count($array) - 1];
     }
 }
