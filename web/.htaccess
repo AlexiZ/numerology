@@ -21,7 +21,6 @@ DirectoryIndex app.php
     RewriteEngine On
 
     RewriteCond %{HTTPS} off
-    RewriteCond %{HTTP_HOST} !.lph$
     RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
 
     # Determine the RewriteBase automatically and set it as environment variable.
@@ -38,10 +37,10 @@ DirectoryIndex app.php
     RewriteCond %{HTTP:Authorization} .
     RewriteRule ^ - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
 
-    # Automatically use app_dev.php on sandbox and docker
+    # Automatically use app_dev.php on local
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_URI} !app.php
-    RewriteCond %{HTTP_HOST} \.(sandbox|docker|lph)(:[0-9]+)?$
+    RewriteCond %{HTTP_HOST} \.local$
     RewriteRule ^(.*)$ /app_dev.php [QSA,L]
 
     # Redirect to URI without front controller to prevent duplicate content
