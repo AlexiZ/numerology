@@ -44,10 +44,3 @@ services:
             - ./var/logs/apache:/var/log/apache2
         environment:
             VIRTUAL_HOST: 'numerology.$DOCKER_HOST_SUFFIX'
-
-    node:
-        image: node:alpine
-        volumes:
-            - .:/var/www/symfony
-        user: 1000:1000
-        working_dir: /var/www/symfony
