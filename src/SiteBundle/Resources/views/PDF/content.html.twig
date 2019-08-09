@@ -303,6 +303,12 @@
                 float: right;
                 display: block;
             }
+            .font-weight-bold {
+                font-size: x-large;
+            }
+            .text-justify {
+                text-align: justify;
+            }
         </style>
     </head>
 
@@ -322,7 +328,7 @@
                 {% if subject.pseudos is not empty and subject.pseudos.0|default %}
                     {{ subject.pseudos|join(', ') }}<br>
                 {% endif %}
-                <small>{{ subject.birthDate|localizeddate('long', 'short', 'fr') }}, {{ subject.birthPlace }} ({{ subject.birthPlaceCoordinates|coordsToText }})</small>
+                <small>{{ subject.birthDate|localizeddate('long', 'short', 'fr') }} (UTC {{ subject.UTCBirthDate|localizeddate('short', 'short', 'fr') }}), {{ subject.birthPlace }} ({{ subject.birthPlaceCoordinates|coordsToText }})</small>
             </h4>
         </div>
 
@@ -331,6 +337,27 @@
                 <div class="col-12 mx-auto">
                     <div class="card card-signin flex-row my-5">
                         <div class="card-body">
+                            <div class="row break-after">
+                                <div class="col-md-12 mb-5 mt-4 text-justify centered font-weight-bold">
+                                    <br>
+                                    <p class="mt-4">
+                                        Cette analyse numérologique prend en compte votre identité et vos paramètres de naissance.
+                                    </p>
+                                    <p class="mt-2">
+                                        L'identité est une composante de votre personnalité qui vous a été imposée à la naissance (le nom par votre famille et votre prénom par vos parents) ou que vous avez choisie ensuite (par mariage ou changement volontaire de nom ou de prénom).
+                                    </p>
+                                    <p class="mt-2">
+                                        La vibration de cette identité, dans ses aspects négatifs et positifs, se construit avec le temps pour faire partie intégrante de la personnalité de l'individu. Mais il arrive, du fait des circonstances propres à chacun, que cette sulbiose ne fonctionne pas, ce qui peut expliquer certaines impressions de mal-être.
+                                    </p>
+                                    <p class="mt-2">
+                                        Le parcours de vie prend en compte la date, l'heure et le lieu de naissance. C'est un cheminement qui s'effectue tantôt du côté positif et tantôt du côté négatif, le rôle de chacun étant d'essayer de rester sur le versant lumineux du parcours.
+                                    </p>
+                                    <p class="mt-2">
+                                        L'intérêt de cette analyse est de vous offrir des repères existentiels pour vous aider à avancer. Elle n'est en aucun cas une manière de coller une étiquette mais au contraire un moyen supplémentaire d'exercer votre libre-arbitre.
+                                    </p>
+                                </div>
+                            </div>
+
                             <div class="row break-after">
                                 <div class="col-md-12 mb-5">
                                     <h3 class="text-center">Identité</h3>
@@ -492,7 +519,7 @@
                                                     <ul>
                                                         {% for index, value in lettersDifferences.private %}
                                                             <li>
-                                                                <strong>{{ ('analysis.show.letters.details.'~index)|trans|raw }} : {% if value > 0 %}+{% endif %}{{ value }}</strong> (relativement à la moyenne)
+                                                                <strong>{{ ('analysis.show.letters.details.'~index)|trans|raw }} : {% if value > 0 %}+{% endif %}{{ value }} %</strong> (relativement à la moyenne)
                                                                 <br>
                                                                 {{ ('analysis.show.letters.'~index~'.'~(value >= 0 ? 'excess' : 'lack'))|trans|raw }}</li>
                                                         {% endfor %}
@@ -630,7 +657,7 @@
                                             </li>
 
                                             <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                <strong>Chemin d'idéal</strong>
+                                                <strong>Nombre d'idéal</strong>
                                                 <span class="badge badge-primary badge-pill">{{ subject.data.lifePath.idealNumber }}</span>
                                             </li>
                                             <li class="list-group-item d-flex justify-content-between align-items-center mb-2">
