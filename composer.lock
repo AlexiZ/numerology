@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f209a8eeed7f002db37275c74ac31b0c",
+    "content-hash": "647b2cd833c559ab07637400b6f7646a",
     "packages": [
         {
             "name": "auth0/auth0-php",
@@ -1813,16 +1813,16 @@
         },
         {
             "name": "h4cc/wkhtmltopdf-amd64",
-            "version": "0.12.5",
+            "version": "0.12.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/AlexiZ/wkhtmltopdf-amd64.git",
-                "reference": "d4bbf9d4b02f36190aa2386cba82f59c7c370f49"
+                "reference": "e5385ebfbcdfe1ec949dd8e46cf8c79325abbdb4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/AlexiZ/wkhtmltopdf-amd64/zipball/d4bbf9d4b02f36190aa2386cba82f59c7c370f49",
-                "reference": "d4bbf9d4b02f36190aa2386cba82f59c7c370f49",
+                "url": "https://api.github.com/repos/AlexiZ/wkhtmltopdf-amd64/zipball/e5385ebfbcdfe1ec949dd8e46cf8c79325abbdb4",
+                "reference": "e5385ebfbcdfe1ec949dd8e46cf8c79325abbdb4",
                 "shasum": ""
             },
             "bin": [
@@ -1856,7 +1856,7 @@
             "support": {
                 "source": "https://github.com/AlexiZ/wkhtmltopdf-amd64/tree/master"
             },
-            "time": "2019-08-09T10:00:09+00:00"
+            "time": "2019-08-18T16:04:07+00:00"
         },
         {
             "name": "hwi/oauth-bundle",

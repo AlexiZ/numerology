@@ -39,3 +39,17 @@ monolog:
 
 #swiftmailer:
 #    delivery_addresses: ['me@example.com']
+
+knp_snappy:
+    pdf:
+        enabled:    true
+        binary:     '/usr/bin/wkhtmltopdf'
+        options:
+            page-size: A4
+            dpi: 300
+            image-quality: 80
+            margin-left: 15mm
+            margin-right: 15mm
+            margin-top: 15mm
+            margin-bottom: 15mm
+    temporary_folder: '%kernel.cache_dir%/snappy'
