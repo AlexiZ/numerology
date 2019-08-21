@@ -41,6 +41,7 @@ twig:
         gr_public_key: '%google_recaptcha.public_key%'
         pp_hosted_btn_id: '%paypal.hosted_button_id%'
         gj_api_key: '%google_javascript_api_key%'
+        gsc_verif_id: '%google_search_console_verification_id%'
 
 # Doctrine Configuration
 doctrine:
