@@ -17,6 +17,20 @@ DirectoryIndex app.php
     Options -MultiViews
 </IfModule>
 
+<IfModule mod_gzip.c>
+    mod_gzip_on       Yes
+    mod_gzip_dechunk  Yes
+    mod_gzip_minimum_file_size 1024
+    mod_gzip_maximum_file_size 100000
+    mod_gzip_item_include file \.css$
+    mod_gzip_item_include mime ^text/css$
+
+    mod_gzip_minimum_file_size 512
+    mod_gzip_maximum_file_size 1000000
+    mod_gzip_item_include file \.js$
+    mod_gzip_item_include mime ^application/x-javascript.*
+</IfModule>
+
 <IfModule mod_expires.c>
 	ExpiresActive On
 	ExpiresDefault "access plus 7200 seconds"
