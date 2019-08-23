@@ -32,7 +32,7 @@ class DefaultController extends Controller
                 $this->addFlash('danger', 'Une erreur s\'est produite lors de l\'envoi de votre message.');
             } else {
                 $message = (new \Swift_Message('Nouvelle demande de contact'))
-                    ->setFrom('no-reply@numerologie.com')
+                    ->setFrom($this->getParameter('contact.from'))
                     ->setTo($this->getParameter('contact.email'))
                     ->setBody(
                         $this->renderView(

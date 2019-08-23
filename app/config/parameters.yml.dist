@@ -40,6 +40,7 @@ parameters:
     osm.geocoding_api: xxx
 
     contact.email: xxx
+    contact.from: no-reply@numerology.local
 
     google_recaptcha.public_key: xxx
     google_recaptcha.secret_key: xxx
