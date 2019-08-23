@@ -10,7 +10,7 @@
         <title>Numérologique - {% block title %}Votre numérologie en ligne{% endblock %}</title>
 
         {% block stylesheets %}
-            <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet">
+            <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
             <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic' rel='stylesheet' type='text/css'>
             <link rel="stylesheet" href="{{ asset('compiled/site.min.css') }}">
         {% endblock %}
