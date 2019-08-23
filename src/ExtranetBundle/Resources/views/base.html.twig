@@ -160,8 +160,8 @@
         <div class="modal fade" id="tour-modal-fade" tabindex="-1" role="dialog"></div>
 
         {% block javascripts %}
-            <script type="text/javascript" src="{{ asset("compiled/common.js") }}"></script>
-            <script type="text/javascript" src="{{ asset("compiled/extranet.js") }}"></script>
+            <script type="text/javascript" src="{{ asset("compiled/common.min.js") }}"></script>
+            <script type="text/javascript" src="{{ asset("compiled/extranet.min.js") }}"></script>
             <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
             <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
         {% endblock %}
