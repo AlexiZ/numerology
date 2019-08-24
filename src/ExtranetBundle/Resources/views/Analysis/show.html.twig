@@ -104,7 +104,7 @@
             Télécharger pour imprimer
         </a>
     {% endif %}
-    <a href="{{ path('site_show', {'hash': subject.hash}) }}" title="Voir sur le site public" class="d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm">
+    <a href="{{ path('site_show', {'hash': subject.hash}) }}" target="_blank" title="Voir sur le site public" class="d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm">
         <i class="fas fa-share fa-sm text-white-50"></i>&nbsp;
     </a>
 {% endblock callback_actions %}
