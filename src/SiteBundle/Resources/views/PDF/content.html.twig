@@ -328,7 +328,7 @@
                 {% if subject.pseudos is not empty and subject.pseudos.0|default %}
                     {{ subject.pseudos|join(', ') }}<br>
                 {% endif %}
-                <small>{{ subject.birthDate|localizeddate('long', 'short', 'fr') }} (UTC {{ subject.UTCBirthDate|localizeddate('short', 'short', 'fr') }}), {{ subject.birthPlace }} ({{ subject.birthPlaceCoordinates|coordsToText }})</small>
+                <small>{{ subject.birthDate|localizeddate('long', 'short', 'fr') }} (UTC {{ subject.UTCBirthDate|date('d/m/Y H:i:s', 'GMT') }}), {{ subject.birthPlace }} ({{ subject.birthPlaceCoordinates|coordsToText }})</small>
             </h4>
         </div>
 
