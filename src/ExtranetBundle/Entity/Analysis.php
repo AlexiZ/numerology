@@ -313,6 +313,8 @@ class Analysis
      */
     public function setOtherFirstnames($otherFirstnames)
     {
+        $this->otherFirstnames = [];
+
         foreach ($otherFirstnames as $otherFirstname) {
             $this->addOtherFirstname($otherFirstname);
         }
