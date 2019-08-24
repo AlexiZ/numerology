@@ -9,6 +9,8 @@
         {% include '@Site/Default/illustrated_lifepath.html.twig' with {'subject': subject} %}
     </div>
 
+    <p class="text-center subtitle font-weight-light mb-4 mt-0">Récapitulatif de vos paramètres de naissance <br> {{ subject.UTCBirthDate|date('d/m/Y H:i:s', 'GMT') }}, {{ subject.birthPlace }} ({{ subject.birthPlaceCoordinates|coordsToText }})</p>
+
     <div class="row">
         <div class="accordion mb-2 col-md-12" id="accordionLifePath">
             <div class="card">
