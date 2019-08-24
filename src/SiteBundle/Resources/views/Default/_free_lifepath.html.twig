@@ -5,6 +5,12 @@
     <p class="text-center subtitle font-weight-light mb-0 mt-0">Vous avancez du côté positif ou du côté négatif</p>
     <p class="text-center subtitle font-weight-light mb-4 mt-0">Selon vos choix ou les aléas du destin</p>
 
+    <div class="row mb-4 mx-auto">
+        {% include '@Site/Default/illustrated_lifepath.html.twig' with {'subject': subject} %}
+    </div>
+
+    <p class="text-center subtitle font-weight-light mb-4 mt-0">Récapitulatif de vos paramètres de naissance :<br> {{ subject.UTCBirthDate|date('d/m/Y H:i:s', 'GMT') }}, {{ subject.birthPlace }} ({{ subject.birthPlaceCoordinates|coordsToText }})</p>
+
     <div class="row">
         <div class="accordion mb-2 col-md-12" id="accordionLifePath">
             <div class="card">

@@ -641,7 +641,9 @@
                                 <div class="col-md-12 mb-5">
                                     <h3 class="text-center">Parcours de vie</h3>
                                     <hr class="divider mt-4 underline-divider">
-                                    <p class="subtitle font-weight-light mb-4 mt-0">Entre les rails du chemin de vie vous avancez du côté positif ou du côté négatif selon vos choix ou les aléas du destin.</p>
+                                    <p class="subtitle font-weight-light mb-0 mt-0">Entre les rails du chemin de vie vous avancez du côté positif ou du côté négatif selon vos choix ou les aléas du destin.</p>
+
+                                    <p class="subtitle font-weight-light mb-4 mt-0">Récapitulatif de vos paramètres de naissance :<br> {{ subject.UTCBirthDate|date('d/m/Y H:i:s', 'GMT') }}, {{ subject.birthPlace }} ({{ subject.birthPlaceCoordinates|coordsToText }})</p>
 
                                     <div class="row">
                                         <ul class="list-group col-md-12">
