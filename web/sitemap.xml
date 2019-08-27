@@ -1,82 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset
-      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
-            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
-
-
-<url>
-  <loc>https://www.numerologique.fr/</loc>
-  <lastmod>2019-08-27T17:51:34+00:00</lastmod>
-  <priority>1.00</priority>
-</url>
-<url>
-  <loc>https://www.numerologique.fr/essayer/free</loc>
-  <lastmod>2019-08-27T17:51:34+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://www.numerologique.fr/essayer/premium</loc>
-  <lastmod>2019-08-27T17:51:34+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://www.numerologique.fr/resultats/5d185ffd6e886</loc>
-  <lastmod>2019-08-27T17:51:34+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://www.numerologique.fr/resultats/5d185458c7184</loc>
-  <lastmod>2019-08-27T17:51:34+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://www.numerologique.fr/resultats/5d17d40c8b1a7</loc>
-  <lastmod>2019-08-27T17:51:34+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://www.numerologique.fr/resultats/5d17ccb52f9e0</loc>
-  <lastmod>2019-08-27T17:51:34+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://www.numerologique.fr/resultats/5d1270ade2ac8</loc>
-  <lastmod>2019-08-27T17:51:34+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://www.numerologique.fr/resultats/5d1270028f716</loc>
-  <lastmod>2019-08-27T17:51:34+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://www.numerologique.fr/resultats/5d12675c06a39</loc>
-  <lastmod>2019-08-27T17:51:34+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://www.numerologique.fr/resultats/5ccf253a33a63</loc>
-  <lastmod>2019-08-27T17:51:34+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://www.numerologique.fr/contact</loc>
-  <lastmod>2019-08-27T17:51:34+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://www.numerologique.fr/extranet/login/</loc>
-  <lastmod>2019-08-27T17:51:34+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://www.numerologique.fr/page/mentions-legales</loc>
-  <lastmod>2019-08-27T17:51:34+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-
-
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+  <url><loc>https://www.numerologique.fr/</loc><priority>1.00</priority></url>
+  <url><loc>https://www.numerologique.fr/essayer/free</loc><priority>0.85</priority></url>
+  <url><loc>https://www.numerologique.fr/essayer/premium</loc><priority>0.85</priority></url>
+  <url><loc>https://www.numerologique.fr/resultats/5d185ffd6e886</loc><priority>0.85</priority></url>
+  <url><loc>https://www.numerologique.fr/resultats/5d185458c7184</loc><priority>0.85</priority></url>
+  <url><loc>https://www.numerologique.fr/resultats/5d17d40c8b1a7</loc><priority>0.85</priority></url>
+  <url><loc>https://www.numerologique.fr/resultats/5d17ccb52f9e0</loc><priority>0.85</priority></url>
+  <url><loc>https://www.numerologique.fr/resultats/5d1270ade2ac8</loc><priority>0.85</priority></url>
+  <url><loc>https://www.numerologique.fr/resultats/5d1270028f716</loc><priority>0.85</priority></url>
+  <url><loc>https://www.numerologique.fr/resultats/5d12675c06a39</loc><priority>0.85</priority></url>
+  <url><loc>https://www.numerologique.fr/resultats/5ccf253a33a63</loc><priority>0.85</priority></url>
+  <url><loc>https://www.numerologique.fr/contact</loc><priority>0.85</priority></url>
+  <url><loc>https://www.numerologique.fr/extranet/login/</loc><priority>0.85</priority></url>
+  <url><loc>https://www.numerologique.fr/page/mentions-legales</loc><priority>0.85</priority></url>
 </urlset>
+ 
