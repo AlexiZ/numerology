@@ -30,7 +30,6 @@
                                                 <th scope="col">#</th>
                                                 <th scope="col">Produit</th>
                                                 <th scope="col">Prix HT</th>
-                                                <th scope="col">Taux TVA</th>
                                                 <th scope="col">Prix TTC</th>
                                             </tr>
                                         </thead>
@@ -39,9 +38,8 @@
                                             <tr>
                                                 <th scope="row">1</th>
                                                 <td>Étude numérologique complète<br>"<em>{{ subject }}</em>"</td>
-                                                <td>{{ (9.9 - (5 / 100 * 9.9))|localizedcurrency('EUR') }}</td>
-                                                <td>{{ 5.5|number_format(1, ',', ' ') }} %</td>
-                                                <td>{{ 9.9|localizedcurrency('EUR') }}</td>
+                                                <td>{{ (14.9 - (5 / 100 * 14.9))|localizedcurrency('EUR') }}</td>
+                                                <td>{{ 14.9|localizedcurrency('EUR') }}</td>
                                             </tr>
                                             <tr>
                                                 <td colspan="5">
