@@ -3,6 +3,9 @@
         <tr>
             <th></th>
             <th>Nom</th>
+            {% if is_granted('ROLE_ADMIN') %}
+                <th>Provenance</th>
+            {% endif %}
             <th>Date de modification</th>
             <th></th>
         </tr>
@@ -15,6 +18,17 @@
                 <td>
                     <a href="{{ url('extranet_show', {'hash': subject.hash}) }}" title="Afficher" class="btn">{{ subject }}</a>
                 </td>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <td>
+                        {% if subject.level == 'free' %}
+                            Gratuit
+                        {% elseif subject.level == 'premium' and subject.userId|default %}
+                            Pro
+                        {% else %}
+                            Complet
+                        {% endif %}
+                    </td>
+                {% endif %}
                 <td>Le {{ subject.createdAt|date('d/m/Y \à H:m') }}</td>
                 <td>
                     <a href="{{ url('extranet_show', {'hash': subject.hash}) }}" title="Afficher" class="btn btn-success btn-circle btn-sm">
