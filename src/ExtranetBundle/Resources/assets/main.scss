@@ -296,3 +296,9 @@ $pastel-blue: #abe1fb;
 #historyTable tbody td:last-child {
   min-width: 80px;
 }
+
+@media (max-width: 1024px) {
+  .copyright {
+    font-size: 1.5rem;
+  }
+}
