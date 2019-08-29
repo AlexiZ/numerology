@@ -98,4 +98,25 @@ class PaymentController extends Controller
 
         return $this->redirectToRoute('site_show', ['hash' => $subject->getHash()]);
     }
+
+    public function paymentDelayedAction(Request $request)
+    {
+        $hash = $request->getSession()->get('hash');
+
+        /** @var Analysis $subject */
+        $subject = $this->registry->getRepository(Analysis::class)->findOneByHash($hash);
+
+        if (!$subject || !$subject->isPaymentAvailable()) {
+            return $this->redirectToRoute('site_homepage');
+        }
+
+        $request->getSession()->remove('hash');
+        $subject->setLevel(Analysis::LEVEL_FREE);
+        $subject->setStatus(Analysis::STATUS_PENDING);
+
+        $this->registry->getManager()->persist($subject);
+        $this->registry->getManager()->flush();
+
+        return $this->redirectToRoute('site_show', ['hash' => $subject->getHash()]);
+    }
 }

@@ -37,6 +37,10 @@
                                         <i class="fa fa-2x fa-print"></i>
                                     </a>
                                 </div>
+                            {% elseif 'pending' == subject.status %}
+                                <div class="row mx-auto premium-item" id="premium-pending">
+                                    <i class="fas fa-2x fa-hourglass-half" title="En attente de paiement"></i>
+                                </div>
                             {% endif %}
 
                             <div class="row mx-auto premium-item" id="free-premium-copy">
@@ -61,7 +65,7 @@
                                 {% include '@Site/Default/_'~subject.level~'_lifepath.html.twig' with {'subject': subject} %}
                             </div>
 
-                            {% if 'free' == subject.level %}
+                            {% if 'free' == subject.level and 'pending' != subject.status %}
                                 <div class="row" id="premium">
                                     <div class="col-md-12">
                                         <div class="alert alert-warning" role="alert">
@@ -71,6 +75,19 @@
                                             Vous recevrez également un <strong>lien permanent vers votre étude</strong> à jour de nos dernières évolutions, que vous pourrez consulter à volonté.
                                             <br><br>
                                             <a href="{{ path('site_payment', {'hash': subject.hash}) }}" class="btn btn-info">Commander pour 14.90 €</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% elseif 'pending' == subject.status %}
+                                <div class="row" id="premium">
+                                    <div class="col-md-12">
+                                        <div class="alert alert-warning" role="alert">
+                                            <h5>Cette étude est en attente de paiement</h5>
+                                            Revenez sur cette page régulièrement pour accéder à tous les résultats lorsque celle-ci aura été débloquée.
+                                            <br>
+                                            Vous pouvez également retourner sur la page de confirmation de commande pour choisir un autre mode de paiement.
+                                            <br><br>
+                                            <a href="{{ path('site_payment', {'hash': subject.hash}) }}" class="btn btn-info">Choisir un autre mode de paiement</a>
                                         </div>
                                     </div>
                                 </div>

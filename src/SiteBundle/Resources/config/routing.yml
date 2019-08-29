@@ -48,6 +48,10 @@ site_payment_roll_back:
     path:     /paiement/retour
     defaults: { _controller: SiteBundle:Payment:paymentRollBack }
 
+site_payment_delayed:
+    path:     /paiement/en-attente
+    defaults: { _controller: SiteBundle:Payment:paymentDelayed }
+
 site_payment:
     path:     /paiement/{hash}
     defaults: { _controller: SiteBundle:Payment:payment }

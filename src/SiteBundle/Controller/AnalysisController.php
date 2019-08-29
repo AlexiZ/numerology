@@ -79,7 +79,7 @@ class AnalysisController extends Controller
         /** @var Analysis $subject */
         $subject = $this->registry->getRepository(Analysis::class)->findOneByHash($hash);
 
-        if (!$subject || Analysis::STATUS_ACTIVE !== $subject->getStatus()) {
+        if (!$subject || (Analysis::STATUS_ACTIVE !== $subject->getStatus() && !(Analysis::STATUS_PENDING == $subject->getStatus() && Analysis::LEVEL_FREE == $subject->getLevel()))) {
             return $this->redirectToRoute('site_homepage');
         }
 
