@@ -7,7 +7,7 @@
                 <th>Provenance</th>
             {% endif %}
             <th>Date de modification</th>
-            <th></th>
+            <th>Actions</th>
         </tr>
     </thead>
 
@@ -58,6 +58,9 @@
                             </a>
                         {% endif %}
                     {% endif %}
+                    <a href="{{ url('site_show', {'hash': subject.hash}) }}" target="_blank" title="Voir sur le site public" class="btn btn-outline-secondary btn-circle btn-sm">
+                        <i class="fas fa-link"></i>
+                    </a>
                 </td>
             </tr>
         {% endfor %}
