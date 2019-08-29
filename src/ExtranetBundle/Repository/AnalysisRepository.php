@@ -58,8 +58,8 @@ class AnalysisRepository extends EntityRepository
 
         return $this
             ->createQueryBuilder('a')
-            ->where('a.status = :status')
-            ->setParameter('status', Analysis::STATUS_ACTIVE)
+            ->where('a.status IN (:status)')
+            ->setParameter('status', [Analysis::STATUS_ACTIVE, Analysis::STATUS_PENDING])
             ->orderBy('a.createdAt', 'DESC')
             ->getQuery()
             ->getResult($returnFormat)

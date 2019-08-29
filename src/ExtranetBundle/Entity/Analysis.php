@@ -616,4 +616,17 @@ class Analysis
 
         return $this;
     }
+
+    /**
+     * Validate payment when it's been delayed.
+     *
+     * @return $this
+     */
+    public function validatePayment()
+    {
+        $this->setLevel(self::LEVEL_PREMIUM);
+        $this->setStatus(self::STATUS_ACTIVE);
+
+        return $this;
+    }
 }
