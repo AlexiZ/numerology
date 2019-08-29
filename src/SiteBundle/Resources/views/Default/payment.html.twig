@@ -18,8 +18,7 @@
                             <div class="row">
                                 <div class="col-lg-12">
                                     <p>
-                                        Pour accéder à votre étude numérologique complète, cliquez sur le bouton ci-dessous.
-                                        Vous serez redirigé vers le site de notre partenaire de paiement sécurisé Paypal.com.
+                                        Votre commande :
                                     </p>
                                 </div>
 
@@ -39,31 +38,56 @@
                                                 <td>Étude numérologique complète<br>"<em>{{ subject }}</em>"</td>
                                                 <td>{{ 14.9|localizedcurrency('EUR') }}</td>
                                             </tr>
-                                            <tr>
-                                                <td colspan="5">
-                                                    <em>Transaction sécurisée par notre partenaire de paiement Paypal</em>
-                                                </td>
-                                            </tr>
                                         </tbody>
                                     </table>
+
+                                    <hr class="full-hr">
                                 </div>
 
-                                <div class="col-lg-12 row">
-                                    <div class="col-lg-8">
-                                        <img height="50px" src="{{ asset('bundles/site/img/payment-rassurance.png') }}" alt="">
+                                <div class="col-lg-12 mt-4">
+                                    <p>
+                                        Sélectionnez un mode de paiement :
+                                    </p>
+                                </div>
+
+                                <div class="col-lg-12 row paymentOption">
+                                    <div class="col-lg-4 text-center">
+                                        <input type="button" class="paymentButton" value="Par chèque" data-toggle="modal" data-target="#paymentMoneyOrder">
                                     </div>
-                                    <div class="col-lg-4 text-right">
+
+                                    <div class="col-lg-8">
+                                        <p><small>Nous vous indiquerons la marche à suivre à l'étape suivante</small></p>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-12 row paymentOption">
+                                    <div class="col-lg-4 text-center">
                                         <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
                                             <input type="hidden" name="cmd" value="_s-xclick">
                                             <input type="hidden" name="hosted_button_id" value="{{ pp_hosted_btn_id }}">
-                                            <input type="image" src="{{ asset('bundles/site/img/payment-simplest.png') }}" name="submit" alt="PayPal, le réflexe sécurité pour payer en ligne" class="paymentButton">
+                                            <input type="submit" name="submit" alt="PayPal, le réflexe sécurité pour payer en ligne" class="paymentButton" value="Paypal &copy;">
                                             <img alt="" src="https://www.paypalobjects.com/fr_FR/i/scr/pixel.gif" width="1" height="1">
                                         </form>
+                                    </div>
+
+                                    <div class="col-lg-8">
+                                        <p><small>Transaction sécurisée par Paypal &copy;</small></p>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-12 row paymentOption">
+                                    <div class="col-lg-4 text-center">
+                                        <input type="button" class="paymentButton" value="Carte Bancaire" disabled alt="Carte Bancaire">
+                                    </div>
+
+                                    <div class="col-lg-8">
+                                        <p><small><em>Bientôt disponible</em></small></p>
                                     </div>
                                 </div>
 
                                 <div class="col-lg-12 text-center">
-                                    <hr>
+                                    <hr class="full-hr">
+
                                     <a href="{{ path('site_payment_roll_back') }}" class="btn btn-link">
                                         <small><em>Ou accédez directement à votre étude numérologique gratuite incomplète.</em></small>
                                     </a>
@@ -75,4 +99,42 @@
             </div>
         </div>
     </header>
+
+    <div class="modal fade" id="paymentMoneyOrder" tabindex="-1" role="dialog" aria-labelledby="paymentMoneyOrderLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="paymentMoneyOrderLabel">Paiement par chèque</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <p>Pour régler votre commande par chèque :</p>
+
+                    <ol>
+                        <li>Adressez votre chèque à l'ordre de "Jean-Michel Mazaudier"</li>
+                        <li>Ajoutez à votre courrier le nom et / ou le numéro de votre étude ("<strong>{{ subject.hash }}</strong>" dans l'url de cette page)</li>
+                        <li>Envoyez-le à l'adresse suivante :
+                            <ul class="list-no-bullet">
+                                <li>Jean-Michel Mazaudier</li>
+                                <li>1, route Hent Glaz</li>
+                                <li>29530 Loqueffret</li>
+                            </ul>
+                        </li>
+                        <li>Cliquez sur le bouton ci-dessous pour accéder à votre étude incomplète</li>
+                        <li>Lorsque nous aurons réceptionné votre chèque nous activerons les fonctionnalités complètes de votre étude</li>
+                    </ol>
+
+                    <p><strong>Conservez bien le lien de votre étude, il est permanent et sera mis à jour automatiquement à réception de votre chèque.</strong></p>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Retour</button>
+                    <a href="{{ path('site_payment_roll_back') }}" class="btn btn-success">Accéder à mon étude incomplète</a>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock body %}
