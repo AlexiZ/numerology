@@ -15,7 +15,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-10 col-xl-9 mx-auto">
-                    <div class="card card-signin flex-row my-5">
+                    <div class="card card-signin flex-row my-5 overflow-visible">
                         <div class="card-body">
                             <h5 class="card-title text-center">Renseignez les paramètres de vie</h5>
 
@@ -57,8 +57,10 @@
 
                                 <div class="row">
                                     <div class="form-label-group col-md-6">
-                                        {{ form_widget(form.birthDate, {'attr': {'class': 'form-control'}}) }}
-                                        {{ form_label(form.birthDate) }}
+                                        <div class="form-group">
+                                            {{ form_widget(form.birthDate, {'attr': {'class': 'form-control'}}) }}
+                                            {{ form_label(form.birthDate) }}
+                                        </div>
                                     </div>
 
                                     <div class="form-label-group col-md-6">
@@ -132,6 +134,16 @@
         function onSubmit(token) {
             document.getElementById("form-try").submit();
         }
+        $('#app_bundle_numerologie_birthDate').datetimepicker({
+            locale: 'fr',
+            viewMode: 'years',
+            icons: {
+                time: "far fa-clock",
+                date: "far fa-calendar-alt",
+                up: "fas fa-arrow-up",
+                down: "fas fa-arrow-down"
+            }
+        });
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key={{ gj_api_key }}&libraries=places&language=fr"></script>
     <script async defer src="{{ asset('bundles/extranet/js/autocomplete.js') }}"></script>

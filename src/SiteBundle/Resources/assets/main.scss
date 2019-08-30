@@ -4,6 +4,7 @@
 @import "~tippy.js/themes/light-border.css";
 @import "pricing.css";
 @import "lifepath";
+@import '~pc-bootstrap4-datetimepicker/src/sass/bootstrap-datetimepicker-build';
 
 $pastel-red: #ff6962;
 $pastel-orange: #ffcb99;
@@ -332,11 +333,16 @@ hr.underline-divider {
     position: relative;
     margin-bottom: 1rem;
 
-    &>input, &>label {
+    input, label {
       padding: var(--input-padding-y) var(--input-padding-x);
     }
 
-    &>label {
+    .date label {
+      width: 80% !important;
+      margin-left: -15px;
+    }
+
+    label {
       position: absolute;
       top: 0;
       left: 0;
@@ -510,4 +516,8 @@ hr.full-hr {
       }
     }
   }
+}
+
+.overflow-visible {
+  overflow: visible !important;
 }

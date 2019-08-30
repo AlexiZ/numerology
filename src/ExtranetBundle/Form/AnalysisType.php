@@ -77,10 +77,10 @@ class AnalysisType extends AbstractType
                 'allow_delete' => true,
                 'delete_empty' => true,
             ])
-            ->add('birthDate', DateTimeType::class, [
+            ->add('birthDate', TextType::class, [
                 'label' => 'Date et heure de naissance',
-                'widget' => 'single_text',
                 'required' => false,
+                'empty_data' =>  '01/01/1970',
             ])
             ->add('birthPlace', TextType::class, [
                 'label' => 'Lieu de naissance',
@@ -126,6 +126,12 @@ class AnalysisType extends AbstractType
                     'lng' => $this->geocoding->DECtoDMS($birthPlaceCoordinatesArray[1], true),
                 ];
                 $data->setBirthPlaceCoordinates($birthPlaceCoordinates);
+            }
+
+            // Prevent case when birthdate isn't what it should be
+            $birthDate = \DateTime::createFromFormat('d/m/Y H:i', $form->get('birthDate')->getData());
+            if (!is_a($birthDate, 'DateTime')) {
+                $form->addError(new FormError('La date de naissance saisie n\'est pas correcte, cliquez dans le champ pour utiliser le sélecteur de date.'));
             }
         });
     }

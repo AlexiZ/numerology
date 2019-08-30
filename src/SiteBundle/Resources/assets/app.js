@@ -4,6 +4,7 @@ import 'jquery-easing';
 import './creative.js';
 import Chart from 'chart.js';
 import 'chartjs-plugin-annotation';
+import 'pc-bootstrap4-datetimepicker';
 
 import './main.scss';
 
@@ -51,6 +52,13 @@ $(document).ready(() => {
             copyTextToClipboard(window.location.href);
             freePremiumCopy.querySelector('i').style.color = '#f4623a';
         });
+    }
+
+    let datetimepicker = document.getElementById('datetimepicker');
+    if (datetimepicker) {
+        // $(datetimepicker).datetimepicker({
+        //     locale: 'fr'
+        // });
     }
 }).on('shown.bs.collapse', () => {
     let automaticBarCharts = document.querySelectorAll(".automaticBarChart");
