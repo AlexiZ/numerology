@@ -484,6 +484,12 @@ hr.full-hr {
   list-style-type: none;
 }
 
+@media screen and (max-width: 1200px) {
+  #environment {
+    display: none;
+  }
+}
+
 @media screen and (max-width: 640px) {
   header.masthead {
     padding-top: 25px;
