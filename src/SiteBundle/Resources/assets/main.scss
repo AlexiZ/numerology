@@ -483,3 +483,27 @@ hr.full-hr {
 .list-no-bullet {
   list-style-type: none;
 }
+
+@media screen and (max-width: 640px) {
+  header.masthead {
+    padding-top: 25px;
+    padding-bottom: 0;
+    background: none;
+
+    .container {
+      padding: 0;
+
+      .card.card-signin {
+        border: none;
+
+        .card-body {
+          //padding: 2rem 0;
+
+          #environment {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+}

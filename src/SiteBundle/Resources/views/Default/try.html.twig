@@ -1,7 +1,11 @@
 {% extends '@Site/base.html.twig' %}
 
 {% block title %}
-    Essayez gratuitement
+    {% if 'free' == version %}
+        Essayez gratuitement
+    {% else %}
+        Obtenez votre étude complète
+    {% endif %}
 {% endblock %}
 
 {% block bodyAttr %}class="tryPage"{% endblock bodyAttr %}
