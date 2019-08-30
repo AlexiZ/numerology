@@ -56,3 +56,7 @@ analysis:
                     {0}Votre comportement <strong>réel</strong> tel que le révèle votre identité est équilibré entre les aspects physique, émotif, cérébral et intuitif.
                     |{1}Le moteur de votre comportement <strong>réel</strong> est d’abord <strong>%1%</strong>.
                     |[2,Inf[Le moteur de votre comportement <strong>réel</strong> est d’abord <strong>%1%</strong>. Il s’appuie ensuite sur le versant <strong>%2%</strong> de votre personnalité."
+    add:
+        error: "
+            {1}Il semblerait que vous ayez fait une petite erreur en remplissant le formulaire
+            |[2,Inf[Il semblerait que vous ayez fait quelques erreurs en remplissant le formulaire"

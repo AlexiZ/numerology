@@ -11,6 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormError;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -112,14 +113,20 @@ class AnalysisType extends AbstractType
             $form = $event->getForm();
             $birthPlaceCoordinatesStringed = $form->get('birthPlaceCoordinates')->getData();
 
-            /** @var Analysis $data */
-            $data = $event->getData();
-            $birthPlaceCoordinatesArray = explode(',', $birthPlaceCoordinatesStringed);
-            $birthPlaceCoordinates = [
-                'lat' => $this->geocoding->DECtoDMS($birthPlaceCoordinatesArray[0], true),
-                'lng' => $this->geocoding->DECtoDMS($birthPlaceCoordinatesArray[1], true),
-            ];
-            $data->setBirthPlaceCoordinates($birthPlaceCoordinates);
+            // Prevent case when autocomplete has not been used
+            if ($birthPlaceCoordinatesStringed == "0,0") {
+                $form->addError(new FormError('Vous devez saisir un lieu de naissance dans le champ "lieu de naissance" puis sélectionner une proposition dans la liste déroulante qui apparaît pendant votre saisie.'));
+            } else {
+
+                /** @var Analysis $data */
+                $data = $event->getData();
+                $birthPlaceCoordinatesArray = explode(',', $birthPlaceCoordinatesStringed);
+                $birthPlaceCoordinates = [
+                    'lat' => $this->geocoding->DECtoDMS($birthPlaceCoordinatesArray[0], true),
+                    'lng' => $this->geocoding->DECtoDMS($birthPlaceCoordinatesArray[1], true),
+                ];
+                $data->setBirthPlaceCoordinates($birthPlaceCoordinates);
+            }
         });
     }
 

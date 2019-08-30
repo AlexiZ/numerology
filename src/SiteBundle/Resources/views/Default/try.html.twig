@@ -26,7 +26,17 @@
                             {% form_theme form '@Site/Commons/_form_theme.html.twig' %}
 
                             {{ form_start(form, {'attr': {'class': 'form-signin', 'id': 'form-try'}}) }}
-                                {{ form_errors(form) }}
+                                {% if form.vars.errors|length > 0 %}
+                                    <div class="font-weight-light text-danger font-italic">
+                                        <p class="small">{{ 'analysis.add.error'|transchoice(form.vars.errors|length) }}</p>
+
+                                        <ul class="form-errors">
+                                            {% for error in form.vars.errors.form.getErrors(true) %}
+                                                <li>{{ error.message }}</li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                {% endif %}
 
                                 <div class="row">
                                     <div class="form-label-group col-md-6">
@@ -52,7 +62,7 @@
                                                 class="add-another-collection-widget btn btn-primary"
                                                 data-list="#otherFirstnames-fields-list"
                                                 data-label="Autre prénom">
-                                            Ajouter un autre prénom
+                                            Ajouter un autre prénom (optionnel)
                                         </button>
                                     </div>
                                 </div>
@@ -76,7 +86,7 @@
                                                 class="add-another-collection-widget btn btn-primary"
                                                 data-list="#pseudos-fields-list"
                                                 data-label="Pseudonyme">
-                                            Ajouter un pseudonyme
+                                            Ajouter un pseudonyme (optionnel)
                                         </button>
                                     </div>
                                 </div>

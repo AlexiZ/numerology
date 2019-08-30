@@ -318,7 +318,6 @@ hr.underline-divider {
 
   .btn {
     font-size: 80%;
-    border-radius: 5rem;
     letter-spacing: .1rem;
     font-weight: bold;
     transition: all 0.2s;
@@ -326,7 +325,10 @@ hr.underline-divider {
 
   ul {
     list-style-type: none;
-    padding-left: 0;
+
+    &:not(.form-errors) {
+      padding-left: 0;
+    }
   }
 
   .form-label-group {
@@ -356,7 +358,6 @@ hr.underline-divider {
 
     input {
       height: auto;
-      border-radius: 2rem;
 
       &::-webkit-input-placeholder {
         color: transparent;

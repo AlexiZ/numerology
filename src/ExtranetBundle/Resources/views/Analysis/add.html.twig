@@ -9,6 +9,20 @@
 {% block body %}
     <div class="row">
         <div class="col-lg-12">
+            {% if form.vars.errors|length > 0 %}
+                <div class="card mb-4 py-3 border-left-danger">
+                    <div class="card-body">
+                        {{ 'analysis.add.error'|transchoice(form.vars.errors|length) }}
+
+                        <ul>
+                            {% for error in form.vars.errors.form.getErrors(true) %}
+                                <li>{{ error.message }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            {% endif %}
+
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
                     <h6 class="m-0 font-weight-bold text-primary">
@@ -20,7 +34,6 @@
                     {% form_theme form '@Extranet/Analysis/_form_theme.html.twig' %}
 
                     {{ form_start(form) }}
-                        {{ form_errors(form) }}
                         {{ form_rest(form) }}
 
                         <button type="submit" id="submitAdd" class="btn btn-success btn-icon-split">
