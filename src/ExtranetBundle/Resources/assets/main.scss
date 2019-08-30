@@ -2,6 +2,7 @@
 @import "~startbootstrap-sb-admin-2/css/sb-admin-2.min.css";
 @import "~shepherd.js/dist/css/shepherd-theme-square.css";
 @import "~quill/dist/quill.snow.css";
+@import '~pc-bootstrap4-datetimepicker/src/sass/bootstrap-datetimepicker-build';
 
 $pastel-red: #ff6962;
 $pastel-orange: #ffcb99;
@@ -301,4 +302,8 @@ $pastel-blue: #abe1fb;
   .copyright {
     font-size: 1.5rem;
   }
+}
+
+.overflow-visible {
+  overflow: visible !important;
 }

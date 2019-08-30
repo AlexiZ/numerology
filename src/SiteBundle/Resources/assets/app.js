@@ -53,13 +53,6 @@ $(document).ready(() => {
             freePremiumCopy.querySelector('i').style.color = '#f4623a';
         });
     }
-
-    let datetimepicker = document.getElementById('datetimepicker');
-    if (datetimepicker) {
-        // $(datetimepicker).datetimepicker({
-        //     locale: 'fr'
-        // });
-    }
 }).on('shown.bs.collapse', () => {
     let automaticBarCharts = document.querySelectorAll(".automaticBarChart");
     if (automaticBarCharts) {

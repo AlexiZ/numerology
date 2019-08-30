@@ -7,6 +7,7 @@ import 'chartjs-plugin-annotation';
 import 'datatables.net-bs4';
 import Shepherd from "shepherd.js";
 import Quill from 'quill';
+import 'pc-bootstrap4-datetimepicker';
 
 import './main.scss';
 
@@ -447,6 +448,17 @@ $(document).ready(() => {
             });
         });
     }
+
+    $('#app_bundle_numerologie_birthDate').datetimepicker({
+        locale: 'fr',
+        viewMode: 'years',
+        icons: {
+            time: "far fa-clock",
+            date: "far fa-calendar-alt",
+            up: "fas fa-arrow-up",
+            down: "fas fa-arrow-down"
+        }
+    });
 });
 
 // Get unread messages count
