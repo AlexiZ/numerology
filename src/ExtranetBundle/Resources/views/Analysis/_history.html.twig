@@ -34,7 +34,7 @@
                     <a href="{{ url('extranet_show', {'hash': subject.hash}) }}" title="Afficher" class="btn btn-success btn-circle btn-sm">
                         <i class="fas fa-eye"></i>
                     </a>
-                    {% if subject.userId == app.user.id %}
+                    {% if subject.userId == app.user.id or is_granted('ROLE_ADMIN') %}
                         <a href="{{ url('extranet_edit', {'hash': subject.hash}) }}" title="Modifier" class="btn btn-primary btn-circle btn-sm">
                             <i class="fas fa-pen"></i>
                         </a>

@@ -55,7 +55,7 @@ class AnalysisController extends Controller
         /** @var Analysis $subject */
         $subject = $registry->getRepository(Analysis::class)->findOneByHash($hash);
 
-        if ($subject->getUserId() !== $this->getUser()->getId()) {
+        if ($subject->getUserId() !== $this->getUser()->getId() && !$this->isGranted('ROLE_ADMIN')) {
             return $this->redirectToRoute(self::ROUTE_INDEX);
         }
 
