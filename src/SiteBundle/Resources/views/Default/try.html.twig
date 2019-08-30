@@ -26,18 +26,6 @@
                             {% form_theme form '@Site/Commons/_form_theme.html.twig' %}
 
                             {{ form_start(form, {'attr': {'class': 'form-signin', 'id': 'form-try'}}) }}
-                                {% if form.vars.errors|length > 0 %}
-                                    <div class="font-weight-light text-danger font-italic">
-                                        <p class="small">{{ 'analysis.add.error'|transchoice(form.vars.errors|length) }}</p>
-
-                                        <ul class="form-errors">
-                                            {% for error in form.vars.errors.form.getErrors(true) %}
-                                                <li>{{ error.message }}</li>
-                                            {% endfor %}
-                                        </ul>
-                                    </div>
-                                {% endif %}
-
                                 <div class="row">
                                     <div class="form-label-group col-md-6">
                                         {{ form_widget(form.birthName, {'attr': {'class': 'form-control'}}) }}
@@ -90,6 +78,18 @@
                                         </button>
                                     </div>
                                 </div>
+
+                                {% if form.vars.errors|length > 0 %}
+                                    <div class="font-weight-light text-danger font-italic mt-4">
+                                        <p class="small">{{ 'analysis.add.error'|transchoice(form.vars.errors|length) }}</p>
+
+                                        <ul class="form-errors">
+                                            {% for error in form.vars.errors.form.getErrors(true) %}
+                                                <li>- {{ error.message }}</li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                {% endif %}
 
                                 {{ form_rest(form) }}
 
