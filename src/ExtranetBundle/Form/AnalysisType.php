@@ -80,7 +80,7 @@ class AnalysisType extends AbstractType
             ->add('birthDate', TextType::class, [
                 'label' => 'Date et heure de naissance',
                 'required' => false,
-                'empty_data' =>  '01/01/1970',
+                'empty_data' =>  '1970/01/01',
             ])
             ->add('birthPlace', TextType::class, [
                 'label' => 'Lieu de naissance',
