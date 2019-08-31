@@ -120,7 +120,6 @@ class AnalysisType extends AbstractType
             if ($birthPlaceCoordinatesStringed == "0,0") {
                 $form->addError(new FormError('Vous devez saisir un lieu de naissance dans le champ "lieu de naissance" puis sélectionner une proposition dans la liste déroulante qui apparaît pendant votre saisie.'));
             } else {
-
                 /** @var Analysis $data */
                 $data = $event->getData();
                 $birthPlaceCoordinatesArray = explode(',', $birthPlaceCoordinatesStringed);

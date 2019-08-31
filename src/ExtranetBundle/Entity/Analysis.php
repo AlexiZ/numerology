@@ -349,6 +349,8 @@ class Analysis
      */
     public function setPseudos($pseudos)
     {
+        $this->pseudos = [];
+
         foreach ($pseudos as $pseudo) {
             $this->addPseudo($pseudo);
         }
