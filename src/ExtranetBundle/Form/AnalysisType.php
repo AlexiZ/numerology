@@ -108,7 +108,7 @@ class AnalysisType extends AbstractType
             /** @var Form $form */
             $form = $event->getForm();
             $form->get('birthPlaceCoordinates')->setData($birthPlaceCoordinatesStringed);
-            $form->get('birthDate')->setData($birthDate->format('Y/m/d H:i'));
+            $form->get('birthDate')->setData($birthDate->format('d/m/Y H:i'));
         });
 
         $builder->addEventListener(FormEvents::SUBMIT, function(FormEvent $event) {
