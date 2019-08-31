@@ -132,9 +132,9 @@ class AnalysisType extends AbstractType
             }
 
             // Prevent case when birthdate isn't what it should be
-            $birthDate = \DateTime::createFromFormat('d/m/Y H:i', $form->get('birthDate')->getData());
+            $birthDate = \DateTime::createFromFormat('Y/m/d H:i', $form->get('birthDate')->getData());
             if (!is_a($birthDate, 'DateTime')) {
-                $form->addError(new FormError('La date de naissance saisie n\'est pas correcte, cliquez dans le champ pour utiliser le sélecteur de date.'));
+                $form->addError(new FormError('La date de naissance saisie n\'est pas correcte, cliquez dans le champ pour utiliser le sélecteur de date et d\'heure. Vous pouvez également inscrire la date et l\'heure à la main sur le modèle suivante : "AAAA/MM/JJ HH:MM" (année, mois, jour, heure puis minutes).'));
             }
         });
     }
