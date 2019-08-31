@@ -80,7 +80,7 @@
 {% endblock pagesubtitle %}
 
 {% block callback_actions %}
-    {% if subject.userId == app.user.id and is_granted('ROLE_ANALYSIS_EDIT') %}
+    {% if (subject.userId == app.user.id and is_granted('ROLE_ANALYSIS_EDIT')) or is_granted('ROLE_ADMIN') %}
         <a href="{{ path('extranet_edit', {'hash': subject.hash}) }}" title="Modifier" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
             <i class="fas fa-pen fa-sm text-white-50"></i>&nbsp;
             Modifier
