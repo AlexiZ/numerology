@@ -452,6 +452,7 @@ $(document).ready(() => {
     $('#app_bundle_numerologie_birthDate').datetimepicker({
         locale: 'fr',
         viewMode: 'years',
+        format: 'DD/MM/YYYY HH:mm',
         icons: {
             time: "far fa-clock",
             date: "far fa-calendar-alt",
