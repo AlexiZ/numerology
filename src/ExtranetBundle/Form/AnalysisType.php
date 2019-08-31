@@ -80,7 +80,7 @@ class AnalysisType extends AbstractType
             ->add('birthDate', TextType::class, [
                 'label' => 'Date et heure de naissance',
                 'required' => false,
-                'empty_data' =>  '1970/01/01',
+                'empty_data' =>  '01/01/1970 00:00',
             ])
             ->add('birthPlace', TextType::class, [
                 'label' => 'Lieu de naissance',
@@ -132,9 +132,11 @@ class AnalysisType extends AbstractType
             }
 
             // Prevent case when birthdate isn't what it should be
-            $birthDate = \DateTime::createFromFormat('Y/m/d H:i', $form->get('birthDate')->getData());
+            $birthDate = \DateTime::createFromFormat('d/m/Y H:i', $form->get('birthDate')->getData());
             if (!is_a($birthDate, 'DateTime')) {
-                $form->addError(new FormError('La date de naissance saisie n\'est pas correcte, cliquez dans le champ pour utiliser le sélecteur de date et d\'heure. Vous pouvez également inscrire la date et l\'heure à la main sur le modèle suivante : "AAAA/MM/JJ HH:MM" (année, mois, jour, heure puis minutes).'));
+                $form->addError(new FormError('La date de naissance saisie n\'est pas correcte, cliquez dans le champ pour utiliser le sélecteur de date et d\'heure. Vous pouvez également inscrire la date et l\'heure à la main sur le modèle suivante : "JJ/MM/AAAA HH:MM" (jour, mois, année, heure puis minutes).'));
+            } else {
+                $data->setBirthDate($birthDate);
             }
         });
     }
