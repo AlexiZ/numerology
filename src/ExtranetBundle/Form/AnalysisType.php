@@ -79,12 +79,11 @@ class AnalysisType extends AbstractType
             ])
             ->add('birthDate', TextType::class, [
                 'label' => 'Date et heure de naissance',
-                'required' => false,
-                'empty_data' =>  '01/01/1970 00:00',
+                'required' => true,
             ])
             ->add('birthPlace', TextType::class, [
                 'label' => 'Lieu de naissance',
-                'required' => false,
+                'required' => true,
                 'attr' => [
                     'placeholder' => 'Lieu de naissance',
                     'class' => 'locationGuesser',
@@ -108,7 +107,7 @@ class AnalysisType extends AbstractType
             /** @var Form $form */
             $form = $event->getForm();
             $form->get('birthPlaceCoordinates')->setData($birthPlaceCoordinatesStringed);
-            $form->get('birthDate')->setData($birthDate->format('d/m/Y H:i'));
+            $form->get('birthDate')->setData($birthDate ? $birthDate->format('d/m/Y H:i') : null);
         });
 
         $builder->addEventListener(FormEvents::SUBMIT, function(FormEvent $event) {
