@@ -65,7 +65,7 @@ class AnalysisType extends AbstractType
                 'allow_delete' => true,
             ])
             ->add('pseudos', CollectionType::class, [
-                'label' => 'Pseudonymes',
+                'label' => 'Surnoms d\'usage',
                 'required' => false,
                 'entry_type' => TextType::class,
                 'entry_options' => [

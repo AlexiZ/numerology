@@ -57,6 +57,7 @@ analysis:
                     |{1}Le moteur de votre comportement <strong>réel</strong> est d’abord <strong>%1%</strong>.
                     |[2,Inf[Le moteur de votre comportement <strong>réel</strong> est d’abord <strong>%1%</strong>. Il s’appuie ensuite sur le versant <strong>%2%</strong> de votre personnalité."
     add:
+        pseudos: "Nom professionnel (écrivain, artiste, etc.) ou alias courant. Attention : ne fournissez cette information que si elle est active au quotidien dans votre vie publique"
         error: "
             {1}Il semblerait que vous ayez fait une petite erreur en remplissant le formulaire
             |[2,Inf[Il semblerait que vous ayez fait quelques erreurs en remplissant le formulaire"

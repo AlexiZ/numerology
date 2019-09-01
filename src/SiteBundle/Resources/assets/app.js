@@ -5,6 +5,8 @@ import './creative.js';
 import Chart from 'chart.js';
 import 'chartjs-plugin-annotation';
 import 'pc-bootstrap4-datetimepicker';
+import 'magnific-popup';
+import tippy from 'tippy.js';
 
 import './main.scss';
 
@@ -36,6 +38,39 @@ $(document).ready(() => {
                 var newElem = $(list.attr('data-widget-tags')).html(newWidget);
                 newElem.appendTo(list);
             });
+        });
+    }
+
+    let automaticTippies = document.querySelectorAll('.automatic-tippy');
+    if (automaticTippies) {
+        automaticTippies.forEach((automaticTippy) => {
+            let rtippy = 'rtippy' in automaticTippy.dataset ? automaticTippy.dataset.rtippy : '',
+                commonOptions = {
+                    interactive: true,
+                    trigger: 'click',
+                    theme: 'light-border',
+                    animateFill: false,
+                    animation: 'scale',
+                    arrow: 'true',
+                    arrowType: 'round',
+                    multiple: 'true',
+                    flipOnUpdate: true,
+                    content: '<div class="spinner-border" role="status"><span class="sr-only">Chargement...</span></div>',
+                },
+                options = {}
+            ;
+
+            if ("rtippy" in automaticTippy.dataset) {
+                options = Object.assign(
+                    commonOptions,
+                    {
+                        placement: 'right',
+                        content: rtippy,
+                    }
+                );
+            }
+
+            tippy(automaticTippy, options);
         });
     }
 
