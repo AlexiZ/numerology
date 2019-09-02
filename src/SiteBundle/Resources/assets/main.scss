@@ -505,10 +505,13 @@ hr.full-hr {
     display: none;
   }
 
+  .row {
+    margin-right: 0px !important;
+    margin-left: 0px !important;
+  }
+
   header.masthead {
-    padding-top: 25px;
-    padding-bottom: 0;
-    background: none;
+    padding-top: 6rem;
 
     .container {
       padding: 0;
