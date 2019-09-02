@@ -501,6 +501,10 @@ hr.full-hr {
 }
 
 @media screen and (max-width: 640px) {
+  #controlBookCover {
+    display: none;
+  }
+
   header.masthead {
     padding-top: 25px;
     padding-bottom: 0;
@@ -526,4 +530,11 @@ hr.full-hr {
 
 .overflow-visible {
   overflow: visible !important;
+}
+
+#reassurance {
+  img {
+    height: 300px;
+    margin: 0 auto;
+  }
 }
