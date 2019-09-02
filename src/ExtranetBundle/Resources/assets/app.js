@@ -458,7 +458,9 @@ $(document).ready(() => {
             date: "far fa-calendar-alt",
             up: "fas fa-arrow-up",
             down: "fas fa-arrow-down"
-        }
+        },
+        ignoreReadonly: true,
+        allowInputToggle: true
     });
 });
 

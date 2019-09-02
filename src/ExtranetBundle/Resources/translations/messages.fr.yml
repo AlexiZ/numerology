@@ -56,8 +56,14 @@ analysis:
                     {0}Votre comportement <strong>réel</strong> tel que le révèle votre identité est équilibré entre les aspects physique, émotif, cérébral et intuitif.
                     |{1}Le moteur de votre comportement <strong>réel</strong> est d’abord <strong>%1%</strong>.
                     |[2,Inf[Le moteur de votre comportement <strong>réel</strong> est d’abord <strong>%1%</strong>. Il s’appuie ensuite sur le versant <strong>%2%</strong> de votre personnalité."
-    add:
-        pseudos: "Nom professionnel (écrivain, artiste, etc.) ou alias courant. Attention : ne fournissez cette information que si elle est active au quotidien dans votre vie publique"
-        error: "
-            {1}Il semblerait que vous ayez fait une petite erreur en remplissant le formulaire
-            |[2,Inf[Il semblerait que vous ayez fait quelques erreurs en remplissant le formulaire"
+    form:
+        error:
+            introduction: >
+                  {1}Il semblerait que vous ayez fait une petite erreur en remplissant le formulaire
+                  |[2,Inf[Il semblerait que vous ayez fait quelques erreurs en remplissant le formulaire
+            birthPlace: >
+                Vous devez saisir un lieu de naissance dans le champ "lieu de naissance" puis sélectionner une proposition dans la liste déroulante qui apparaît pendant votre saisie.
+            birthDate: >
+                La date de naissance saisie n\'est pas correcte, cliquez dans le champ pour utiliser le sélecteur de date et d'heure. Vous pouvez également inscrire la date et l'heure à la main sur le modèle suivante : "JJ/MM/AAAA HH:MM" (jour, mois, année, heure puis minutes).
+        info:
+            pseudos: "Nom professionnel (écrivain, artiste, etc.) ou alias courant. Attention : ne fournissez cette information que si elle est active au quotidien dans votre vie publique"

@@ -6,7 +6,6 @@ use ExtranetBundle\Entity\Analysis;
 use ExtranetBundle\Services\Geocoding;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
-use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Form;
@@ -15,6 +14,7 @@ use Symfony\Component\Form\FormError;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class AnalysisType extends AbstractType
 {
@@ -23,9 +23,15 @@ class AnalysisType extends AbstractType
      */
     private $geocoding;
 
-    public function __construct(Geocoding $geocoding)
+    /**
+     * @var TranslatorInterface
+     */
+    private $translator;
+
+    public function __construct(Geocoding $geocoding, TranslatorInterface $translator)
     {
         $this->geocoding = $geocoding;
+        $this->translator = $translator;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -80,6 +86,9 @@ class AnalysisType extends AbstractType
             ->add('birthDate', TextType::class, [
                 'label' => 'Date et heure de naissance',
                 'required' => true,
+                'attr' => [
+                    'readonly' => 'true',
+                ],
             ])
             ->add('birthPlace', TextType::class, [
                 'label' => 'Lieu de naissance',
@@ -110,14 +119,14 @@ class AnalysisType extends AbstractType
             $form->get('birthDate')->setData($birthDate ? $birthDate->format('d/m/Y H:i') : null);
         });
 
-        $builder->addEventListener(FormEvents::SUBMIT, function(FormEvent $event) {
+        $builder->addEventListener(FormEvents::SUBMIT, function(FormEvent $event) use ($options) {
             /** @var Form $form */
             $form = $event->getForm();
             $birthPlaceCoordinatesStringed = $form->get('birthPlaceCoordinates')->getData();
 
             // Prevent case when autocomplete has not been used
             if ($birthPlaceCoordinatesStringed == "0,0") {
-                $form->addError(new FormError('Vous devez saisir un lieu de naissance dans le champ "lieu de naissance" puis sélectionner une proposition dans la liste déroulante qui apparaît pendant votre saisie.'));
+                $form->addError(new FormError($options['translator']->trans('analysis.form.error.birthPlace')));
             } else {
                 /** @var Analysis $data */
                 $data = $event->getData();
@@ -132,7 +141,7 @@ class AnalysisType extends AbstractType
             // Prevent case when birthdate isn't what it should be
             $birthDate = \DateTime::createFromFormat('d/m/Y H:i', $form->get('birthDate')->getData());
             if (!is_a($birthDate, 'DateTime')) {
-                $form->addError(new FormError('La date de naissance saisie n\'est pas correcte, cliquez dans le champ pour utiliser le sélecteur de date et d\'heure. Vous pouvez également inscrire la date et l\'heure à la main sur le modèle suivante : "JJ/MM/AAAA HH:MM" (jour, mois, année, heure puis minutes).'));
+                $form->addError(new FormError($options['translator']->trans('analysis.form.error.birthDate')));
             } else {
                 $data->setBirthDate($birthDate);
             }
@@ -143,6 +152,7 @@ class AnalysisType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Analysis::class,
+            'translator' => $this->translator,
         ]);
     }
 

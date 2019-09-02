@@ -78,13 +78,13 @@
                                                 data-label="Surnom">
                                             Avez-vous un surnom ?
                                         </button>
-                                        <i class="far fa-2x fa-question-circle automatic-tippy" id="tippyPseudos" data-rtippy="{{ 'analysis.add.pseudos'|trans }}"></i>
+                                        <i class="far fa-2x fa-question-circle automatic-tippy" id="tippyPseudos" data-rtippy="{{ 'analysis.form.info.pseudos'|trans }}"></i>
                                     </div>
                                 </div>
 
                                 {% if form.vars.errors|length > 0 %}
                                     <div class="font-weight-light text-danger font-italic mt-4">
-                                        <p class="small">{{ 'analysis.add.error'|transchoice(form.vars.errors|length) }}</p>
+                                        <p class="small">{{ 'analysis.form.error.introduction'|transchoice(form.vars.errors|length) }}</p>
 
                                         <ul class="form-errors">
                                             {% for error in form.vars.errors.form.getErrors(true) %}
@@ -143,7 +143,9 @@
                 date: "far fa-calendar-alt",
                 up: "fas fa-arrow-up",
                 down: "fas fa-arrow-down"
-            }
+            },
+            ignoreReadonly: true,
+            allowInputToggle: true
         });
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key={{ gj_api_key }}&libraries=places&language=fr"></script>

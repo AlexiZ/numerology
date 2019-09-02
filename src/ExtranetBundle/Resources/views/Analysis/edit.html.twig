@@ -19,7 +19,7 @@
             {% if form.vars.errors|length > 0 %}
                 <div class="card mb-4 py-3 border-left-danger">
                     <div class="card-body">
-                        {{ 'analysis.add.error'|transchoice(form.vars.errors|length) }}
+                        {{ 'analysis.form.error.introduction'|transchoice(form.vars.errors|length) }}
 
                         <ul>
                             {% for error in form.vars.errors.form.getErrors(true) %}
