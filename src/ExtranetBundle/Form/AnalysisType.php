@@ -7,6 +7,7 @@ use ExtranetBundle\Services\Geocoding;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -83,12 +84,9 @@ class AnalysisType extends AbstractType
                 'allow_delete' => true,
                 'delete_empty' => true,
             ])
-            ->add('birthDate', TextType::class, [
+            ->add('birthDate', NumberType::class, [
                 'label' => 'Date et heure de naissance',
                 'required' => true,
-                'attr' => [
-                    'readonly' => 'true',
-                ],
             ])
             ->add('birthPlace', TextType::class, [
                 'label' => 'Lieu de naissance',

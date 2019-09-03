@@ -135,18 +135,6 @@
         function onSubmit(token) {
             document.getElementById("form-try").submit();
         }
-        $('#app_bundle_numerologie_birthDate').datetimepicker({
-            locale: 'fr',
-            viewMode: 'years',
-            icons: {
-                time: "far fa-clock",
-                date: "far fa-calendar-alt",
-                up: "fas fa-arrow-up",
-                down: "fas fa-arrow-down"
-            },
-            ignoreReadonly: true,
-            allowInputToggle: true
-        });
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key={{ gj_api_key }}&libraries=places&language=fr"></script>
     <script async defer src="{{ asset('bundles/extranet/js/autocomplete.js') }}"></script>

@@ -88,11 +88,38 @@ $(document).ready(() => {
             freePremiumCopy.querySelector('i').style.color = '#f4623a';
         });
     }
+
+    $('#app_bundle_numerologie_birthDate').datetimepicker({
+        locale: 'fr',
+        viewMode: 'years',
+        icons: {
+            time: "far fa-clock",
+            date: "far fa-calendar-alt",
+            up: "fas fa-arrow-up",
+            down: "fas fa-arrow-down"
+        },
+        ignoreReadonly: true,
+        allowInputToggle: true,
+        showClose: true,
+        focusOnShow: false
+    });
 }).on('shown.bs.collapse', () => {
     let automaticBarCharts = document.querySelectorAll(".automaticBarChart");
     if (automaticBarCharts) {
         buildCharts(automaticBarCharts);
     }
+}).on('dp.show', () => {
+    document.querySelectorAll('.datepicker-decades span').forEach((span) => {
+        if (0 === span.classList.length) {
+            span.remove();
+        }
+    });
+}).on('DOMSubtreeModified', '.datepicker-decades', () => {
+    document.querySelectorAll('.datepicker-decades span').forEach((span) => {
+        if (0 === span.classList.length) {
+            span.remove();
+        }
+    });
 });
 
 const buildCharts = (automaticBarCharts) => {

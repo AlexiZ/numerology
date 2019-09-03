@@ -494,6 +494,10 @@ hr.full-hr {
   list-style-type: none;
 }
 
+.bootstrap-datetimepicker-widget table td span.decade {
+  width: 108px !important;
+}
+
 @media screen and (max-width: 1200px) {
   #environment {
     display: none;
