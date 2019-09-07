@@ -42,7 +42,7 @@
                     <a href="{{ path('site_export_pdf', {'hash': subject.hash}) }}" title="Télécharger pour imprimer" class="btn btn-info btn-circle btn-sm">
                         <i class="fas fa-print"></i>
                     </a>
-                    {% if subject.userId == app.user.id and subject.example != '1' %}
+                    {% if subject.userId == app.user.id and subject.example != '1' or is_granted('ROLE_ADMIN') %}
                         <a href="{{ url('extranet_delete', {'hash': subject.hash}) }}" title="Supprimer" class="btn btn-danger btn-circle btn-sm">
                             <i class="fas fa-times"></i>
                         </a>
