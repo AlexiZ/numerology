@@ -7,6 +7,7 @@ import 'chartjs-plugin-annotation';
 import 'pc-bootstrap4-datetimepicker';
 import 'magnific-popup';
 import tippy from 'tippy.js';
+import 'jssor-slider';
 
 import './main.scss';
 
@@ -103,6 +104,8 @@ $(document).ready(() => {
         showClose: true,
         focusOnShow: false
     });
+
+    jssor_1_slider_init();
 }).on('shown.bs.collapse', () => {
     let automaticBarCharts = document.querySelectorAll(".automaticBarChart");
     if (automaticBarCharts) {
@@ -246,4 +249,47 @@ const copyTextToClipboard = (text) => {
     }, function(err) {
         console.error('Async: Could not copy text: ', err);
     });
+};
+
+const jssor_1_slider_init = () => {
+    let jssor_1_options = {
+            $AutoPlay: 1,
+            $AutoPlaySteps: 4,
+            $SlideDuration: 160,
+            $SlideWidth: 200,
+            $SlideHeight: 300,
+            $SlideSpacing: 3,
+            $ArrowNavigatorOptions: {
+                $Class: $JssorArrowNavigator$,
+                $Steps: 4
+            },
+            $BulletNavigatorOptions: {
+                $Class: $JssorBulletNavigator$
+            }
+        },
+        jssor_1_slider = new $JssorSlider$("jssor_1", jssor_1_options),
+        MAX_WIDTH = 980
+    ;
+
+    const ScaleSlider = () => {
+        let containerElement = jssor_1_slider.$Elmt.parentNode,
+            containerWidth = containerElement.clientWidth
+        ;
+
+        if (containerWidth) {
+            let expectedWidth = Math.min(MAX_WIDTH || containerWidth, containerWidth);
+
+            jssor_1_slider.$ScaleWidth(expectedWidth);
+        }
+        else {
+            window.setTimeout(ScaleSlider, 30);
+        }
+    };
+
+    ScaleSlider();
+
+    $Jssor$.$AddEvent(window, "load", ScaleSlider);
+    $Jssor$.$AddEvent(window, "resize", ScaleSlider);
+    $Jssor$.$AddEvent(window, "orientationchange", ScaleSlider);
+    /*#endregion responsive code end*/
 };

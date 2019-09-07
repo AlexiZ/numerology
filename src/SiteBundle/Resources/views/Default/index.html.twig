@@ -95,6 +95,11 @@
                 <div class="col-lg-8 text-center">
                     <h4 class="text-white mt-4">Quelques exemples réels</h4>
                 </div>
+                <div class="col-lg-8 align-self-baseline text-center">
+                    <p class="text-white-75 mb-4">
+                        Pour illustrer ce que vous obtiendrez avec votre propre analyse
+                    </p>
+                </div>
             </div>
         </div>
     </section>
@@ -108,7 +113,7 @@
 
                 <div class="col-lg-3 col-sm-6 text-center">
                     <a class="portfolio-box" href="{{ path('site_show', {'hash': example.hash}) }}">
-                        <img class="img-fluid" src="{{ asset('bundles/site/img/'~example.hash~'.png') }}" alt="" loading="lazy">
+                        <img class="img-fluid" src="{% if fileExists('bundles/site/img/'~example.hash~'.png') %}{{ asset('bundles/site/img/'~example.hash~'.png') }}{% else %}{{ asset('bundles/site/img/default.png') }}{% endif %}" alt="" loading="lazy">
                         <div class="portfolio-box-caption">
                             <div class="project-category text-white-50">
                                 Étude numérologique complète
@@ -349,42 +354,89 @@
         </div>
     </section>
 
-    <section class="page-section bg-primary text-white" id="extranet">
+    <section class="page-section" id="extranet">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-8 text-center">
                     <h2 class="mt-0">Découvrez notre solution pour les professionnels</h2>
-                    <hr class="divider light my-4">
-                    <p class="mb-2">Un espace sécurisé, des études numérologiques complètes imprimables en illimité et un espace de communication privilégié.</p>
+                    <hr class="divider my-4">
+                    <p class="mb-2">Vous avez besoin d'analyser de nombreux profils chaque mois ?<br>Vous êtes recruteur, dirigeant d'entreprise ou professionnel travaillant dans l'aide et le soutien personnel ?</p>
+                    <p class="mb-2">Profitez d'un abonnement à notre espace sécurisé, des études numérologiques complètes imprimables en illimité, un espace de communication privilégié.</p>
                 </div>
             </div>
 
             <div class="row mt-5">
                 <div class="col-lg-6 col-md-6 mr-auto text-center mb-2">
-                    <a class="d-block text-white" href="javascript:void(0);" data-toggle="modal" data-target="#modalPrez"><i class="fas fa-play fa-3x mb-3"></i><br>Voir la présentation</a>
+                    <a class="d-block" href="javascript:void(0);" data-toggle="modal" data-target="#modalPrez"><i class="fas fa-play fa-3x mb-3"></i><br>Voir la présentation</a>
                 </div>
 
                 <div class="col-lg-6 col-md-6 mr-auto text-center">
-                    <a class="d-block text-white" href="{{ path('extranet_index') }}"><i class="fas fa-sign-in-alt fa-3x mb-3"></i><br>Accédez à votre espace professionnel</a>
+                    <a class="d-block" href="{{ path('extranet_index') }}"><i class="fas fa-sign-in-alt fa-3x mb-3"></i><br>Accédez à votre espace professionnel</a>
                 </div>
             </div>
 
             <div class="row justify-content-center mt-5">
                 <div class="col-lg-8 text-center">
                     <p class="mb-0">Vous voulez essayer l'outil avant de vous lancer ?</p>
-                    <p class="mb-5"><a class="btn-link text-white" href="{{ path('site_contact') }}">Écrivez-nous</a> et nous vous enverrons un accès temporaire gratuit à toutes les fonctionnalités de notre espace pour professionnels.</p>
+                    <p class="mb-5"><a class="btn-link" href="{{ path('site_contact') }}">Écrivez-nous</a> et nous vous enverrons un accès temporaire gratuit à toutes les fonctionnalités de notre espace pour professionnels.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="page-section" id="contact">
+    <section class="page-section bg-primary text-white" id="qui">
         <div class="container">
-            <h2 class="text-center mt-0">Contact</h2>
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center align-self-end">
+                    <h2 class="text-white mt-0">Qui sommes-nous ?</h2>
+                    <hr class="divider light my-4">
+                </div>
+            </div>
+
+            <div class="row justify-content-center mt-4">
+                <div class="col-lg-8 align-self-baseline text-center">
+                    <p class="text-white-75 mb-4">
+                        Ce site est issu de la collaboration entre Jean-Michel Mazaudier et Alexis Mazaudier.
+                        <br><br>
+                        <strong>Jean-Michel Mazaudier</strong>, un professionel de la numérologie, du tarot de Marseille, de la radiesthésie, de la géobiologue et du Feng Sgui, exerce en Bretagne depuis de nombreuses années. Découvrez ses autres activités et centres d'intérêts sur le site <a href="http://harmoniesmaison.fr" class="text-white-50" title="Site internet Harmonies Maison" target="_blank">Harmonies Maison</a>.
+                        <br>
+                        Il est l'auteur du livre "La numérologie essentielle - Héritages et parcours de vie" aux éditions Bussière ainsi que de 11 autres ouvrages.
+                    </p>
+                </div>
+
+                <div id="jssor_1" style="position:relative;top:0px;left:0px;width:980px;height:380px;overflow:hidden;">
+                    <!-- Loading Screen -->
+                    <div data-u="loading" class="jssorl-009-spin" style="position:absolute;top:0px;left:0px;width:100%;height:100%;text-align:center;background-color:rgba(0,0,0,0.7);">
+                        <img style="margin-top:-19px;position:relative;top:50%;width:38px;height:38px;" src="img/spin.svg" />
+                    </div>
+                    <div data-u="slides" style="position:absolute;top:0px;left:0px;width:980px;height:380px;overflow:hidden;">
+                        <div><img data-u="image" src="http://placehold.it/200x300" /></div>
+                        <div><img data-u="image" src="http://placekitten.com/200/300" /></div>
+                        <div><img data-u="image" src="http://placekitten.com/200/300" /></div>
+                        <div><img data-u="image" src="http://placekitten.com/200/300" /></div>
+                        <div><img data-u="image" src="http://placekitten.com/200/300" /></div>
+                        <div><img data-u="image" src="http://placekitten.com/200/300" /></div>
+                        <div><img data-u="image" src="http://placekitten.com/200/300" /></div>
+                        <div><img data-u="image" src="http://placekitten.com/200/300" /></div>
+                    </div>
+                </div>
+
+                <div class="col-lg-8 align-self-baseline text-center">
+                    <p class="text-white-75 mb-4">
+                        <strong>Alexis Mazaudier</strong>, créateur des sites numerologique.fr et harmoniesmaison.fr, est <a href="https://www.malt.fr/profile/alexismazaudier1" rel="noopener" title="Alexis Mazaudier développeur web" class="text-white-50" target="_blank">développeur web professionnel</a> depuis 2011.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="page-section py-5 bg-dark" id="contact">
+        <div class="container">
+            <h2 class="text-center mt-0 text-white">Contact</h2>
             <hr class="divider my-4">
             <div class="row">
-                <div class="col-lg-12 mr-auto text-center">
-                    <a class="d-block" href="{{ path('site_contact') }}"><i class="fas fa-envelope fa-3x mb-3 text-muted"></i><br>Contactez-nous</a>
+                <div class="col-lg-12 mr-auto text-center text-white">
+                    <a class="d-block" href="{{ path('site_contact') }}"><i class="fas fa-envelope fa-3x mb-3"></i><br>Contactez-nous</a>
                 </div>
             </div>
         </div>
