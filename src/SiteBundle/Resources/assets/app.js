@@ -261,11 +261,14 @@ const jssor_1_slider_init = () => {
             $SlideSpacing: 3,
             $ArrowNavigatorOptions: {
                 $Class: $JssorArrowNavigator$,
-                $Steps: 4
+                $Steps: 4,
+                $ChanceToShow: 2,
             },
             $BulletNavigatorOptions: {
-                $Class: $JssorBulletNavigator$
-            }
+                $Class: $JssorBulletNavigator$,
+            },
+            $StartIndex: 2,
+            $ArrowKeyNavigation: 0,
         },
         jssor_1_slider = new $JssorSlider$("jssor_1", jssor_1_options),
         MAX_WIDTH = 980

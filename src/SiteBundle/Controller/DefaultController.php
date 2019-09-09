@@ -11,12 +11,28 @@ use Symfony\Component\HttpFoundation\Request;
 
 class DefaultController extends Controller
 {
+    public static $books = [
+        1 => 'La Numérologie Essentielle',
+        2 => 'Tarot de Marseille - L\'Interprète',
+        3 => 'La Divination par le Tarot de Marseille',
+        4 => 'L\'énergie du bien-être',
+        5 => 'So Feng-Shui - La Chambre à coucher',
+        6 => 'So Feng-Shui - La Cuisine',
+        7 => 'So Feng-Shui - Le salon et la salle à manger',
+        8 => 'So Feng-Shui - Cabinet des professions de santé et de bien-être',
+        9 => 'So Feng-Shui - Chambre d\'enfant et d\'adolescent',
+        10 => 'Feng Shui Business',
+        11 => 'Vendez mieux votre maison grâce au Home Staging Feng Shui',
+        12 => 'Le Pendule et la Balance',
+    ];
+
     public function homepageAction()
     {
         $repository = $this->getDoctrine()->getRepository(Analysis::class);
 
         return $this->render('SiteBundle:Default:index.html.twig', [
             'examples' => $repository->getExamples(),
+            'books' => self::$books,
         ]);
     }
 

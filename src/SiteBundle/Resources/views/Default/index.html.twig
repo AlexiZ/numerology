@@ -398,32 +398,35 @@
                     <p class="text-white-75 mb-4 text-justify">
                         Ce site est issu de la collaboration entre Jean-Michel Mazaudier et Alexis Mazaudier.
                         <br><br>
-                        <strong>Jean-Michel Mazaudier</strong>, un professionel de la numérologie, du tarot de Marseille, de la radiesthésie, de la géobiologue et du Feng Sgui, exerce en Bretagne depuis de nombreuses années. Découvrez ses autres activités et centres d'intérêts sur le site <a href="http://harmoniesmaison.fr" class="text-white-50" title="Site internet Harmonies Maison" target="_blank">Harmonies Maison</a>.
+                        <i class="fas fa-caret-right"></i>&nbsp;<strong>Jean-Michel Mazaudier</strong>, un professionnel de la numérologie, du tarot de Marseille, de la radiesthésie, de la géobiologue et du Feng Sgui, exerce en Bretagne depuis de nombreuses années. Découvrez ses autres activités et centres d'intérêts sur le site <a href="http://harmoniesmaison.fr" class="text-white-50" title="Site internet Harmonies Maison" target="_blank">Harmonies Maison</a>.
                         <br>
                         Il est l'auteur du livre "La numérologie essentielle - Héritages et parcours de vie" aux éditions Bussière ainsi que de 11 autres ouvrages.
                     </p>
                 </div>
 
-                <div id="jssor_1" style="position:relative;top:0px;left:0px;width:980px;height:380px;overflow:hidden;">
-                    <!-- Loading Screen -->
-                    <div data-u="loading" class="jssorl-009-spin" style="position:absolute;top:0px;left:0px;width:100%;height:100%;text-align:center;background-color:rgba(0,0,0,0.7);">
-                        <img style="margin-top:-19px;position:relative;top:50%;width:38px;height:38px;" src="img/spin.svg" />
+                <div id="jssor_1" style="position:relative;top:0px;left:0px;width:1010px;height:300px;overflow:visible;">
+                    <div data-u="arrowleft" class="jssora051" style="width:55px;height:55px;left:-50px;position:absolute;opacity:0.5;cursor:pointer;" data-autocenter="2" data-scale="0.75" data-scale-left="0.75">
+                        <svg viewBox="0 0 16000 16000" style="position:relative;z-index:9999;top:0;left:0;width:100%;height:100%;">
+                            <polyline class="a" points="11040,1920 4960,8000 11040,14080 "></polyline>
+                        </svg>
                     </div>
-                    <div data-u="slides" style="position:absolute;top:0px;left:0px;width:980px;height:380px;overflow:hidden;">
-                        <div><img data-u="image" src="http://placehold.it/200x300" /></div>
-                        <div><img data-u="image" src="http://placekitten.com/200/300" /></div>
-                        <div><img data-u="image" src="http://placekitten.com/200/300" /></div>
-                        <div><img data-u="image" src="http://placekitten.com/200/300" /></div>
-                        <div><img data-u="image" src="http://placekitten.com/200/300" /></div>
-                        <div><img data-u="image" src="http://placekitten.com/200/300" /></div>
-                        <div><img data-u="image" src="http://placekitten.com/200/300" /></div>
-                        <div><img data-u="image" src="http://placekitten.com/200/300" /></div>
+                    <div data-u="arrowright" class="jssora051" style="width:55px;height:55px;right:-50px;position:absolute;opacity:0.5;cursor:pointer;" data-autocenter="2" data-scale="0.75" data-scale-right="0.75">
+                        <svg viewBox="0 0 16000 16000" style="position:relative;z-index:9999;top:0;left:0;width:100%;height:100%;">
+                            <polyline class="a" points="4960,1920 11040,8000 4960,14080 "></polyline>
+                        </svg>
+                    </div>
+                    <div data-u="slides" style="position:absolute;top:0px;left:0px;width:1010px;height:380px;overflow:hidden;">
+                        {% for name, title in books %}
+                            <a href="http://www.editions-bussiere.com/139_mazaudier-jean-michel" target="_blank" title="{{ title }}" rel="noopener">
+                                <img data-u="image" alt="{{ title }}" src="{{ asset('bundles/site/img/livres/' ~ name ~ '.jpg') }}" />
+                            </a>
+                        {% endfor %}
                     </div>
                 </div>
 
-                <div class="col-lg-8 align-self-baseline text-justify">
+                <div class="col-lg-8 mt-4 align-self-baseline text-justify">
                     <p class="text-white-75 mb-4">
-                        <strong>Alexis Mazaudier</strong>, créateur des sites numerologique.fr et harmoniesmaison.fr, est <a href="https://www.malt.fr/profile/alexismazaudier1" rel="noopener" title="Alexis Mazaudier développeur web" class="text-white-50" target="_blank">développeur web professionnel</a> depuis 2014.
+                        <i class="fas fa-caret-right"></i>&nbsp;<strong>Alexis Mazaudier</strong>, créateur des sites <a href="https://www.numerologique.fr" rel="noopener" class="text-white-50" title="Numérologique">numerologique.fr</a> et <a href="http://harmoniesmaison.fr" rel="noopener" class="text-white-50" title="Harmonies Maison">harmoniesmaison.fr</a>, est <a href="https://www.malt.fr/profile/alexismazaudier1" rel="noopener" title="Alexis Mazaudier développeur web" class="text-white-50" target="_blank">développeur web professionnel</a> depuis 2014.
                     </p>
                 </div>
             </div>
