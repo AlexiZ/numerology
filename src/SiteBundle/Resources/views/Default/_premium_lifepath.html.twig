@@ -32,6 +32,44 @@
             </div>
         </div>
 
+        <div class="accordion mb-2 col-md-12" id="accordionCycles">
+            <div class="card">
+                <div class="card-header" id="headingCycles">
+                    <h6 class="mb-0">
+                        <a class="d-flex justify-content-between align-items-center" href="#" data-toggle="collapse" data-target="#collapseCycles" aria-expanded="true" aria-controls="collapseCycles">
+                            Les cycles de votre chemin de vie
+                        </a>
+                    </h6>
+                </div>
+
+                <div id="collapseCycles" class="collapse" aria-labelledby="headingCycles" data-parent="#accordionCycles">
+                    <div class="card-body">
+                        <p>Ils varient selon les personnes en fonction de la numérologie de chacun.<br>Mais ils peuvent aussi être étroitement liés à la lignée familiale comme le démontre la psychogénéalogie. Dans ce cas, on observe un parallèle parfois très fort entre les cycles de sa propre vie et ceux de ses ascendants plus ou moins proches.<br>Cette loyauté familiale peut représenter un barrage à sa propre réalisation personnelle, qu'il peut être utile de mettre en lumière, de comprendre et de résoudre.</p>
+                        <p>Voici les nombres représentant les repères et les durées de vos cycles de vie :</p>
+                        <ul>
+                            <li>
+                                Nombres très forts :
+                                <ul>
+                                    <li>Votre <strong>tournant majeur</strong> : {{ subject.data.lifePath.majorTurnNumber }} ans.</li>
+                                    <li>Le <strong>Feng Shui</strong> met en évidence des périodes de <strong>20 ans</strong>. La période actuelle a débuté en février <strong>2004</strong> et prendra fin en février <strong>2024</strong>.</li>
+                                    <li>Les cycles des <strong>années personnelles</strong>, s'étendant sur <strong>9 ans</strong>, il faut en tenir compte pour s'insérer dans le flux énergétique positif de votre année personnelle.</li>
+                                    <li>Le nombre de votre <strong>chemin de vie</strong> : {{ subject.data.lifePath.lifePathNumber }}.</li>
+                                </ul>
+                            </li>
+                            <li>
+                                Autres nombres actifs :
+                                <ul>
+                                    <li>Les cycles annuels du Feng Shui, débutant le 4 février de chaque année.</li>
+                                    <li>Les nombres du <strong>jour de naissance</strong> ({{ subject.birthDate|date('d') }}) ou du <strong>mois de naissance</strong> ({{ subject.birthDate|date('m') }}).</li>
+                                    <li>33 : la place du soleil dans le ciel est la même tous les 33 ans. On a donc exactement la même orientation du ciel que celle du thème natal sur le lieu de naissance. La trente-troisième année peut alors correspondre à une seconde naissance. Ceci explique aussi pourquoi il est possible que l'on vive le même type de situations ou de sensations à 33 ans d'intervalle. Que viviez-vous il y a 33 ans ?</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="accordion mb-2 col-md-12" id="accordionIdeal">
             <div class="card">
                 <div class="card-header" id="headingIdeal">
@@ -207,44 +245,6 @@
                     <div class="card-body">
                         <p>{{ getDefinition('longterm')|raw }}</p>
                         <p>{{ subject.data.lifePath.longTermNumber|getAnalysis('longterm')|raw }}</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="accordion mb-2 col-md-12" id="accordionCycles">
-            <div class="card">
-                <div class="card-header" id="headingCycles">
-                    <h6 class="mb-0">
-                        <a class="d-flex justify-content-between align-items-center" href="#" data-toggle="collapse" data-target="#collapseCycles" aria-expanded="true" aria-controls="collapseCycles">
-                            Les cycles de votre chemin de vie
-                        </a>
-                    </h6>
-                </div>
-
-                <div id="collapseCycles" class="collapse" aria-labelledby="headingCycles" data-parent="#accordionCycles">
-                    <div class="card-body">
-                        <p>Ils varient selon les personnes en fonction de la numérologie de chacun.<br>Mais ils peuvent aussi être étroitement liés à votre lignée familiale comme le démontre la psychogénéalogie. Dans ce cas, on observe un parallèle parfois très fort entre les cycles de sa propre vie et ceux de ses ascendants plus ou moins proches.<br>Cette loyauté familiale peut représenter un barrage à la réalisation personnelle, qu'il peut être utile de mettre en lumière, de comprendre et de résoudre.</p>
-                        <p>Voici les nombres représentant les repères et les durées de vos cycles de vie :</p>
-                        <ul>
-                            <li>
-                                Nombres très forts :
-                                <ul>
-                                    <li>Votre <strong>tournant majeur</strong> : {{ subject.data.lifePath.majorTurnNumber }} ans.</li>
-                                    <li>Le <strong>Feng Shui</strong> met en évidence des périodes de <strong>20 ans</strong>. La période actuelle a débuté en février <strong>2004</strong> et prendra fin en février <strong>2024</strong>.</li>
-                                    <li>Les cycles des <strong>années personnelles</strong>, s'étendant sur <strong>9 ans</strong>, il faut en tenir compte pour s'insérer dans le flux énergétique positif de votre année personnelle.</li>
-                                    <li>Le nombre de votre <strong>chemin de vie</strong> : {{ subject.data.lifePath.lifePathNumber }}.</li>
-                                </ul>
-                            </li>
-                            <li>
-                                Autres nombres actifs :
-                                <ul>
-                                    <li>Les cycles annuels du Feng Shui, débutant le 4 février de chaque année.</li>
-                                    <li>Les nombres du <strong>jour de naissance</strong> ({{ subject.birthDate|date('d') }}) ou du <strong>mois de naissance</strong> ({{ subject.birthDate|date('m') }}).</li>
-                                    <li>33 : la place du soleil dans le ciel est la même tous les 33 ans. On a donc exactement la même orientation du ciel que celle du thème natal sur le lie de naissance. La trente-troisième année peut alors correspondre à une seconde naissance. Ceci explique aussi pourquoi il est possible que l'on vive le même type de situtations ou de sensations à 33 ans d'intervalle. Que viviez-vous il y a 33 ans ?</li>
-                                </ul>
-                            </li>
-                        </ul>
                     </div>
                 </div>
             </div>
