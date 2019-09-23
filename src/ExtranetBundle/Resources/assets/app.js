@@ -424,31 +424,6 @@ $(document).ready(() => {
         });
     }
 
-    // Examplarize analysis from admin analysis' list
-    let exemplarizers = document.querySelectorAll('.exemplarize');
-    if (exemplarizers) {
-        exemplarizers.forEach((exemplarize) => {
-            let hash = exemplarize.dataset.hash;
-
-            exemplarize.addEventListener('click', (e) => {
-                e.preventDefault();
-
-                let xmlhttp = new XMLHttpRequest();
-                xmlhttp.onreadystatechange = () => {
-                    if (xmlhttp.readyState === XMLHttpRequest.DONE) {
-                        if (xmlhttp.status === 200) {
-                            let data = JSON.parse(xmlhttp.response);
-                            modalMessage('Changement d\'exemple', data);
-                        }
-                    }
-                };
-
-                xmlhttp.open("GET", Routing.generate('extranet_exemplarize', {'hash': hash}), true);
-                xmlhttp.send();
-            });
-        });
-    }
-
     $('#app_bundle_numerologie_birthDate').datetimepicker({
         locale: 'fr',
         viewMode: 'years',
@@ -462,6 +437,23 @@ $(document).ready(() => {
         ignoreReadonly: true,
         allowInputToggle: true
     });
+}).on('click', '.exemplarize', (e) => {
+    e.preventDefault();
+
+    let hash = e.currentTarget.dataset.hash,
+        xmlhttp = new XMLHttpRequest()
+    ;
+    xmlhttp.onreadystatechange = () => {
+        if (xmlhttp.readyState === XMLHttpRequest.DONE) {
+            if (xmlhttp.status === 200) {
+                let data = JSON.parse(xmlhttp.response);
+                modalMessage('Changement d\'exemple', data);
+            }
+        }
+    };
+
+    xmlhttp.open("GET", Routing.generate('extranet_exemplarize', {'hash': hash}), true);
+    xmlhttp.send();
 });
 
 // Get unread messages count
