@@ -42,6 +42,7 @@ twig:
         pp_hosted_btn_id: '%paypal.hosted_button_id%'
         gj_api_key: '%google_javascript_api_key%'
         gsc_verif_id: '%google_search_console_verification_id%'
+        ms_verif_id: '%bing_verification_id%'
 
 # Doctrine Configuration
 doctrine:

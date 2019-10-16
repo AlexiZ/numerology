@@ -26,7 +26,7 @@
         }
     ],
     "require": {
-        "php": ">=5.5.9",
+        "php": ">=7.1",
         "ext-curl": "*",
         "ext-json": "*",
         "auth0/auth0-php": "^5.4",

@@ -48,3 +48,5 @@ parameters:
     google_search_console_verification_id: xxx
 
     paypal.hosted_button_id: xxx
+
+    bing_verification_id: xxx
