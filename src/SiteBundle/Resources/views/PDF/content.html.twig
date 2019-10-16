@@ -658,7 +658,21 @@
                                                     {{ subject.data.lifePath.lifePathNumber|getAnalysis('lifepath')|raw }}
                                                 </div>
                                             </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
 
+                            <div class="row break-after">
+                                <div class="col-md-12 mb-5">
+                                    <h3 class="text-center">Parcours de vie</h3>
+                                    <hr class="divider mt-4 underline-divider">
+                                    <p class="subtitle font-weight-light mb-0 mt-0">Entre les rails du chemin de vie vous avancez du côté positif ou du côté négatif selon vos choix ou les aléas du destin.</p>
+
+                                    <p class="subtitle font-weight-light mb-4 mt-0">Récapitulatif de vos paramètres de naissance :<br> {{ subject.UTCBirthDate|date('d/m/Y H:i:s', 'GMT') }}, {{ subject.birthPlace }} ({{ subject.birthPlaceCoordinates|coordsToText }})</p>
+
+                                    <div class="row">
+                                        <ul class="list-group col-md-12">
                                             <li class="list-group-item d-flex justify-content-between align-items-center">
                                                 <strong>Nombre d'idéal</strong>
                                                 <span class="badge badge-primary badge-pill">{{ subject.data.lifePath.idealNumber }}</span>
@@ -668,6 +682,40 @@
                                                     {{ getDefinition('ideal')|raw }}
                                                     <br>
                                                     {{ subject.data.lifePath.idealNumber|getAnalysis('ideal')|raw }}
+                                                </div>
+                                            </li>
+
+                                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                <strong>Cycles de vie</strong>
+                                            </li>
+                                            <li class="list-group-item d-flex justify-content-between align-items-center mb-2">
+                                                <div>
+                                                    {{ getDefinition('ideal')|raw }}
+                                                    <br>
+                                                    Ils varient selon les personnes en fonction de la numérologie de chacun.<br>Mais ils peuvent aussi être étroitement liés à la lignée familiale comme le démontre la psychogénéalogie. Dans ce cas, on observe un parallèle parfois très fort entre les cycles de sa propre vie et ceux de ses ascendants plus ou moins proches.<br>Cette loyauté familiale peut représenter un barrage à sa propre réalisation personnelle, qu'il peut être utile de mettre en lumière, de comprendre et de résoudre.<br>
+                                                    Voici les nombres représentant les repères et les durées de vos cycles de vie :
+                                                    <ul>
+                                                        <li>
+                                                            Nombres très forts :
+                                                            <ul>
+                                                                <li>Votre <strong>tournant majeur</strong> : {{ subject.data.lifePath.majorTurnNumber }} ans.</li>
+                                                                <li>Le <strong>Feng Shui</strong> met en évidence des périodes de <strong>20 ans</strong>. La période actuelle a débuté en février <strong>2004</strong> et prendra fin en février <strong>2024</strong>.</li>
+                                                                <li>Les cycles des <strong>années personnelles</strong>, s'étendant sur <strong>9 ans</strong>, il faut en tenir compte pour s'insérer dans le flux énergétique positif de votre année personnelle.</li>
+                                                                <li>Le nombre de votre <strong>chemin de vie</strong> : {{ subject.data.lifePath.lifePathNumber }}.</li>
+                                                            </ul>
+                                                        </li>
+                                                        <li>
+                                                            Autres nombres actifs :
+                                                            <ul>
+                                                                <li>Les cycles annuels du Feng Shui, débutant le 4 février de chaque année.</li>
+                                                                <li>Les nombres du <strong>jour de naissance</strong> ({{ subject.birthDate|date('d') }}) ou du <strong>mois de naissance</strong> ({{ subject.birthDate|date('m') }}).</li>
+                                                                <li>33 : La place du soleil dans le ciel est la même tous les 33 ans. Cela signifie que les influences astrologiques sont les mêmes aujourd’hui que 33 ans auparavant, en particulier si l’on vit au même endroit.
+                                                                    <br>Du point de vue pratique, la trente-troisième année peut alors correspondre à une seconde naissance. Par ailleurs, il est possible que l'on vive le même type de situations ou de sensations à 33 ans d'intervalle. Que viviez-vous il y a 33 ans ?
+                                                                    <br>Exemple : le 1er janvier 1986, je déménageai, quittant un mode de vie citadin à Marseille vers quelque chose de plus rural. Le 28 décembre 2018 (33 ans à quelques jours près), j’ai déménagé pour un nouveau changement de vie, laissant Trébeurden, une station balnéaire et touristique, pour retrouver la campagne à Loqueffret.
+                                                                </li>
+                                                            </ul>
+                                                        </li>
+                                                    </ul>
                                                 </div>
                                             </li>
                                         </ul>
