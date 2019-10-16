@@ -10702,6 +10702,10 @@ header.masthead h1 {
     max-width: 1920px;
 }
 
+#portfolio .container-fluid .no-gutters {
+    background-color: #f4623a;
+}
+
 #portfolio .container-fluid .portfolio-box {
     position: relative;
     display: block;
