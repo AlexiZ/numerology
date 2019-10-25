@@ -35,7 +35,7 @@
                         <p>
                             {{ 'analysis.show.letters.synthesis.public'|transchoice(lettersSynthesis.public|length, {'%1%': ('analysis.show.letters.synthesis.'~lettersSynthesis.public.0)|trans, '%2%': ('analysis.show.letters.synthesis.'~lettersSynthesis.public.1)|trans})|raw }}
                         </p>
-                    {% else %}
+                    {% elseif (not lettersSynthesis.negativeOnly) %}
                         <p>
                             {{ 'analysis.show.letters.synthesis.public'|transchoice(0)|raw }}
                         </p>
@@ -87,7 +87,7 @@
                         <p>
                             {{ 'analysis.show.letters.synthesis.private'|transchoice(lettersSynthesis.private|length, {'%1%': ('analysis.show.letters.synthesis.'~lettersSynthesis.private.0)|trans, '%2%': ('analysis.show.letters.synthesis.'~lettersSynthesis.private.1)|trans})|raw }}
                         </p>
-                    {% else %}
+                    {% elseif (not lettersSynthesis.negativeOnly) %}
                         <p>
                             {{ 'analysis.show.letters.synthesis.private'|transchoice(0)|raw }}
                         </p>

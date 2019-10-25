@@ -509,15 +509,21 @@ class Numerologie
     {
         $input = $this->getLettersDifferences($subject);
         $output = [];
+        $negativeOnly = true;
 
         foreach ($input as $property => $data) {
             $output[$property] = array_flip(array_filter($data, function ($a) {
+                if ($a >= 0) {
+                    $negativeOnly = false;
+                }
                 return $a >= 0;
             }));
             krsort($output[$property]);
             $output[$property] = array_values($output[$property]);
         }
 
-        return $output;
+        return array_merge($output, [
+            'negativeOnly' => $negativeOnly,
+        ]);
     }
 }
