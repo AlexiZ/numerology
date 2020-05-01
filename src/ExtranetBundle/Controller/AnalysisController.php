@@ -32,6 +32,7 @@ class AnalysisController extends Controller
             $subject->setData($numerologie->exportData($subject));
             $subject->setUserId($this->getUser()->getId());
             $subject->setLevel(Analysis::LEVEL_PREMIUM);
+            $subject->setUpdatedAt(new \DateTime());
 
             $registry->getManager()->persist($subject);
             $registry->getManager()->flush();
@@ -68,6 +69,7 @@ class AnalysisController extends Controller
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $subject->setData($numerologieService->exportData($subject));
+            $subject->setUpdatedAt(new \DateTime());
 
             $registry->getManager()->persist($subject);
             $registry->getManager()->flush();

@@ -13,6 +13,10 @@
                 <div class="col-lg-10 col-xl-11 mx-auto">
                     <div class="card card-signin flex-row my-5">
                         <div class="card-body">
+                            <div class="mx-auto text-center mb-3">
+                                <em>Analyse générée le {{ subject.updatedAt|default(subject.createdAt)|date('d-m-Y \à H:i') }}</em>
+                            </div>
+
                             {% if fileExists('bundles/site/img/'~subject.hash~'.png') %}
                                 <div class="crop mx-auto">
                                     <img src="{{ asset('bundles/site/img/'~subject.hash~'.png') }}" alt="{{ subject }}">

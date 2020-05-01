@@ -96,7 +96,7 @@
                 <div class="card-header premium-only" id="headingPersonalYearNow">
                     <h6 class="mb-0">
                         <a class="d-flex justify-content-between align-items-center" href="#" data-toggle="collapse" data-target="#collapsePersonalYearNow" aria-expanded="true" aria-controls="collapsePersonalYearNow">
-                            Année personnelle {{ "now"|date('Y') }}
+                            Année personnelle {{ subject.updatedAt|default(subject.createdAt)|date('Y') }}
                             <span class="badge badge-info badge-pill">{{ subject.data.lifePath.personalYearNowNumber }}</span>
                         </a>
                     </h6>

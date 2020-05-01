@@ -42,7 +42,7 @@
         </section>
         <section id="hiker">
             <div id="personalYear">
-                ANNÉE PERSONNELLE 2019 : {{ subject.data.lifePath.personalYearNowNumber }}
+                ANNÉE PERSONNELLE {{ subject.updatedAt|default(subject.createdAt)|date('Y') }} : {{ subject.data.lifePath.personalYearNowNumber }}
             </div>
         </section>
         <section id="hikeress"></section>

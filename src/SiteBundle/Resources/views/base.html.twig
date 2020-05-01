@@ -72,7 +72,7 @@
         <footer class="bg-light py-5">
             <div class="container">
                 <div class="small text-center text-muted">
-                    <a href="{{ path('site_page', {'slug': 'mentions-legales'}) }}">Copyright &copy; Jean-Michel Mazaudier 2019</a>
+                    <a href="{{ path('site_page', {'slug': 'mentions-legales'}) }}">Copyright &copy; Jean-Michel Mazaudier {{ "now"|date('Y') }}</a>
                 </div>
                 <div class="small text-center text-muted">
                     <span class="mr-2 d-none d-lg-inline text-gray-600 small"><em>Date de dernière mise à jour : {% include 'latest.html.twig' %}</em></span>
