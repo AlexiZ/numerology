@@ -1506,7 +1506,7 @@
                     "homepage": "https://github.com/friendsofsymfony/FOSJsRoutingBundle/contributors"
                 },
                 {
-                    "name": "William Durand",
+                    "name": "William DURAND",
                     "email": "william.durand1@gmail.com"
                 }
             ],
@@ -1880,7 +1880,7 @@
                 "wkhtmltopdf"
             ],
             "support": {
-                "source": "https://github.com/AlexiZ/wkhtmltopdf-amd64/tree/master"
+                "source": "https://github.com/AlexiZ/wkhtmltopdf-amd64/tree/0.12.6"
             },
             "time": "2019-08-18T16:04:07+00:00"
         },
