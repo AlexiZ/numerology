@@ -10,6 +10,7 @@ use ExtranetBundle\Form\AnalysisType;
 use ExtranetBundle\Services\Numerologie;
 use Knp\Bundle\SnappyBundle\Snappy\Response\PdfResponse;
 use ReCaptcha\ReCaptcha;
+use SiteBundle\Form\ContactType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -29,10 +30,16 @@ class AnalysisController extends Controller
      */
     private $registry;
 
-    public function __construct(Numerologie $numerologieService, ManagerRegistry $registry)
+    /**
+     * @var Swift_Mailer
+     */
+    private $mailer;
+
+    public function __construct(Numerologie $numerologieService, ManagerRegistry $registry, \Swift_Mailer $mailer)
     {
         $this->numerologieService = $numerologieService;
         $this->registry = $registry;
+        $this->mailer = $mailer;
     }
 
     public function tryAction($version, Request $request)
@@ -74,7 +81,7 @@ class AnalysisController extends Controller
         ]);
     }
 
-    public function showAction($hash, Numerologie $numerologieService)
+    public function showAction($hash, Request $request)
     {
         /** @var Analysis $subject */
         $subject = $this->registry->getRepository(Analysis::class)->findOneByHash($hash);
@@ -83,17 +90,43 @@ class AnalysisController extends Controller
             return $this->redirectToRoute('site_homepage');
         }
 
-        $subject->setData($numerologieService->exportData($subject));
+        $subject->setData($this->numerologieService->exportData($subject));
         $subject->setUpdatedAt(new \DateTime());
         $this->registry->getManager()->persist($subject);
         $this->registry->getManager()->flush();
 
+        $form = $this->createForm(ContactType::class);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $message = (new \Swift_Message('Nouveau commentaire'))
+                ->setFrom($this->getParameter('contact.from'))
+                ->setTo($this->getParameter('contact.email'))
+                ->setBody(
+                    $this->renderView(
+                        '@Site/Emails/contact.html.twig',
+                        [
+                            'hash' => $subject->getHash(),
+                            'message' => $form->getData(),
+                        ]
+                    ),
+                    'text/html'
+                )
+            ;
+
+            try {
+                $this->mailer->send($message);
+            } catch (\Exception $e) {}
+
+            return $this->redirectToRoute('site_show', ['hash' => $hash]);
+        }
+
         return $this->render('@Site/Default/show.html.twig', [
             'subject' => $subject,
-            'identity' => $numerologieService->getIdentityDetails($subject),
-            'lettersChartValues' => $numerologieService->getLettersChartValues($subject),
-            'lettersDifferences' => $numerologieService->getLettersDifferences($subject),
-            'lettersSynthesis' => $numerologieService->getLettersSynthesis($subject),
+            'identity' => $this->numerologieService->getIdentityDetails($subject),
+            'lettersChartValues' => $this->numerologieService->getLettersChartValues($subject),
+            'lettersDifferences' => $this->numerologieService->getLettersDifferences($subject),
+            'lettersSynthesis' => $this->numerologieService->getLettersSynthesis($subject),
+            'form' => $form->createView(),
         ]);
     }
 

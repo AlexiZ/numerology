@@ -1,4 +1,7 @@
 <h1>Nouveau message en provenance du formulaire de contact de Numérologie</h1>
 
+{% if hash|default %}
+    <p>Ce message est un commentaire pour l'étude <a href="{{ path('site_show', {'hash': hash}) }}">{{ hash }}</a></p>
+{% endif %}
 <p>Envoyé par <a href="{{ message.email }}">{{ message.email }}</a> :</p>
 <blockquote>{{ message.body }}</blockquote>
