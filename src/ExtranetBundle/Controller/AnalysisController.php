@@ -121,6 +121,11 @@ class AnalysisController extends Controller
             return $this->redirectToRoute(self::ROUTE_INDEX);
         }
 
+        $subject->setData($numerologieService->exportData($subject));
+        $subject->setUpdatedAt(new \DateTime());
+        $registry->getManager()->persist($subject);
+        $registry->getManager()->flush();
+
         return $this->render('@Extranet/Analysis/show.html.twig', [
             self::SUBJECT => $subject,
             'identity' => $numerologieService->getIdentityDetails($subject),

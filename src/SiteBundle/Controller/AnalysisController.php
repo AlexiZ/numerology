@@ -83,6 +83,11 @@ class AnalysisController extends Controller
             return $this->redirectToRoute('site_homepage');
         }
 
+        $subject->setData($numerologieService->exportData($subject));
+        $subject->setUpdatedAt(new \DateTime());
+        $this->registry->getManager()->persist($subject);
+        $this->registry->getManager()->flush();
+
         return $this->render('@Site/Default/show.html.twig', [
             'subject' => $subject,
             'identity' => $numerologieService->getIdentityDetails($subject),
