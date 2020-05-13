@@ -140,8 +140,8 @@
                     <div class="modal-body">
                         {% form_theme form '@Site/Commons/_form_theme.html.twig' %}
 
-                        {{ form_start(form) }}
-                            {{ form_errors(form, {'attr': {'class': 'form-signin', 'id': 'form-contact'}}) }}
+                        {{ form_start(form, {'attr': {'class': 'form-signin', 'id': 'form-contact'}}) }}
+                            {{ form_errors(form) }}
 
                             <div class="row">
                                 <div class="col-md-12">
@@ -176,7 +176,12 @@
     <script type="text/javascript" src="https://www.google.com/recaptcha/api.js" async defer></script>
     <script type="text/javascript">
         function onSubmit(token) {
-            document.getElementById("form-contact").submit();
+            return new Promise(function (resolve, reject) {
+                if (grecaptcha.getResponse() !== "") {
+                    document.getElementById("form-contact").submit();
+                }
+                grecaptcha.reset();
+            });
         }
     </script>
 {% endblock javascripts %}
