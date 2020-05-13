@@ -98,24 +98,28 @@ class AnalysisController extends Controller
         $form = $this->createForm(ContactType::class);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $message = (new \Swift_Message('Nouveau commentaire'))
-                ->setFrom($this->getParameter('contact.from'))
-                ->setTo($this->getParameter('contact.email'))
-                ->setBody(
-                    $this->renderView(
-                        '@Site/Emails/contact.html.twig',
-                        [
-                            'hash' => $subject->getHash(),
-                            'message' => $form->getData(),
-                        ]
-                    ),
-                    'text/html'
-                )
-            ;
+            $recaptcha = new ReCaptcha($this->getParameter('google_recaptcha.secret_key'));
+            $resp = $recaptcha->verify($request->request->get('g-recaptcha-response'), $request->getClientIp());
 
-            try {
-                $this->mailer->send($message);
-            } catch (\Exception $e) {}
+            if ($resp->isSuccess()) {
+                $message = (new \Swift_Message('Nouveau commentaire'))
+                    ->setFrom($this->getParameter('contact.from'))
+                    ->setTo($this->getParameter('contact.email'))
+                    ->setBody(
+                        $this->renderView(
+                            '@Site/Emails/contact.html.twig',
+                            [
+                                'hash' => $subject->getHash(),
+                                'message' => $form->getData(),
+                            ]
+                        ),
+                        'text/html'
+                    );
+
+                try {
+                    $this->mailer->send($message);
+                } catch (\Exception $e) {}
+            }
 
             return $this->redirectToRoute('site_show', ['hash' => $hash]);
         }

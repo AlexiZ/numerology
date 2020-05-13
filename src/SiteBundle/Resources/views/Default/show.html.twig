@@ -11,6 +11,10 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-10 col-xl-11 mx-auto">
+                    {% for key, message in app.session.flashbag.all %}
+                        <div class="alert alert-{{ key }}">{{ message|join('') }}</div>
+                    {% endfor %}
+
                     <div class="card card-signin flex-row my-5">
                         <div class="card-body">
                             {% if fileExists('bundles/site/img/'~subject.hash~'.png') %}
@@ -134,8 +138,10 @@
                         </button>
                     </div>
                     <div class="modal-body">
+                        {% form_theme form '@Site/Commons/_form_theme.html.twig' %}
+
                         {{ form_start(form) }}
-                            {{ form_errors(form) }}
+                            {{ form_errors(form, {'attr': {'class': 'form-signin', 'id': 'form-contact'}}) }}
 
                             <div class="row">
                                 <div class="col-md-12">
@@ -153,7 +159,7 @@
 
                             <hr class="my-4">
 
-                            <button class="btn btn-lg btn-info btn-block" type="submit">
+                            <button class="btn btn-lg btn-info btn-block g-recaptcha" type="submit" data-sitekey="{{ gr_public_key }}" data-callback="onSubmit">
                                 <i class="fa fa-check mr-2"></i> Envoyer ce message
                             </button>
                         {{ form_end(form) }}
@@ -163,3 +169,14 @@
         </div>
     </div>
 {% endblock body %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script type="text/javascript" src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script type="text/javascript">
+        function onSubmit(token) {
+            document.getElementById("form-contact").submit();
+        }
+    </script>
+{% endblock javascripts %}
