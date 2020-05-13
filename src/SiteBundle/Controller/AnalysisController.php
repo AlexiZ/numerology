@@ -101,7 +101,9 @@ class AnalysisController extends Controller
             $recaptcha = new ReCaptcha($this->getParameter('google_recaptcha.secret_key'));
             $resp = $recaptcha->verify($request->request->get('g-recaptcha-response'), $request->getClientIp());
 
-            if ($resp->isSuccess()) {
+            if (!$resp->isSuccess()) {
+                $this->addFlash('danger', 'Une erreur s\'est produite lors de l\'envoi de votre message.');
+            } else {
                 $message = (new \Swift_Message('Nouveau commentaire'))
                     ->setFrom($this->getParameter('contact.from'))
                     ->setTo($this->getParameter('contact.email'))
@@ -118,7 +120,11 @@ class AnalysisController extends Controller
 
                 try {
                     $this->mailer->send($message);
-                } catch (\Exception $e) {}
+
+                    $this->addFlash('success', 'Votre message a bien été envoyé');
+                } catch (\Exception $e) {
+                    $this->addFlash('danger', 'Une erreur s\'est produite lors de l\'envoi de votre message.');
+                }
             }
 
             return $this->redirectToRoute('site_show', ['hash' => $hash]);
