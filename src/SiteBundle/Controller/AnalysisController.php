@@ -86,7 +86,7 @@ class AnalysisController extends Controller
         /** @var Analysis $subject */
         $subject = $this->registry->getRepository(Analysis::class)->findOneByHash($hash);
 
-        if (!$subject || (Analysis::STATUS_ACTIVE !== $subject->getStatus() && !(Analysis::STATUS_PENDING == $subject->getStatus() && Analysis::LEVEL_FREE == $subject->getLevel()))) {
+        if (!$subject) {
             return $this->redirectToRoute('site_homepage');
         }
 
@@ -94,6 +94,10 @@ class AnalysisController extends Controller
         $subject->setUpdatedAt(new \DateTime());
         $this->registry->getManager()->persist($subject);
         $this->registry->getManager()->flush();
+
+        if (Analysis::STATUS_ACTIVE !== $subject->getStatus() && !(Analysis::STATUS_PENDING === $subject->getStatus() && Analysis::LEVEL_FREE === $subject->getLevel())) {
+            $subject->setLevel(Analysis::LEVEL_FREE);
+        }
 
         $form = $this->createForm(ContactType::class);
         $form->handleRequest($request);
