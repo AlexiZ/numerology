@@ -73,6 +73,7 @@
 {% endblock pagetitle %}
 
 {% block pagesubtitle %}
+    <small>&Eacute;tude créée le : {{ subject.createdAt|date('d/m/Y \à H:i:s') }}</small><br>
     {% if subject.pseudos is not empty and subject.pseudos.0|default %}
         {{ subject.pseudos|join(', ') }}<br>
     {% endif %}
