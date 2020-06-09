@@ -105,7 +105,7 @@ $(document).ready(() => {
         focusOnShow: false
     });
 
-    jssor_1_slider_init();
+    if (document.getElementById('jssor_1')) jssor_1_slider_init();
 }).on('shown.bs.collapse', () => {
     let automaticBarCharts = document.querySelectorAll(".automaticBarChart");
     if (automaticBarCharts) {

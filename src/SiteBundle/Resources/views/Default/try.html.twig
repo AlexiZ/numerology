@@ -27,6 +27,13 @@
 
                             {{ form_start(form, {'attr': {'class': 'form-signin', 'id': 'form-try'}}) }}
                                 <div class="row">
+                                    <div class="form-label-group col-md-12">
+                                        {{ form_widget(form.email, {'attr': {'class': 'form-control', 'pattern': '[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}'}}) }}
+                                        {{ form_label(form.email) }}
+                                    </div>
+                                </div>
+
+                                <div class="row">
                                     <div class="form-label-group col-md-6">
                                         {{ form_widget(form.birthName, {'attr': {'class': 'form-control'}}) }}
                                         {{ form_label(form.birthName) }}

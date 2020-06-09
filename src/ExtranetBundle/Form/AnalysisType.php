@@ -6,6 +6,7 @@ use ExtranetBundle\Entity\Analysis;
 use ExtranetBundle\Services\Geocoding;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Form;
@@ -38,28 +39,28 @@ class AnalysisType extends AbstractType
     {
         $builder
             ->add('birthName', TextType::class, [
-                'label' => 'Nom de famille de naissance',
+                'label' => 'Votre nom de famille de naissance',
                 'required' => true,
                 'attr' => [
-                    'placeholder' => 'Nom de famille de naissance',
+                    'placeholder' => 'Votre nom de famille de naissance',
                 ],
             ])
             ->add('useName', TextType::class, [
-                'label' => 'Nom de famille d\'usage (si différent)',
+                'label' => 'Votre nom de famille d\'usage (si différent)',
                 'required' => false,
                 'attr' => [
-                    'placeholder' => 'Nom de famille d\'usage',
+                    'placeholder' => 'Votre nom de famille d\'usage',
                 ],
             ])
             ->add('firstname', TextType::class, [
-                'label' => 'Premier prénom',
+                'label' => 'Votre premier prénom',
                 'required' => true,
                 'attr' => [
-                    'placeholder' => 'Premier prénom',
+                    'placeholder' => 'Votre premier prénom',
                 ],
             ])
             ->add('otherFirstnames', CollectionType::class, [
-                'label' => 'Autres prénoms',
+                'label' => 'Vos autres prénoms',
                 'required' => false,
                 'entry_type' => TextType::class,
                 'entry_options' => [
@@ -71,7 +72,7 @@ class AnalysisType extends AbstractType
                 'allow_delete' => true,
             ])
             ->add('pseudos', CollectionType::class, [
-                'label' => 'Surnoms d\'usage',
+                'label' => 'Vos surnoms d\'usage',
                 'required' => false,
                 'entry_type' => TextType::class,
                 'entry_options' => [
@@ -84,32 +85,42 @@ class AnalysisType extends AbstractType
                 'delete_empty' => true,
             ])
             ->add('birthDate', TextType::class, [
-                'label' => 'Date et heure de naissance',
+                'label' => 'Vos date et heure de naissance',
                 'required' => true,
                 'attr' => [
                     'readonly' => 'true',
                 ],
             ])
             ->add('birthPlace', TextType::class, [
-                'label' => 'Lieu de naissance',
+                'label' => 'Votre lieu de naissance',
                 'required' => true,
                 'attr' => [
-                    'placeholder' => 'Lieu de naissance',
+                    'placeholder' => 'Votre lieu de naissance',
                     'class' => 'locationGuesser',
                 ],
             ])
             ->add('birthPlaceCoordinates', HiddenType::class, [
                 'mapped' => false,
             ])
+            ->add('email', EmailType::class, [
+                'label' => 'Votre email (facultatif)',
+                'required' => false,
+                'attr' => [
+                    'placeholder' => 'Votre email (facultatif)',
+                ],
+            ])
+            ->add('referrer', HiddenType::class, [
+                'data' => $_SERVER['HTTP_REFERER'],
+            ])
         ;
 
         $builder->addEventListener(FormEvents::POST_SET_DATA, function(FormEvent $event) {
             /** @var Analysis $data */
             $data = $event->getData();
-            $birthPlaceCoordinatesStringed = implode(',', array_merge([
+            $birthPlaceCoordinatesStringed = $data->getBirthPlaceCoordinates() ? implode(',', array_merge([
                 $this->geocoding->DMStoDEC($data->getBirthPlaceCoordinates()['lat']),
                 $this->geocoding->DMStoDEC($data->getBirthPlaceCoordinates()['lng'])
-            ]));
+            ])) : '';
             /** @var \DateTime $birthDate */
             $birthDate = $data->getBirthDate();
 

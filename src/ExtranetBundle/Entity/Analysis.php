@@ -121,6 +121,18 @@ class Analysis
      */
     private $example;
 
+    /**
+     * @var string
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $email;
+
+    /**
+     * @var string
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $referrer;
+
     public static $statusValues = [
         self::STATUS_ACTIVE,
         self::STATUS_PENDING,
@@ -574,6 +586,47 @@ class Analysis
 
         return $this;
     }
+
+    /**
+     * @return string|null
+     */
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    /**
+     * @param string|null $email
+     *
+     * @return Analysis
+     */
+    public function setEmail(string $email = null): Analysis
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getReferrer(): ?string
+    {
+        return $this->referrer;
+    }
+
+    /**
+     * @param string|null $referrer
+     *
+     * @return Analysis
+     */
+    public function setReferrer(string $referrer = null): Analysis
+    {
+        $this->referrer = $referrer;
+
+        return $this;
+    }
+
 
     public function isPaymentAvailable()
     {
