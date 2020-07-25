@@ -75,7 +75,7 @@ class AnalysisController extends Controller
                     // Send analysis to user email if provided
                     $message = (new \Swift_Message('Votre étude numérologique ' . (Analysis::LEVEL_FREE === $subject->getLevel() ? 'gratuite' : 'complète')))
                         ->setFrom($this->getParameter('contact.from'))
-                        ->setTo($this->getParameter('contact.email'))
+                        ->setTo($subject->getEmail())
                         ->setBody(
                             $this->renderView(
                                 '@Site/Emails/analysis.html.twig',

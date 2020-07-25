@@ -5,27 +5,27 @@
         <link href='https://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
         <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet' type='text/css'>
     </head>
-    <body style="width:60vw;margin-left:20vw;">
-    <div style="width:100%;text-align:center;">
-        <img src="https://www.numerologique.fr/bundles/site/img/Logo-photoshop.png" style="height:150px;">
-        <h1 style="font-variant:small-caps;font-family: 'Oswald', sans-serif;">Votre étude numérologique</h1>
-        <hr style="border:3px red solid;width:50px;">
-    </div>
+    <body>
+        <div style="width:100%;text-align:center;">
+            <img src="https://www.numerologique.fr/bundles/site/img/Logo-photoshop.png" style="height:150px;">
+            <h1 style="font-variant:small-caps;font-family: 'Oswald', sans-serif;">Votre étude numérologique</h1>
+            <hr style="border:3px red solid;width:50px;">
+        </div>
 
-    <div style="width:100%;text-align:left;font-family: 'Poppins', sans-serif;">
-        <p>Bonjour,</p>
+        <div style="width:100%;text-align:left;font-family: 'Poppins', sans-serif;">
+            <p>Bonjour,</p>
 
-        <p>Vous venez de générer votre étude numérologique {{ 'free' == subject.level ? 'gratuite' : 'complète' }} sur <a href="{{ app.request.getSchemeAndHttpHost() }}" style="color:black;">numerologique.fr</a>, à laquelle vous pouvez accéder en cliquant sur ce lien :</p>
-        <br>
-        <p style="text-align:center;">
-            <a href="{{ app.request.getSchemeAndHttpHost() ~ path('site_show', {'hash': subject.hash}) }}" style="border:black solid 1px;background-color:#fad017;padding:10px;text-decoration: none;color:black;font-weight: bold;">{{ subject }}</a>
-        </p>
-        <br>
+            <p>Vous venez de générer votre étude numérologique {{ 'free' == subject.level ? 'gratuite' : 'complète' }} sur <a href="{{ app.request.getSchemeAndHttpHost() }}" style="color:black;">numerologique.fr</a>, à laquelle vous pouvez accéder en cliquant sur ce lien :</p>
+            <br>
+            <p style="text-align:center;">
+                <a href="{{ app.request.getSchemeAndHttpHost() ~ path('site_show', {'hash': subject.hash}) }}" style="border:black solid 1px;background-color:#fad017;padding:10px;text-decoration: none;color:black;font-weight: bold;">{{ subject }}</a>
+            </p>
+            <br>
 
-        <p>Conservez-le précieusement : il est permanent et vous permettra de revenir sur cette étude à volonté pour profiter des futures mises à jour.</p>
-        <br>
-        <p>Bien cordialement,</p>
-        <p>L'équipe numerologique.fr</p>
-    </div>
+            <p>Conservez-le précieusement : il est permanent et vous permettra de revenir sur cette étude à volonté pour profiter des futures mises à jour.</p>
+            <br>
+            <p>Bien cordialement,</p>
+            <p>L'équipe numerologique.fr</p>
+        </div>
     </body>
 </html>
