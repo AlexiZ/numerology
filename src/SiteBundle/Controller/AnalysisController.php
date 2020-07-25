@@ -53,7 +53,7 @@ class AnalysisController extends Controller
             $resp = $recaptcha->verify($request->request->get('g-recaptcha-response'), $request->getClientIp());
 
             if (!$resp->isSuccess()) {
-                $this->addFlash('danger', 'Une erreur s\'est produite lors de l\'envoi de votre message.');
+                $this->addFlash('danger', 'Une erreur s\'est produite.');
             } else {
                 $subject->setData($this->numerologieService->exportData($subject));
                 $subject->setUserId($this->getUser() ? $this->getUser()->getId() : null);
@@ -70,6 +70,24 @@ class AnalysisController extends Controller
 
                 $this->registry->getManager()->persist($subject);
                 $this->registry->getManager()->flush();
+
+                if ($subject->getEmail()) {
+                    // Send analysis to user email if provided
+                    $message = (new \Swift_Message('Votre étude numérologique ' . (Analysis::LEVEL_FREE === $subject->getLevel() ? 'gratuite' : 'complète')))
+                        ->setFrom($this->getParameter('contact.from'))
+                        ->setTo($this->getParameter('contact.email'))
+                        ->setBody(
+                            $this->renderView(
+                                '@Site/Emails/analysis.html.twig',
+                                ['subject' => $form->getData()]
+                            ),
+                            'text/html'
+                        );
+
+                    try {
+                        $this->mailer->send($message);
+                    } catch (\Exception $e) {}
+                }
 
                 return $this->redirectToRoute('site_show', ['hash' => $subject->getHash()]);
             }
