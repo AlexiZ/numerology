@@ -15,7 +15,7 @@
     <div style="width:100%;text-align:left;font-family: 'Poppins', sans-serif;">
         <p>Bonjour,</p>
 
-        <p>Vous venez de générer votre étude numérologique {{ Analysis::LEVEL_FREE === subject.level ? 'gratuite' : 'complète' }} sur <a href="{{ app.request.getSchemeAndHttpHost() }}" style="color:black;">numerologique.fr</a>, à laquelle vous pouvez accéder en cliquant sur ce lien :</p>
+        <p>Vous venez de générer votre étude numérologique {{ 'free' === subject.level ? 'gratuite' : 'complète' }} sur <a href="{{ app.request.getSchemeAndHttpHost() }}" style="color:black;">numerologique.fr</a>, à laquelle vous pouvez accéder en cliquant sur ce lien :</p>
         <br>
         <p style="text-align:center;">
             <a href="{{ app.request.getSchemeAndHttpHost() ~ path('site_show', {'hash': subject.hash}) }}" style="border:black solid 1px;background-color:#fad017;padding:10px;text-decoration: none;color:black;font-weight: bold;">{{ subject }}</a>
