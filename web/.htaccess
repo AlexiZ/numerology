@@ -31,10 +31,6 @@ DirectoryIndex app.php
     mod_gzip_item_include mime ^application/x-javascript.*
 </IfModule>
 
-<IfModule mod_headers.c>
-    Header append Set-Cookie "SameSite=None"
-</IfModule>
-
 <IfModule mod_expires.c>
 	ExpiresActive On
 	ExpiresDefault "access plus 7200 seconds"
