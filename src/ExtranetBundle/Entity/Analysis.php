@@ -679,11 +679,11 @@ class Analysis
     }
 
     /**
-     * Validate payment when it's been delayed.
+     * Force type premium of an analysis
      *
      * @return $this
      */
-    public function validatePayment()
+    public function forcePremium()
     {
         $this->setLevel(self::LEVEL_PREMIUM);
         $this->setStatus(self::STATUS_ACTIVE);

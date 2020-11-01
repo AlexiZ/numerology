@@ -40,6 +40,6 @@ admin_definition_edit:
     path: /definition/{id}
     defaults: { _controller: ExtranetBundle:Admin\Definition:definitionEdit }
 
-admin_validate_payment:
-    path: /validation-paiement/{hash}
-    defaults: { _controller: ExtranetBundle:Analysis:paymentValidation }
+admin_force_premium:
+    path: /force-premium/{hash}
+    defaults: { _controller: ExtranetBundle:Analysis:forcePremium }

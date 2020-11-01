@@ -185,7 +185,7 @@ class AnalysisController extends Controller
         return new JsonResponse($translator->transChoice('analysis.history.actions.examplarize.confirmation', $subject->isExample(), ['%subject%' => $subject->__toString()]));
     }
 
-    public function paymentValidationAction($hash, ManagerRegistry $registry, TranslatorInterface $translator)
+    public function forcePremiumAction($hash, ManagerRegistry $registry, TranslatorInterface $translator)
     {
         /** @var Analysis $subject */
         $subject = $registry->getRepository(Analysis::class)->findOneByHash($hash);
@@ -194,7 +194,7 @@ class AnalysisController extends Controller
             return $this->redirectToRoute(self::ROUTE_INDEX);
         }
 
-        $subject->validatePayment();
+        $subject->forcePremium();
         $registry->getManager()->persist($subject);
         $registry->getManager()->flush();
 

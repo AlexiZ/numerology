@@ -114,10 +114,9 @@
     <a href="{{ path('site_show', {'hash': subject.hash}) }}" target="_blank" title="Voir sur le site public" class="d-none d-sm-inline-block btn btn-sm btn-secondary shadow-sm">
         <i class="fas fa-share fa-sm text-white-50"></i>&nbsp;
     </a>
-    {% if is_granted('ROLE_ADMIN') and 'free' == subject.level and 'pending' == subject.status %}
-        <a href="{{url('admin_validate_payment', {'hash': subject.hash})}}" title="Valider le paiement" class="d-none d-sm-inline-block btn btn-sm btn-outline-success shadow-sm">
-            <i class="fas fa-sm fa-euro-sign"></i>&nbsp;
-            Valider le paiement
+    {% if is_granted('ROLE_ADMIN') and ('free' == subject.level or 'pending' == subject.status) %}
+        <a href="{{url('admin_force_premium', {'hash': subject.hash})}}" title="Confirmer l'étude complète" class="d-none d-sm-inline-block btn btn-sm btn-outline-success shadow-sm">
+            <i class="fas fa-sm fa-lock-open"></i>&nbsp;
         </a>
     {% endif %}
 {% endblock callback_actions %}
