@@ -413,7 +413,7 @@ class Analysis
      */
     public function getUtcBirthDate()
     {
-        return $this->utcBirthDate;
+        return $this->utcBirthDate ?? $this->getBirthDate();
     }
 
     /**
