@@ -120,6 +120,9 @@ class AnalysisController extends Controller
         if (!$subject || Analysis::STATUS_DELETED === $subject->getStatus()) {
             return $this->redirectToRoute(self::ROUTE_INDEX);
         }
+        $utcDatetime = clone $subject->getBirthDate();
+        $utcDatetime->setTimezone(new \DateTimeZone('UTC'));
+        $subject->setUtcBirthDate($utcDatetime);
 
         $subject->setData($numerologieService->exportData($subject));
         $subject->setUpdatedAt(new \DateTime());
