@@ -62,6 +62,12 @@ class Analysis
     private $birthDate;
 
     /**
+     * @var \Datetime
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $utcBirthDate;
+
+    /**
      * @var string
      * @ORM\Column(type="string", length=255, nullable=true)
      */
@@ -391,15 +397,6 @@ class Analysis
     }
 
     /**
-     * @return \Datetime
-     */
-    public function getUTCBirthDate()
-    {
-        $utcBirthDate = clone $this->birthDate;
-        return $utcBirthDate->setTimezone(new \DateTimeZone('UTC'));
-    }
-
-    /**
      * @param \Datetime $birthDate
      *
      * @return Analysis
@@ -407,6 +404,26 @@ class Analysis
     public function setBirthDate($birthDate)
     {
         $this->birthDate = $birthDate;
+
+        return $this;
+    }
+
+    /**
+     * @return \Datetime
+     */
+    public function getUtcBirthDate()
+    {
+        return $this->utcBirthDate;
+    }
+
+    /**
+     * @param \Datetime $utcBirthDate
+     *
+     * @return Analysis
+     */
+    public function setUtcBirthDate(\Datetime $utcBirthDate)
+    {
+        $this->utcBirthDate = $utcBirthDate;
 
         return $this;
     }

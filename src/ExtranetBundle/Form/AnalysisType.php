@@ -138,19 +138,23 @@ class AnalysisType extends AbstractType
             // Prevent case when autocomplete has not been used
             if ($birthPlaceCoordinatesStringed == "0,0") {
                 $form->addError(new FormError($options['translator']->trans('analysis.form.error.birthPlace')));
-            } else {
-                /** @var Analysis $data */
-                $data = $event->getData();
-                $birthPlaceCoordinatesArray = explode(',', $birthPlaceCoordinatesStringed);
-                $birthPlaceCoordinates = [
-                    'lat' => $this->geocoding->DECtoDMS($birthPlaceCoordinatesArray[0], true),
-                    'lng' => $this->geocoding->DECtoDMS($birthPlaceCoordinatesArray[1], true),
-                ];
-                $data->setBirthPlaceCoordinates($birthPlaceCoordinates);
             }
 
+            /** @var Analysis $data */
+            $data = $event->getData();
+            $birthPlaceCoordinatesArray = explode(',', $birthPlaceCoordinatesStringed);
+            $birthPlaceCoordinates = [
+                'lat' => $this->geocoding->DECtoDMS($birthPlaceCoordinatesArray[0], true),
+                'lng' => $this->geocoding->DECtoDMS($birthPlaceCoordinatesArray[1], true),
+            ];
+            $data->setBirthPlaceCoordinates($birthPlaceCoordinates);
+
             // Prevent case when birthdate isn't what it should be
-            $birthDate = \DateTime::createFromFormat('d/m/Y H:i', $form->get('birthDate')->getData());
+            $birthDate = \DateTime::createFromFormat(
+                'd/m/Y H:i',
+                $form->get('birthDate')->getData(),
+                new \DateTimeZone($this->geocoding->getNearestTimezone($birthPlaceCoordinatesArray[0], $birthPlaceCoordinatesArray[1]))
+            );
             if (!is_a($birthDate, 'DateTime')) {
                 $form->addError(new FormError($options['translator']->trans('analysis.form.error.birthDate')));
             } else {

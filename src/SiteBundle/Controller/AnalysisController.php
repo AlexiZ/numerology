@@ -55,6 +55,10 @@ class AnalysisController extends Controller
             if (!$resp->isSuccess()) {
                 $this->addFlash('danger', 'Une erreur s\'est produite.');
             } else {
+                $utcDatetime = clone $subject->getBirthDate();
+                $utcDatetime->setTimezone(new \DateTimeZone('UTC'));
+                $subject->setUtcBirthDate($utcDatetime);
+
                 $subject->setData($this->numerologieService->exportData($subject));
                 $subject->setUserId($this->getUser() ? $this->getUser()->getId() : null);
                 $subject->setLevel($version);

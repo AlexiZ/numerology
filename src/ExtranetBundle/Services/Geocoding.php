@@ -36,4 +36,47 @@ class Geocoding
     {
         return $coordinates[0] + ((($coordinates[1] * 60) + ($coordinates[2])) / 3600);
     }
+
+    /**
+     * Find timezone associated to given decimal coordinates
+     *
+     * @param $currentLatitude
+     * @param $currentLongitude
+     * @param string $countryCode
+     *
+     * @return mixed|string
+     */
+    public function getNearestTimezone($currentLatitude, $currentLongitude, $countryCode = '') {
+        $timezone_ids = ($countryCode) ? \DateTimeZone::listIdentifiers(\DateTimeZone::PER_COUNTRY, $countryCode) : \DateTimeZone::listIdentifiers();
+
+        if ($timezone_ids && is_array($timezone_ids) && isset($timezone_ids[0])) {
+            $time_zone = '';
+            $tz_distance = 0;
+
+            //only one identifier?
+            if (count($timezone_ids) == 1) {
+                $time_zone = $timezone_ids[0];
+            } else {
+                foreach ($timezone_ids as $timezone_id) {
+                    $timezone = new \DateTimeZone($timezone_id);
+                    $location = $timezone->getLocation();
+                    $tz_lat   = $location['latitude'];
+                    $tz_long  = $location['longitude'];
+
+                    $theta    = $currentLongitude - $tz_long;
+                    $distance = (sin(deg2rad($currentLatitude)) * sin(deg2rad($tz_lat))) + (cos(deg2rad($currentLatitude)) * cos(deg2rad($tz_lat)) * cos(deg2rad($theta)));
+                    $distance = acos($distance);
+                    $distance = abs(rad2deg($distance));
+                    // echo '<br />'.$timezone_id.' '.$distance;
+
+                    if (!$time_zone || $tz_distance > $distance) {
+                        $time_zone   = $timezone_id;
+                        $tz_distance = $distance;
+                    }
+                }
+            }
+            return  $time_zone;
+        }
+        return 'unknown';
+    }
 }

@@ -339,22 +339,22 @@ class Numerologie
 
     public function getLifePathNumber(Analysis $subject)
     {
-        return $this->reduceNumber($subject->getUTCBirthDate()->format('dmY'));
+        return $this->reduceNumber($subject->getUtcBirthDate()->format('dmY'));
     }
 
     public function getIdealNumber(Analysis $subject)
     {
-        return $this->reduceNumber($subject->getUTCBirthDate()->format('dmYHi'));
+        return $this->reduceNumber($subject->getUtcBirthDate()->format('dmYHi'));
     }
 
     public function getMajorTurnNumber(Analysis $subject)
     {
-        return (int) $subject->getUTCBirthDate()->format('d') + (int) $subject->getUTCBirthDate()->format('m');
+        return (int) $subject->getUtcBirthDate()->format('d') + (int) $subject->getUtcBirthDate()->format('m');
     }
 
     public function getPersonnalYearNowNumber(Analysis $subject)
     {
-        return $this->reduceNumber($subject->getUTCBirthDate()->format('dm') . date('Y'), [1, 2, 3, 4, 5, 6, 7, 8, 9]);
+        return $this->reduceNumber($subject->getUtcBirthDate()->format('dm') . date('Y'), [1, 2, 3, 4, 5, 6, 7, 8, 9]);
     }
 
     public function getAstrologicalNumber(Analysis $subject)
@@ -363,27 +363,27 @@ class Numerologie
         $lng = implode('', $subject->getBirthPlaceCoordinates()['lng']);
         $cityCoordinates = str_replace([',', '.'], '', $lat.$lng);
 
-        return $this->reduceNumber($subject->getUTCBirthDate()->format('dmYHi') . $cityCoordinates, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
+        return $this->reduceNumber($subject->getUtcBirthDate()->format('dmYHi') . $cityCoordinates, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
     }
 
     public function getVeryShortTermNumber(Analysis $subject)
     {
-        return $this->reduceNumber($subject->getUTCBirthDate()->format('Hi'));
+        return $this->reduceNumber($subject->getUtcBirthDate()->format('Hi'));
     }
 
     public function getShortTermNumber(Analysis $subject)
     {
-        return $this->reduceNumber($subject->getUTCBirthDate()->format('d'));
+        return $this->reduceNumber($subject->getUtcBirthDate()->format('d'));
     }
 
     public function getMeanTermNumber(Analysis $subject)
     {
-        return $this->reduceNumber($subject->getUTCBirthDate()->format('m'));
+        return $this->reduceNumber($subject->getUtcBirthDate()->format('m'));
     }
 
     public function getLongTermNumber(Analysis $subject)
     {
-        return $this->reduceNumber($subject->getUTCBirthDate()->format('Y'));
+        return $this->reduceNumber($subject->getUtcBirthDate()->format('Y'));
     }
 
     public function getSecretNumber(Analysis $subject)
